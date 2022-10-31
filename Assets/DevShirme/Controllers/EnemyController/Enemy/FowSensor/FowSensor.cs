@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace DevShirme.EnemyModule
 {
     public class FowSensor: MonoBehaviour
     {
 		#region Fields
-		private List<Transform> visibleTargets;
-		private FowSensorData data;
+		[Header("Sensor Fields")]
+		[SerializeField] private List<Transform> visibleTargets;
+		[SerializeField] private FowSensorData data;
 		private bool canSearch;
 		private Coroutine search;
 		#endregion
@@ -27,9 +29,8 @@ namespace DevShirme.EnemyModule
 		#endregion
 
         #region Executes
-		public void StartSensor(FowSensorData data)
+		public void StartSensor()
         {
-			this.data = data;
 			canSearch = true;
 			search = StartCoroutine(searching(data.SearchDelay));
 		}
@@ -54,7 +55,7 @@ namespace DevShirme.EnemyModule
 				{
 					float dstToTarget = Vector3.Distance(transform.position, target.position);
 
-					if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, data.ObstacleMask))
+					if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, data.ObstacleMask) && !visibleTargets.Contains(target))
 					{
 						visibleTargets.Add(target);
 					}
@@ -71,4 +72,25 @@ namespace DevShirme.EnemyModule
 		}
 		#endregion
 	}
+}
+
+[Serializable]
+public struct FowSensorData
+{
+	#region Fields
+	[Header("Sensor Settings")]
+	[SerializeField] private float viewRadius;
+	[SerializeField] private float viewAngle;
+	[SerializeField] private float searchDelay;
+	[SerializeField] private LayerMask targetMask;
+	[SerializeField] private LayerMask obstacleMask;
+	#endregion
+
+	#region Getters
+	public float ViewRadius => viewRadius;
+	public float ViewAngle => viewAngle;
+	public float SearchDelay => searchDelay;
+	public LayerMask TargetMask => targetMask;
+	public LayerMask ObstacleMask => obstacleMask;
+	#endregion
 }

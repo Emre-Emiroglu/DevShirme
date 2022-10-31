@@ -18,9 +18,9 @@ namespace DevShirme.EnemyModule
         #endregion
 
         #region SensorExecutes
-        public void StartSearch(FowSensorData data)
+        public void StartSearch()
         {
-            fowSensor.StartSensor(data);
+            fowSensor.StartSensor();
         }
         public void StopSearch()
         {

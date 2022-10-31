@@ -16,12 +16,18 @@ namespace DevShirme.EnemyModule
             for (int i = 0; i < enemies.Count; i++)
             {
                 enemies[i].Initialize();
-                enemies[i].StartSearch(((EnemySettings)settings).FowSensorData);
             }
         }
         private void Update()
         {
             if ( Input.GetKeyUp(KeyCode.Alpha1))
+            {
+                for (int i = 0; i < enemies.Count; i++)
+                {
+                    enemies[i].StartSearch();
+                }
+            }
+            if (Input.GetKeyUp(KeyCode.Alpha2))
             {
                 for (int i = 0; i < enemies.Count; i++)
                 {
