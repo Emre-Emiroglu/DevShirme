@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace DevShirme.Editor
+namespace DevShirme.OwnEditor
 {
     [ExecuteInEditMode]
     public class PlacementEditor : EditorWindow

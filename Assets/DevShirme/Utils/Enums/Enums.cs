@@ -18,5 +18,12 @@ namespace DevShirme.Utils
             OnTriggerExit = 2,
             Both = 3
         }
+        public enum ManagerType: int
+        {
+            DataManager = 0,
+            PoolManager = 1,
+            GameManager = 2,
+            UIManager = 3
+        }
     }
 }

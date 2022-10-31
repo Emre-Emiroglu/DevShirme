@@ -5,7 +5,7 @@ using DevShirme.Utils;
 
 namespace DevShirme.PlayerModule
 {
-    [CreateAssetMenu(fileName = "PlayerSettings", menuName = "DevShirme/Modules/Player Settings", order = 1)]
+    [CreateAssetMenu(fileName = "PlayerSettings", menuName = "DevShirme/Settings/Player Settings", order = 1)]
     public class PlayerSettings : DevSettings
     {
         #region Fields
