@@ -18,23 +18,6 @@ namespace DevShirme.EnemyModule
                 enemies[i].Initialize();
             }
         }
-        private void Update()
-        {
-            if ( Input.GetKeyUp(KeyCode.Alpha1))
-            {
-                for (int i = 0; i < enemies.Count; i++)
-                {
-                    enemies[i].StartSearch();
-                }
-            }
-            if (Input.GetKeyUp(KeyCode.Alpha2))
-            {
-                for (int i = 0; i < enemies.Count; i++)
-                {
-                    enemies[i].StopSearch();
-                }
-            }
-        }
         #endregion
     }
 }

@@ -14,17 +14,18 @@ namespace DevShirme.EnemyModule
         #region Core
         public void Initialize()
         {
+            fowSensor.Initialize();
+            fowSensor.OnDetected += onDetected;
+        }
+        private void OnDestroy()
+        {
+            fowSensor.OnDetected -= onDetected;
         }
         #endregion
 
-        #region SensorExecutes
-        public void StartSearch()
+        #region Receviers
+        private void onDetected(Transform target)
         {
-            fowSensor.StartSensor();
-        }
-        public void StopSearch()
-        {
-            fowSensor.StopSensor();
         }
         #endregion
 

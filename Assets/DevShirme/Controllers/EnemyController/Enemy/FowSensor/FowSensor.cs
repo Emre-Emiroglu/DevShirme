@@ -8,9 +8,10 @@ namespace DevShirme.EnemyModule
     public class FowSensor: MonoBehaviour
     {
 		#region Fields
+		public Action<Transform> OnDetected;
 		[Header("Sensor Fields")]
-		[SerializeField] private List<Transform> visibleTargets;
 		[SerializeField] private FowSensorData data;
+		private List<Transform> visibleTargets;
 		private bool canSearch;
 		private Coroutine search;
 		#endregion
@@ -26,12 +27,19 @@ namespace DevShirme.EnemyModule
 			}
 			return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
 		}
-		#endregion
+        #endregion
+
+        #region Core
+		public void Initialize()
+        {
+        }
+        #endregion
 
         #region Executes
-		public void StartSensor()
+        public void StartSensor()
         {
 			canSearch = true;
+			visibleTargets = new List<Transform>();
 			search = StartCoroutine(searching(data.SearchDelay));
 		}
 		public void StopSensor()
@@ -58,6 +66,7 @@ namespace DevShirme.EnemyModule
 					if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, data.ObstacleMask) && !visibleTargets.Contains(target))
 					{
 						visibleTargets.Add(target);
+						OnDetected?.Invoke(target);
 					}
 				}
 			}
