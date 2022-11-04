@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 namespace DevShirme.DataModule
 {
@@ -17,20 +14,40 @@ namespace DevShirme.DataModule
         public override void Initialize()
         {
             playerData = new PlayerData();
-            playerData.LoadData();
         }
         #endregion
 
         #region Executes
-#if UNITY_EDITOR
-        [MenuItem("DevShirme/ClearDatas")]
-        public static void ClearDatas()
+        public void SaveAllData()
         {
-            PlayerPrefs.DeleteAll();
-            PlayerPrefs.Save();
+            playerData.SaveData();
+            string data = JsonUtility.ToJson(playerData);
+            System.IO.File.WriteAllText(Application.persistentDataPath + "/ply.dat", data);
+
+            Debug.Log(Application.persistentDataPath + "/ply.dat");
         }
-#endif
+        public void LoadAllData()
+        {
+            string oldData = System.IO.File.ReadAllText(Application.persistentDataPath + "/ply.dat");
+            playerData = JsonUtility.FromJson<PlayerData>(oldData);
+            playerData.LoadData();
+            Debug.Log(playerData.Coin);
+        }
+        public void ClearAllData()
+        {
+        }
         #endregion
+        private void Update()
+        {
+            if (Input.GetMouseButtonUp(0))
+            {
+                SaveAllData();
+            }
+            if (Input.GetMouseButtonUp(1))
+            {
+                LoadAllData();
+            }
+        }
     }
 }
 

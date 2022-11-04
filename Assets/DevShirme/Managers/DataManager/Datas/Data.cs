@@ -7,10 +7,6 @@ namespace DevShirme.DataModule
     public abstract class Data
     {
         #region Executes
-        public Data()
-        {
-
-        }
         public abstract void SaveData();
         public abstract void LoadData();
         #endregion
