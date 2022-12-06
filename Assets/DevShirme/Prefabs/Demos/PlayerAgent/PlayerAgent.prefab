@@ -465,8 +465,6 @@ GameObject:
   - component: {fileID: 7954459496903344262}
   - component: {fileID: 7954459496903344256}
   - component: {fileID: 7954459496903344257}
-  - component: {fileID: 7954459496903344258}
-  - component: {fileID: 7954459496903344259}
   m_Layer: 3
   m_Name: PlayerAgent
   m_TagString: Player
@@ -502,8 +500,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 118b6b566c062ed49ae974432d798a27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementHandler: {fileID: 7954459496903344258}
-  rotationHandler: {fileID: 7954459496903344259}
+  movementHandler: {fileID: 0}
+  rotationHandler: {fileID: 0}
   rb: {fileID: 7954459496903344257}
 --- !u!54 &7954459496903344257
 Rigidbody:
@@ -521,27 +519,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7954459496903344258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7954459496903344263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80e290b0ae52cc4488e3f844d5eb77a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7954459496903344259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7954459496903344263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3189718604063384a9212024c7020029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
