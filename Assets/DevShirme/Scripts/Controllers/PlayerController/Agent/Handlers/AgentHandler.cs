@@ -21,7 +21,6 @@ namespace DevShirme.PlayerModule
 
         #region Execute
         public abstract void Execute(Vector2 input);
-
         #endregion
     }
 }

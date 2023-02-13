@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DevShirme
 {
-    public abstract class DevShirmeManager : MonoBehaviour
+    public abstract class Manager : MonoBehaviour
     {
         protected Utils.Enums.ManagerType managerType;
         public abstract void Initialize();

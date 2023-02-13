@@ -19,12 +19,12 @@ namespace DevShirme.UIModule
         #region Getters
         private int getDataCoin()
         {
-            DataManager dm = DevShirmeCore.Instance.GetAManager(Utils.Enums.ManagerType.DataManager) as DataManager;
+            DataManager dm = Core.Instance.GetAManager(Utils.Enums.ManagerType.DataManager) as DataManager;
             return dm.PlayerData.Coin;
         }
         private int getDataLevel()
         {
-            DataManager dm = DevShirmeCore.Instance.GetAManager(Utils.Enums.ManagerType.DataManager) as DataManager;
+            DataManager dm = Core.Instance.GetAManager(Utils.Enums.ManagerType.DataManager) as DataManager;
             return dm.PlayerData.Level;
         }
         #endregion

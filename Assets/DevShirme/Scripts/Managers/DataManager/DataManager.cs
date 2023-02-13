@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace DevShirme.DataModule
 {
-    public class DataManager : DevShirmeManager
+    public class DataManager : Manager
     {
         #region Fields
         private PlayerData playerData;

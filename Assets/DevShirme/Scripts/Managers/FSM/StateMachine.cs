@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DevShirme.FSM
 {
-    public class StateMachine : DevShirmeManager
+    public class StateMachine : Manager
     {
         #region Fields
         private State currentState;

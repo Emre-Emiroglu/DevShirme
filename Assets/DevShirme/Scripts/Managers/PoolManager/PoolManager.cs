@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DevShirme.PoolModule
 {
-    public class PoolManager : DevShirmeManager
+    public class PoolManager : Manager
     {
         #region Fields
         [Header("Module Fields")]

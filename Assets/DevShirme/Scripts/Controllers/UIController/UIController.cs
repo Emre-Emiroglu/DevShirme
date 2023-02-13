@@ -5,7 +5,7 @@ using DevShirme.Utils;
 
 namespace DevShirme.UIModule
 {
-    public class UIController : DevShirmeController
+    public class UIController : Controller
     {
         #region Fields
         [Header("UI Controller Fields")]

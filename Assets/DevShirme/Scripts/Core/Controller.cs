@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DevShirme
 {
-    public abstract class DevShirmeController : MonoBehaviour, IGameCycle
+    public abstract class Controller : MonoBehaviour, IGameCycle
     {
         #region Fields
         [Header("Dev Controller Fields")]

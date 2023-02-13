@@ -5,7 +5,7 @@ using DevShirme.Utils;
 
 namespace DevShirme.PlayerModule
 {
-    public class PlayerController : DevShirmeController
+    public class PlayerController : Controller
     {
         #region Fields
         [Header("Player Controller Settings")]

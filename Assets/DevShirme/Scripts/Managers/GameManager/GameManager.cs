@@ -5,11 +5,11 @@ using DevShirme.Helpers;
 
 namespace DevShirme
 {
-    public class GameManager : DevShirmeManager, IGameCycle
+    public class GameManager : Manager, IGameCycle
     {
         #region Fields
         [Header("Gameplay Controllers")]
-        [SerializeField] private List<DevShirmeController> controllers;
+        [SerializeField] private List<Controller> controllers;
         #endregion
 
         #region Core

@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace DevShirme
 {
-    public class DevShirmeCore : MonoSingleton<DevShirmeCore>
+    public class Core : MonoSingleton<Core>
     {
         #region Fields
         [Header("Fields")]
-        [SerializeField] private List<DevShirmeManager> managers;
+        [SerializeField] private List<Manager> managers;
         #endregion
 
         #region Getters
-        public DevShirmeManager GetAManager(Utils.Enums.ManagerType type)
+        public Manager GetAManager(Utils.Enums.ManagerType type)
         {
             return managers[((int)type)];
         }

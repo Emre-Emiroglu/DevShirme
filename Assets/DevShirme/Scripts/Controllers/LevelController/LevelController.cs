@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DevShirme.LevelModule
 {
-    public class LevelController : DevShirmeController
+    public class LevelController : Controller
     {
         #region Fields
         #endregion

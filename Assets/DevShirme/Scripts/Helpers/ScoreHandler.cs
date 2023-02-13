@@ -27,7 +27,7 @@ namespace DevShirme.Helpers
             }
             if (save)
             {
-                DataManager dm = DevShirmeCore.Instance.GetAManager(Utils.Enums.ManagerType.DataManager) as DataManager;
+                DataManager dm = Core.Instance.GetAManager(Utils.Enums.ManagerType.DataManager) as DataManager;
                 dm.PlayerData.Coin += amount;
                 dm.PlayerData.SaveData();
             }
