@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
-#if UNITY_EDITOR
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
 #endif
 
 namespace DevShirme.DataModule
@@ -10,28 +10,22 @@ namespace DevShirme.DataModule
     public class DataManager : Manager
     {
         #region Fields
-        private PlayerData playerData;
-        #endregion
-
-        #region Getters
-        public PlayerData PlayerData => playerData;
+        public static PlayerDataSet PlayerDataSet;
         #endregion
 
         #region Core
         public override void Initialize()
         {
-            playerData = new PlayerData();
-            playerData.LoadData();
+            PlayerDataSet = new PlayerDataSet("ply.dat");
         }
         #endregion
 
         #region Executes
 #if UNITY_EDITOR
-        [MenuItem("DevShirme/ClearDatas")]
-        public static void ClearDatas()
+        [MenuItem("DevShirme/ClearDataFolders")]
+        public static void ClearDataFolders()
         {
-            PlayerPrefs.DeleteAll();
-            PlayerPrefs.Save();
+            PlayerDataSet?.Clear();
         }
 #endif
         #endregion

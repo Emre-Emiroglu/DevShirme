@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DevShirme.Helpers;
 
 namespace DevShirme
 {
@@ -29,8 +28,6 @@ namespace DevShirme
         }
         public void Reload()
         {
-            ScoreHandler.Reload();
-
             for (int i = 0; i < controllers.Count; i++)
             {
                 controllers[i].Reload();

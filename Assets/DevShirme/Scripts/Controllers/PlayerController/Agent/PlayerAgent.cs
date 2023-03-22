@@ -8,7 +8,7 @@ namespace DevShirme.PlayerModule
     {
         #region Fields
         [Header("Components")]
-        [SerializeField] private Rigidbody rb;
+        private Rigidbody rb;
         [Header("Handlers")]
         private MovementHandler movementHandler;
         private RotationHandler rotationHandler;
@@ -17,6 +17,7 @@ namespace DevShirme.PlayerModule
         #region Core
         public void Initialize(PlayerSettings playerSettings)
         {
+            rb = GetComponent<Rigidbody>();
             movementHandler = new MovementHandler(playerSettings, transform, rb);
             rotationHandler = new RotationHandler(playerSettings, transform);
         }

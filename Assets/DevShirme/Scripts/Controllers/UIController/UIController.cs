@@ -9,14 +9,12 @@ namespace DevShirme.UIModule
     {
         #region Fields
         [Header("UI Controller Fields")]
-        [SerializeField] private ViewContainer viewContainer;
         [SerializeField] private List<UIPanel> panels;
         #endregion
 
         #region Core
         public override void Initialize()
         {
-            viewContainer.Initialize();
             transation(Enums.UIPanelType.MainMenuPanel);
         }
         public override void GameStart()
@@ -25,7 +23,6 @@ namespace DevShirme.UIModule
         }
         public override void Reload()
         {
-            viewContainer.Reload();
             transation(Enums.UIPanelType.MainMenuPanel);
         }
         public override void GameOver()

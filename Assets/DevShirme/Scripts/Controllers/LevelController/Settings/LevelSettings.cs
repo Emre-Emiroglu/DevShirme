@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DevShirme.DataModule;
-using DevShirme.Utils;
 
 namespace DevShirme.LevelModule
 {
@@ -10,9 +9,16 @@ namespace DevShirme.LevelModule
     public class LevelSettings : DevSettings
     {
         #region Fields
+        [Header("Level Settings Fields")]
+        [SerializeField] private List<Level> levels;
         #endregion
 
         #region Getters
+        public Level GetLevel()
+        {
+            int index = (DataManager.PlayerDataSet.MyData.Level - 1) % levels.Count;
+            return levels[index];
+        }
         #endregion
     }
 }

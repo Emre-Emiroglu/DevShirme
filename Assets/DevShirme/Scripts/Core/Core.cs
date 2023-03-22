@@ -9,6 +9,7 @@ namespace DevShirme
         #region Fields
         [Header("Fields")]
         [SerializeField] private List<Manager> managers;
+        [SerializeField] private ActionContainer actionContainer;
         #endregion
 
         #region Getters
@@ -33,6 +34,7 @@ namespace DevShirme
         }
         private void Awake()
         {
+            actionContainer.Initialize();
             Initialize();
         }
         #endregion

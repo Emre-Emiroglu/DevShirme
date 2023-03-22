@@ -36,7 +36,7 @@ namespace DevShirme
             if (Instance == null)
             {
                 Instance = this as T;
-                DontDestroyOnLoad(this);
+                //DontDestroyOnLoad(this);
             }
         }
         #endregion
