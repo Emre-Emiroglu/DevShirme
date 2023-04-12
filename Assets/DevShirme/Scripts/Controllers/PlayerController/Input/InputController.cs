@@ -1,15 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InputController
 {
     #region Fields
-    private bool Lerp;
-    private float LerpSpeed;
-    private float Sensitivity;
-    private float ClampDistance;
-    private InputBehavior Behavior;
+    public event Action OnDown;
+    public event Action OnDrag;
+    public event Action OnUp;
+    private bool lerp;
+    private float lerpSpeed;
+    private float sensitivity;
+    private float clampDistance;
+    private InputBehavior behavior;
+    private bool swipe;
     Vector2 outputRaw, outputNormal;
     Vector2 beganPos, movedPos;
     Vector2 prevPos, currPos;
@@ -17,15 +22,15 @@ public class InputController
     bool isPressing;
     #endregion
 
-
     #region Constructor
-    public InputController(bool lerp = false, float lerpSpeed = .1f, float sensitivity = 1f, float clampDistance = 80f, InputBehavior behavior = InputBehavior.Clamped)
+    public InputController(bool lerp = false, float lerpSpeed = .1f, float sensitivity = 1f, float clampDistance = 80f, InputBehavior behavior = InputBehavior.Clamped, bool swipe = false)
     {
-        Lerp = lerp;
-        LerpSpeed = lerpSpeed;
-        Sensitivity = sensitivity;
-        ClampDistance = clampDistance;
-        Behavior = behavior;
+        this.lerp = lerp;
+        this.lerpSpeed = lerpSpeed;
+        this.sensitivity = sensitivity;
+        this.clampDistance = clampDistance;
+        this.behavior = behavior;
+        this.swipe = swipe;
     }
     #endregion
 
@@ -58,34 +63,40 @@ public class InputController
             beganPos = Input.mousePosition;
             currPos = beganPos;
             prevPos = beganPos;
-        }
 
+            OnDown?.Invoke();
+        }
         if (Input.GetMouseButton(0))
         {
             isPressing = true;
             currPos = Input.mousePosition;
-            deltaPos = (currPos - prevPos) * Sensitivity;
+            deltaPos = (currPos - prevPos) * sensitivity;
 
-            if (Behavior == InputBehavior.Clamped)
-                movedPos = beganPos + Vector2.ClampMagnitude(currPos - beganPos, ClampDistance);
+            if (behavior == InputBehavior.Clamped)
+                movedPos = beganPos + Vector2.ClampMagnitude(currPos - beganPos, clampDistance);
             else
                 movedPos = currPos;
 
-            if (Lerp)
-                outputRaw = Vector3.Lerp(outputRaw, (movedPos - beganPos).normalized, LerpSpeed);
+            if (lerp)
+                outputRaw = Vector3.Lerp(outputRaw, (movedPos - beganPos).normalized, lerpSpeed);
             else
                 outputRaw = (movedPos - beganPos);
 
             outputNormal = outputRaw.normalized;
-            prevPos = currPos;
-        }
 
+            if(!swipe)
+                prevPos = currPos;
+
+            OnDrag?.Invoke();
+        }
         if (Input.GetMouseButtonUp(0))
         {
             isPressing = false;
             outputRaw = Vector3.zero;
             deltaPos = Vector3.zero;
             outputNormal = Vector2.zero;
+
+            OnUp?.Invoke();
         }
     }
     #endregion
