@@ -2,82 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum InputBehavior
-{
-    Unclamped,
-    Clamped
-}
-
 public class InputController
 {
-    public bool Lerp = false;
-    public float LerpSpeed = 0.1f;
-    public float Sensitivity = 1f;
-    public float ClampDistance = 80f;
-    public InputBehavior Behavior = InputBehavior.Clamped;
-
+    #region Fields
+    private bool Lerp;
+    private float LerpSpeed;
+    private float Sensitivity;
+    private float ClampDistance;
+    private InputBehavior Behavior;
     Vector2 outputRaw, outputNormal;
     Vector2 beganPos, movedPos;
     Vector2 prevPos, currPos;
     Vector2 deltaPos, clampPos;
     bool isPressing;
+    #endregion
 
-    public bool IsPressing
+
+    #region Constructor
+    public InputController(bool lerp = false, float lerpSpeed = .1f, float sensitivity = 1f, float clampDistance = 80f, InputBehavior behavior = InputBehavior.Clamped)
     {
-        get
-        {
-            return isPressing;
-        }
+        Lerp = lerp;
+        LerpSpeed = lerpSpeed;
+        Sensitivity = sensitivity;
+        ClampDistance = clampDistance;
+        Behavior = behavior;
     }
+    #endregion
 
-    public float Severity
-    {
-        get
-        {
-            return outputNormal.magnitude;
-        }
-    }
+    #region Getters
+    public bool IsPressing => isPressing;
+    public float OutputNormaMagnitude => outputNormal.magnitude;
+    public float OutputRawMagnitude => outputRaw.magnitude;
+    public Vector2 OutputNormal => outputNormal;
+    public Vector2 DeltaPos => deltaPos;
+    public Vector2 BeganPos => beganPos;
+    public Vector2 MovedPos => movedPos;
+    #endregion
 
-    public float Magnitude
-    {
-        get
-        {
-            return outputRaw.magnitude;
-        }
-    }
-
-    public Vector2 Value
-    {
-        get
-        {
-            return outputNormal;
-        }
-    }
-
-    public Vector2 DeltaPos
-    {
-        get
-        {
-            return deltaPos;
-        }
-    }
-
-    public Vector2 BeganPos
-    {
-        get
-        {
-            return beganPos;
-        }
-    }
-
-    public Vector2 MovedPos
-    {
-        get
-        {
-            return movedPos;
-        }
-    }
-
+    #region Executes
     public void RemoveInputs()
     {
         outputNormal = Vector2.zero;
@@ -87,12 +49,7 @@ public class InputController
         outputRaw = Vector2.zero;
         isPressing = false;
     }
-
-    public void Update()
-    {
-        inputUpdate();
-    }
-
+    public void ExternaUpdate() => inputUpdate();
     private void inputUpdate()
     {
         if (Input.GetMouseButtonDown(0))
@@ -131,5 +88,10 @@ public class InputController
             outputNormal = Vector2.zero;
         }
     }
-
+    #endregion
+}
+public enum InputBehavior
+{
+    Unclamped,
+    Clamped
 }
