@@ -108,6 +108,5 @@ namespace DevShirme.Helpers
             raycastAction(transform.position, Direction);
         }
         #endregion
-
     }
 }

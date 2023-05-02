@@ -23,9 +23,9 @@ namespace DevShirme.Helpers
             if (slowMoActivate)
             {
                 Time.timeScale += (1f / slowDownLength) * Time.unscaledDeltaTime;
-                Time.fixedDeltaTime += (0.01f / slowDownLength) * Time.unscaledDeltaTime;
+                Time.fixedDeltaTime += (0.02f / slowDownLength) * Time.unscaledDeltaTime;
                 Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
-                Time.fixedDeltaTime = Mathf.Clamp(Time.fixedDeltaTime, 0f, 0.01f);
+                Time.fixedDeltaTime = Mathf.Clamp(Time.fixedDeltaTime, 0f, 0.02f);
                 if (Time.timeScale == 1f)
                 {
                     slowMoActivate = false;

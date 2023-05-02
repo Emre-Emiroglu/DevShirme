@@ -2,45 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Magnet: MonoBehaviour
+namespace DevShirme.Helpers
 {
-    #region Fields
-    [SerializeField] private float magnetPower;
-    private List<Rigidbody> rigidbodies;
-    #endregion
-
-    #region Core
-    public void Init()
+    public class Magnet : MonoBehaviour
     {
-        rigidbodies = new List<Rigidbody>();
-    }
-    public void Clear() => rigidbodies.Clear();
-    #endregion
+        #region Fields
+        [SerializeField] private float magnetPower;
+        private List<Rigidbody> rigidbodies;
+        #endregion
 
-    #region Update
-    private void FixedUpdate()
-    {
-        if (rigidbodies.Count > 0)
+        #region Core
+        public void Init()
         {
-            foreach (Rigidbody rb in rigidbodies)
+            rigidbodies = new List<Rigidbody>();
+        }
+        public void Clear() => rigidbodies.Clear();
+        #endregion
+
+        #region Update
+        private void FixedUpdate()
+        {
+            if (rigidbodies.Count > 0)
             {
-                rb.AddForce((transform.position - rb.position) * magnetPower * Time.fixedDeltaTime);
+                foreach (Rigidbody rb in rigidbodies)
+                {
+                    rb.AddForce((transform.position - rb.position) * magnetPower * Time.fixedDeltaTime);
+                }
             }
         }
-    }
-    #endregion
+        #endregion
 
-    #region Physics
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Ballon"))
+        #region Physics
+        private void OnTriggerEnter(Collider other)
         {
-            Rigidbody rb = other.attachedRigidbody;
-            if (!rigidbodies.Contains(rb))
+            if (other.gameObject.CompareTag("Ballon"))
             {
-                rigidbodies.Add(rb);
+                Rigidbody rb = other.attachedRigidbody;
+                if (!rigidbodies.Contains(rb))
+                {
+                    rigidbodies.Add(rb);
+                }
             }
         }
+        #endregion
     }
-    #endregion
 }

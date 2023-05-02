@@ -38,6 +38,5 @@ namespace DevShirme
             Initialize();
         }
         #endregion
-
     }
 }
