@@ -1,3 +1,4 @@
+using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,36 +8,62 @@ namespace DevShirme
     public class Core : MonoSingleton<Core>
     {
         #region Fields
-        [Header("Fields")]
-        [SerializeField] private List<Manager> managers;
-        [SerializeField] private ActionContainer actionContainer;
+        [Header("Core Fields")]
+        [SerializeField] private List<ManagerContainer> managerContainers;
         #endregion
 
         #region Getters
-        public Manager GetAManager(Utils.Enums.ManagerType type)
+        public Manager GetManager(Enums.InitType initType, Enums.ManagerType managerType)
         {
-            return managers[((int)type)];
+            return managerContainers[((int)initType)].Managers[((int)managerType)];
         }
         #endregion
 
         #region Core
+        private void Awake()
+        {
+            Initialize();
+        }
         public override void Initialize()
         {
             base.Initialize();
-            for (int i = 0; i < managers.Count; i++)
+            preInitialize();
+            initialize();
+            afterýnitialize();
+        }
+        private void preInitialize()
+        {
+            for (int i = 0; i < managerContainers[((int)Enums.InitType.PreInit)].Managers.Count; i++)
             {
-                managers[i].Initialize();
+                managerContainers[((int)Enums.InitType.PreInit)].Managers[i].Initialize();
+            }
+        }
+        private void initialize()
+        {
+            for (int i = 0; i < managerContainers[((int)Enums.InitType.Init)].Managers.Count; i++)
+            {
+                managerContainers[((int)Enums.InitType.PreInit)].Managers[i].Initialize();
+            }
+        }
+        private void afterýnitialize()
+        {
+            for (int i = 0; i < managerContainers[((int)Enums.InitType.Afterýnit)].Managers.Count; i++)
+            {
+                managerContainers[((int)Enums.InitType.PreInit)].Managers[i].Initialize();
             }
         }
         protected override void OnDestroy()
         {
             base.OnDestroy();
         }
-        private void Awake()
-        {
-            actionContainer.Initialize();
-            Initialize();
-        }
         #endregion
+    }
+    [System.Serializable]
+    public class ManagerContainer
+    {
+        [SerializeField] private Enums.InitType initType;
+        [SerializeField] private List<Manager> managers;
+
+        public List<Manager> Managers => managers;
     }
 }

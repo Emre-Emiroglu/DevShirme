@@ -7,29 +7,18 @@ namespace DevShirme.Utils
             DestroyNewObj,
             DestroyOldObj
         }
-        public enum MovementType
-        {
-            Transform,
-            Rigidbody,
-        }
-        public enum TriggerBehavior : int
-        {
-            OnTriggerEnter = 1,
-            OnTriggerExit = 2,
-            Both = 3
-        }
         public enum ManagerType : int
         {
             DataManager = 0,
             ADManager = 1,
-            PoolManager = 2,
-            GameManager = 3
+            PoolManager = 0,
+            GameManager = 0
         }
-        public enum UIPanelType : int
+        public enum InitType : int
         {
-            MainMenuPanel = 0,
-            InGamePanel = 1,
-            EndGamePanel = 2
+            PreInit = 0,
+            Init = 1,
+            Afterýnit = 2
         }
         public enum ADType : int
         {
@@ -37,17 +26,39 @@ namespace DevShirme.Utils
             Interstital = 1,
             Rewarded = 2
         }
+        public enum UIPanelType : int
+        {
+            MainMenuPanel = 0,
+            InGamePanel = 1,
+            EndGamePanel = 2
+        }
+        public enum MovementType
+        {
+            Transform,
+            Rigidbody,
+        }
+        public enum InputBehavior
+        {
+            Unclamped,
+            Clamped
+        }
+        public enum CamType : int
+        {
+            IdleCam = 0,
+            InGameCam = 1
+        }
+        public enum TriggerBehavior : int
+        {
+            OnTriggerEnter = 1,
+            OnTriggerExit = 2,
+            Both = 3
+        }
         public enum CountDownFormatting
         {
             DaysHoursMinutesSeconds,
             HoursMinutesSeconds,
             MinutesSeconds,
             Seconds
-        }
-        public enum CamType: int
-        {
-            IdleCam = 0,
-            InGameCam = 1
         }
         public enum GameItemType: int
         {
