@@ -42,14 +42,14 @@ namespace DevShirme
         {
             for (int i = 0; i < managerContainers[((int)Enums.InitType.Init)].Managers.Count; i++)
             {
-                managerContainers[((int)Enums.InitType.PreInit)].Managers[i].Initialize();
+                managerContainers[((int)Enums.InitType.Init)].Managers[i].Initialize();
             }
         }
         private void afterýnitialize()
         {
             for (int i = 0; i < managerContainers[((int)Enums.InitType.Afterýnit)].Managers.Count; i++)
             {
-                managerContainers[((int)Enums.InitType.PreInit)].Managers[i].Initialize();
+                managerContainers[((int)Enums.InitType.Afterýnit)].Managers[i].Initialize();
             }
         }
         protected override void OnDestroy()

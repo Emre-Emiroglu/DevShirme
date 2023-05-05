@@ -1,5 +1,3 @@
-using DevShirme.DataModule;
-using DevShirme.PoolModule;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +15,7 @@ namespace DevShirme.Helpers
             }
             if (sendSignal)
             {
-                //ActionContainer.Instance.OnCoinChanged?.Invoke(DataManager.PlayerDataSet.MyData.Coin);
+                GameManager.OnCoinChanged?.Invoke(DataManager.PlayerDataSet.MyData.Coin);
             }
         }
         public static void PlayerProgress(bool positive = true)
@@ -29,7 +27,6 @@ namespace DevShirme.Helpers
 
             DataManager.PlayerDataSet.Save();
         }
-
         public static PoolObject CallFromPool(string tag, Vector3 pos, Quaternion rot)
         {
             PoolManager pm = Core.Instance.GetManager(Utils.Enums.InitType.PreInit, Utils.Enums.ManagerType.PoolManager) as PoolManager;

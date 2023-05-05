@@ -19,5 +19,22 @@ namespace DevShirme.Utils
             public float HideDuration => hideDuration;
             #endregion
         }
+
+        public struct PlayerData
+        {
+            public int Level;
+            public int Coin;
+            public bool IsSettingsOpen;
+            public bool SoundOn;
+            public bool VibrateOn;
+            public PlayerData(int level, int coin, bool isSettingsOpen, bool soundOn, bool vibrateOn)
+            {
+                Level = level;
+                Coin = coin;
+                IsSettingsOpen = isSettingsOpen;
+                SoundOn = soundOn;
+                VibrateOn = vibrateOn;
+            }
+        }
     }
 }

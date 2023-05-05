@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace DevShirme.DataModule
+namespace DevShirme
 {
     public class DataManager : Manager
     {

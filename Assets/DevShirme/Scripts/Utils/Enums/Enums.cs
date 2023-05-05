@@ -10,7 +10,6 @@ namespace DevShirme.Utils
         public enum ManagerType : int
         {
             DataManager = 0,
-            ADManager = 1,
             PoolManager = 0,
             GameManager = 0
         }
@@ -36,6 +35,11 @@ namespace DevShirme.Utils
         {
             Transform,
             Rigidbody,
+        }
+        public enum GameOverButtonType: int
+        {
+            Reload = 0,
+            Restart = 1,
         }
         public enum InputBehavior
         {
@@ -67,9 +71,11 @@ namespace DevShirme.Utils
         }
         public enum CollectableType : int
         {
+            Coin = 0
         }
         public enum ObstacleType : int
         {
+            Block = 0
         }
     }
 }

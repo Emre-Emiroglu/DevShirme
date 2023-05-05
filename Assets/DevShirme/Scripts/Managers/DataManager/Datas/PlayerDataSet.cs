@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using DevShirme.Utils;
 
-namespace DevShirme.DataModule
+namespace DevShirme
 {
-    public class PlayerDataSet : DataSet<PlayerData>
+    public class PlayerDataSet : DataSet<Structs.PlayerData>
     {
         #region Fields
-        public PlayerData MyData;
+        public Structs.PlayerData MyData;
         #endregion
 
         #region Constructor
@@ -29,13 +30,13 @@ namespace DevShirme.DataModule
             if (File.Exists(getPath(fileName)))
             {
                 string read = File.ReadAllText(getPath(fileName));
-                MyData = JsonUtility.FromJson<PlayerData>(read);
+                MyData = JsonUtility.FromJson<Structs.PlayerData>(read);
 
                 Debug.Log("Data Loaded");
             }
             else
             {
-                MyData = new PlayerData(1, 100, false, true, true);
+                MyData = new Structs.PlayerData(1, 100, false, true, true);
                 Save();
                 Debug.Log("Data Not Found. Created New One");
             }
@@ -45,21 +46,5 @@ namespace DevShirme.DataModule
             base.Clear();
         }
         #endregion
-    }
-}
-public struct PlayerData
-{
-    public int Level;
-    public int Coin;
-    public bool IsSettingsOpen;
-    public bool SoundOn;
-    public bool VibrateOn;
-    public PlayerData(int level, int coin, bool isSettingsOpen, bool soundOn, bool vibrateOn)
-    {
-        Level = level;
-        Coin = coin;
-        IsSettingsOpen = isSettingsOpen;
-        SoundOn = soundOn;
-        VibrateOn = vibrateOn;
     }
 }

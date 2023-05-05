@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IBouncable
+namespace DevShirme.Interfaces
 {
-    public void BounceAnimation(float targetScale, float duration);
-    public IEnumerator bounceAnim(float targetScale, float duration);
+    public interface IBouncable
+    {
+        public void BounceAnimation(float targetScale, float duration);
+        public IEnumerator bounceAnim(float targetScale, float duration);
+    }
 }
