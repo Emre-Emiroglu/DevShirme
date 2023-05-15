@@ -6,7 +6,6 @@ namespace DevShirme
 {
     public abstract class Manager : MonoBehaviour
     {
-        [SerializeField] protected Utils.Enums.ManagerType managerType;
         public abstract void Initialize();
     }
 }

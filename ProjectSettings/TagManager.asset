@@ -3,10 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - PlayGround
-  - Obstacle
-  - Enemy
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -14,9 +11,9 @@ TagManager:
   - Player
   - Water
   - UI
-  - Obstacle
-  - PlayGround
-  - Enemy
+  - 
+  - 
+  - 
   - 
   - 
   - 

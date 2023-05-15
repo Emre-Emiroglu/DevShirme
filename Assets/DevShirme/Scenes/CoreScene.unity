@@ -332,7 +332,7 @@ Transform:
   - {fileID: 72926034}
   - {fileID: 1789989668}
   m_Father: {fileID: 1328774099}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &212899529
 GameObject:
@@ -532,7 +532,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a063ac787a4bb0438f8a69217e013c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managerType: 0
 --- !u!1 &251572922
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,7 +560,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1950945602}
   m_Father: {fileID: 1314554428}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -577,7 +577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51151e458e759e04194259e0d6eaee39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managerType: 0
   modules:
   - {fileID: 100337891}
   - {fileID: 1081648386}
@@ -1014,7 +1013,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e63c6d26fdab6474f825135f9aa425e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managerType: 0
   pools:
   - {fileID: 1691198898}
 --- !u!1 &1081648384
@@ -1163,7 +1161,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1950945602}
   - {fileID: 151909705}
   - {fileID: 813016274811603987}
   m_Father: {fileID: 0}
@@ -1631,7 +1628,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1950945601}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1643,7 +1640,7 @@ Transform:
   - {fileID: 107494032}
   - {fileID: 1658649520}
   - {fileID: 452037591}
-  m_Father: {fileID: 1328774099}
+  m_Father: {fileID: 251572923}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1967382600
