@@ -12,12 +12,15 @@ namespace DevShirme.CameraModule
         [Range(0f, 1f)][SerializeField] private float amplitudeGain = 1f;
         [Range(0f, 1f)][SerializeField] private float frequencyGain = 1f;
         [Range(0f, 1f)][SerializeField] private float shakeDuration = 1f;
+        [Header("Fov Change Settings")]
+        [Range(0f, 1f)][SerializeField] private float fovChangeDuration = 1f;
         #endregion
 
         #region Getters
         public float AmplitudeGain => amplitudeGain;
         public float FrequencyGain => frequencyGain;
         public float ShakeDuration => shakeDuration;
+        public float FovChangeDuration => fovChangeDuration;
         #endregion
     }
 }

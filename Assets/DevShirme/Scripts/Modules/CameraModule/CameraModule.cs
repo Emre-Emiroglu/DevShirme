@@ -18,6 +18,11 @@ namespace DevShirme.CameraModule
         public override void Initialize()
         {
             base.Initialize();
+
+            for (int i = 0; i < cams.Length; i++)
+            {
+                cams[i].Initialize();
+            }
         }
         public override void OnGameStart()
         {
@@ -59,6 +64,10 @@ namespace DevShirme.CameraModule
 
         #region Shake
         public void CamShake() => activeCam.CamShake(cameraSettings.AmplitudeGain, cameraSettings.FrequencyGain, cameraSettings.ShakeDuration);
+        #endregion
+
+        #region Fov
+        public void FovChange(float addValue) => activeCam.FovChange(addValue, cameraSettings.FovChangeDuration);
         #endregion
     }
 }

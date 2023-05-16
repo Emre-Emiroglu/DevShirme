@@ -14,6 +14,8 @@ namespace DevShirme.CameraModule
         [SerializeField] private CinemachineVirtualCamera myCam;
         private CinemachineBasicMultiChannelPerlin myPerlin;
         private Coroutine shake;
+        private Coroutine fov;
+        private float orgFov;
         #endregion
 
         #region Core
@@ -52,6 +54,37 @@ namespace DevShirme.CameraModule
         {
             myPerlin.m_AmplitudeGain = amplitudeGain;
             myPerlin.m_FrequencyGain = frequencyGain;
+        }
+        #endregion
+
+        #region Fov
+        public void FovChange(float addValue, float duration)
+        {
+            myCam.m_Lens.FieldOfView = orgFov;
+
+            stopFovCoroutine();
+
+            fov = StartCoroutine(processFov(addValue, duration));
+        }
+        private void stopFovCoroutine()
+        {
+            if (fov != null)
+                StopCoroutine(fov);
+        }
+        private IEnumerator processFov(float addValue, float duration)
+        {
+            float oldValue = myCam.m_Lens.FieldOfView;
+            float targetValue = oldValue + addValue;
+            float t = 0f;
+            while (t < duration)
+            {
+                t += Time.deltaTime;
+                myCam.m_Lens.FieldOfView = Mathf.Lerp(oldValue, targetValue, t / duration);
+
+                yield return null;
+            }
+
+            myCam.m_Lens.FieldOfView = targetValue;
         }
         #endregion
     }
