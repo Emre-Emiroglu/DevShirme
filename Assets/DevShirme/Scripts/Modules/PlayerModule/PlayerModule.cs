@@ -9,6 +9,7 @@ namespace DevShirme.PlayerModule
         #region Fields
         [Header("Player Module Components")]
         [SerializeField] private PlayerAgent playerAgent;
+        private InputController inputController;
         #endregion
 
         #region Core
@@ -16,6 +17,7 @@ namespace DevShirme.PlayerModule
         {
             base.Initialize();
 
+            inputController = new InputController();
             playerAgent.Initialize(settings as PlayerSettings);
         }
         public override void OnGameStart()

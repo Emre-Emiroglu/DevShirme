@@ -57,10 +57,10 @@ namespace DevShirme.PlayerModule
             outputRaw = Vector2.zero;
             isPressing = false;
         }
-        public void ExternaUpdate() => inputUpdate();
-        private void inputUpdate()
+        public void ExternaUpdate(bool down, bool drag, bool up) => inputUpdate(down, drag, up);
+        private void inputUpdate(bool down, bool drag, bool up)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (down)
             {
                 isPressing = true;
                 beganPos = Input.mousePosition;
@@ -69,7 +69,7 @@ namespace DevShirme.PlayerModule
 
                 OnDown?.Invoke();
             }
-            if (Input.GetMouseButton(0))
+            if (drag)
             {
                 isPressing = true;
                 currPos = Input.mousePosition;
@@ -92,7 +92,7 @@ namespace DevShirme.PlayerModule
 
                 OnDrag?.Invoke();
             }
-            if (Input.GetMouseButtonUp(0))
+            if (up)
             {
                 isPressing = false;
                 outputRaw = Vector3.zero;
