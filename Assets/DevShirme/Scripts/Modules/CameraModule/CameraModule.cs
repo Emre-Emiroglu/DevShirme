@@ -24,21 +24,6 @@ namespace DevShirme.CameraModule
                 cams[i].Initialize();
             }
         }
-        public override void OnGameStart()
-        {
-        }
-        public override void OnGameReload()
-        {
-        }
-        public override void OnGameOver()
-        {
-        }
-        public override void OnGameSuccess()
-        {
-        }
-        public override void OnGameFailed()
-        {
-        }
         protected override void setSubs(bool isSub)
         {
             base.setSubs(isSub);

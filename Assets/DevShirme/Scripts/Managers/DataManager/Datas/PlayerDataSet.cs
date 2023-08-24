@@ -13,7 +13,7 @@ namespace DevShirme
         #endregion
 
         #region Constructor
-        public PlayerDataSet(string fileName) : base(fileName)
+        public PlayerDataSet() : base("ply.dat")
         {
             Load();
         }
@@ -23,13 +23,13 @@ namespace DevShirme
         public override void Save()
         {
             string content = JsonUtility.ToJson(MyData);
-            File.WriteAllText(getPath(fileName), content);
+            File.WriteAllText(path, content);
         }
         public override void Load()
         {
-            if (File.Exists(getPath(fileName)))
+            if (File.Exists(path))
             {
-                string read = File.ReadAllText(getPath(fileName));
+                string read = File.ReadAllText(path);
                 MyData = JsonUtility.FromJson<Structs.PlayerData>(read);
 
                 Debug.Log("Data Loaded");
@@ -40,10 +40,6 @@ namespace DevShirme
                 Save();
                 Debug.Log("Data Not Found. Created New One");
             }
-        }
-        public override void Clear()
-        {
-            base.Clear();
         }
         #endregion
     }

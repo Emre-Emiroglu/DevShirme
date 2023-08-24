@@ -8,7 +8,6 @@ namespace DevShirme.PlayerModule
     {
         #region Fields
         [Header("Player Module Components")]
-        [SerializeField] private PlayerAgent playerAgent;
         private InputController inputController;
         #endregion
 
@@ -18,22 +17,6 @@ namespace DevShirme.PlayerModule
             base.Initialize();
 
             inputController = new InputController();
-            playerAgent.Initialize(settings as PlayerSettings);
-        }
-        public override void OnGameStart()
-        {
-        }
-        public override void OnGameReload()
-        {
-        }
-        public override void OnGameOver()
-        {
-        }
-        public override void OnGameSuccess()
-        {
-        }
-        public override void OnGameFailed()
-        {
         }
         protected override void setSubs(bool isSub)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DevShirme
 {
-    public abstract class Manager : MonoBehaviour
+    public abstract class Manager: MonoBehaviour
     {
         public abstract void Initialize();
     }

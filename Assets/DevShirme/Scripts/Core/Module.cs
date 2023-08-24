@@ -1,11 +1,10 @@
-using DevShirme.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevShirme
 {
-    public abstract class Module: MonoBehaviour, IModule
+    public abstract class Module: MonoBehaviour
     {
         #region Fields
         [Header("Module Components")]
@@ -17,28 +16,13 @@ namespace DevShirme
         {
             setSubs(true);
         }
-        public abstract void OnGameStart();
-        public abstract void OnGameReload();
-        public abstract void OnGameOver();
-        public abstract void OnGameSuccess();
-        public abstract void OnGameFailed();
         protected virtual void setSubs(bool isSub)
         {
             if (isSub)
             {
-                GameManager.OnGameStart += OnGameStart;
-                GameManager.OnGameReload += OnGameReload;
-                GameManager.OnGameOver += OnGameOver;
-                GameManager.OnGameSuccess += OnGameSuccess;
-                GameManager.OnGameFailed += OnGameFailed;
             }
             else
             {
-                GameManager.OnGameStart -= OnGameStart;
-                GameManager.OnGameReload -= OnGameReload;
-                GameManager.OnGameOver -= OnGameOver;
-                GameManager.OnGameSuccess -= OnGameSuccess;
-                GameManager.OnGameFailed -= OnGameFailed;
             }
         }
         private void OnDestroy()

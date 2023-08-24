@@ -15,9 +15,7 @@ namespace DevShirme
         public override void Initialize()
         {
             for (int i = 0; i < pools.Count; i++)
-            {
                 pools[i].Initilaze();
-            }
         }
         #endregion
 

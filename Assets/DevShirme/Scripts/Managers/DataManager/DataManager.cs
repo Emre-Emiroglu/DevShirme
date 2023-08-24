@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -16,16 +17,26 @@ namespace DevShirme
         #region Core
         public override void Initialize()
         {
-            PlayerDataSet = new PlayerDataSet("ply.dat");
+            PlayerDataSet = new PlayerDataSet();
         }
         #endregion
 
         #region Executes
 #if UNITY_EDITOR
-        [MenuItem("DevShirme/ClearDataFolders")]
-        public static void ClearDataFolders()
+        [MenuItem("DevShirme/ClearPlayerData")]
+        public static void ClearPlayerData()
         {
-            PlayerDataSet?.Clear();
+            string path = Application.persistentDataPath + "/" + "ply.dat";
+
+            if (File.Exists(path))
+                File.Delete(path);
+        }
+        [MenuItem("DevShirme/OpenDataFolder")]
+        public static void OpenDataFolder()
+        {
+            string path = Application.persistentDataPath;
+
+            EditorUtility.OpenFolderPanel("", path, "");
         }
 #endif
         #endregion

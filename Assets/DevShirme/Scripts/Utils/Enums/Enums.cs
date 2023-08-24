@@ -10,14 +10,9 @@ namespace DevShirme.Utils
         public enum ManagerType : int
         {
             DataManager = 0,
-            PoolManager = 0,
-            GameManager = 0
-        }
-        public enum InitType : int
-        {
-            PreInit = 0,
-            Init = 1,
-            Afterýnit = 2
+            PoolManager = 1,
+            GameManager = 2,
+            COUNT = 3
         }
         public enum ADType : int
         {
