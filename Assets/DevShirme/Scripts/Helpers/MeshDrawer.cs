@@ -13,37 +13,24 @@ namespace DevShirme.Helpers
         [Header("Components")]
         [SerializeField] private LineRenderer lr;
         [SerializeField] private MeshCollider drawQuad;
-        [Header("Cameras")]
-        [SerializeField] private Camera gameCamera;
-        [SerializeField] private Camera screenCamera;
-        private InputListener inputListener;
-        private bool canDraw;
         private List<Vector3> fingerPoses;
+        private bool canDraw;
         #endregion
 
         #region Core
         private void Awake()
         {
-            inputListener = new InputListener();
-            inputListener.OnInputStarted += onInputStarted;
-            inputListener.OnInputEnded += onInputEnded;
             fingerPoses = new List<Vector3>();
-        }
-        private void OnDestroy()
-        {
-            inputListener.OnInputStarted -= onInputStarted;
-            inputListener.OnInputEnded -= onInputEnded;
         }
         #endregion
 
         #region Receivers
-        private void onInputStarted()
+        private void onInputStarted(Vector3 mouseWorldPos)
         {
             lr.positionCount = 2;
-            Vector3 pos = inputListener.GetMouseWorldPos(gameCamera, screenCamera);
             for (int i = 0; i < 2; i++)
             {
-                fingerPoses.Add(pos);
+                fingerPoses.Add(mouseWorldPos);
                 lr.SetPosition(i, fingerPoses[i]);
             }
         }
@@ -78,9 +65,8 @@ namespace DevShirme.Helpers
         #endregion
 
         #region Executes
-        private void drawLine()
+        private void drawLine(Vector3 mouseWorldPos)
         {
-            Vector3 mouseWorldPos = inputListener.GetMouseWorldPos(gameCamera, screenCamera);
             float diff = Mathf.Sqrt(Vector3.SqrMagnitude(mouseWorldPos - fingerPoses[fingerPoses.Count - 1]));
             if (diff > threshold)
             {
@@ -119,16 +105,12 @@ namespace DevShirme.Helpers
         #endregion
 
         #region Updates
-        public void Update()
+        public void ExternalUpdate(Vector3 mouseWorldPos, bool isInputActive)
         {
-            canDraw = drawQuad.bounds.Contains(inputListener.GetMouseWorldPos(gameCamera, screenCamera));
-            if (canDraw)
+            canDraw = drawQuad.bounds.Contains(mouseWorldPos);
+            if (canDraw && isInputActive)
             {
-                inputListener.ExternalUpdate();
-                if (inputListener.IsDragging)
-                {
-                    drawLine();
-                }
+                drawLine(mouseWorldPos);
             }
         }
         #endregion
