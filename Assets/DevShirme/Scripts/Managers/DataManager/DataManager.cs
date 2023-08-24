@@ -23,7 +23,7 @@ namespace DevShirme
 
         #region Executes
 #if UNITY_EDITOR
-        [MenuItem("DevShirme/ClearPlayerData")]
+        [MenuItem("DevShirme/Data/ClearPlayerData")]
         public static void ClearPlayerData()
         {
             string path = Application.persistentDataPath + "/" + "ply.dat";
@@ -31,7 +31,7 @@ namespace DevShirme
             if (File.Exists(path))
                 File.Delete(path);
         }
-        [MenuItem("DevShirme/OpenDataFolder")]
+        [MenuItem("DevShirme/Data/OpenDataFolder")]
         public static void OpenDataFolder()
         {
             string path = Application.persistentDataPath;

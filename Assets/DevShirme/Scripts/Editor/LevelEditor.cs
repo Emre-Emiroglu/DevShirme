@@ -17,7 +17,7 @@ namespace DevShirme.Editors
         #endregion
 
         #region Core
-        [MenuItem("DevShirme/LevelEditor")]
+        [MenuItem("DevShirme/Editors/LevelEditor")]
         private static void Init()
         {
             LevelEditor levelEditor = (LevelEditor)GetWindow(typeof(LevelEditor));

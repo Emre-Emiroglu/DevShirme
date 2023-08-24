@@ -18,7 +18,7 @@ namespace DevShirme.Editors
         #endregion
 
         #region Open
-        [MenuItem("DevShirme/Placement Editor")]
+        [MenuItem("DevShirme/Editors/Placement Editor")]
         private static void OpenEditor()
         {
             var window = (PlacementEditor)GetWindow(typeof(PlacementEditor), true, "Placement Editor");
