@@ -30,9 +30,13 @@ namespace DevShirme.ADModule
 
             Show(Enums.ADType.Banner);
         }
-        protected override void setSubs(bool isSub)
+        public override void Shutdown()
         {
-            base.setSubs(isSub);
+            base.Shutdown();
+        }
+        protected override void setSubscriptions(bool isSub)
+        {
+            base.setSubscriptions(isSub);
         }
         #endregion
 

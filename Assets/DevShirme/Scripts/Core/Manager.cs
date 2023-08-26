@@ -1,11 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using DevShirme.Interfaces;
 using UnityEngine;
 
 namespace DevShirme
 {
-    public abstract class Manager: MonoBehaviour
+    public abstract class Manager : IManager
     {
-        public abstract void Initialize();
+        #region Fields
+        protected readonly ScriptableObject _settings;
+        #endregion
+
+        #region Core
+        public Manager(ScriptableObject _settings)
+        {
+            this._settings = _settings;
+        }
+        #endregion
     }
 }

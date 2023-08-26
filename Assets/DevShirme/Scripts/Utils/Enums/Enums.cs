@@ -1,3 +1,5 @@
+using System;
+
 namespace DevShirme.Utils
 {
     public static class Enums
@@ -7,12 +9,16 @@ namespace DevShirme.Utils
             DestroyNewObj,
             DestroyOldObj
         }
+        public enum InputBehavior
+        {
+            Unclamped,
+            Clamped
+        }
         public enum ManagerType : int
         {
             DataManager = 0,
             PoolManager = 1,
             GameManager = 2,
-            COUNT = 3
         }
         public enum ADType : int
         {
@@ -23,23 +29,6 @@ namespace DevShirme.Utils
         public enum UIPanelType : int
         {
             MainMenuPanel = 0,
-            InGamePanel = 1,
-            EndGamePanel = 2
-        }
-        public enum MovementType
-        {
-            Transform,
-            Rigidbody,
-        }
-        public enum GameOverButtonType: int
-        {
-            Reload = 0,
-            Restart = 1,
-        }
-        public enum InputBehavior
-        {
-            Unclamped,
-            Clamped
         }
         public enum CamType : int
         {
@@ -58,19 +47,6 @@ namespace DevShirme.Utils
             HoursMinutesSeconds,
             MinutesSeconds,
             Seconds
-        }
-        public enum GameItemType: int
-        {
-            Collectable = 0,
-            Obstacle = 1
-        }
-        public enum CollectableType : int
-        {
-            Coin = 0
-        }
-        public enum ObstacleType : int
-        {
-            Block = 0
         }
     }
 }

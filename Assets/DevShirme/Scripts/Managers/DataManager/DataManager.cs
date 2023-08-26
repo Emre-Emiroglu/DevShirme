@@ -15,7 +15,7 @@ namespace DevShirme
         #endregion
 
         #region Core
-        public override void Initialize()
+        public DataManager(ScriptableObject _settings) : base(_settings)
         {
             PlayerDataSet = new PlayerDataSet();
         }
@@ -36,7 +36,7 @@ namespace DevShirme
         {
             string path = Application.persistentDataPath;
 
-            EditorUtility.OpenFolderPanel("", path, "");
+            EditorUtility.OpenFilePanel("", path, "");
         }
 #endif
         #endregion

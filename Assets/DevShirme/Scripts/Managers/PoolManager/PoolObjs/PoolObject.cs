@@ -1,14 +1,13 @@
+using DevShirme.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevShirme
 {
-    public class PoolObject : MonoBehaviour
+    public class PoolObject : MonoBehaviour, IPoolObject
     {
         #region Fields
-        [Header("Pool Object Fields")]
-        [SerializeField] private string objName;
         private bool inUse;
         protected GameObject obj;
         private Vector3 restartPos;
@@ -18,12 +17,11 @@ namespace DevShirme
         #endregion
 
         #region Getters
-        public string ObjName => objName;
         public bool InUse => inUse;
         #endregion
 
-        #region Obj Core
-        public virtual void initilaze()
+        #region Core
+        public virtual void Initialize()
         {
             obj = gameObject;
             inUse = false;
@@ -33,7 +31,7 @@ namespace DevShirme
             restartScale = obj.transform.localScale;
             restartParent = transform.parent.gameObject;
         }
-        public virtual void SpawnObj(Vector3 pos, bool useRotation, Quaternion rot, bool useScale, Vector3 scale, bool setParent = false, GameObject p = null)
+        public virtual void Spawn(Vector3 pos, Quaternion rot, Vector3 scale, Transform parent, bool useRotation = false, bool useScale = false, bool setParent = false)
         {
             inUse = true;
             obj.transform.position = pos;
@@ -47,26 +45,18 @@ namespace DevShirme
             }
             if (setParent)
             {
-                obj.transform.SetParent(p.transform);
+                obj.transform.SetParent(parent.transform);
             }
             obj.SetActive(true);
         }
-        public virtual void DespawnObj()
-        {
-            DespawnObjProcess();
-        }
-        private void DespawnObjProcess()
+        public virtual void DeSpawn()
         {
             obj.transform.position = restartPos;
             obj.transform.rotation = restartRot;
             obj.transform.localScale = restartScale;
-            RestartParent();
+            obj.transform.SetParent(restartParent.transform);
             inUse = false;
             obj.SetActive(false);
-        }
-        private void RestartParent()
-        {
-            obj.transform.SetParent(restartParent.transform);
         }
         #endregion
     }

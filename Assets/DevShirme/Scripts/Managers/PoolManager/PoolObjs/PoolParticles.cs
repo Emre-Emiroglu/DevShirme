@@ -13,28 +13,35 @@ namespace DevShirme
         private float destroyTime;
         #endregion
 
-        #region Particle Core
-        public override void initilaze()
+        #region Core
+        public override void Initialize()
         {
-            base.initilaze();
+            base.Initialize();
+
             particle = GetComponent<ParticleSystem>();
             loopParticle = particle.main.loop;
             completeTime = particle.main.duration;
         }
-        public override void SpawnObj(Vector3 pos, bool useRotation, Quaternion rot, bool useScale, Vector3 scale, bool setParent = false, GameObject p = null)
+        public override void Spawn(Vector3 pos, Quaternion rot, Vector3 scale, Transform parent, bool useRotation = false, bool useScale = false, bool setParent = false)
         {
-            base.SpawnObj(pos, useRotation, rot, useScale, scale, setParent, p);
+            base.Spawn(pos, rot, scale, parent, useRotation, useScale, setParent);
+
             obj.SetActive(true);
             destroyTime = Time.time + completeTime;
         }
+        public override void DeSpawn()
+        {
+            base.DeSpawn();
+        }
+        #endregion
+
+        #region Timer
         void Update()
         {
             if (!loopParticle && InUse)
             {
                 if (Time.time >= destroyTime)
-                {
-                    DespawnObj();
-                }
+                    DeSpawn();
             }
         }
         #endregion

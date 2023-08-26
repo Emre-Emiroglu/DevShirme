@@ -1,3 +1,4 @@
+using DevShirme.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,112 +8,52 @@ namespace DevShirme
     public class PoolManager : Manager
     {
         #region Fields
-        [Header("Module Fields")]
-        [SerializeField] private List<ObjectPool> pools;
+        private readonly PoolManagerSettings pmSettings;
+        private ObjectPool[] pools;
+        #endregion
+
+        #region Getters
+        public IPoolObject GetObj(string poolName, Vector3 pos, Quaternion rot, Vector3 scale, Transform parent, bool useRotation = false, bool useScale = false, bool setParent = false)
+        {
+            for (int i = 0; i < pools.Length; i++)
+            {
+                if (pools[i].PoolName == poolName)
+                    return pools[i].GetObj(pos, rot, scale, parent, useRotation, useScale, setParent);
+            }
+
+            Debug.LogError(poolName + " Cant Found");
+            return null;
+        }
         #endregion
 
         #region Core
-        public override void Initialize()
+        public PoolManager(ScriptableObject _settings, Transform poolsParent) : base(_settings)
         {
-            for (int i = 0; i < pools.Count; i++)
-                pools[i].Initilaze();
-        }
-        #endregion
+            pmSettings = base._settings as PoolManagerSettings;
 
-        #region GetObjVector3
-        public PoolObject GetObj(string objName, Vector3 pos, GameObject setParent = null)
-        {
-            if (setParent == null)
-            {
-                return GetObj(objName, pos, false, Quaternion.identity, false, Vector3.one);
-            }
-            else
-            {
-                return GetObj(objName, pos, false, Quaternion.identity, false, Vector3.one, true, setParent);
-            }
-        }
-        public PoolObject GetObj(string objName, Vector3 pos, Quaternion rot, GameObject setParent = null)
-        {
-            if (setParent == null)
-            {
-                return GetObj(objName, pos, true, rot, false, Vector3.one);
-            }
-            else
-            {
-                return GetObj(objName, pos, true, rot, false, Vector3.one, true, setParent);
-            }
-        }
-        public PoolObject GetObj(string objName, Vector3 pos, Vector3 scale, GameObject setParent = null)
-        {
-            if (setParent == null)
-            {
-                return GetObj(objName, pos, false, Quaternion.identity, true, scale);
-            }
-            else
-            {
-                return GetObj(objName, pos, false, Quaternion.identity, true, scale, true, setParent);
-            }
-        }
-        public PoolObject GetObj(string objName, Vector3 pos, Quaternion rot, Vector3 scale, GameObject setParent = null)
-        {
-            if (setParent == null)
-            {
-                return GetObj(objName, pos, true, rot, true, scale);
-            }
-            else
-            {
-                return GetObj(objName, pos, true, rot, true, scale, true, setParent);
-            }
-        }
-        #endregion
+            pools = new ObjectPool[pmSettings.Prefabs.Length];
 
-        #region GetObjGameObject
-        public PoolObject GetObj(string objName, Transform targetObj, bool setParent = false)
-        {
-            return GetObj(objName, targetObj.position, false, Quaternion.identity, false, Vector3.one,
-                setParent, targetObj.gameObject);
+            for (int i = 0; i < pmSettings.Prefabs.Length; i++)
+            {
+                ObjectPool pool = new ObjectPool(pmSettings.Prefabs[i], pmSettings.PoolNames[i], pmSettings.InitSize, pmSettings.MaxSize, poolsParent);
+                pools[i] = pool;
+            }
         }
-        public PoolObject GetObj(string objName, Transform targetObj, bool setRot, bool setScale, bool setParent = false)
-        {
-            return GetObj(objName, targetObj.position, setRot, targetObj.rotation, setScale, targetObj.localScale,
-                setParent, targetObj.gameObject);
-        }
-
         #endregion
 
         #region Clears
         public void ClearPool(string objName)
         {
-            for (int i = 0; i < pools.Count; i++)
+            for (int i = 0; i < pools.Length; i++)
             {
                 if (pools[i].PoolName == objName)
-                {
                     pools[i].Reload();
-                }
             }
         }
-        public void ClearPool()
+        public void ClearAllPools()
         {
-            for (int i = 0; i < pools.Count; i++)
-            {
+            for (int i = 0; i < pools.Length; i++)
                 pools[i].Reload();
-            }
-        }
-        #endregion
-
-        #region GetObj
-        private PoolObject GetObj(string objName, Vector3 pos, bool useRotation, Quaternion rot, bool useScale, Vector3 scale,
-           bool setParent = false, GameObject obj = null)
-        {
-            for (int i = 0; i < pools.Count; i++)
-            {
-                if (string.Compare(pools[i].PoolName, objName) == 0)
-                {
-                    return pools[i].GetObj(pos, useRotation, rot, useScale, scale, setParent, obj);
-                }
-            }
-            Debug.LogError(objName + " Cant Found");
-            return null;
         }
         #endregion
     }

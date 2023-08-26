@@ -1,10 +1,11 @@
+using DevShirme.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevShirme
 {
-    public abstract class Module: MonoBehaviour
+    public abstract class Module: MonoBehaviour, IModule
     {
         #region Fields
         [Header("Module Components")]
@@ -14,9 +15,13 @@ namespace DevShirme
         #region Core
         public virtual void Initialize()
         {
-            setSubs(true);
+            setSubscriptions(true);
         }
-        protected virtual void setSubs(bool isSub)
+        public virtual void Shutdown()
+        {
+            setSubscriptions(false);
+        }
+        protected virtual void setSubscriptions(bool isSub)
         {
             if (isSub)
             {
@@ -24,10 +29,6 @@ namespace DevShirme
             else
             {
             }
-        }
-        private void OnDestroy()
-        {
-            setSubs(false);
         }
         #endregion
     }

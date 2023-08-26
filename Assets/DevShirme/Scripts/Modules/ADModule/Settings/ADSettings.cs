@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DevShirme.ADModule
 {
-    [CreateAssetMenu(fileName = "ADSettings", menuName = "DevShirme/Settings/AD Settings")]
+    [CreateAssetMenu(fileName = "ADSettings", menuName = "DevShirme/ModuleSettings/AD Settings")]
     public class ADSettings : ScriptableObject
     {
         #region Fields
