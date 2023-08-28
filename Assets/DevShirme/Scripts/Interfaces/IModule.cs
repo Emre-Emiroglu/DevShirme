@@ -6,7 +6,6 @@ namespace DevShirme.Interfaces
 {
     public interface IModule
     {
-        public void Initialize();
-        public void Shutdown();
+        public void SetSubscriptions(bool isSub);
     }
 }

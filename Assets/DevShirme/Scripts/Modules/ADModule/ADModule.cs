@@ -12,31 +12,26 @@ namespace DevShirme.ADModule
     {
         #region Fields
         public static Action OnRewardedADCallBack;
-        [Header("AD Manager Fields")]
-        [SerializeField] private bool test;
+        private readonly ADSettings adSettings;
+        private bool test;
         //private BannerView bannerView;
         //private InterstitialAd interstitialAd;
         //private RewardedAd rewardedAd;
         #endregion
 
         #region Core
-        public override void Initialize()
+        public ADModule(ScriptableObject _settings) : base(_settings)
         {
-            base.Initialize();
+            adSettings = _settings as ADSettings;
 
             //MobileAds.Initialize((InitializationStatus initStatus) =>
             //{
             //});
 
-            Show(Enums.ADType.Banner);
+            //Show(Enums.ADType.Banner);
         }
-        public override void Shutdown()
+        public override void SetSubscriptions(bool isSub)
         {
-            base.Shutdown();
-        }
-        protected override void setSubscriptions(bool isSub)
-        {
-            base.setSubscriptions(isSub);
         }
         #endregion
 
@@ -61,7 +56,7 @@ namespace DevShirme.ADModule
         private void bannerADRequest()
         {
 #if UNITY_ANDROID
-            string id = ((ADSettings)settings).GetID(Enums.ADType.Banner, true);
+            string id = adSettings.GetID(Enums.ADType.Banner, true);
 #elif UNITY_IPHONE
   string id = "ca-app-pub-3940256099942544/2934735716";
 #else
@@ -81,7 +76,7 @@ namespace DevShirme.ADModule
         private void interstitialADRequest()
         {
 #if UNITY_ANDROID
-            string id = ((ADSettings)settings).GetID(Enums.ADType.Interstital, true);
+            string id = adSettings.GetID(Enums.ADType.Interstital, true);
 #elif UNITY_IPHONE
   string id = "ca-app-pub-3940256099942544/4411468910";
 #else
@@ -113,7 +108,7 @@ namespace DevShirme.ADModule
         private void rewardedADRequest()
         {
 #if UNITY_ANDROID
-            string id = ((ADSettings)settings).GetID(Enums.ADType.Rewarded, true);
+            string id = adSettings.GetID(Enums.ADType.Rewarded, true);
 #elif UNITY_IPHONE
   string id = "ca-app-pub-3940256099942544/1712485313";
 #else

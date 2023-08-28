@@ -8,29 +8,25 @@ namespace DevShirme.CameraModule
     public class CameraModule : Module
     {
         #region Fields
-        [Header("Camera Controller Fields")]
-        [SerializeField] private Cam[] cams;
-        private CameraSettings cameraSettings;
+        private readonly CameraSettings cameraSettings;
+        private readonly Cam[] cams;
         private Cam activeCam;
         #endregion
 
         #region Core
-        public override void Initialize()
+        public CameraModule(ScriptableObject _settings) : base(_settings)
         {
-            base.Initialize();
+            cameraSettings = _settings as CameraSettings;
+
+            cams = Object.FindObjectsOfType<Cam>();
 
             for (int i = 0; i < cams.Length; i++)
             {
                 cams[i].Initialize();
             }
         }
-        public override void Shutdown()
+        public override void SetSubscriptions(bool isSub)
         {
-            base.Shutdown();
-        }
-        protected override void setSubscriptions(bool isSub)
-        {
-            base.setSubscriptions(isSub);
         }
         #endregion
 

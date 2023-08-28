@@ -5,31 +5,14 @@ using UnityEngine;
 
 namespace DevShirme
 {
-    public abstract class Module: MonoBehaviour, IModule
+    public abstract class Module: IModule
     {
-        #region Fields
-        [Header("Module Components")]
-        [SerializeField] protected ScriptableObject settings;
-        #endregion
-
         #region Core
-        public virtual void Initialize()
+        public Module(ScriptableObject _settings)
         {
-            setSubscriptions(true);
+            SetSubscriptions(true);
         }
-        public virtual void Shutdown()
-        {
-            setSubscriptions(false);
-        }
-        protected virtual void setSubscriptions(bool isSub)
-        {
-            if (isSub)
-            {
-            }
-            else
-            {
-            }
-        }
+        public abstract void SetSubscriptions(bool isSub);
         #endregion
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DevShirme.CameraModule
 {
-    [CreateAssetMenu(fileName = "CameraSettings", menuName = "DevShirme/ModuleSettings/Camera Settings", order = 1)]
+    [CreateAssetMenu(fileName = "CameraSettings", menuName = "DevShirme/Settings/ModuleSettings/CameraSettings", order = 1)]
     public class CameraSettings : ScriptableObject
     {
         #region Fields

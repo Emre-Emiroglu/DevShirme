@@ -77,13 +77,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyType: 0
-  managerServices:
-  - managerType: 0
-    managerSettings: {fileID: 11400000, guid: 33d9a012c9cf1244db4093da31eccbd5, type: 2}
-    transform: {fileID: 6058604143147178683}
-  - managerType: 1
-    managerSettings: {fileID: 11400000, guid: 78370ab1c90708e4cafe8faa82d34812, type: 2}
-    transform: {fileID: 1742882971}
-  - managerType: 2
-    managerSettings: {fileID: 11400000, guid: 72f9543a99580cb4e8aef4699ce92b06, type: 2}
-    transform: {fileID: 6058604143147178683}
+  coreSettings: {fileID: 11400000, guid: 3b76d78af17373447bd32465869d0ef5, type: 2}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DevShirme
 {
-    [CreateAssetMenu(fileName = "DataManagerSettings", menuName = "DevShirme/ManagerSettings/DataManagerSettings", order = 0)]
+    [CreateAssetMenu(fileName = "DataManagerSettings", menuName = "DevShirme/Settings/ManagerSettings/DataManagerSettings", order = 0)]
     public class DataManagerSettings : ScriptableObject
     {
         #region Fields

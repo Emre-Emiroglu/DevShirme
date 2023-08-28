@@ -27,8 +27,10 @@ namespace DevShirme
         #endregion
 
         #region Core
-        public PoolManager(ScriptableObject _settings, Transform poolsParent) : base(_settings)
+        public PoolManager(ScriptableObject _settings) : base(_settings)
         {
+            Transform poolsParent = Object.FindObjectOfType<Core>().transform;
+
             pmSettings = base._settings as PoolManagerSettings;
 
             pools = new ObjectPool[pmSettings.Prefabs.Length];

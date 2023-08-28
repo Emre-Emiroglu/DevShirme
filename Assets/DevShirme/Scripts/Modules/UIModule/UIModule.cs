@@ -8,31 +8,27 @@ namespace DevShirme.UIModule
     public class UIModule : Module
     {
         #region Fields
-        [Header("UI Controller Fields")]
-        [SerializeField] private List<UIPanel> panels;
+        private readonly UIPanel[] panels;
         #endregion
 
         #region Core
-        public override void Initialize()
+        public UIModule(ScriptableObject _settings) : base(_settings)
         {
-            base.Initialize();
+            panels = Object.FindObjectsOfType<UIPanel>();
 
             transation(Enums.UIPanelType.MainMenuPanel);
         }
-        public override void Shutdown()
+        public override void SetSubscriptions(bool isSub)
         {
-            base.Shutdown();
-        }
-        protected override void setSubscriptions(bool isSub)
-        {
-            base.setSubscriptions(isSub);
         }
         #endregion
 
         #region PanelProcess
         private void transation(Enums.UIPanelType newPanel)
         {
-            panels.ForEach(x => x.Hide());
+            for (int i = 0; i < panels.Length; i++)
+                panels[i].Hide();
+            
             panels[((int)newPanel)].Show();
         }
         #endregion

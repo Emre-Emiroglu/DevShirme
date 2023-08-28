@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DevShirme.PlayerModule
 {
-    [CreateAssetMenu(fileName = "PlayerSettings", menuName = "DevShirme/ModuleSettings/Player Settings", order = 1)]
+    [CreateAssetMenu(fileName = "PlayerSettings", menuName = "DevShirme/Settings/ModuleSettings/PlayerSettings", order = 1)]
     public class PlayerSettings : ScriptableObject
     {
         #region Fields

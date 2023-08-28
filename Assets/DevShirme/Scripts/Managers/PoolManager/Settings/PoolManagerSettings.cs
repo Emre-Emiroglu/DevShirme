@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DevShirme
 {
-    [CreateAssetMenu(fileName ="PoolManagerSettings", menuName ="DevShirme/ManagerSettings/PoolManagerSettings", order = 0)]
+    [CreateAssetMenu(fileName ="PoolManagerSettings", menuName ="DevShirme/Settings/ManagerSettings/PoolManagerSettings", order = 0)]
     public class PoolManagerSettings : ScriptableObject
     {
         #region Fields

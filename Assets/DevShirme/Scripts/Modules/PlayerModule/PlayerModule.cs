@@ -7,24 +7,19 @@ namespace DevShirme.PlayerModule
     public class PlayerModule : Module
     {
         #region Fields
-        [Header("Player Module Components")]
-        private InputController inputController;
+        private readonly PlayerSettings playerSettings;
+        private readonly InputController inputController;
         #endregion
 
         #region Core
-        public override void Initialize()
+        public PlayerModule(ScriptableObject _settings) : base(_settings)
         {
-            base.Initialize();
+            playerSettings = _settings as PlayerSettings;
 
             inputController = new InputController();
         }
-        public override void Shutdown()
+        public override void SetSubscriptions(bool isSub)
         {
-            base.Shutdown();
-        }
-        protected override void setSubscriptions(bool isSub)
-        {
-            base.setSubscriptions(isSub);
         }
         #endregion
     }
