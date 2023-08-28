@@ -1,10 +1,14 @@
 using DevShirme.Interfaces;
 using DevShirme.Utils;
+using DevShirme.Modules.ADModule;
+using DevShirme.Modules.CameraModule;
+using DevShirme.Modules.PlayerModule;
+using DevShirme.Modules.UIModule;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DevShirme
+namespace DevShirme.Managers.GameManager
 {
     public class GameManager : Manager
     {
@@ -69,7 +73,7 @@ namespace DevShirme
                 if (!checkIsCreated(indexValue))
                 {
                     ScriptableObject settings = getSettings(indexValue);
-                    IModule module = new ADModule.ADModule(settings);
+                    IModule module = new ADModule(settings);
                     modules.Add(indexValue, module);
                 }
             }
@@ -79,7 +83,7 @@ namespace DevShirme
                 if (!checkIsCreated(indexValue))
                 {
                     ScriptableObject settings = getSettings(indexValue);
-                    IModule module = new PlayerModule.PlayerModule(settings);
+                    IModule module = new PlayerModule(settings);
                     modules.Add(indexValue, module);
                 }
             }
@@ -89,7 +93,7 @@ namespace DevShirme
                 if (!checkIsCreated(indexValue))
                 {
                     ScriptableObject settings = getSettings(indexValue);
-                    IModule module = new CameraModule.CameraModule(settings);
+                    IModule module = new CameraModule(settings);
                     modules.Add(indexValue, module);
                 }
             }
@@ -99,7 +103,7 @@ namespace DevShirme
                 if (!checkIsCreated(indexValue))
                 {
                     //ScriptableObject settings = getSettings(indexValue);
-                    IModule module = new UIModule.UIModule(null);
+                    IModule module = new UIModule(null);
                     modules.Add(indexValue, module);
                 }
             }

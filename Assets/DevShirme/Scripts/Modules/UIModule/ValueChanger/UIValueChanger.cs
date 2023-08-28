@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DevShirme.UIModule
+namespace DevShirme.Modules.UIModule
 {
     public class UIValueChanger : MonoBehaviour
     {

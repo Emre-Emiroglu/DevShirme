@@ -6,7 +6,7 @@ using DevShirme.Utils;
 using System;
 using UnityEngine.Events;
 
-namespace DevShirme.ADModule
+namespace DevShirme.Modules.ADModule
 {
     public class ADModule : Module
     {

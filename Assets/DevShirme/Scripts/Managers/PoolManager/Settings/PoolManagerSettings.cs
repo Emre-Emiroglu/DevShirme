@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DevShirme
+namespace DevShirme.Managers.PoolManager
 {
     [CreateAssetMenu(fileName ="PoolManagerSettings", menuName ="DevShirme/Settings/ManagerSettings/PoolManagerSettings", order = 0)]
     public class PoolManagerSettings : ScriptableObject

@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 using DevShirme.Utils;
 
-namespace DevShirme
+namespace DevShirme.Managers.DataManager
 {
     public class PlayerDataSet : DataSet<Structs.PlayerData>
     {

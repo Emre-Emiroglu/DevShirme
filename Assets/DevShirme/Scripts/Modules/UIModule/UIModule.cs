@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DevShirme.Utils;
 
-namespace DevShirme.UIModule
+namespace DevShirme.Modules.UIModule
 {
     public class UIModule : Module
     {

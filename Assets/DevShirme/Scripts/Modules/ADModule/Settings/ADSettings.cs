@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DevShirme.ADModule
+namespace DevShirme.Modules.ADModule
 {
     [CreateAssetMenu(fileName = "ADSettings", menuName = "DevShirme/Settings/ModuleSettings/ADSettings")]
     public class ADSettings : ScriptableObject

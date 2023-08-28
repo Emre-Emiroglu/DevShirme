@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DevShirme.PlayerModule
+namespace DevShirme.Modules.PlayerModule
 {
     [CreateAssetMenu(fileName = "PlayerSettings", menuName = "DevShirme/Settings/ModuleSettings/PlayerSettings", order = 1)]
     public class PlayerSettings : ScriptableObject

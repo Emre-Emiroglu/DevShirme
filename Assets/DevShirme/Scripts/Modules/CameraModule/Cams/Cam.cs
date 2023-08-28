@@ -4,7 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using DevShirme.Utils;
 
-namespace DevShirme.CameraModule
+namespace DevShirme.Modules.CameraModule
 {
     public class Cam : MonoBehaviour
     {

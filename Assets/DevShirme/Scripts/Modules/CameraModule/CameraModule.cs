@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DevShirme.Utils;
 
-namespace DevShirme.CameraModule
+namespace DevShirme.Modules.CameraModule
 {
     public class CameraModule : Module
     {

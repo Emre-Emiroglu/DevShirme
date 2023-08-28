@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace DevShirme.UIModule
+namespace DevShirme.Modules.UIModule
 {
     public class UIPanel : MonoBehaviour
     {

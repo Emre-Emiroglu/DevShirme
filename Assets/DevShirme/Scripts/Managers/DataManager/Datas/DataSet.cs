@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DevShirme
+namespace DevShirme.Managers.DataManager
 {
     public abstract class DataSet<T>
     {

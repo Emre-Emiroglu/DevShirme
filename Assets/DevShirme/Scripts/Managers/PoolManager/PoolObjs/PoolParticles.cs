@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DevShirme
+namespace DevShirme.Managers.PoolManager
 {
     public class PoolParticles : PoolObject
     {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DevShirme
+namespace DevShirme.Managers.GameManager
 {
     [CreateAssetMenu(fileName = "GameManagerSettings", menuName = "DevShirme/Settings/ManagerSettings/GameManagerSettings", order = 0)]
     public class GameManagerSettings : ScriptableObject

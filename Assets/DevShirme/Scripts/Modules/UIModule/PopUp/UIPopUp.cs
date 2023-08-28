@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace DevShirme.UIModule
+namespace DevShirme.Modules.UIModule
 {
     public class UIPopUp : MonoBehaviour
     {

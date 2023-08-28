@@ -1,5 +1,8 @@
 using DevShirme.Interfaces;
 using DevShirme.Utils;
+using DevShirme.Managers.DataManager;
+using DevShirme.Managers.GameManager;
+using DevShirme.Managers.PoolManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

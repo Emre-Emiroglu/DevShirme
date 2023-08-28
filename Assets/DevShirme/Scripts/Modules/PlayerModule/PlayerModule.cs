@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DevShirme.PlayerModule
+namespace DevShirme.Modules.PlayerModule
 {
     public class PlayerModule : Module
     {

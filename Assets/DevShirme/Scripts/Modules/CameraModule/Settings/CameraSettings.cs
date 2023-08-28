@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DevShirme.CameraModule
+namespace DevShirme.Modules.CameraModule
 {
     [CreateAssetMenu(fileName = "CameraSettings", menuName = "DevShirme/Settings/ModuleSettings/CameraSettings", order = 1)]
     public class CameraSettings : ScriptableObject

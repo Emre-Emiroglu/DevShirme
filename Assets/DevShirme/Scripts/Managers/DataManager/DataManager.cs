@@ -6,7 +6,7 @@ using System.IO;
 using UnityEditor;
 #endif
 
-namespace DevShirme
+namespace DevShirme.Managers.DataManager
 {
     public class DataManager : Manager
     {

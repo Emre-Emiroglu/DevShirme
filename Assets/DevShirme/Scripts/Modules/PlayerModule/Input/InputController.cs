@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DevShirme.Utils;
 
-namespace DevShirme.PlayerModule
+namespace DevShirme.Modules.PlayerModule
 {
     public class InputController
     {
