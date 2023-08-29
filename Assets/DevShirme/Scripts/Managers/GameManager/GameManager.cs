@@ -25,7 +25,7 @@ namespace DevShirme.Managers.GameManager
         }
         private int getIndexValue(int baseValue)
         {
-            return baseValue == 1 ? 0 : baseValue / 2;
+            return baseValue == 1 ? 0 : Mathf.ClosestPowerOfTwo(baseValue);
         }
         private bool checkIsCreated(int keyValue)
         {
