@@ -113,9 +113,13 @@ namespace DevShirme.Managers.GameManager
         #region Updates
         public override void ExternalUpdate()
         {
+            for (int i = 0; i < modules.Count; i++)
+                modules[i].ExternalUpdate();
         }
         public override void ExternalFixedUpdate()
         {
+            for (int i = 0; i < modules.Count; i++)
+                modules[i].ExternalFixedUpdate();
         }
         #endregion
     }
