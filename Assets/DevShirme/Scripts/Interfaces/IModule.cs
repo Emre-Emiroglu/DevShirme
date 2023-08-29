@@ -7,5 +7,7 @@ namespace DevShirme.Interfaces
     public interface IModule
     {
         public void SetSubscriptions(bool isSub);
+        public void ExternalUpdate();
+        public void ExternalFixedUpdate();
     }
 }

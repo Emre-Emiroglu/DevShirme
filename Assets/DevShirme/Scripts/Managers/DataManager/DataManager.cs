@@ -40,6 +40,15 @@ namespace DevShirme.Managers.DataManager
         }
 #endif
         #endregion
+
+        #region Updates
+        public override void ExternalUpdate()
+        {
+        }
+        public override void ExternalFixedUpdate()
+        {
+        }
+        #endregion
     }
 }
 

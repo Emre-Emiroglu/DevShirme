@@ -102,5 +102,18 @@ namespace DevShirme
             }
         }
         #endregion
+
+        #region Updates
+        private void Update()
+        {
+            for (int i = 0; i < managers.Count; i++)
+                managers[i].ExternalUpdate();
+        }
+        private void FixedUpdate()
+        {
+            for (int i = 0; i < managers.Count; i++)
+                managers[i].ExternalFixedUpdate();
+        }
+        #endregion
     }
 }

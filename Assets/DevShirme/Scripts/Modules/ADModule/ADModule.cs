@@ -201,5 +201,14 @@ namespace DevShirme.Modules.ADModule
         //    };
         //}
         #endregion
+
+        #region Updates
+        public override void ExternalUpdate()
+        {
+        }
+        public override void ExternalFixedUpdate()
+        {
+        }
+        #endregion
     }
 }

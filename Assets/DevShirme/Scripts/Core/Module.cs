@@ -14,5 +14,10 @@ namespace DevShirme
         }
         public abstract void SetSubscriptions(bool isSub);
         #endregion
+
+        #region Updates
+        public abstract void ExternalUpdate();
+        public abstract void ExternalFixedUpdate();
+        #endregion
     }
 }

@@ -58,5 +58,14 @@ namespace DevShirme.Managers.PoolManager
                 pools[i].Reload();
         }
         #endregion
+
+        #region Updates
+        public override void ExternalUpdate()
+        {
+        }
+        public override void ExternalFixedUpdate()
+        {
+        }
+        #endregion
     }
 }

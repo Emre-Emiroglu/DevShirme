@@ -32,5 +32,14 @@ namespace DevShirme.Modules.UIModule
             panels[((int)newPanel)].Show();
         }
         #endregion
+
+        #region Updates
+        public override void ExternalUpdate()
+        {
+        }
+        public override void ExternalFixedUpdate()
+        {
+        }
+        #endregion
     }
 }

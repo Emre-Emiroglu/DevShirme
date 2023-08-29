@@ -15,5 +15,10 @@ namespace DevShirme
             this._settings = _settings;
         }
         #endregion
+
+        #region Updates
+        public abstract void ExternalUpdate();
+        public abstract void ExternalFixedUpdate();
+        #endregion
     }
 }

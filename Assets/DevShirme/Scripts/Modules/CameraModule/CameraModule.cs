@@ -54,5 +54,14 @@ namespace DevShirme.Modules.CameraModule
         #region Fov
         public void FovChange(float addValue) => activeCam.FovChange(addValue, cameraSettings.FovChangeDuration);
         #endregion
+
+        #region Updates
+        public override void ExternalUpdate()
+        {
+        }
+        public override void ExternalFixedUpdate()
+        {
+        }
+        #endregion
     }
 }
