@@ -17,6 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3e9ee137392b47c4cb6d3eb2f0c63796, type: 2}
   - {fileID: 11400000, guid: 9b47eaaad61fba34886e8da85b7ffcdb, type: 2}
   - {fileID: 11400000, guid: 8d7b5b5de91819f43b27677a24162265, type: 2}
+  - {fileID: 11400000, guid: 8422b1f4f8a67374ea430e55d94a2e6d, type: 2}
   targetFPS: 165
   isCursorActive: 1
   cursorLockMode: 0

@@ -15,13 +15,13 @@ namespace DevShirme
         [Header("Core Fields")]
         [SerializeField] private CoreSettings coreSettings;
         private Dictionary<int, IManager> managers;
-        private List<IManager> loadedManagers;
+        private List<IManager> loadedManagers;    
         #endregion
 
         #region Getters
         public IManager GetManager(Enums.ManagerType managerType)
         {
-            IManager manager = managers[getIndexValue(((int)managerType))];
+            IManager manager = managers[Utilities.FlagsValueToIndex(((int)managerType))];
             if (manager == null)
             {
                 Debug.LogError("You dont have: " + managerType.ToString());
@@ -29,19 +29,6 @@ namespace DevShirme
             }
             else
                 return manager;
-        }
-        private ScriptableObject getSettings(int indexValue)
-        {
-            ScriptableObject settings = coreSettings.ManagersSettings[indexValue];
-            return settings;
-        }
-        private int getIndexValue(int baseValue)
-        {
-            return (int)(baseValue == 1 ? 0 : Mathf.Sqrt(baseValue));
-        }
-        private bool checkIsCreated(int keyValue)
-        {
-            return managers.ContainsKey(keyValue);
         }
         #endregion
 
@@ -73,37 +60,34 @@ namespace DevShirme
             bool hasGM = coreSettings.Managers.HasFlag(Enums.ManagerType.GameManager);
 
             if (hasDM)
-            {
-                int indexValue = getIndexValue(((int)Enums.ManagerType.DataManager));
-                if (!checkIsCreated(indexValue))
-                {
-                    ScriptableObject settings = getSettings(indexValue);
-                    IManager manager = new DataManager(settings);
-                    managers.Add(indexValue, manager);
-                    loadedManagers.Add(manager);
-                }
-            }
+                createManager(Enums.ManagerType.DataManager);
             if (hasPM)
-            {
-                int indexValue = getIndexValue(((int)Enums.ManagerType.PoolManager));
-                if (!checkIsCreated(indexValue))
-                {
-                    ScriptableObject settings = getSettings(indexValue);
-                    IManager manager = new PoolManager(settings);
-                    managers.Add(indexValue, manager);
-                    loadedManagers.Add(manager);
-                }
-            }
+                createManager(Enums.ManagerType.PoolManager);
             if (hasGM)
+                createManager(Enums.ManagerType.GameManager);
+        }
+        private void createManager(Enums.ManagerType managerType)
+        {
+            int indexValue = Utilities.FlagsValueToIndex(((int)managerType));
+            bool contain = managers.ContainsKey(indexValue);
+            IManager manager = null;
+            if (!contain)
             {
-                int indexValue = getIndexValue(((int)Enums.ManagerType.GameManager));
-                if (!checkIsCreated(indexValue))
+                ScriptableObject settings = coreSettings.ManagersSettings[indexValue];
+                switch (managerType)
                 {
-                    ScriptableObject settings = getSettings(indexValue);
-                    IManager manager = new GameManager(settings);
-                    managers.Add(indexValue, manager);
-                    loadedManagers.Add(manager);
+                    case Enums.ManagerType.DataManager:
+                        manager = new DataManager(settings);
+                        break;
+                    case Enums.ManagerType.PoolManager:
+                        manager = new PoolManager(settings);
+                        break;
+                    case Enums.ManagerType.GameManager:
+                        manager = new GameManager(settings);
+                        break;
                 }
+                managers.Add(indexValue, manager);
+                loadedManagers.Add(manager);
             }
         }
         #endregion

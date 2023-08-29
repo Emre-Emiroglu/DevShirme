@@ -1,8 +1,6 @@
 namespace DevShirme.Interfaces
 {
-    public interface IManager
+    public interface IManager: IUpdateable
     {
-        public void ExternalUpdate();
-        public void ExternalFixedUpdate();
     }
 }

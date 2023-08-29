@@ -93,5 +93,10 @@ namespace DevShirme.Utils
                 }
             }
         }
+        public static int FlagsValueToIndex(int value)
+        {
+            float result = value == 1 ? 0 : Mathf.Sqrt(value);
+            return Mathf.RoundToInt(result);
+        }
     }
 }

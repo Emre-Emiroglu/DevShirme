@@ -18,22 +18,6 @@ namespace DevShirme.Managers.GameManager
         private List<IModule> loadedModules;
         #endregion
 
-        #region Getters
-        private ScriptableObject getSettings(int indexValue)
-        {
-            ScriptableObject settings = gmSettings.ModulesSettings[indexValue];
-            return settings;
-        }
-        private int getIndexValue(int baseValue)
-        {
-            return (int)(baseValue == 1 ? 0 : Mathf.Sqrt(baseValue));
-        }
-        private bool checkIsCreated(int keyValue)
-        {
-            return modules.ContainsKey(keyValue);
-        }
-        #endregion
-
         #region Core
         public GameManager(ScriptableObject _settings) : base(_settings)
         {
@@ -70,48 +54,39 @@ namespace DevShirme.Managers.GameManager
             bool hasUM = gmSettings.Modules.HasFlag(Enums.ModuleType.UIModule);
 
             if (hasAD)
-            {
-                int indexValue = getIndexValue(((int)Enums.ModuleType.ADModule));
-                if (!checkIsCreated(indexValue))
-                {
-                    ScriptableObject settings = getSettings(indexValue);
-                    IModule module = new ADModule(settings);
-                    modules.Add(indexValue, module);
-                    loadedModules.Add(module);
-                }
-            }
+                createModule(Enums.ModuleType.ADModule);
             if (hasPM)
-            {
-                int indexValue = getIndexValue(((int)Enums.ModuleType.PlayerModule));
-                if (!checkIsCreated(indexValue))
-                {
-                    ScriptableObject settings = getSettings(indexValue);
-                    IModule module = new PlayerModule(settings);
-                    modules.Add(indexValue, module);
-                    loadedModules.Add(module);
-                }
-            }
+                createModule(Enums.ModuleType.PlayerModule);
             if (hasCM)
-            {
-                int indexValue = getIndexValue(((int)Enums.ModuleType.CameraModule));
-                if (!checkIsCreated(indexValue))
-                {
-                    ScriptableObject settings = getSettings(indexValue);
-                    IModule module = new CameraModule(settings);
-                    modules.Add(indexValue, module);
-                    loadedModules.Add(module);
-                }
-            }
+                createModule(Enums.ModuleType.CameraModule);
             if (hasUM)
+                createModule(Enums.ModuleType.UIModule);
+        }
+        private void createModule(Enums.ModuleType moduleType)
+        {
+            int indexValue = Utilities.FlagsValueToIndex(((int)moduleType));
+            bool contain = modules.ContainsKey(indexValue);
+            IModule module = null;
+            if (!contain)
             {
-                int indexValue = getIndexValue(((int)Enums.ModuleType.UIModule));
-                if (!checkIsCreated(indexValue))
+                ScriptableObject settings = gmSettings.ModulesSettings[indexValue];
+                switch (moduleType)
                 {
-                    //ScriptableObject settings = getSettings(indexValue);
-                    IModule module = new UIModule(null);
-                    modules.Add(indexValue, module);
-                    loadedModules.Add(module);
+                    case Enums.ModuleType.ADModule:
+                        module = new ADModule(settings);
+                        break;
+                    case Enums.ModuleType.PlayerModule:
+                        module = new PlayerModule(settings);
+                        break;
+                    case Enums.ModuleType.CameraModule:
+                        module = new CameraModule(settings);
+                        break;
+                    case Enums.ModuleType.UIModule:
+                        module = new UIModule(settings);
+                        break;
                 }
+                modules.Add(indexValue, module);
+                loadedModules.Add(module);
             }
         }
         #endregion

@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace DevShirme.Interfaces
 {
-    public interface IModule: IUpdateable
+    public interface IUpdateable
     {
-        public void SetSubscriptions(bool isSub);
+        public void ExternalUpdate();
+        public void ExternalFixedUpdate();
     }
 }
