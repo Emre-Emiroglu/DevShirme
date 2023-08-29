@@ -15,6 +15,7 @@ namespace DevShirme.Managers.GameManager
         #region Fields
         private readonly GameManagerSettings gmSettings;
         private Dictionary<int, IModule> modules;
+        private List<IModule> loadedModules;
         #endregion
 
         #region Getters
@@ -61,6 +62,7 @@ namespace DevShirme.Managers.GameManager
         private void createModules()
         {
             modules = new Dictionary<int, IModule>();
+            loadedModules = new List<IModule>();
 
             bool hasAD = gmSettings.Modules.HasFlag(Enums.ModuleType.ADModule);
             bool hasPM = gmSettings.Modules.HasFlag(Enums.ModuleType.PlayerModule);
@@ -75,6 +77,7 @@ namespace DevShirme.Managers.GameManager
                     ScriptableObject settings = getSettings(indexValue);
                     IModule module = new ADModule(settings);
                     modules.Add(indexValue, module);
+                    loadedModules.Add(module);
                 }
             }
             if (hasPM)
@@ -85,6 +88,7 @@ namespace DevShirme.Managers.GameManager
                     ScriptableObject settings = getSettings(indexValue);
                     IModule module = new PlayerModule(settings);
                     modules.Add(indexValue, module);
+                    loadedModules.Add(module);
                 }
             }
             if (hasCM)
@@ -95,6 +99,7 @@ namespace DevShirme.Managers.GameManager
                     ScriptableObject settings = getSettings(indexValue);
                     IModule module = new CameraModule(settings);
                     modules.Add(indexValue, module);
+                    loadedModules.Add(module);
                 }
             }
             if (hasUM)
@@ -105,6 +110,7 @@ namespace DevShirme.Managers.GameManager
                     //ScriptableObject settings = getSettings(indexValue);
                     IModule module = new UIModule(null);
                     modules.Add(indexValue, module);
+                    loadedModules.Add(module);
                 }
             }
         }
@@ -113,13 +119,13 @@ namespace DevShirme.Managers.GameManager
         #region Updates
         public override void ExternalUpdate()
         {
-            for (int i = 0; i < modules.Count; i++)
-                modules[i].ExternalUpdate();
+            for (int i = 0; i < loadedModules.Count; i++)
+                loadedModules[i].ExternalUpdate();
         }
         public override void ExternalFixedUpdate()
         {
-            for (int i = 0; i < modules.Count; i++)
-                modules[i].ExternalFixedUpdate();
+            for (int i = 0; i < loadedModules.Count; i++)
+                loadedModules[i].ExternalFixedUpdate();
         }
         #endregion
     }

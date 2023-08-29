@@ -15,6 +15,7 @@ namespace DevShirme
         [Header("Core Fields")]
         [SerializeField] private CoreSettings coreSettings;
         private Dictionary<int, IManager> managers;
+        private List<IManager> loadedManagers;
         #endregion
 
         #region Getters
@@ -65,6 +66,7 @@ namespace DevShirme
         private void createManagers()
         {
             managers = new Dictionary<int, IManager>();
+            loadedManagers = new List<IManager>();
 
             bool hasDM = coreSettings.Managers.HasFlag(Enums.ManagerType.DataManager);
             bool hasPM = coreSettings.Managers.HasFlag(Enums.ManagerType.PoolManager);
@@ -78,6 +80,7 @@ namespace DevShirme
                     ScriptableObject settings = getSettings(indexValue);
                     IManager manager = new DataManager(settings);
                     managers.Add(indexValue, manager);
+                    loadedManagers.Add(manager);
                 }
             }
             if (hasPM)
@@ -88,6 +91,7 @@ namespace DevShirme
                     ScriptableObject settings = getSettings(indexValue);
                     IManager manager = new PoolManager(settings);
                     managers.Add(indexValue, manager);
+                    loadedManagers.Add(manager);
                 }
             }
             if (hasGM)
@@ -98,6 +102,7 @@ namespace DevShirme
                     ScriptableObject settings = getSettings(indexValue);
                     IManager manager = new GameManager(settings);
                     managers.Add(indexValue, manager);
+                    loadedManagers.Add(manager);
                 }
             }
         }
@@ -106,13 +111,13 @@ namespace DevShirme
         #region Updates
         private void Update()
         {
-            for (int i = 0; i < managers.Count; i++)
-                managers[i].ExternalUpdate();
+            for (int i = 0; i < loadedManagers.Count; i++)
+                loadedManagers[i].ExternalUpdate();
         }
         private void FixedUpdate()
         {
-            for (int i = 0; i < managers.Count; i++)
-                managers[i].ExternalFixedUpdate();
+            for (int i = 0; i < loadedManagers.Count; i++)
+                loadedManagers[i].ExternalFixedUpdate();
         }
         #endregion
     }
