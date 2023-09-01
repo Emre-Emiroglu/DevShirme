@@ -27,6 +27,8 @@ namespace DevShirme.Managers.GameManager
             setCursor();
 
             createModules();
+
+            initGameEvents();
         }
         #endregion
 
@@ -88,6 +90,14 @@ namespace DevShirme.Managers.GameManager
                 modules.Add(indexValue, module);
                 loadedModules.Add(module);
             }
+        }
+        #endregion
+
+        #region Inits
+        private void initGameEvents()
+        {
+            for (int i = 0; i < gmSettings.GameEvents.Length; i++)
+                gmSettings.GameEvents[i].Initialize();
         }
         #endregion
 

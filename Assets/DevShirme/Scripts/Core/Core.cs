@@ -3,6 +3,7 @@ using DevShirme.Utils;
 using DevShirme.Managers.DataManager;
 using DevShirme.Managers.GameManager;
 using DevShirme.Managers.PoolManager;
+using DevShirme.DesignPatterns.Creationals;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

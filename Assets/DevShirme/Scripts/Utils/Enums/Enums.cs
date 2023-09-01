@@ -57,5 +57,15 @@ namespace DevShirme.Utils
             MinutesSeconds,
             Seconds
         }
+        public enum NotificationType: int
+        {
+            A = 0,
+            B = 1
+        }
+        public enum SubjectType : int
+        {
+            Action = 0,
+            NotAction = 1
+        }
     }
 }

@@ -38,5 +38,27 @@ namespace DevShirme.Utils
                 VibrateOn = vibrateOn;
             }
         }
+
+        [Serializable]
+        public struct SubjectData
+        {
+            [SerializeField] private Enums.SubjectType subjectType;
+            [SerializeField] private Enums.NotificationType notificationType;
+            private HashSet<IObserver> observers;
+            private Action<object, Enums.NotificationType> action;
+
+            public Enums.SubjectType SubjectType => subjectType;
+            public Enums.NotificationType NotificationType => notificationType;
+            public HashSet<IObserver> Observers { get { return observers; } set { observers = value; } }
+            public Action<object, Enums.NotificationType> Action { get { return action; } set { action = value; } }
+
+            public SubjectData(Enums.SubjectType subjectType, Enums.NotificationType notificationType, HashSet<IObserver> observers, Action<object, Enums.NotificationType> action)
+            {
+                this.subjectType = subjectType;
+                this.notificationType = notificationType;
+                this.observers = observers;
+                this.action = action;
+            }
+        }
     }
 }
