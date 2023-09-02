@@ -24,12 +24,12 @@ namespace DevShirme.Modules.PlayerModule.Controllers
         #endregion
 
         #region Updates
-        public void ExternalUpdate()
+        public void Update()
         {
             if (!isActivated)
                 return;
         }
-        public void ExternalFixedUpdate()
+        public void FixedUpdate()
         {
             if (!isActivated)
                 return;

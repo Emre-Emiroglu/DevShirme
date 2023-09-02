@@ -1,11 +1,10 @@
-using DevShirme.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevShirme
 {
-    public abstract class Module: ILoadable
+    public abstract class Module
     {
         #region Fields
         protected readonly ScriptableObject _settings;

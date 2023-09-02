@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DevShirme.Interfaces
 {
-    public interface IPlayerAgent: ILoadable
+    public interface IPlayerAgent
     {
         public bool IsActived { get; set; }
         public void Initialize(PlayerSettings playerSettings);

@@ -1,4 +1,3 @@
-using DevShirme.Interfaces;
 using DevShirme.Utils;
 using DevShirme.Managers.DataManager;
 using DevShirme.Managers.GameManager;

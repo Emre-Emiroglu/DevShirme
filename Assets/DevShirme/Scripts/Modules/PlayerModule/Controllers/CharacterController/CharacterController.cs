@@ -26,11 +26,9 @@ namespace DevShirme.Modules.PlayerModule.Controllers
         #region Updates
         public override void ExternalUpdate()
         {
-            agent?.ExternalUpdate();
         }
         public override void ExternalFixedUpdate()
         {
-            agent?.ExternalFixedUpdate();
         }
         #endregion
     }
