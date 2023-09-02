@@ -1,3 +1,4 @@
+using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,9 +9,12 @@ namespace DevShirme.Modules.PlayerModule
     public class PlayerSettings : ScriptableObject
     {
         #region Fields
+        [Header("Included Controllers")]
+        [SerializeField] private Enums.PlayerModuleControllerType controllers;
         #endregion
 
         #region Getters
+        public Enums.PlayerModuleControllerType Controllers => controllers;
         #endregion
     }
 }

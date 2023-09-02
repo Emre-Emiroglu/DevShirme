@@ -15,14 +15,14 @@ namespace DevShirme
         #region Fields
         [Header("Core Fields")]
         [SerializeField] private CoreSettings coreSettings;
-        private Dictionary<int, IManager> managers;
-        private List<IManager> loadedManagers;    
+        private Dictionary<int, Manager> managers;
+        private List<Manager> loadedManagers;    
         #endregion
 
         #region Getters
-        public IManager GetManager(Enums.ManagerType managerType)
+        public Manager GetManager(Enums.ManagerType managerType)
         {
-            IManager manager = managers[Utilities.FlagsValueToIndex(((int)managerType))];
+            Manager manager = managers[Utilities.FlagsValueToIndex(((int)managerType))];
             if (manager == null)
             {
                 Debug.LogError("You dont have: " + managerType.ToString());
@@ -53,8 +53,8 @@ namespace DevShirme
         #region Creates
         private void createManagers()
         {
-            managers = new Dictionary<int, IManager>();
-            loadedManagers = new List<IManager>();
+            managers = new Dictionary<int, Manager>();
+            loadedManagers = new List<Manager>();
 
             bool hasDM = coreSettings.Managers.HasFlag(Enums.ManagerType.DataManager);
             bool hasPM = coreSettings.Managers.HasFlag(Enums.ManagerType.PoolManager);
@@ -71,7 +71,7 @@ namespace DevShirme
         {
             int indexValue = Utilities.FlagsValueToIndex(((int)managerType));
             bool contain = managers.ContainsKey(indexValue);
-            IManager manager = null;
+            Manager manager = null;
             if (!contain)
             {
                 ScriptableObject settings = coreSettings.ManagersSettings[indexValue];

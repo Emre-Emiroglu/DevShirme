@@ -18,9 +18,6 @@ namespace DevShirme.Modules.UIModule
 
             transation(Enums.UIPanelType.MainMenuPanel);
         }
-        public override void SetSubscriptions(bool isSub)
-        {
-        }
         #endregion
 
         #region PanelProcess
@@ -38,6 +35,12 @@ namespace DevShirme.Modules.UIModule
         {
         }
         public override void ExternalFixedUpdate()
+        {
+        }
+        #endregion
+
+        #region Subscriptions
+        public override void SetSubscriptions(bool isSub)
         {
         }
         #endregion

@@ -1,9 +1,10 @@
 using DevShirme.Interfaces;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevShirme
 {
-    public abstract class Manager : IManager
+    public abstract class Manager : ILoadable
     {
         #region Fields
         protected readonly ScriptableObject _settings;

@@ -25,9 +25,6 @@ namespace DevShirme.Modules.CameraModule
                 cams[i].Initialize();
             }
         }
-        public override void SetSubscriptions(bool isSub)
-        {
-        }
         #endregion
 
         #region Transations
@@ -60,6 +57,12 @@ namespace DevShirme.Modules.CameraModule
         {
         }
         public override void ExternalFixedUpdate()
+        {
+        }
+        #endregion
+
+        #region Subscriptions
+        public override void SetSubscriptions(bool isSub)
         {
         }
         #endregion

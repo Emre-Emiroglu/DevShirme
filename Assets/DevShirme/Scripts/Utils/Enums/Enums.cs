@@ -17,12 +17,18 @@ namespace DevShirme.Utils
             GameManager = 4,
         }
         [Flags]
-        public enum ModuleType: int
+        public enum GameManagerModuleType: int
         {
             ADModule = 1,
             PlayerModule = 2,
             CameraModule = 4,
             UIModule = 8,
+        }
+        [Flags]
+        public enum PlayerModuleControllerType : int
+        {
+            InputController = 1,
+            CharacterController = 2,
         }
         public enum InputBehavior
         {

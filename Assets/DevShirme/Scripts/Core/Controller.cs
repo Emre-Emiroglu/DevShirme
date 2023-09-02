@@ -5,28 +5,22 @@ using UnityEngine;
 
 namespace DevShirme
 {
-    public abstract class Module: ILoadable
+    public abstract class Controller: ILoadable
     {
         #region Fields
         protected readonly ScriptableObject _settings;
         #endregion
 
         #region Core
-        public Module(ScriptableObject _settings)
+        public Controller(ScriptableObject _settings)
         {
             this._settings = _settings;
-
-            SetSubscriptions(true);
         }
         #endregion
 
         #region Updates
         public abstract void ExternalUpdate();
         public abstract void ExternalFixedUpdate();
-        #endregion
-
-        #region Subscriptions
-        public abstract void SetSubscriptions(bool isSub);
         #endregion
     }
 }

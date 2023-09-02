@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DevShirme.Utils;
+using DevShirme.Interfaces;
 
 namespace DevShirme.Modules.PlayerModule
 {
@@ -101,6 +102,15 @@ namespace DevShirme.Modules.PlayerModule
 
                 OnUp?.Invoke();
             }
+        }
+        #endregion
+
+        #region Updates
+        public void ExternalUpdate()
+        {
+        }
+        public void ExternalFixedUpdate()
+        {
         }
         #endregion
     }

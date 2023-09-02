@@ -14,8 +14,8 @@ namespace DevShirme.Managers.GameManager
     {
         #region Fields
         private readonly GameManagerSettings gmSettings;
-        private Dictionary<int, IModule> modules;
-        private List<IModule> loadedModules;
+        private Dictionary<int, Module> modules;
+        private List<Module> loadedModules;
         #endregion
 
         #region Core
@@ -47,43 +47,43 @@ namespace DevShirme.Managers.GameManager
         #region Creates
         private void createModules()
         {
-            modules = new Dictionary<int, IModule>();
-            loadedModules = new List<IModule>();
+            modules = new Dictionary<int, Module>();
+            loadedModules = new List<Module>();
 
-            bool hasAD = gmSettings.Modules.HasFlag(Enums.ModuleType.ADModule);
-            bool hasPM = gmSettings.Modules.HasFlag(Enums.ModuleType.PlayerModule);
-            bool hasCM = gmSettings.Modules.HasFlag(Enums.ModuleType.CameraModule);
-            bool hasUM = gmSettings.Modules.HasFlag(Enums.ModuleType.UIModule);
+            bool hasAD = gmSettings.Modules.HasFlag(Enums.GameManagerModuleType.ADModule);
+            bool hasPM = gmSettings.Modules.HasFlag(Enums.GameManagerModuleType.PlayerModule);
+            bool hasCM = gmSettings.Modules.HasFlag(Enums.GameManagerModuleType.CameraModule);
+            bool hasUM = gmSettings.Modules.HasFlag(Enums.GameManagerModuleType.UIModule);
 
             if (hasAD)
-                createModule(Enums.ModuleType.ADModule);
+                createModule(Enums.GameManagerModuleType.ADModule);
             if (hasPM)
-                createModule(Enums.ModuleType.PlayerModule);
+                createModule(Enums.GameManagerModuleType.PlayerModule);
             if (hasCM)
-                createModule(Enums.ModuleType.CameraModule);
+                createModule(Enums.GameManagerModuleType.CameraModule);
             if (hasUM)
-                createModule(Enums.ModuleType.UIModule);
+                createModule(Enums.GameManagerModuleType.UIModule);
         }
-        private void createModule(Enums.ModuleType moduleType)
+        private void createModule(Enums.GameManagerModuleType moduleType)
         {
             int indexValue = Utilities.FlagsValueToIndex(((int)moduleType));
             bool contain = modules.ContainsKey(indexValue);
-            IModule module = null;
+            Module module = null;
             if (!contain)
             {
                 ScriptableObject settings = gmSettings.ModulesSettings[indexValue];
                 switch (moduleType)
                 {
-                    case Enums.ModuleType.ADModule:
+                    case Enums.GameManagerModuleType.ADModule:
                         module = new ADModule(settings);
                         break;
-                    case Enums.ModuleType.PlayerModule:
+                    case Enums.GameManagerModuleType.PlayerModule:
                         module = new PlayerModule(settings);
                         break;
-                    case Enums.ModuleType.CameraModule:
+                    case Enums.GameManagerModuleType.CameraModule:
                         module = new CameraModule(settings);
                         break;
-                    case Enums.ModuleType.UIModule:
+                    case Enums.GameManagerModuleType.UIModule:
                         module = new UIModule(settings);
                         break;
                 }

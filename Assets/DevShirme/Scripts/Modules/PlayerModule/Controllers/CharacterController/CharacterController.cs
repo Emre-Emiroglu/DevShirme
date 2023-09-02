@@ -1,35 +1,36 @@
+using DevShirme.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
+using UnityEditor;
 using UnityEngine;
 
-namespace DevShirme.Modules.PlayerModule
+namespace DevShirme.Modules.PlayerModule.Controllers
 {
-    public class PlayerModule: Module
+    public class CharacterController: Controller
     {
         #region Fields
         private readonly PlayerSettings playerSettings;
+        private readonly IPlayerAgent agent;
         #endregion
 
         #region Core
-        public PlayerModule(ScriptableObject _settings) : base(_settings)
+        public CharacterController(ScriptableObject _settings) : base(_settings)
         {
             playerSettings = _settings as PlayerSettings;
+
+            agent = Object.FindObjectOfType<PlayerAgent>();
+            agent.Initialize(playerSettings);
         }
         #endregion
 
         #region Updates
         public override void ExternalUpdate()
         {
+            agent?.ExternalUpdate();
         }
         public override void ExternalFixedUpdate()
         {
-        }
-        #endregion
-
-        #region Subscriptions
-        public override void SetSubscriptions(bool isSub)
-        {
+            agent?.ExternalFixedUpdate();
         }
         #endregion
     }

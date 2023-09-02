@@ -30,9 +30,6 @@ namespace DevShirme.Modules.ADModule
 
             //Show(Enums.ADType.Banner);
         }
-        public override void SetSubscriptions(bool isSub)
-        {
-        }
         #endregion
 
         #region Executes
@@ -207,6 +204,12 @@ namespace DevShirme.Modules.ADModule
         {
         }
         public override void ExternalFixedUpdate()
+        {
+        }
+        #endregion
+
+        #region Subscriptions
+        public override void SetSubscriptions(bool isSub)
         {
         }
         #endregion
