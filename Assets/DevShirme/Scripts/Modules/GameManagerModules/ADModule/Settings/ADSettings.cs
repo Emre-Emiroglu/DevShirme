@@ -10,6 +10,10 @@ namespace DevShirme.Modules.ADModule
     public class ADSettings : ScriptableObject
     {
         #region Fields
+        [Header("Included Controllers")]
+        [SerializeField] private Enums.ADModuleControllerType controllers;
+        [Header("Controllers Settings")]
+        [SerializeField] private ScriptableObject[] controllersSettings;
         [Header("AD Settings")]
         [SerializeField] private string[] adIds;
         [SerializeField] private string[] testAdIds;
@@ -19,6 +23,8 @@ namespace DevShirme.Modules.ADModule
         #endregion
 
         #region Getters
+        public Enums.ADModuleControllerType Controllers => controllers;
+        public ScriptableObject[] ControllersSettings => controllersSettings;
         public string GetID(Enums.ADType adType, bool test)
         {
             string id = test ? testAdIds[((int)adType)] : adIds[((int)adType)];

@@ -12,11 +12,17 @@ namespace DevShirme.Managers.DataManager
     {
         #region Fields
         public static PlayerDataSet PlayerDataSet;
+        private readonly DataManagerSettings dmSettings;
         #endregion
 
         #region Core
         public DataManager(ScriptableObject _settings) : base(_settings)
         {
+            dmSettings = _settings as DataManagerSettings;
+
+            _loader = new DataManagerModuleLoader(dmSettings.Modules, dmSettings.ModulesSettings);
+            _loader.Load();
+
             PlayerDataSet = new PlayerDataSet();
         }
         #endregion

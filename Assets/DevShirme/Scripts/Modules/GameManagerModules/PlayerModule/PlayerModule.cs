@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 namespace DevShirme.Modules.PlayerModule
@@ -15,6 +14,9 @@ namespace DevShirme.Modules.PlayerModule
         public PlayerModule(ScriptableObject _settings) : base(_settings)
         {
             playerSettings = _settings as PlayerSettings;
+
+            _loader = new PlayerModuleControllerLoader(playerSettings.Controllers, playerSettings.ControllersSettings);
+            _loader.Load();
         }
         #endregion
 

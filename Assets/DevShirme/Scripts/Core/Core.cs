@@ -1,7 +1,4 @@
 using DevShirme.Utils;
-using DevShirme.Managers.DataManager;
-using DevShirme.Managers.GameManager;
-using DevShirme.Managers.PoolManager;
 using DevShirme.DesignPatterns.Creationals;
 using System.Collections;
 using System.Collections.Generic;
@@ -41,51 +38,12 @@ namespace DevShirme
         {
             base.Initialize();
 
-            loads();
+            loader = new ManagerLoader(coreSettings.Managers, coreSettings.ManagersSettings);
+            loader.Load();
         }
         protected override void OnDestroy()
         {
             base.OnDestroy();
-        }
-        #endregion
-
-        #region Loads
-        private void loads()
-        {
-            loader = new Loader();
-
-            bool hasDM = coreSettings.Managers.HasFlag(Enums.ManagerType.DataManager);
-            bool hasPM = coreSettings.Managers.HasFlag(Enums.ManagerType.PoolManager);
-            bool hasGM = coreSettings.Managers.HasFlag(Enums.ManagerType.GameManager);
-
-            if (hasDM)
-                singleLoad(Enums.ManagerType.DataManager);
-            if (hasPM)
-                singleLoad(Enums.ManagerType.PoolManager);
-            if (hasGM)
-                singleLoad(Enums.ManagerType.GameManager);
-        }
-        private void singleLoad(Enums.ManagerType managerType)
-        {
-            int indexValue = Utilities.FlagsValueToIndex(((int)managerType));
-            ScriptableObject settings = coreSettings.ManagersSettings[indexValue];
-            if (!loader.IsContain(indexValue))
-            {
-                Manager manager = null;
-                switch (managerType)
-                {
-                    case Enums.ManagerType.DataManager:
-                        manager = new DataManager(settings);
-                        break;
-                    case Enums.ManagerType.PoolManager:
-                        manager = new PoolManager(settings);
-                        break;
-                    case Enums.ManagerType.GameManager:
-                        manager = new GameManager(settings);
-                        break;
-                }
-                loader.AddLoadable(indexValue, manager);
-            }
         }
         #endregion
 

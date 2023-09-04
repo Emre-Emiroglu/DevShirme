@@ -11,10 +11,13 @@ namespace DevShirme.Modules.PlayerModule
         #region Fields
         [Header("Included Controllers")]
         [SerializeField] private Enums.PlayerModuleControllerType controllers;
+        [Header("Controllers Settings")]
+        [SerializeField] private ScriptableObject[] controllersSettings;
         #endregion
 
         #region Getters
         public Enums.PlayerModuleControllerType Controllers => controllers;
+        public ScriptableObject[] ControllersSettings => controllersSettings;
         #endregion
     }
 }

@@ -8,7 +8,6 @@ namespace DevShirme.Interfaces
     {
         public Dictionary<int, ILoadable> Loadables { get; }
         public List<ILoadable> Loadeds { get; }
-        public bool IsContain(int indexValue);
-        public void AddLoadable(int indexValue, ILoadable loadable);
+        public void Load();
     }
 }

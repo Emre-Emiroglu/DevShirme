@@ -29,6 +29,11 @@ namespace DevShirme.Managers.PoolManager
         #region Core
         public PoolManager(ScriptableObject _settings) : base(_settings)
         {
+            pmSettings = _settings as PoolManagerSettings;
+
+            _loader = new PoolManagerModuleLoader(pmSettings.Modules, pmSettings.ModulesSettings);
+            _loader.Load();
+
             Transform poolsParent = Object.FindObjectOfType<Core>().transform;
 
             pmSettings = base._settings as PoolManagerSettings;

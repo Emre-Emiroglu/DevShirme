@@ -18,6 +18,9 @@ namespace DevShirme.Modules.CameraModule
         {
             cameraSettings = _settings as CameraSettings;
 
+            _loader = new CameraModuleControllerLoader(cameraSettings.Controllers, cameraSettings.ControllersSettings);
+            _loader.Load();
+
             cams = Object.FindObjectsOfType<Cam>();
 
             for (int i = 0; i < cams.Length; i++)

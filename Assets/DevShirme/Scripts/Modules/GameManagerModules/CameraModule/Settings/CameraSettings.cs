@@ -1,3 +1,4 @@
+using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,10 @@ namespace DevShirme.Modules.CameraModule
     public class CameraSettings : ScriptableObject
     {
         #region Fields
+        [Header("Included Controllers")]
+        [SerializeField] private Enums.CameraModuleControllerType controllers;
+        [Header("Controllers Settings")]
+        [SerializeField] private ScriptableObject[] controllersSettings;
         [Header("Shake Settings")]
         [Range(0f, 1f)][SerializeField] private float amplitudeGain = 1f;
         [Range(0f, 1f)][SerializeField] private float frequencyGain = 1f;
@@ -17,6 +22,8 @@ namespace DevShirme.Modules.CameraModule
         #endregion
 
         #region Getters
+        public Enums.CameraModuleControllerType Controllers => controllers;
+        public ScriptableObject[] ControllersSettings => controllersSettings;
         public float AmplitudeGain => amplitudeGain;
         public float FrequencyGain => frequencyGain;
         public float ShakeDuration => shakeDuration;

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DevShirme
 {
-    public class Loadable: ILoadable
+    public abstract class Loadable: ILoadable
     {
         #region Fields
         protected readonly ScriptableObject _settings;

@@ -8,12 +8,18 @@ namespace DevShirme.Modules.UIModule
     public class UIModule : Module
     {
         #region Fields
+        private readonly UISettings uiSettings;
         private readonly UIPanel[] panels;
         #endregion
 
         #region Core
         public UIModule(ScriptableObject _settings) : base(_settings)
         {
+            uiSettings = _settings as UISettings;
+
+            _loader = new UIModuleControllerLoader(uiSettings.Controllers, uiSettings.ControllersSettings);
+            _loader.Load();
+
             panels = Object.FindObjectsOfType<UIPanel>();
 
             transation(Enums.UIPanelType.MainMenuPanel);

@@ -24,6 +24,9 @@ namespace DevShirme.Modules.ADModule
         {
             adSettings = _settings as ADSettings;
 
+            _loader = new ADModuleControllerLoader(adSettings.Controllers, adSettings.ControllersSettings);
+            _loader.Load();
+
             //MobileAds.Initialize((InitializationStatus initStatus) =>
             //{
             //});
