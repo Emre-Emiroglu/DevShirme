@@ -6,6 +6,7 @@ using DevShirme.DesignPatterns.Creationals;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DevShirme.Interfaces;
 
 namespace DevShirme
 {
@@ -14,14 +15,13 @@ namespace DevShirme
         #region Fields
         [Header("Core Fields")]
         [SerializeField] private CoreSettings coreSettings;
-        private Dictionary<int, Manager> managers;
-        private List<Manager> loadedManagers;    
+        private ILoader loader;
         #endregion
 
         #region Getters
         public Manager GetManager(Enums.ManagerType managerType)
         {
-            Manager manager = managers[Utilities.FlagsValueToIndex(((int)managerType))];
+            Manager manager = (Manager)loader.Loadeds[Utilities.FlagsValueToIndex(((int)managerType))];
             if (manager == null)
             {
                 Debug.LogError("You dont have: " + managerType.ToString());
@@ -41,7 +41,7 @@ namespace DevShirme
         {
             base.Initialize();
 
-            createManagers();
+            loads();
         }
         protected override void OnDestroy()
         {
@@ -49,31 +49,29 @@ namespace DevShirme
         }
         #endregion
 
-        #region Creates
-        private void createManagers()
+        #region Loads
+        private void loads()
         {
-            managers = new Dictionary<int, Manager>();
-            loadedManagers = new List<Manager>();
+            loader = new Loader();
 
             bool hasDM = coreSettings.Managers.HasFlag(Enums.ManagerType.DataManager);
             bool hasPM = coreSettings.Managers.HasFlag(Enums.ManagerType.PoolManager);
             bool hasGM = coreSettings.Managers.HasFlag(Enums.ManagerType.GameManager);
 
             if (hasDM)
-                createManager(Enums.ManagerType.DataManager);
+                singleLoad(Enums.ManagerType.DataManager);
             if (hasPM)
-                createManager(Enums.ManagerType.PoolManager);
+                singleLoad(Enums.ManagerType.PoolManager);
             if (hasGM)
-                createManager(Enums.ManagerType.GameManager);
+                singleLoad(Enums.ManagerType.GameManager);
         }
-        private void createManager(Enums.ManagerType managerType)
+        private void singleLoad(Enums.ManagerType managerType)
         {
             int indexValue = Utilities.FlagsValueToIndex(((int)managerType));
-            bool contain = managers.ContainsKey(indexValue);
-            Manager manager = null;
-            if (!contain)
+            ScriptableObject settings = coreSettings.ManagersSettings[indexValue];
+            if (!loader.IsContain(indexValue))
             {
-                ScriptableObject settings = coreSettings.ManagersSettings[indexValue];
+                Manager manager = null;
                 switch (managerType)
                 {
                     case Enums.ManagerType.DataManager:
@@ -86,8 +84,7 @@ namespace DevShirme
                         manager = new GameManager(settings);
                         break;
                 }
-                managers.Add(indexValue, manager);
-                loadedManagers.Add(manager);
+                loader.AddLoadable(indexValue, manager);
             }
         }
         #endregion
@@ -95,13 +92,13 @@ namespace DevShirme
         #region Updates
         private void Update()
         {
-            for (int i = 0; i < loadedManagers.Count; i++)
-                loadedManagers[i].ExternalUpdate();
+            for (int i = 0; i < loader.Loadeds.Count; i++)
+                loader.Loadeds[i].ExternalUpdate();
         }
         private void FixedUpdate()
         {
-            for (int i = 0; i < loadedManagers.Count; i++)
-                loadedManagers[i].ExternalFixedUpdate();
+            for (int i = 0; i < loader.Loadeds.Count; i++)
+                loader.Loadeds[i].ExternalFixedUpdate();
         }
         #endregion
     }

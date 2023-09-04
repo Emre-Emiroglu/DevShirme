@@ -1,24 +1,26 @@
+using DevShirme.Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevShirme
 {
-    public abstract class Manager
+    public abstract class Manager: Loadable
     {
-        #region Fields
-        protected readonly ScriptableObject _settings;
-        #endregion
-
         #region Core
-        public Manager(ScriptableObject _settings)
+        public Manager(ScriptableObject _settings) : base(_settings)
         {
-            this._settings = _settings;
         }
         #endregion
 
         #region Updates
-        public abstract void ExternalUpdate();
-        public abstract void ExternalFixedUpdate();
+        public override void ExternalUpdate()
+        {
+            base.ExternalUpdate();
+        }
+        public override void ExternalFixedUpdate()
+        {
+            base.ExternalFixedUpdate();
+        }
         #endregion
     }
 }

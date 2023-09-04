@@ -4,22 +4,23 @@ using UnityEngine;
 
 namespace DevShirme
 {
-    public abstract class Controller
+    public abstract class Controller: Loadable
     {
-        #region Fields
-        protected readonly ScriptableObject _settings;
-        #endregion
-
         #region Core
-        public Controller(ScriptableObject _settings)
+        public Controller(ScriptableObject _settings) : base(_settings)
         {
-            this._settings = _settings;
         }
         #endregion
 
         #region Updates
-        public abstract void ExternalUpdate();
-        public abstract void ExternalFixedUpdate();
+        public override void ExternalUpdate()
+        {
+            base.ExternalUpdate();
+        }
+        public override void ExternalFixedUpdate()
+        {
+            base.ExternalFixedUpdate();
+        }
         #endregion
     }
 }

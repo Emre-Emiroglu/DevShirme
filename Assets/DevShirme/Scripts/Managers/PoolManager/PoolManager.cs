@@ -62,9 +62,11 @@ namespace DevShirme.Managers.PoolManager
         #region Updates
         public override void ExternalUpdate()
         {
+            base.ExternalUpdate();
         }
         public override void ExternalFixedUpdate()
         {
+            base.ExternalFixedUpdate();
         }
         #endregion
     }

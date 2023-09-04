@@ -6,6 +6,8 @@ using DevShirme.Modules.UIModule;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DevShirme.Interfaces;
+using System.Reflection;
 
 namespace DevShirme.Managers.GameManager
 {
@@ -13,8 +15,7 @@ namespace DevShirme.Managers.GameManager
     {
         #region Fields
         private readonly GameManagerSettings gmSettings;
-        private Dictionary<int, Module> modules;
-        private List<Module> loadedModules;
+        private ILoader loader;
         #endregion
 
         #region Core
@@ -25,7 +26,7 @@ namespace DevShirme.Managers.GameManager
             setFPS();
             setCursor();
 
-            createModules();
+            loads();
 
             initGameEvents();
         }
@@ -43,11 +44,10 @@ namespace DevShirme.Managers.GameManager
         }
         #endregion
 
-        #region Creates
-        private void createModules()
+        #region Loads
+        private void loads()
         {
-            modules = new Dictionary<int, Module>();
-            loadedModules = new List<Module>();
+            loader = new Loader();
 
             bool hasAD = gmSettings.Modules.HasFlag(Enums.GameManagerModuleType.ADModule);
             bool hasPM = gmSettings.Modules.HasFlag(Enums.GameManagerModuleType.PlayerModule);
@@ -55,22 +55,21 @@ namespace DevShirme.Managers.GameManager
             bool hasUM = gmSettings.Modules.HasFlag(Enums.GameManagerModuleType.UIModule);
 
             if (hasAD)
-                createModule(Enums.GameManagerModuleType.ADModule);
+                singleLoad(Enums.GameManagerModuleType.ADModule);
             if (hasPM)
-                createModule(Enums.GameManagerModuleType.PlayerModule);
+                singleLoad(Enums.GameManagerModuleType.PlayerModule);
             if (hasCM)
-                createModule(Enums.GameManagerModuleType.CameraModule);
+                singleLoad(Enums.GameManagerModuleType.CameraModule);
             if (hasUM)
-                createModule(Enums.GameManagerModuleType.UIModule);
+                singleLoad(Enums.GameManagerModuleType.UIModule);
         }
-        private void createModule(Enums.GameManagerModuleType moduleType)
+        private void singleLoad(Enums.GameManagerModuleType moduleType)
         {
             int indexValue = Utilities.FlagsValueToIndex(((int)moduleType));
-            bool contain = modules.ContainsKey(indexValue);
-            Module module = null;
-            if (!contain)
+            ScriptableObject settings = gmSettings.ModulesSettings[indexValue];
+            if (!loader.IsContain(indexValue))
             {
-                ScriptableObject settings = gmSettings.ModulesSettings[indexValue];
+                Module module = null;
                 switch (moduleType)
                 {
                     case Enums.GameManagerModuleType.ADModule:
@@ -86,8 +85,7 @@ namespace DevShirme.Managers.GameManager
                         module = new UIModule(settings);
                         break;
                 }
-                modules.Add(indexValue, module);
-                loadedModules.Add(module);
+                loader.AddLoadable(indexValue, module);
             }
         }
         #endregion
@@ -103,13 +101,17 @@ namespace DevShirme.Managers.GameManager
         #region Updates
         public override void ExternalUpdate()
         {
-            for (int i = 0; i < loadedModules.Count; i++)
-                loadedModules[i].ExternalUpdate();
+            base.ExternalUpdate();
+
+            for (int i = 0; i < loader.Loadeds.Count; i++)
+                loader.Loadeds[i].ExternalUpdate();
         }
         public override void ExternalFixedUpdate()
         {
-            for (int i = 0; i < loadedModules.Count; i++)
-                loadedModules[i].ExternalFixedUpdate();
+            base.ExternalFixedUpdate();
+
+            for (int i = 0; i < loader.Loadeds.Count; i++)
+                loader.Loadeds[i].ExternalFixedUpdate();
         }
         #endregion
     }
