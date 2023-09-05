@@ -71,12 +71,31 @@ namespace DevShirme.Utils
             public float ClampDistance;
             public bool Swipe;
         }
+
         [Serializable]
         public struct PCInputData
         {
             public Enums.PCInputBehavior PCInputBehavior;
             public string VerticalAxis;
             public string HorizontalAxis;
+            public string MouseX;
+            public string MouseY;
+        }
+
+        [Serializable]
+        public struct MovementData
+        {
+            public Enums.MovementType MovementType;
+            public float WalkSpeed;
+            public float RunSpeed;
+            public float SlideSpeed;
+            public float JumpPower;
+        }
+
+        [Serializable]
+        public struct RotationData
+        {
+            public float RotationSpeed;
         }
     }
 }

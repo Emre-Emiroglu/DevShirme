@@ -28,6 +28,7 @@ namespace DevShirme.Utils
         public enum PlayerModuleControllerType : int
         {
             InputController = 1,
+            CharacterController = 2,
         }
         public enum InputType
         {
@@ -43,6 +44,11 @@ namespace DevShirme.Utils
         {
             Raw,
             NonRaw
+        }
+        public enum MovementType
+        {
+            Transform,
+            Rigidbody
         }
         public enum ADType : int
         {

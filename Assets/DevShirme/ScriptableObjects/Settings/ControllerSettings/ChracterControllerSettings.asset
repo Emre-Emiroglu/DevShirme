@@ -9,10 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd3833a947e47c24f922fe75d9d87d91, type: 3}
-  m_Name: PlayerSettings
+  m_Script: {fileID: 11500000, guid: 0a84eb741f598f843b6ff65d77af0ffe, type: 3}
+  m_Name: ChracterControllerSettings
   m_EditorClassIdentifier: 
-  controllers: -1
-  controllersSettings:
-  - {fileID: 11400000, guid: 61974c17276bb7f47ab88287ce65019b, type: 2}
-  - {fileID: 11400000, guid: ebe093a20ba00b44294e28112d269065, type: 2}
+  movementData:
+    MovementType: 0
+    WalkSpeed: 5
+    RunSpeed: 10
+    SlideSpeed: 7.5
+    JumpPower: 10
+  rotationData:
+    RotationSpeed: 50

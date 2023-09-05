@@ -24,3 +24,5 @@ MonoBehaviour:
     PCInputBehavior: 0
     VerticalAxis: Vertical
     HorizontalAxis: Horizontal
+    MouseX: Mouse X
+    MouseY: Mouse Y

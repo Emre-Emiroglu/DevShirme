@@ -5,9 +5,8 @@ using UnityEngine;
 
 namespace DevShirme.Interfaces
 {
-    public interface IPlayerAgent
+    public interface IPlayerAgent: IAgentHandler
     {
-        public bool IsActived { get; set; }
-        public void Initialize(PlayerSettings playerSettings);
+        public void Initialize(CharacterControllerSettings playerSettings);
     }
 }
