@@ -28,7 +28,6 @@ namespace DevShirme.Utils
         public enum PlayerModuleControllerType : int
         {
             InputController = 1,
-            CharacterController = 2,
         }
         public enum InputType
         {

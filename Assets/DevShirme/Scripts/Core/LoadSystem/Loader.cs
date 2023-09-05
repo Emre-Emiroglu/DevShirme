@@ -5,7 +5,6 @@ using DevShirme.Managers.PoolManager;
 using DevShirme.Modules.ADModule;
 using DevShirme.Modules.CameraModule;
 using DevShirme.Modules.PlayerModule;
-using DevShirme.Modules.PlayerModule.Controllers;
 using DevShirme.Modules.UIModule;
 using DevShirme.Utils;
 using System.Collections;
@@ -107,12 +106,9 @@ namespace DevShirme
             List<ILoadable> list = new List<ILoadable>();
 
             bool hasIC = playerModuleControllerType.HasFlag(Enums.PlayerModuleControllerType.InputController);
-            bool hasCC = playerModuleControllerType.HasFlag(Enums.PlayerModuleControllerType.CharacterController);
 
             if (hasIC)
-                createModule(Enums.ModuleType.ADModule, settingsArray);
-            if (hasCC)
-                createModule(Enums.ModuleType.PlayerModule, settingsArray);
+                createPlayerModuleController(Enums.PlayerModuleControllerType.InputController, settingsArray);
 
             return list;
         }
@@ -134,9 +130,6 @@ namespace DevShirme
                             c = new PCInputController(icSettings);
                             break;
                     }
-                    break;
-                case Enums.PlayerModuleControllerType.CharacterController:
-                    c = new DevCharacterController(settings);
                     break;
             }
             return c;
