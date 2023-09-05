@@ -1,3 +1,4 @@
+using DevShirme.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace DevShirme.Managers.GameManager
     {
         #region Fields
         private readonly GameManagerSettings gmSettings;
+        private readonly ILoader loader;
+        private readonly List<ILoadable> modules;
         #endregion
 
         #region Core
@@ -15,8 +18,8 @@ namespace DevShirme.Managers.GameManager
         {
             gmSettings = _settings as GameManagerSettings;
 
-            _loader = new GameManagerModuleLoader(gmSettings.Modules, gmSettings.ModulesSettings);
-            _loader.Load();
+            loader = new Loader();
+            modules = loader.LoadModules(gmSettings.Modules, gmSettings.ModulesSettings);
 
             setFPS();
             setCursor();
@@ -48,11 +51,13 @@ namespace DevShirme.Managers.GameManager
         #region Updates
         public override void ExternalUpdate()
         {
-            base.ExternalUpdate();
+            for (int i = 0; i < modules.Count; i++)
+                modules[i].ExternalUpdate();
         }
         public override void ExternalFixedUpdate()
         {
-            base.ExternalFixedUpdate();
+            for (int i = 0; i < modules.Count; i++)
+                modules[i].ExternalFixedUpdate();
         }
         #endregion
     }

@@ -1,4 +1,3 @@
-using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +8,6 @@ namespace DevShirme.Managers.PoolManager
     public class PoolManagerSettings : ScriptableObject
     {
         #region Fields
-        [Header("Included Modules")]
-        [SerializeField] private Enums.PoolManagerModuleType modules;
-        [Header("Modules Settings")]
-        [SerializeField] private ScriptableObject[] modulesSettings;
         [Header("Pool Settings")]
         [SerializeField] private GameObject[] prefabs;
         [SerializeField] private string[] poolNames;
@@ -21,8 +16,6 @@ namespace DevShirme.Managers.PoolManager
         #endregion
 
         #region Getters
-        public Enums.PoolManagerModuleType Modules => modules;
-        public ScriptableObject[] ModulesSettings => modulesSettings;
         public GameObject[] Prefabs => prefabs;
         public string[] PoolNames => poolNames;
         public int InitSize => initSize;

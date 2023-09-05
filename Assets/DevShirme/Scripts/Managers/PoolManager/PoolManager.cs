@@ -31,9 +31,6 @@ namespace DevShirme.Managers.PoolManager
         {
             pmSettings = _settings as PoolManagerSettings;
 
-            _loader = new PoolManagerModuleLoader(pmSettings.Modules, pmSettings.ModulesSettings);
-            _loader.Load();
-
             Transform poolsParent = Object.FindObjectOfType<Core>().transform;
 
             pmSettings = base._settings as PoolManagerSettings;
@@ -67,11 +64,9 @@ namespace DevShirme.Managers.PoolManager
         #region Updates
         public override void ExternalUpdate()
         {
-            base.ExternalUpdate();
         }
         public override void ExternalFixedUpdate()
         {
-            base.ExternalFixedUpdate();
         }
         #endregion
     }

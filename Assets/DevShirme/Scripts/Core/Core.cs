@@ -1,9 +1,9 @@
 using DevShirme.Utils;
 using DevShirme.DesignPatterns.Creationals;
+using DevShirme.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DevShirme.Interfaces;
 
 namespace DevShirme
 {
@@ -13,12 +13,13 @@ namespace DevShirme
         [Header("Core Fields")]
         [SerializeField] private CoreSettings coreSettings;
         private ILoader loader;
+        private List<ILoadable> managers;
         #endregion
 
         #region Getters
         public Manager GetManager(Enums.ManagerType managerType)
         {
-            Manager manager = (Manager)loader.Loadeds[Utilities.FlagsValueToIndex(((int)managerType))];
+            Manager manager = (Manager)managers[Utilities.FlagsValueToIndex(((int)managerType))];
             if (manager == null)
             {
                 Debug.LogError("You dont have: " + managerType.ToString());
@@ -38,8 +39,8 @@ namespace DevShirme
         {
             base.Initialize();
 
-            loader = new ManagerLoader(coreSettings.Managers, coreSettings.ManagersSettings);
-            loader.Load();
+            loader = new Loader();
+            managers = loader.LoadManagers(coreSettings.Managers, coreSettings.ManagersSettings);
         }
         protected override void OnDestroy()
         {
@@ -50,13 +51,13 @@ namespace DevShirme
         #region Updates
         private void Update()
         {
-            for (int i = 0; i < loader.Loadeds.Count; i++)
-                loader.Loadeds[i].ExternalUpdate();
+            for (int i = 0; i < managers.Count; i++)
+                managers[i].ExternalUpdate();
         }
         private void FixedUpdate()
         {
-            for (int i = 0; i < loader.Loadeds.Count; i++)
-                loader.Loadeds[i].ExternalFixedUpdate();
+            for (int i = 0; i < managers.Count; i++)
+                managers[i].ExternalFixedUpdate();
         }
         #endregion
     }

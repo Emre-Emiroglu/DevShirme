@@ -20,9 +20,6 @@ namespace DevShirme.Managers.DataManager
         {
             dmSettings = _settings as DataManagerSettings;
 
-            _loader = new DataManagerModuleLoader(dmSettings.Modules, dmSettings.ModulesSettings);
-            _loader.Load();
-
             PlayerDataSet = new PlayerDataSet();
         }
         #endregion
@@ -50,11 +47,9 @@ namespace DevShirme.Managers.DataManager
         #region Updates
         public override void ExternalUpdate()
         {
-            base.ExternalUpdate();
         }
         public override void ExternalFixedUpdate()
         {
-            base.ExternalFixedUpdate();
         }
         #endregion
     }
