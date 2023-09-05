@@ -50,10 +50,20 @@ namespace DevShirme.Utils
         public enum UIModuleControllerType : int
         {
         }
-        public enum InputBehavior
+        public enum InputType
+        {
+            Mobile,
+            PC
+        }
+        public enum MobileInputBehavior
         {
             Unclamped,
             Clamped
+        }
+        public enum PCInputBehavior
+        {
+            Raw,
+            NonRaw
         }
         public enum ADType : int
         {

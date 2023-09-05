@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3833a947e47c24f922fe75d9d87d91, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
-  controllers: 0
+  controllers: -1
+  controllersSettings:
+  - {fileID: 11400000, guid: 61974c17276bb7f47ab88287ce65019b, type: 2}
+  - {fileID: 11400000, guid: 61974c17276bb7f47ab88287ce65019b, type: 2}

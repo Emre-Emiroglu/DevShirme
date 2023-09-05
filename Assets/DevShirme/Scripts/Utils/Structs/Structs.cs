@@ -60,5 +60,23 @@ namespace DevShirme.Utils
                 this.action = action;
             }
         }
+
+        [Serializable]
+        public struct MobileInputData
+        {
+            public Enums.MobileInputBehavior MobileInputBehavior;
+            public bool Lerp;
+            public float LerpSpeed;
+            public float Sensitivity;
+            public float ClampDistance;
+            public bool Swipe;
+        }
+        [Serializable]
+        public struct PCInputData
+        {
+            public Enums.PCInputBehavior PCInputBehavior;
+            public string VerticalAxis;
+            public string HorizontalAxis;
+        }
     }
 }

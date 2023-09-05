@@ -1,12 +1,11 @@
 using DevShirme.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 namespace DevShirme.Modules.PlayerModule.Controllers
 {
-    public class CharacterController: Controller
+    public class DevCharacterController: Controller
     {
         #region Fields
         private readonly PlayerSettings playerSettings;
@@ -14,7 +13,7 @@ namespace DevShirme.Modules.PlayerModule.Controllers
         #endregion
 
         #region Core
-        public CharacterController(ScriptableObject _settings) : base(_settings)
+        public DevCharacterController(ScriptableObject _settings) : base(_settings)
         {
             playerSettings = _settings as PlayerSettings;
 
