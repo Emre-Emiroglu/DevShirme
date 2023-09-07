@@ -10,8 +10,6 @@ namespace DevShirme.Managers.GameManager
     public class GameManagerSettings : ScriptableObject
     {
         #region Fields
-        [Header("Included Modules")]
-        [SerializeField] private Enums.ModuleType modules;
         [Header("Modules Settings")]
         [SerializeField] private ScriptableObject[] modulesSettings;
         [Header("Game Events")]
@@ -23,7 +21,6 @@ namespace DevShirme.Managers.GameManager
         #endregion
 
         #region Getters
-        public Enums.ModuleType Modules => modules;
         public ScriptableObject[] ModulesSettings => modulesSettings;
         public GameEvent[] GameEvents => gameEvents;
         public int TargetFPS => targetFPS;

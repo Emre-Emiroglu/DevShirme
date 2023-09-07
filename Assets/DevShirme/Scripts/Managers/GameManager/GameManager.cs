@@ -1,4 +1,9 @@
 using DevShirme.Interfaces;
+using DevShirme.Modules.ADModule;
+using DevShirme.Modules.CameraModule;
+using DevShirme.Modules.PlayerModule;
+using DevShirme.Modules.UIModule;
+using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,8 +14,11 @@ namespace DevShirme.Managers.GameManager
     {
         #region Fields
         private readonly GameManagerSettings gmSettings;
-        private readonly ILoader loader;
-        private readonly List<ILoadable> modules;
+        private readonly ILoadable adModule;
+        private readonly ILoadable playerModule;
+        private readonly ILoadable cameraModule;
+        private readonly ILoadable uiModule;
+        private ILoadable[] modules;
         #endregion
 
         #region Core
@@ -18,8 +26,18 @@ namespace DevShirme.Managers.GameManager
         {
             gmSettings = _settings as GameManagerSettings;
 
-            loader = new Loader();
-            modules = loader.LoadModules(gmSettings.Modules, gmSettings.ModulesSettings);
+            adModule = new ADModule(gmSettings.ModulesSettings[((int)Enums.ModuleType.ADModule)]);
+            playerModule = new PlayerModule(gmSettings.ModulesSettings[((int)Enums.ModuleType.PlayerModule)]);
+            cameraModule = new CameraModule(gmSettings.ModulesSettings[((int)Enums.ModuleType.CameraModule)]);
+            uiModule = new UIModule(gmSettings.ModulesSettings[((int)Enums.ModuleType.UIModule)]);
+
+            modules = new ILoadable[]
+            {
+                modules[0] = adModule,
+                modules[1] = playerModule,
+                modules[2] = cameraModule,
+                modules[3] = uiModule
+            };
 
             setFPS();
             setCursor();
@@ -51,12 +69,12 @@ namespace DevShirme.Managers.GameManager
         #region Updates
         public override void ExternalUpdate()
         {
-            for (int i = 0; i < modules.Count; i++)
+            for (int i = 0; i < modules.Length; i++)
                 modules[i].ExternalUpdate();
         }
         public override void ExternalFixedUpdate()
         {
-            for (int i = 0; i < modules.Count; i++)
+            for (int i = 0; i < modules.Length; i++)
                 modules[i].ExternalFixedUpdate();
         }
         #endregion

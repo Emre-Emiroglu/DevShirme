@@ -1,7 +1,7 @@
 using DevShirme.Interfaces;
+using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 namespace DevShirme.Modules.PlayerModule
@@ -10,8 +10,9 @@ namespace DevShirme.Modules.PlayerModule
     {
         #region Fields
         private readonly PlayerSettings playerSettings;
-        private readonly ILoader loader;
-        private readonly List<ILoadable> controllers;
+        private readonly ILoadable inputController;
+        private readonly ILoadable characterController;
+        private readonly ILoadable[] controllers;
         #endregion
 
         #region Core
@@ -19,20 +20,37 @@ namespace DevShirme.Modules.PlayerModule
         {
             playerSettings = _settings as PlayerSettings;
 
-            loader = new Loader();
-            controllers = loader.LoadPlayerModuleControllers(playerSettings.Controllers, playerSettings.ControllersSettings);
+            InputControllerSettings icSettings = playerSettings.ControllersSettings[((int)Enums.PlayerModuleControllerType.InputController)] as InputControllerSettings;
+
+            switch (icSettings.InputType)
+            {
+                case Enums.InputType.Mobile:
+                    inputController = new MobileInputController(icSettings);
+                    break;
+                case Enums.InputType.PC:
+                    inputController = new PCInputController(icSettings);
+                    break;
+            }
+
+            characterController = new CharacterController(playerSettings.ControllersSettings[((int)Enums.PlayerModuleControllerType.CharacterController)]);
+
+            controllers = new ILoadable[]
+            {
+                controllers[0] = inputController,
+                controllers[1] = characterController
+            };
         }
         #endregion
 
         #region Updates
         public override void ExternalUpdate()
         {
-            for (int i = 0; i < controllers.Count; i++)
+            for (int i = 0; i < controllers.Length; i++)
                 controllers[i].ExternalUpdate();
         }
         public override void ExternalFixedUpdate()
         {
-            for (int i = 0; i < controllers.Count; i++)
+            for (int i = 0; i < controllers.Length; i++)
                 controllers[i].ExternalFixedUpdate();
         }
         #endregion

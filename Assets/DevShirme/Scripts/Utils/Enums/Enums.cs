@@ -9,26 +9,23 @@ namespace DevShirme.Utils
             DestroyNewObj,
             DestroyOldObj
         }
-        [Flags]
         public enum ManagerType : int
         {
-            DataManager = 1,
-            PoolManager = 2,
-            GameManager = 4,
+            DataManager = 0,
+            PoolManager = 1,
+            GameManager = 2
         }
-        [Flags]
-        public enum ModuleType: int
+        public enum ModuleType : int
         {
-            ADModule = 1,
-            PlayerModule = 2,
-            CameraModule = 4,
-            UIModule = 8,
+            ADModule = 0,
+            PlayerModule = 1,
+            CameraModule = 2,
+            UIModule = 3
         }
-        [Flags]
-        public enum PlayerModuleControllerType : int
+        public enum PlayerModuleControllerType: int
         {
-            InputController = 1,
-            CharacterController = 2,
+            InputController = 0,
+            CharacterController = 1
         }
         public enum InputType
         {

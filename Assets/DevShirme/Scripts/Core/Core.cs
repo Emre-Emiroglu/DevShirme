@@ -1,6 +1,9 @@
-using DevShirme.Utils;
-using DevShirme.DesignPatterns.Creationals;
 using DevShirme.Interfaces;
+using DevShirme.DesignPatterns.Creationals;
+using DevShirme.Managers.DataManager;
+using DevShirme.Managers.PoolManager;
+using DevShirme.Managers.GameManager;
+using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,14 +15,16 @@ namespace DevShirme
         #region Fields
         [Header("Core Fields")]
         [SerializeField] private CoreSettings coreSettings;
-        private ILoader loader;
-        private List<ILoadable> managers;
+        private ILoadable dataManager;
+        private ILoadable poolManager;
+        private ILoadable gameManager;
+        private ILoadable[] managers;
         #endregion
 
         #region Getters
         public Manager GetManager(Enums.ManagerType managerType)
         {
-            Manager manager = (Manager)managers[Utilities.FlagsValueToIndex(((int)managerType))];
+            Manager manager = (Manager)managers[((int)managerType)];
             if (manager == null)
             {
                 Debug.LogError("You dont have: " + managerType.ToString());
@@ -39,8 +44,16 @@ namespace DevShirme
         {
             base.Initialize();
 
-            loader = new Loader();
-            managers = loader.LoadManagers(coreSettings.Managers, coreSettings.ManagersSettings);
+            dataManager = new DataManager(coreSettings.ManagersSettings[((int)Enums.ManagerType.DataManager)]);
+            poolManager = new PoolManager(coreSettings.ManagersSettings[((int)Enums.ManagerType.PoolManager)]);
+            gameManager = new GameManager(coreSettings.ManagersSettings[((int)Enums.ManagerType.GameManager)]);
+
+            managers = new ILoadable[]
+            {
+                managers[0] = dataManager,
+                managers[1] = poolManager,
+                managers[2] = gameManager
+            };
         }
         protected override void OnDestroy()
         {
@@ -51,12 +64,12 @@ namespace DevShirme
         #region Updates
         private void Update()
         {
-            for (int i = 0; i < managers.Count; i++)
+            for (int i = 0; i < managers.Length; i++)
                 managers[i].ExternalUpdate();
         }
         private void FixedUpdate()
         {
-            for (int i = 0; i < managers.Count; i++)
+            for (int i = 0; i < managers.Length; i++)
                 managers[i].ExternalFixedUpdate();
         }
         #endregion

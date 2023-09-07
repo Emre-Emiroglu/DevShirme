@@ -9,14 +9,11 @@ namespace DevShirme
     public class CoreSettings : ScriptableObject
     {
         #region Fields
-        [Header("Included Managers")]
-        [SerializeField] private Enums.ManagerType managers;
         [Header("Managers Settings")]
         [SerializeField] private ScriptableObject[] managersSettings;
         #endregion
 
         #region Getters
-        public Enums.ManagerType Managers => managers;
         public ScriptableObject[] ManagersSettings => managersSettings;
         #endregion
     }
