@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace DevShirme.Modules.PlayerModule
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class PlayerAgent : MonoBehaviour, IPlayerAgent
     {
         #region Fields
