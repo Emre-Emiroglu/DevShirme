@@ -77,8 +77,10 @@ namespace DevShirme.Utils
         }
         public enum NotificationType: int
         {
-            A = 0,
-            B = 1
+            None = 0,
+            Run = 1,
+            Jump = 2,
+            Slide = 3,
         }
         public enum SubjectType : int
         {

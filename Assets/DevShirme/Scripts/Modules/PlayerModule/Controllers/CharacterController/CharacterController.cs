@@ -12,28 +12,24 @@ namespace DevShirme.Modules.PlayerModule
         private readonly IPlayerAgent playerAgent;
         #endregion
 
-        #region Props
-        public Vector2 Input { get; set; }
-        #endregion
-
         #region Core
-        public CharacterController(ScriptableObject _settings) : base(_settings)
+        public CharacterController(ISubject subject, ScriptableObject _settings) : base(_settings)
         {
             ccSettings = _settings as CharacterControllerSettings;
 
             playerAgent = Object.FindObjectOfType<PlayerAgent>();
-            playerAgent?.Initialize(ccSettings);
+            playerAgent?.Initialize(subject, ccSettings);
         }
         #endregion
 
         #region Updates
         public override void ExternalUpdate()
         {
-            playerAgent?.ExternalUpdate(Input);
+            playerAgent?.ExternalUpdate();
         }
         public override void ExternalFixedUpdate()
         {
-            playerAgent?.ExternalFixedUpdate(Input);
+            playerAgent?.ExternalFixedUpdate();
         }
         #endregion
     }

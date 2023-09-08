@@ -17,16 +17,6 @@ namespace DevShirme.Modules.PlayerModule
         private Vector2 deltaPos, clampPos;
         #endregion
 
-        #region Getters
-        public bool IsPressing => isPressing;
-        public float OutputNormaMagnitude => outputNormal.magnitude;
-        public float OutputRawMagnitude => outputRaw.magnitude;
-        public Vector2 OutputNormal => outputNormal;
-        public Vector2 DeltaPos => deltaPos;
-        public Vector2 BeganPos => beganPos;
-        public Vector2 MovedPos => movedPos;
-        #endregion
-
         #region Core
         public MobileInputController(ScriptableObject _settings) : base(_settings)
         {
@@ -41,7 +31,7 @@ namespace DevShirme.Modules.PlayerModule
                 currPos = beganPos;
                 prevPos = beganPos;
 
-                inputValue = Vector2.zero;
+                _onInputValueChaged?.Invoke(Vector2.zero, Enums.NotificationType.None);
             }
             if (Input.GetMouseButton(0))
             {
@@ -64,7 +54,7 @@ namespace DevShirme.Modules.PlayerModule
                 if (!data.Swipe)
                     prevPos = currPos;
 
-                inputValue = deltaPos;
+                _onInputValueChaged?.Invoke(deltaPos, Enums.NotificationType.None);
             }
             if (Input.GetMouseButtonUp(0))
             {
@@ -73,7 +63,7 @@ namespace DevShirme.Modules.PlayerModule
                 deltaPos = Vector3.zero;
                 outputNormal = Vector2.zero;
 
-                inputValue = Vector2.zero;
+                _onInputValueChaged?.Invoke(Vector2.zero, Enums.NotificationType.None);
             }
         }
         public override void ClearInputs()

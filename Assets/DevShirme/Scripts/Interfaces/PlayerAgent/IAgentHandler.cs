@@ -6,7 +6,7 @@ namespace DevShirme.Interfaces
 {
     public interface IAgentHandler
     {
-        public void ExternalUpdate(Vector2 input);
-        public void ExternalFixedUpdate(Vector2 input);
+        public void ExternalUpdate();
+        public void ExternalFixedUpdate();
     }
 }

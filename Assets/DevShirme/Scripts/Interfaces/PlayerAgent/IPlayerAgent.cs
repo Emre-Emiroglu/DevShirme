@@ -7,6 +7,6 @@ namespace DevShirme.Interfaces
 {
     public interface IPlayerAgent: IAgentHandler
     {
-        public void Initialize(CharacterControllerSettings playerSettings);
+        public void Initialize(ISubject subject, CharacterControllerSettings playerSettings);
     }
 }

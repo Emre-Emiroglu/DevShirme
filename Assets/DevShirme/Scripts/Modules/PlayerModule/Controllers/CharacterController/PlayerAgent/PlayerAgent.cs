@@ -11,33 +11,30 @@ namespace DevShirme.Modules.PlayerModule
         #region Fields
         [Header("Components")]
         private Rigidbody rb;
-        private CharacterControllerSettings ccSettings;
         [Header("Handlers")]
         private IAgentHandler movementHandler;
         private IAgentHandler rotationHandler;
         #endregion
 
         #region Core
-        public void Initialize(CharacterControllerSettings ccSettings)
+        public void Initialize(ISubject subject, CharacterControllerSettings ccSettings)
         {
             rb = GetComponent<Rigidbody>();
 
-            this.ccSettings = ccSettings;
-
-            movementHandler = new MovementHandler(ccSettings.MovementData);
-            rotationHandler = new RotationHandler(ccSettings.RotationData);
+            movementHandler = new MovementHandler(ccSettings.MovementData, subject, transform, rb);
+            rotationHandler = new RotationHandler(ccSettings.RotationData, subject, transform, rb);
         }
         #endregion
 
         #region Updates
-        public void ExternalUpdate(Vector2 input)
+        public void ExternalUpdate()
         {
-            movementHandler.ExternalUpdate(input);
-            rotationHandler.ExternalUpdate(input);
+            movementHandler.ExternalUpdate();
+            rotationHandler.ExternalUpdate();
         }
-        public void ExternalFixedUpdate(Vector2 input)
+        public void ExternalFixedUpdate()
         {
-            movementHandler.ExternalFixedUpdate(input);
+            movementHandler.ExternalFixedUpdate();
         }
         #endregion
     }

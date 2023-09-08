@@ -1,3 +1,4 @@
+using DevShirme.Interfaces;
 using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,27 +10,34 @@ namespace DevShirme.Modules.PlayerModule
     {
         #region Fields
         private readonly Structs.RotationData rotationData;
+        private Vector2 rotationInput;
         #endregion
 
         #region Core
-        public RotationHandler(Structs.RotationData rotationData)
+        public RotationHandler(Structs.RotationData rotationData, ISubject subject, Transform obj, Rigidbody rb) : base(subject, obj, rb)
         {
             this.rotationData = rotationData;
         }
         #endregion
 
-        #region Updates
-        public override void ExternalUpdate(Vector2 input)
+        #region Observer
+        public override void OnNotify(object value, Enums.NotificationType notificationType)
         {
-            rotate(input);
         }
-        public override void ExternalFixedUpdate(Vector2 input)
+        #endregion
+
+        #region Updates
+        public override void ExternalUpdate()
+        {
+            rotate();
+        }
+        public override void ExternalFixedUpdate()
         {
         }
         #endregion
 
         #region Rotations
-        private void rotate(Vector2 input)
+        private void rotate()
         {
         }
         #endregion

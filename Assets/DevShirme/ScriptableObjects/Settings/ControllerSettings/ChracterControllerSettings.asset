@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementData:
     MovementType: 0
-    WalkSpeed: 5
-    RunSpeed: 10
-    SlideSpeed: 7.5
-    JumpPower: 10
+    ForwardBased: 0
+    WalkSpeed: 1
+    RunSpeed: 2
+    SlideSpeed: 3
+    JumpPower: 5
   rotationData:
     RotationSpeed: 50

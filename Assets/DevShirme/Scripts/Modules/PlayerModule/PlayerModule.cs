@@ -10,8 +10,8 @@ namespace DevShirme.Modules.PlayerModule
     {
         #region Fields
         private readonly PlayerSettings playerSettings;
-        private readonly InputController inputController;
-        private readonly CharacterController characterController;
+        private readonly ILoadable inputController;
+        private readonly ILoadable characterController;
         private readonly ILoadable[] controllers;
         #endregion
 
@@ -21,7 +21,6 @@ namespace DevShirme.Modules.PlayerModule
             playerSettings = _settings as PlayerSettings;
 
             InputControllerSettings icSettings = playerSettings.ControllersSettings[((int)Enums.PlayerModuleControllerType.InputController)] as InputControllerSettings;
-
             switch (icSettings.InputType)
             {
                 case Enums.InputType.Mobile:
@@ -32,7 +31,7 @@ namespace DevShirme.Modules.PlayerModule
                     break;
             }
 
-            characterController = new CharacterController(playerSettings.ControllersSettings[((int)Enums.PlayerModuleControllerType.CharacterController)]);
+            characterController = new CharacterController((InputController)inputController, playerSettings.ControllersSettings[((int)Enums.PlayerModuleControllerType.CharacterController)]);
 
             controllers = new ILoadable[2];
             controllers[0] = inputController;
@@ -45,8 +44,6 @@ namespace DevShirme.Modules.PlayerModule
         {
             for (int i = 0; i < controllers.Length; i++)
                 controllers[i].ExternalUpdate();
-
-            characterController.Input = inputController.InputValue;
         }
         public override void ExternalFixedUpdate()
         {

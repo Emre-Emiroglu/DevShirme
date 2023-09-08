@@ -1,18 +1,20 @@
-﻿using System.Collections;
+﻿using DevShirme.Interfaces;
+using DevShirme.Utils;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevShirme.Modules.PlayerModule
 {
-    public abstract class InputController: Controller
+    public abstract class InputController: Controller, ISubject
     {
-        #region Fields
-        protected readonly InputControllerSettings _icSettings;
-        protected Vector2 inputValue;
+        #region Actions
+        protected Action<object, Enums.NotificationType> _onInputValueChaged;
         #endregion
 
-        #region Getters
-        public Vector2 InputValue => inputValue;
+        #region Fields
+        protected readonly InputControllerSettings _icSettings;
         #endregion
 
         #region Core
@@ -30,6 +32,21 @@ namespace DevShirme.Modules.PlayerModule
         }
         public override void ExternalFixedUpdate()
         {
+        }
+        #endregion
+
+        #region Subject
+        public void Attach(IObserver observer)
+        {
+            _onInputValueChaged += observer.OnNotify;
+        }
+        public void DeAttach(IObserver observer)
+        {
+            _onInputValueChaged -= observer.OnNotify;
+        }
+        public void Notify(object value, Enums.NotificationType notificationType)
+        {
+            _onInputValueChaged?.Invoke(value, notificationType);
         }
         #endregion
     }

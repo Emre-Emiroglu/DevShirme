@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3d0fd219e011548b18f7d1af0d57f7, type: 3}
   m_Name: InputControllerSettings
   m_EditorClassIdentifier: 
-  inputType: 1
+  inputType: 0
   mobileInputData:
     MobileInputBehavior: 1
     Lerp: 1
