@@ -66,7 +66,7 @@ namespace DevShirme.Modules.PlayerModule
         private void rigidbodyMovement()
         {
             _rb.velocity += getAcceleration() * Time.fixedDeltaTime;
-            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, movementData.RunSpeed);
+            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, isRun ? movementData.RunSpeed : movementData.WalkSpeed);
         }
         #endregion
 
@@ -87,9 +87,7 @@ namespace DevShirme.Modules.PlayerModule
         private void rigidbodyJump()
         {
             if (isJump)
-            {
                 _rb.AddForce(Vector3.up * movementData.JumpPower * Time.fixedDeltaTime, movementData.JumpForceMode);
-            }
         }
         #endregion
     }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3d0fd219e011548b18f7d1af0d57f7, type: 3}
   m_Name: InputControllerSettings
   m_EditorClassIdentifier: 
-  inputType: 0
+  inputType: 1
   mobileInputData:
     MobileInputBehavior: 1
     Lerp: 1
@@ -21,11 +21,10 @@ MonoBehaviour:
     ClampDistance: 80
     Swipe: 0
   pcInputData:
-    PCInputBehavior: 0
+    PCInputBehavior: 1
     VerticalAxis: Vertical
     HorizontalAxis: Horizontal
     MouseX: Mouse X
     MouseY: Mouse Y
     RunKey: 304
     JumpKey: 32
-    SlideKey: 306
