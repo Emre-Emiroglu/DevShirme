@@ -47,6 +47,12 @@ namespace DevShirme.Utils
             Transform,
             Rigidbody
         }
+        public enum KeyCodeState
+        {
+            Walk = 0,
+            Run = 1,
+            Jump = 2
+        }
         public enum ADType : int
         {
             Banner = 0,
@@ -77,9 +83,8 @@ namespace DevShirme.Utils
         }
         public enum NotificationType: int
         {
-            Walk = 0,
-            Run = 1,
-            Jump = 2,
+            A = 0,
+            B = 1,
         }
         public enum SubjectType : int
         {

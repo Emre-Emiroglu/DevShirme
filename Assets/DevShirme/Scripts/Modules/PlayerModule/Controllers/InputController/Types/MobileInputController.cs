@@ -30,7 +30,8 @@ namespace DevShirme.Modules.PlayerModule
                 currPos = beganPos;
                 prevPos = beganPos;
 
-                Notify(Vector2.zero, Enums.NotificationType.Walk);
+                _movementInput = Vector2.zero;
+                _keyCodeState = Enums.KeyCodeState.Walk;
             }
             if (Input.GetMouseButton(0))
             {
@@ -53,7 +54,8 @@ namespace DevShirme.Modules.PlayerModule
                 if (!data.Swipe)
                     prevPos = currPos;
 
-                Notify(deltaPos, Enums.NotificationType.Walk);
+                _movementInput = deltaPos;
+                _keyCodeState = Enums.KeyCodeState.Walk;
             }
             if (Input.GetMouseButtonUp(0))
             {
@@ -62,7 +64,8 @@ namespace DevShirme.Modules.PlayerModule
                 deltaPos = Vector3.zero;
                 outputNormal = Vector2.zero;
 
-                Notify(Vector2.zero, Enums.NotificationType.Walk);
+                _movementInput = Vector2.zero;
+                _keyCodeState = Enums.KeyCodeState.Walk;
             }
         }
         public override void ClearInputs()

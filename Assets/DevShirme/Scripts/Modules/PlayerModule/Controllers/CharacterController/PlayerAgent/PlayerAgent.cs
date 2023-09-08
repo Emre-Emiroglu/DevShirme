@@ -1,4 +1,5 @@
 using DevShirme.Interfaces;
+using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,24 +18,23 @@ namespace DevShirme.Modules.PlayerModule
         #endregion
 
         #region Core
-        public void Initialize(ISubject subject, CharacterControllerSettings ccSettings)
+        public void Initialize(CharacterControllerSettings ccSettings)
         {
             rb = GetComponent<Rigidbody>();
 
-            movementHandler = new MovementHandler(ccSettings.MovementData, subject, transform, rb);
-            rotationHandler = new RotationHandler(ccSettings.RotationData, subject, transform, rb);
+            movementHandler = new MovementHandler(ccSettings.MovementData, transform, rb);
+            rotationHandler = new RotationHandler(ccSettings.RotationData, transform, rb);
         }
         #endregion
 
-        #region Updates
-        public void ExternalUpdate()
+        #region Handlers
+        public void Movement(Vector2 input, Enums.KeyCodeState keyCodeState)
         {
-            movementHandler.ExternalUpdate();
-            rotationHandler.ExternalUpdate();
+            movementHandler.Execute(input, keyCodeState);
         }
-        public void ExternalFixedUpdate()
+        public void Rotation(Vector2 input, Enums.KeyCodeState keyCodeState)
         {
-            movementHandler.ExternalFixedUpdate();
+            rotationHandler.Execute(input, keyCodeState);
         }
         #endregion
     }

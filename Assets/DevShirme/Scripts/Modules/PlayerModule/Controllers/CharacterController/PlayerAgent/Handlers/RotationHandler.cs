@@ -1,4 +1,3 @@
-using DevShirme.Interfaces;
 using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,34 +10,33 @@ namespace DevShirme.Modules.PlayerModule
         #region Fields
         private readonly Structs.RotationData rotationData;
         private Vector2 rotationInput;
+        private float rotY;
         #endregion
 
         #region Core
-        public RotationHandler(Structs.RotationData rotationData, ISubject subject, Transform obj, Rigidbody rb) : base(subject, obj, rb)
+        public RotationHandler(Structs.RotationData rotationData, Transform obj, Rigidbody rb) : base(obj, rb)
         {
             this.rotationData = rotationData;
         }
         #endregion
 
-        #region Observer
-        public override void OnNotify(object value, Enums.NotificationType notificationType)
-        {
-        }
-        #endregion
-
         #region Updates
-        public override void ExternalUpdate()
+        public override void Execute(Vector2 input, Enums.KeyCodeState keyCodeState)
         {
+            rotationInput = input;
+
             rotate();
-        }
-        public override void ExternalFixedUpdate()
-        {
         }
         #endregion
 
         #region Rotations
         private void rotate()
         {
+            if (rotationInput.sqrMagnitude > .1f)
+            {
+                rotY = Mathf.Atan2(rotationInput.x, rotationInput.y) * Mathf.Rad2Deg;
+                _obj.rotation = Quaternion.Lerp(_obj.rotation, Quaternion.Euler(new Vector3(0f, rotY, 0f)), Time.deltaTime * rotationData.RotationSpeed);
+            }
         }
         #endregion
     }

@@ -1,4 +1,3 @@
-using DevShirme.Interfaces;
 using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,38 +15,30 @@ namespace DevShirme.Modules.PlayerModule
         #endregion
 
         #region Core
-        public MovementHandler(Structs.MovementData movementData, ISubject subject, Transform obj, Rigidbody rb) : base(subject, obj, rb)
+        public MovementHandler(Structs.MovementData movementData, Transform obj, Rigidbody rb) : base(obj, rb)
         {
             this.movementData = movementData;
         }
         #endregion
 
-        #region Observer
-        public override void OnNotify(object value, Enums.NotificationType notificationType)
-        {
-            movementInput = (Vector2)value;
-
-            isRun = notificationType == Enums.NotificationType.Run;
-            isJump = notificationType == Enums.NotificationType.Jump;
-        }
-        #endregion
-
         #region Updates
-        public override void ExternalUpdate()
+        public override void Execute(Vector2 input, Enums.KeyCodeState keyCodeState)
         {
-            if (movementData.MovementType == Enums.MovementType.Rigidbody)
-                return;
+            movementInput = input;
 
-            transformMovement();
-            transformJump();
-        }
-        public override void ExternalFixedUpdate()
-        {
-            if (movementData.MovementType == Enums.MovementType.Transform)
-                return;
+            isRun = keyCodeState == Enums.KeyCodeState.Run;
+            isJump = keyCodeState == Enums.KeyCodeState.Jump;
 
-            rigidbodyMovement();
-            rigidbodyJump();
+            if (movementData.MovementType != Enums.MovementType.Rigidbody)
+            {
+                transformMovement();
+                transformJump();
+            }
+            else
+            {
+                rigidbodyMovement();
+                rigidbodyJump();
+            }
         }
         #endregion
 

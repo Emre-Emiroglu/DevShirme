@@ -9,8 +9,8 @@ namespace DevShirme.Modules.PlayerModule
     {
         #region Fields
         private readonly Structs.PCInputData data;
-        private Vector2 inputValue;
         private bool isRunKeyPressed;
+        private bool isJumpKeyPressed;
         #endregion
 
         #region Getters
@@ -26,32 +26,22 @@ namespace DevShirme.Modules.PlayerModule
             switch (data.PCInputBehavior)
             {
                 case Enums.PCInputBehavior.Raw:
-                    inputValue = new Vector2(Input.GetAxis(data.HorizontalAxis), Input.GetAxis(data.VerticalAxis));
+                    _movementInput = new Vector2(Input.GetAxis(data.HorizontalAxis), Input.GetAxis(data.VerticalAxis));
+                    _rotationInput = new Vector2(Input.GetAxis(data.MouseX), Input.GetAxis(data.MouseY));
                     break;
                 case Enums.PCInputBehavior.NonRaw:
-                    inputValue = new Vector2(Input.GetAxisRaw(data.HorizontalAxis), Input.GetAxisRaw(data.VerticalAxis));
+                    _movementInput = new Vector2(Input.GetAxisRaw(data.HorizontalAxis), Input.GetAxisRaw(data.VerticalAxis));
+                    _rotationInput = new Vector2(Input.GetAxisRaw(data.MouseX), Input.GetAxisRaw(data.MouseY));
                     break;
             }
 
             isRunKeyPressed = Input.GetKey(data.RunKey);
+            isJumpKeyPressed = Input.GetKeyUp(data.JumpKey);
 
-            if (Input.GetKeyUp(data.JumpKey))
-            {
-                Notify(inputValue, Enums.NotificationType.Jump);
-            }
-            else if(isRunKeyPressed)
-            {
-                Notify(inputValue, Enums.NotificationType.Run);
-            }
-            else
-            {
-                Notify(inputValue, Enums.NotificationType.Walk);
-            }
+            _keyCodeState = isRunKeyPressed ? Enums.KeyCodeState.Run : isJumpKeyPressed ? Enums.KeyCodeState.Jump : Enums.KeyCodeState.Walk;
         }
         public override void ClearInputs()
         {
-            inputValue = Vector2.zero;
-            isRunKeyPressed = false;
         }
         #endregion
 

@@ -16,7 +16,7 @@ MonoBehaviour:
     MovementType: 0
     WalkSpeed: 5
     RunSpeed: 10
-    JumpPower: 20
+    JumpPower: 50
     JumpForceMode: 1
   rotationData:
-    RotationSpeed: 50
+    RotationSpeed: 10

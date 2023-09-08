@@ -7,14 +7,19 @@ using UnityEngine;
 
 namespace DevShirme.Modules.PlayerModule
 {
-    public abstract class InputController: Controller, ISubject
+    public abstract class InputController: Controller
     {
-        #region Actions
-        private Action<object, Enums.NotificationType> onInputValueChaged;
-        #endregion
-
         #region Fields
         protected readonly InputControllerSettings _icSettings;
+        protected Vector2 _movementInput;
+        protected Vector2 _rotationInput;
+        protected Enums.KeyCodeState _keyCodeState;
+        #endregion
+
+        #region Getters
+        public Vector2 MovementInput => _movementInput;
+        public Vector2 RotationInput => _rotationInput;
+        public Enums.KeyCodeState KeyCodeState => _keyCodeState;
         #endregion
 
         #region Core
@@ -32,21 +37,6 @@ namespace DevShirme.Modules.PlayerModule
         }
         public override void ExternalFixedUpdate()
         {
-        }
-        #endregion
-
-        #region Subject
-        public void Attach(IObserver observer)
-        {
-            onInputValueChaged += observer.OnNotify;
-        }
-        public void DeAttach(IObserver observer)
-        {
-            onInputValueChaged -= observer.OnNotify;
-        }
-        public void Notify(object value, Enums.NotificationType notificationType)
-        {
-            onInputValueChaged?.Invoke(value, notificationType);
         }
         #endregion
     }
