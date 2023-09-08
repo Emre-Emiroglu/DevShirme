@@ -26,6 +26,6 @@ MonoBehaviour:
     HorizontalAxis: Horizontal
     MouseX: Mouse X
     MouseY: Mouse Y
-    RunKey: 0
-    JumpKey: 0
-    SlideKey: 0
+    RunKey: 304
+    JumpKey: 32
+    SlideKey: 306

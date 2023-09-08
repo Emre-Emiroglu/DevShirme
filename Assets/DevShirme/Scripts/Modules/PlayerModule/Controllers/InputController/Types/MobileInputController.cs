@@ -1,5 +1,4 @@
 using DevShirme.Utils;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,7 +30,7 @@ namespace DevShirme.Modules.PlayerModule
                 currPos = beganPos;
                 prevPos = beganPos;
 
-                _onInputValueChaged?.Invoke(Vector2.zero, Enums.NotificationType.None);
+                Notify(Vector2.zero, Enums.NotificationType.Walk);
             }
             if (Input.GetMouseButton(0))
             {
@@ -54,7 +53,7 @@ namespace DevShirme.Modules.PlayerModule
                 if (!data.Swipe)
                     prevPos = currPos;
 
-                _onInputValueChaged?.Invoke(deltaPos, Enums.NotificationType.None);
+                Notify(deltaPos, Enums.NotificationType.Walk);
             }
             if (Input.GetMouseButtonUp(0))
             {
@@ -63,7 +62,7 @@ namespace DevShirme.Modules.PlayerModule
                 deltaPos = Vector3.zero;
                 outputNormal = Vector2.zero;
 
-                _onInputValueChaged?.Invoke(Vector2.zero, Enums.NotificationType.None);
+                Notify(Vector2.zero, Enums.NotificationType.Walk);
             }
         }
         public override void ClearInputs()

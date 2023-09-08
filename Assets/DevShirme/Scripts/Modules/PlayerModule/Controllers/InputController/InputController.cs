@@ -10,7 +10,7 @@ namespace DevShirme.Modules.PlayerModule
     public abstract class InputController: Controller, ISubject
     {
         #region Actions
-        protected Action<object, Enums.NotificationType> _onInputValueChaged;
+        private Action<object, Enums.NotificationType> onInputValueChaged;
         #endregion
 
         #region Fields
@@ -38,15 +38,15 @@ namespace DevShirme.Modules.PlayerModule
         #region Subject
         public void Attach(IObserver observer)
         {
-            _onInputValueChaged += observer.OnNotify;
+            onInputValueChaged += observer.OnNotify;
         }
         public void DeAttach(IObserver observer)
         {
-            _onInputValueChaged -= observer.OnNotify;
+            onInputValueChaged -= observer.OnNotify;
         }
         public void Notify(object value, Enums.NotificationType notificationType)
         {
-            _onInputValueChaged?.Invoke(value, notificationType);
+            onInputValueChaged?.Invoke(value, notificationType);
         }
         #endregion
     }

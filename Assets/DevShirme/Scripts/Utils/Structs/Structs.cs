@@ -82,18 +82,16 @@ namespace DevShirme.Utils
             public string MouseY;
             public KeyCode RunKey;
             public KeyCode JumpKey;
-            public KeyCode SlideKey;
         }
 
         [Serializable]
         public struct MovementData
         {
             public Enums.MovementType MovementType;
-            public bool ForwardBased;
             public float WalkSpeed;
             public float RunSpeed;
-            public float SlideSpeed;
             public float JumpPower;
+            public ForceMode JumpForceMode;
         }
 
         [Serializable]
