@@ -10,8 +10,8 @@ namespace DevShirme.Modules.PlayerModule
     {
         #region Fields
         private readonly PlayerSettings playerSettings;
-        private readonly ILoadable inputController;
-        private readonly ILoadable characterController;
+        private readonly InputController inputController;
+        private readonly CharacterController characterController;
         private readonly ILoadable[] controllers;
         #endregion
 
@@ -34,11 +34,9 @@ namespace DevShirme.Modules.PlayerModule
 
             characterController = new CharacterController(playerSettings.ControllersSettings[((int)Enums.PlayerModuleControllerType.CharacterController)]);
 
-            controllers = new ILoadable[]
-            {
-                controllers[0] = inputController,
-                controllers[1] = characterController
-            };
+            controllers = new ILoadable[2];
+            controllers[0] = inputController;
+            controllers[1] = characterController;
         }
         #endregion
 
@@ -47,6 +45,8 @@ namespace DevShirme.Modules.PlayerModule
         {
             for (int i = 0; i < controllers.Length; i++)
                 controllers[i].ExternalUpdate();
+
+            characterController.Input = inputController.InputValue;
         }
         public override void ExternalFixedUpdate()
         {

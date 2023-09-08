@@ -31,13 +31,11 @@ namespace DevShirme.Managers.GameManager
             cameraModule = new CameraModule(gmSettings.ModulesSettings[((int)Enums.ModuleType.CameraModule)]);
             uiModule = new UIModule(gmSettings.ModulesSettings[((int)Enums.ModuleType.UIModule)]);
 
-            modules = new ILoadable[]
-            {
-                modules[0] = adModule,
-                modules[1] = playerModule,
-                modules[2] = cameraModule,
-                modules[3] = uiModule
-            };
+            modules = new ILoadable[4];
+            modules[0] = adModule;
+            modules[1] = playerModule;
+            modules[2] = cameraModule;
+            modules[3] = uiModule;
 
             setFPS();
             setCursor();

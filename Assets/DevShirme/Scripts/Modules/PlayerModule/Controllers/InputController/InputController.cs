@@ -8,6 +8,11 @@ namespace DevShirme.Modules.PlayerModule
     {
         #region Fields
         protected readonly InputControllerSettings _icSettings;
+        protected Vector2 inputValue;
+        #endregion
+
+        #region Getters
+        public Vector2 InputValue => inputValue;
         #endregion
 
         #region Core

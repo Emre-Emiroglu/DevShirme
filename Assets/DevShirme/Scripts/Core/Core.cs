@@ -48,12 +48,10 @@ namespace DevShirme
             poolManager = new PoolManager(coreSettings.ManagersSettings[((int)Enums.ManagerType.PoolManager)]);
             gameManager = new GameManager(coreSettings.ManagersSettings[((int)Enums.ManagerType.GameManager)]);
 
-            managers = new ILoadable[]
-            {
-                managers[0] = dataManager,
-                managers[1] = poolManager,
-                managers[2] = gameManager
-            };
+            managers = new ILoadable[3];
+            managers[0] = dataManager;
+            managers[1] = poolManager;
+            managers[2] = gameManager;
         }
         protected override void OnDestroy()
         {

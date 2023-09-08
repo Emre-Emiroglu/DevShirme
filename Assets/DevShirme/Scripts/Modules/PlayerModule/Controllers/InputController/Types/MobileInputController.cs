@@ -9,9 +9,6 @@ namespace DevShirme.Modules.PlayerModule
     public class MobileInputController : InputController
     {
         #region Fields
-        public event Action OnDown;
-        public event Action OnDrag;
-        public event Action OnUp;
         private readonly Structs.MobileInputData data;
         private bool isPressing;
         private Vector2 outputRaw, outputNormal;
@@ -44,7 +41,7 @@ namespace DevShirme.Modules.PlayerModule
                 currPos = beganPos;
                 prevPos = beganPos;
 
-                OnDown?.Invoke();
+                inputValue = Vector2.zero;
             }
             if (Input.GetMouseButton(0))
             {
@@ -67,7 +64,7 @@ namespace DevShirme.Modules.PlayerModule
                 if (!data.Swipe)
                     prevPos = currPos;
 
-                OnDrag?.Invoke();
+                inputValue = deltaPos;
             }
             if (Input.GetMouseButtonUp(0))
             {
@@ -76,7 +73,7 @@ namespace DevShirme.Modules.PlayerModule
                 deltaPos = Vector3.zero;
                 outputNormal = Vector2.zero;
 
-                OnUp?.Invoke();
+                inputValue = Vector2.zero;
             }
         }
         public override void ClearInputs()

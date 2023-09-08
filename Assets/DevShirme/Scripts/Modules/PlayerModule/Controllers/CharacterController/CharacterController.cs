@@ -10,7 +10,10 @@ namespace DevShirme.Modules.PlayerModule
         #region Fields
         private readonly CharacterControllerSettings ccSettings;
         private readonly IPlayerAgent playerAgent;
-        private Vector2 input;
+        #endregion
+
+        #region Props
+        public Vector2 Input { get; set; }
         #endregion
 
         #region Core
@@ -26,11 +29,11 @@ namespace DevShirme.Modules.PlayerModule
         #region Updates
         public override void ExternalUpdate()
         {
-            playerAgent?.ExternalUpdate(input);
+            playerAgent?.ExternalUpdate(Input);
         }
         public override void ExternalFixedUpdate()
         {
-            playerAgent?.ExternalFixedUpdate(input);
+            playerAgent?.ExternalFixedUpdate(Input);
         }
         #endregion
     }
