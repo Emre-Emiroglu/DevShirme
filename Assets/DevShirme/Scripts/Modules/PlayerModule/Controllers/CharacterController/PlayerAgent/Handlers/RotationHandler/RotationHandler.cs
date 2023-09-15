@@ -21,7 +21,7 @@ namespace DevShirme.Modules.PlayerModule
         #endregion
 
         #region Updates
-        public override void Execute(Vector2 input, Enums.KeyCodeState keyCodeState)
+        public override void Execute(Vector2 input, Enums.MovementState keyCodeState)
         {
             rotationInput = input;
 

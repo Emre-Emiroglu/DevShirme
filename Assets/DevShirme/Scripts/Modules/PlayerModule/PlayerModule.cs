@@ -34,6 +34,7 @@ namespace DevShirme.Modules.PlayerModule
         {
             characterController.MovementInput = pcInputController.MovementInput;
             characterController.RotationInput = pcInputController.RotationInput;
+            characterController.LeftClick = pcInputController.LeftClick;
             characterController.KeyCodeState = pcInputController.KeyCodeState;
 
             for (int i = 0; i < controllers.Length; i++)

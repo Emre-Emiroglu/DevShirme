@@ -13,7 +13,8 @@ namespace DevShirme.Utils
         {
             DataManager = 0,
             PoolManager = 1,
-            GameManager = 2
+            GameManager = 2,
+            AudioManager = 3
         }
         public enum ModuleType : int
         {
@@ -47,7 +48,7 @@ namespace DevShirme.Utils
             Transform,
             Rigidbody
         }
-        public enum KeyCodeState
+        public enum MovementState
         {
             Walk = 0,
             Run = 1,
@@ -62,11 +63,13 @@ namespace DevShirme.Utils
         public enum UIPanelType : int
         {
             MainMenuPanel = 0,
+            InGamePanel = 1,
+            EndGamePanel = 2
         }
         public enum CamType : int
         {
             IdleCam = 0,
-            InGameCam = 1
+            FollowCam = 1
         }
         public enum TriggerBehavior : int
         {

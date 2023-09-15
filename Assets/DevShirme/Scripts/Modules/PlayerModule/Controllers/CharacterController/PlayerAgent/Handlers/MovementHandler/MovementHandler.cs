@@ -22,12 +22,12 @@ namespace DevShirme.Modules.PlayerModule
         #endregion
 
         #region Updates
-        public override void Execute(Vector2 input, Enums.KeyCodeState keyCodeState)
+        public override void Execute(Vector2 input, Enums.MovementState keyCodeState)
         {
             movementInput = input;
 
-            isRun = keyCodeState == Enums.KeyCodeState.Run;
-            isJump = keyCodeState == Enums.KeyCodeState.Jump;
+            isRun = keyCodeState == Enums.MovementState.Run;
+            isJump = keyCodeState == Enums.MovementState.Jump;
 
             if (movementData.MovementType != Enums.MovementType.Rigidbody)
             {

@@ -18,7 +18,7 @@ namespace DevShirme.Modules.PlayerModule
             _obj = obj;
             _rb = rb;
         }
-        public abstract void Execute(Vector2 input, Enums.KeyCodeState keyCodeState);
+        public abstract void Execute(Vector2 input, Enums.MovementState keyCodeState);
         #endregion
     }
 }

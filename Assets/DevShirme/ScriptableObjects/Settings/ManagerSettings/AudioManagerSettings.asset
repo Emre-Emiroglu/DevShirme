@@ -9,12 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8895e87ffa648334bafa0226753e790b, type: 3}
-  m_Name: PoolManagerSettings
+  m_Script: {fileID: 11500000, guid: 19389c59bc620a94e8eee702b2a71f51, type: 3}
+  m_Name: AudioManagerSettings
   m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 1974922271291803560, guid: c2dc462153183f741918073cc9f2fccf, type: 3}
-  poolNames:
-  - BulletPool
-  initSize: 100
-  maxSize: 500

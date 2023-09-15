@@ -11,13 +11,15 @@ namespace DevShirme.Modules.PlayerModule
         protected readonly InputControllerSettings _icSettings;
         protected Vector2 _movementInput;
         protected Vector2 _rotationInput;
-        protected Enums.KeyCodeState _keyCodeState;
+        protected bool _leftClick;
+        protected Enums.MovementState _keyCodeState;
         #endregion
 
         #region Getters
         public Vector2 MovementInput => _movementInput;
         public Vector2 RotationInput => _rotationInput;
-        public Enums.KeyCodeState KeyCodeState => _keyCodeState;
+        public bool LeftClick => _leftClick;
+        public Enums.MovementState KeyCodeState => _keyCodeState;
         #endregion
 
         #region Core

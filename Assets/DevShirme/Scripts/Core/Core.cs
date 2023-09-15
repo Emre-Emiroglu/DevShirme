@@ -2,6 +2,7 @@ using DevShirme.DesignPatterns.Creationals;
 using DevShirme.Managers.DataManager;
 using DevShirme.Managers.PoolManager;
 using DevShirme.Managers.GameManager;
+using DevShirme.Managers.AudioManager;
 using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,9 +19,11 @@ namespace DevShirme
         #region Fields
         [Header("Core Fields")]
         [SerializeField] private CoreSettings coreSettings;
+        [SerializeField] private AudioSource audioSource;
         private DataManager dataManager;
         private PoolManager poolManager;
         private GameManager gameManager;
+        private AudioManager audioManager;
         private Manager[] managers;
         #endregion
 
@@ -49,10 +52,11 @@ namespace DevShirme
 
             installs();
 
-            managers = new Manager[3];
+            managers = new Manager[4];
             managers[((int)Enums.ManagerType.DataManager)] = dataManager;
             managers[((int)Enums.ManagerType.PoolManager)] = poolManager;
             managers[((int)Enums.ManagerType.GameManager)] = gameManager;
+            managers[((int)Enums.ManagerType.AudioManager)] = audioManager;
         }
         protected override void OnDestroy()
         {
@@ -66,6 +70,7 @@ namespace DevShirme
             DataManagerSettings dmSettings = coreSettings.ManagersSettings[((int)Enums.ManagerType.DataManager)] as DataManagerSettings;
             PoolManagerSettings pmSettings = coreSettings.ManagersSettings[((int)Enums.ManagerType.PoolManager)] as PoolManagerSettings;
             GameManagerSettings gmSettings = coreSettings.ManagersSettings[((int)Enums.ManagerType.GameManager)] as GameManagerSettings;
+            AudioManagerSettings amSettings = coreSettings.ManagersSettings[((int)Enums.ManagerType.AudioManager)] as AudioManagerSettings;
 
             ADSettings adSettings = gmSettings.ModulesSettings[((int)Enums.ModuleType.ADModule)] as ADSettings;
             PlayerSettings playerSettings = gmSettings.ModulesSettings[((int)Enums.ModuleType.PlayerModule)] as PlayerSettings;
@@ -85,6 +90,7 @@ namespace DevShirme
                 new PlayerModule(playerSettings, new PCInputController(icSettings), new MobileInputController(icSettings), new DevCharacterController(ccSettings, playerAgent)),
                 new CameraModule(cameraSettings, cams),
                 new UIModule(uiSettings, panels));
+            audioManager = new AudioManager(amSettings, audioSource);
         }
         #endregion
 

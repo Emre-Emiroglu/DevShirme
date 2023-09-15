@@ -31,7 +31,7 @@ namespace DevShirme.Modules.PlayerModule
                 prevPos = beganPos;
 
                 _movementInput = Vector2.zero;
-                _keyCodeState = Enums.KeyCodeState.Walk;
+                _keyCodeState = Enums.MovementState.Walk;
             }
             if (Input.GetMouseButton(0))
             {
@@ -55,7 +55,7 @@ namespace DevShirme.Modules.PlayerModule
                     prevPos = currPos;
 
                 _movementInput = deltaPos;
-                _keyCodeState = Enums.KeyCodeState.Walk;
+                _keyCodeState = Enums.MovementState.Walk;
             }
             if (Input.GetMouseButtonUp(0))
             {
@@ -65,8 +65,10 @@ namespace DevShirme.Modules.PlayerModule
                 outputNormal = Vector2.zero;
 
                 _movementInput = Vector2.zero;
-                _keyCodeState = Enums.KeyCodeState.Walk;
+                _keyCodeState = Enums.MovementState.Walk;
             }
+
+            _leftClick = isPressing;
         }
         public override void ClearInputs()
         {

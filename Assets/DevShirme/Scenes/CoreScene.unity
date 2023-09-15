@@ -844,7 +844,7 @@ GameObject:
   - component: {fileID: 2021559915473139700}
   - component: {fileID: 2021559915473139703}
   m_Layer: 0
-  m_Name: InGameCam
+  m_Name: FollowGameCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1092,8 +1092,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 9083348022186212241, guid: a4af3579508a9d442a855c22df6975fb, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4af3579508a9d442a855c22df6975fb, type: 3}
 --- !u!20 &6809292392702894434 stripped
 Camera:

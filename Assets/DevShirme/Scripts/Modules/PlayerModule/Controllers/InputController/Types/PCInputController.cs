@@ -38,7 +38,9 @@ namespace DevShirme.Modules.PlayerModule
             isRunKeyPressed = Input.GetKey(data.RunKey);
             isJumpKeyPressed = Input.GetKeyUp(data.JumpKey);
 
-            _keyCodeState = isRunKeyPressed ? Enums.KeyCodeState.Run : isJumpKeyPressed ? Enums.KeyCodeState.Jump : Enums.KeyCodeState.Walk;
+            _keyCodeState = isRunKeyPressed ? Enums.MovementState.Run : isJumpKeyPressed ? Enums.MovementState.Jump : Enums.MovementState.Walk;
+
+            _leftClick = Input.GetMouseButton(0);
         }
         public override void ClearInputs()
         {

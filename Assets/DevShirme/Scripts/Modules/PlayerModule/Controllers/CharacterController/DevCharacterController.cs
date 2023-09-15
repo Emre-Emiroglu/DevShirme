@@ -15,7 +15,8 @@ namespace DevShirme.Modules.PlayerModule
         #region Props
         public Vector2 MovementInput { get; set; }
         public Vector2 RotationInput { get; set; }
-        public Enums.KeyCodeState KeyCodeState { get; set; }
+        public bool LeftClick { get; set; }
+        public Enums.MovementState KeyCodeState { get; set; }
         #endregion
 
         #region Core
@@ -35,6 +36,7 @@ namespace DevShirme.Modules.PlayerModule
                 playerAgent?.Movement(MovementInput, KeyCodeState);
 
             playerAgent?.Rotation(RotationInput, KeyCodeState);
+            playerAgent?.Weapon(LeftClick, KeyCodeState);
         }
         public override void FixedTick()
         {
