@@ -13,11 +13,10 @@ namespace DevShirme.Modules.UIModule
         #endregion
 
         #region Core
-        public UIModule(ScriptableObject _settings) : base(_settings)
+        public UIModule(UISettings uiSettings, UIPanel[] panels) : base()
         {
-            uiSettings = _settings as UISettings;
-
-            panels = Object.FindObjectsOfType<UIPanel>();
+            this.uiSettings = uiSettings;
+            this.panels = panels;
 
             transation(Enums.UIPanelType.MainMenuPanel);
         }
@@ -34,16 +33,13 @@ namespace DevShirme.Modules.UIModule
         #endregion
 
         #region Updates
-        public override void ExternalUpdate()
+        public override void Tick()
         {
         }
-        public override void ExternalFixedUpdate()
+        public override void FixedTick()
         {
         }
-        #endregion
-
-        #region Subscriptions
-        public override void SetSubscriptions(bool isSub)
+        public override void LateTick()
         {
         }
         #endregion

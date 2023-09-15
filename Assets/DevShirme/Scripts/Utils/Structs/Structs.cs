@@ -78,8 +78,6 @@ namespace DevShirme.Utils
             public Enums.PCInputBehavior PCInputBehavior;
             public string VerticalAxis;
             public string HorizontalAxis;
-            public string MouseX;
-            public string MouseY;
             public KeyCode RunKey;
             public KeyCode JumpKey;
         }

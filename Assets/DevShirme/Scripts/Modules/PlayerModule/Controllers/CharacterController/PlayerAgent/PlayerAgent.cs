@@ -1,4 +1,3 @@
-using DevShirme.Interfaces;
 using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,14 +6,14 @@ using UnityEngine;
 namespace DevShirme.Modules.PlayerModule
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class PlayerAgent : MonoBehaviour, IPlayerAgent
+    public class PlayerAgent : MonoBehaviour
     {
         #region Fields
         [Header("Components")]
         private Rigidbody rb;
         [Header("Handlers")]
-        private IAgentHandler movementHandler;
-        private IAgentHandler rotationHandler;
+        private AgentHandler movementHandler;
+        private AgentHandler rotationHandler;
         #endregion
 
         #region Core

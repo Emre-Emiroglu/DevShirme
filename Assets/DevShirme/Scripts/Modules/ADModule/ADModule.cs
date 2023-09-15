@@ -13,16 +13,16 @@ namespace DevShirme.Modules.ADModule
         #region Fields
         public static Action OnRewardedADCallBack;
         private readonly ADSettings adSettings;
-        private bool test;
+        //private bool test;
         //private BannerView bannerView;
         //private InterstitialAd interstitialAd;
         //private RewardedAd rewardedAd;
         #endregion
 
         #region Core
-        public ADModule(ScriptableObject _settings) : base(_settings)
+        public ADModule(ADSettings adSettings) : base()
         {
-            adSettings = _settings as ADSettings;
+            this.adSettings = adSettings;
 
             //MobileAds.Initialize((InitializationStatus initStatus) =>
             //{
@@ -57,7 +57,7 @@ namespace DevShirme.Modules.ADModule
 #elif UNITY_IPHONE
   string id = "ca-app-pub-3940256099942544/2934735716";
 #else
-  string id = "unused";
+  //string id = "unused";
 #endif
             //if (bannerView != null)
             //{
@@ -77,7 +77,7 @@ namespace DevShirme.Modules.ADModule
 #elif UNITY_IPHONE
   string id = "ca-app-pub-3940256099942544/4411468910";
 #else
-  string id = "unused";
+  //string id = "unused";
 #endif
             //if (interstitialAd != null)
             //{
@@ -109,7 +109,7 @@ namespace DevShirme.Modules.ADModule
 #elif UNITY_IPHONE
   string id = "ca-app-pub-3940256099942544/1712485313";
 #else
-  string id = "unused";
+  //string id = "unused";
 #endif
             //if (rewardedAd != null)
             //{
@@ -200,16 +200,13 @@ namespace DevShirme.Modules.ADModule
         #endregion
 
         #region Updates
-        public override void ExternalUpdate()
+        public override void Tick()
         {
         }
-        public override void ExternalFixedUpdate()
+        public override void FixedTick()
         {
         }
-        #endregion
-
-        #region Subscriptions
-        public override void SetSubscriptions(bool isSub)
+        public override void LateTick()
         {
         }
         #endregion

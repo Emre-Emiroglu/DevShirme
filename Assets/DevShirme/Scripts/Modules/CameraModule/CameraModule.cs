@@ -14,13 +14,12 @@ namespace DevShirme.Modules.CameraModule
         #endregion
 
         #region Core
-        public CameraModule(ScriptableObject _settings) : base(_settings)
+        public CameraModule(CameraSettings cameraSettings, Cam[] cams) : base()
         {
-            cameraSettings = _settings as CameraSettings;
+            this.cameraSettings = cameraSettings;
+            this.cams = cams;
 
-            cams = Object.FindObjectsOfType<Cam>();
-
-            for (int i = 0; i < cams.Length; i++)
+            for (int i = 0; i < this.cams.Length; i++)
             {
                 cams[i].Initialize();
             }
@@ -53,16 +52,13 @@ namespace DevShirme.Modules.CameraModule
         #endregion
 
         #region Updates
-        public override void ExternalUpdate()
+        public override void Tick()
         {
         }
-        public override void ExternalFixedUpdate()
+        public override void FixedTick()
         {
         }
-        #endregion
-
-        #region Subscriptions
-        public override void SetSubscriptions(bool isSub)
+        public override void LateTick()
         {
         }
         #endregion

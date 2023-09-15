@@ -1,6 +1,4 @@
-﻿using DevShirme.Interfaces;
-using DevShirme.Utils;
-using System;
+﻿using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,19 +21,22 @@ namespace DevShirme.Modules.PlayerModule
         #endregion
 
         #region Core
-        public InputController(ScriptableObject _settings) : base(_settings)
+        public InputController(InputControllerSettings _icSettings) : base()
         {
-            _icSettings = _settings as InputControllerSettings;
+            this._icSettings = _icSettings;
         }
         public abstract void ClearInputs();
         protected abstract void inputUpdate();
         #endregion
 
         #region Updates
-        public override void ExternalUpdate()
+        public override void Tick()
         {
         }
-        public override void ExternalFixedUpdate()
+        public override void FixedTick()
+        {
+        }
+        public override void LateTick()
         {
         }
         #endregion

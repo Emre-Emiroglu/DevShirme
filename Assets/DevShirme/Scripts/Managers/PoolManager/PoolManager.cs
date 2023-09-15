@@ -9,6 +9,7 @@ namespace DevShirme.Managers.PoolManager
     {
         #region Fields
         private readonly PoolManagerSettings pmSettings;
+        private readonly Transform poolsParent;
         private ObjectPool[] pools;
         #endregion
 
@@ -27,19 +28,16 @@ namespace DevShirme.Managers.PoolManager
         #endregion
 
         #region Core
-        public PoolManager(ScriptableObject _settings) : base(_settings)
+        public PoolManager(PoolManagerSettings pmSettings, Transform poolsParent) : base()
         {
-            pmSettings = _settings as PoolManagerSettings;
-
-            Transform poolsParent = Object.FindObjectOfType<Core>().transform;
-
-            pmSettings = base._settings as PoolManagerSettings;
+            this.pmSettings = pmSettings;
+            this.poolsParent = poolsParent;
 
             pools = new ObjectPool[pmSettings.Prefabs.Length];
 
             for (int i = 0; i < pmSettings.Prefabs.Length; i++)
             {
-                ObjectPool pool = new ObjectPool(pmSettings.Prefabs[i], pmSettings.PoolNames[i], pmSettings.InitSize, pmSettings.MaxSize, poolsParent);
+                ObjectPool pool = new ObjectPool(pmSettings.Prefabs[i], pmSettings.PoolNames[i], pmSettings.InitSize, pmSettings.MaxSize, this.poolsParent);
                 pools[i] = pool;
             }
         }
@@ -62,10 +60,13 @@ namespace DevShirme.Managers.PoolManager
         #endregion
 
         #region Updates
-        public override void ExternalUpdate()
+        public override void Tick()
         {
         }
-        public override void ExternalFixedUpdate()
+        public override void FixedTick()
+        {
+        }
+        public override void LateTick()
         {
         }
         #endregion

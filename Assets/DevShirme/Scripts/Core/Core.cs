@@ -1,4 +1,3 @@
-using DevShirme.Interfaces;
 using DevShirme.DesignPatterns.Creationals;
 using DevShirme.Managers.DataManager;
 using DevShirme.Managers.PoolManager;
@@ -7,6 +6,10 @@ using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DevShirme.Modules.ADModule;
+using DevShirme.Modules.PlayerModule;
+using DevShirme.Modules.CameraModule;
+using DevShirme.Modules.UIModule;
 
 namespace DevShirme
 {
@@ -15,10 +18,10 @@ namespace DevShirme
         #region Fields
         [Header("Core Fields")]
         [SerializeField] private CoreSettings coreSettings;
-        private ILoadable dataManager;
-        private ILoadable poolManager;
-        private ILoadable gameManager;
-        private ILoadable[] managers;
+        private DataManager dataManager;
+        private PoolManager poolManager;
+        private GameManager gameManager;
+        private Manager[] managers;
         #endregion
 
         #region Getters
@@ -44,14 +47,12 @@ namespace DevShirme
         {
             base.Initialize();
 
-            dataManager = new DataManager(coreSettings.ManagersSettings[((int)Enums.ManagerType.DataManager)]);
-            poolManager = new PoolManager(coreSettings.ManagersSettings[((int)Enums.ManagerType.PoolManager)]);
-            gameManager = new GameManager(coreSettings.ManagersSettings[((int)Enums.ManagerType.GameManager)]);
+            installs();
 
-            managers = new ILoadable[3];
-            managers[0] = dataManager;
-            managers[1] = poolManager;
-            managers[2] = gameManager;
+            managers = new Manager[3];
+            managers[((int)Enums.ManagerType.DataManager)] = dataManager;
+            managers[((int)Enums.ManagerType.PoolManager)] = poolManager;
+            managers[((int)Enums.ManagerType.GameManager)] = gameManager;
         }
         protected override void OnDestroy()
         {
@@ -59,16 +60,49 @@ namespace DevShirme
         }
         #endregion
 
+        #region Installs
+        private void installs()
+        {
+            DataManagerSettings dmSettings = coreSettings.ManagersSettings[((int)Enums.ManagerType.DataManager)] as DataManagerSettings;
+            PoolManagerSettings pmSettings = coreSettings.ManagersSettings[((int)Enums.ManagerType.PoolManager)] as PoolManagerSettings;
+            GameManagerSettings gmSettings = coreSettings.ManagersSettings[((int)Enums.ManagerType.GameManager)] as GameManagerSettings;
+
+            ADSettings adSettings = gmSettings.ModulesSettings[((int)Enums.ModuleType.ADModule)] as ADSettings;
+            PlayerSettings playerSettings = gmSettings.ModulesSettings[((int)Enums.ModuleType.PlayerModule)] as PlayerSettings;
+            CameraSettings cameraSettings = gmSettings.ModulesSettings[((int)Enums.ModuleType.CameraModule)] as CameraSettings;
+            UISettings uiSettings = gmSettings.ModulesSettings[((int)Enums.ModuleType.UIModule)] as UISettings;
+
+            InputControllerSettings icSettings = playerSettings.ControllersSettings[((int)Enums.PlayerModuleControllerType.InputController)] as InputControllerSettings;
+            CharacterControllerSettings ccSettings = playerSettings.ControllersSettings[((int)Enums.PlayerModuleControllerType.CharacterController)] as CharacterControllerSettings;
+
+            PlayerAgent playerAgent = FindObjectOfType<PlayerAgent>();
+            Cam[] cams = FindObjectsOfType<Cam>();
+            UIPanel[] panels = FindObjectsOfType<UIPanel>();
+
+            dataManager = new DataManager(dmSettings);
+            poolManager = new PoolManager(pmSettings, transform.GetChild(0));
+            gameManager = new GameManager(gmSettings, new ADModule(adSettings),
+                new PlayerModule(playerSettings, new PCInputController(icSettings), new MobileInputController(icSettings), new DevCharacterController(ccSettings, playerAgent)),
+                new CameraModule(cameraSettings, cams),
+                new UIModule(uiSettings, panels));
+        }
+        #endregion
+
         #region Updates
         private void Update()
         {
             for (int i = 0; i < managers.Length; i++)
-                managers[i].ExternalUpdate();
+                managers[i].Tick();
         }
         private void FixedUpdate()
         {
             for (int i = 0; i < managers.Length; i++)
-                managers[i].ExternalFixedUpdate();
+                managers[i].FixedTick();
+        }
+        private void LateUpdate()
+        {
+            for (int i = 0; i < managers.Length; i++)
+                managers[i].LateTick();
         }
         #endregion
     }

@@ -1,4 +1,3 @@
-using DevShirme.Interfaces;
 using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +5,7 @@ using UnityEngine;
 
 namespace DevShirme.Modules.PlayerModule
 {
-    public abstract class AgentHandler : IAgentHandler
+    public abstract class AgentHandler
     {
         #region Fields
         protected Transform _obj;

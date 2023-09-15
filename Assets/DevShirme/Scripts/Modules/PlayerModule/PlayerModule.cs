@@ -1,8 +1,7 @@
-using DevShirme.Interfaces;
-using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DevShirme.Utils;
 
 namespace DevShirme.Modules.PlayerModule
 {
@@ -10,55 +9,45 @@ namespace DevShirme.Modules.PlayerModule
     {
         #region Fields
         private readonly PlayerSettings playerSettings;
-        private readonly InputController inputController;
-        private readonly CharacterController characterController;
-        private readonly ILoadable[] controllers;
+        private readonly PCInputController pcInputController;
+        private readonly MobileInputController mobileInputController;
+        private readonly DevCharacterController characterController;
+        private readonly Controller[] controllers;
         #endregion
 
         #region Core
-        public PlayerModule(ScriptableObject _settings) : base(_settings)
+        public PlayerModule(PlayerSettings playerSettings, PCInputController pcInputController, MobileInputController mobileInputController, DevCharacterController characterController) : base()
         {
-            playerSettings = _settings as PlayerSettings;
+            this.playerSettings = playerSettings;
+            this.pcInputController = pcInputController;
+            this.mobileInputController = mobileInputController;
+            this.characterController = characterController;
 
-            InputControllerSettings icSettings = playerSettings.ControllersSettings[((int)Enums.PlayerModuleControllerType.InputController)] as InputControllerSettings;
-            switch (icSettings.InputType)
-            {
-                case Enums.InputType.Mobile:
-                    inputController = new MobileInputController(icSettings);
-                    break;
-                case Enums.InputType.PC:
-                    inputController = new PCInputController(icSettings);
-                    break;
-            }
-
-            characterController = new CharacterController(playerSettings.ControllersSettings[((int)Enums.PlayerModuleControllerType.CharacterController)]);
-
-            controllers = new ILoadable[2];
-            controllers[0] = inputController;
-            controllers[1] = characterController;
+            controllers = new Controller[2];
+            controllers[((int)Enums.PlayerModuleControllerType.InputController)] = this.pcInputController;
+            controllers[((int)Enums.PlayerModuleControllerType.CharacterController)] = this.characterController;
         }
         #endregion
 
         #region Updates
-        public override void ExternalUpdate()
+        public override void Tick()
         {
-            characterController.MovementInput = inputController.MovementInput;
-            characterController.RotationInput = inputController.RotationInput;
-            characterController.KeyCodeState = inputController.KeyCodeState;
+            characterController.MovementInput = pcInputController.MovementInput;
+            characterController.RotationInput = pcInputController.RotationInput;
+            characterController.KeyCodeState = pcInputController.KeyCodeState;
 
             for (int i = 0; i < controllers.Length; i++)
-                controllers[i].ExternalUpdate();
+                controllers[i].Tick();
         }
-        public override void ExternalFixedUpdate()
+        public override void FixedTick()
         {
             for (int i = 0; i < controllers.Length; i++)
-                controllers[i].ExternalFixedUpdate();
+                controllers[i].FixedTick();
         }
-        #endregion
-
-        #region Subscriptions
-        public override void SetSubscriptions(bool isSub)
+        public override void LateTick()
         {
+            for (int i = 0; i < controllers.Length; i++)
+                controllers[i].LateTick();
         }
         #endregion
     }

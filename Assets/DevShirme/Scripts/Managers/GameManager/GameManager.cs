@@ -1,4 +1,3 @@
-using DevShirme.Interfaces;
 using DevShirme.Modules.ADModule;
 using DevShirme.Modules.CameraModule;
 using DevShirme.Modules.PlayerModule;
@@ -14,28 +13,27 @@ namespace DevShirme.Managers.GameManager
     {
         #region Fields
         private readonly GameManagerSettings gmSettings;
-        private readonly ILoadable adModule;
-        private readonly ILoadable playerModule;
-        private readonly ILoadable cameraModule;
-        private readonly ILoadable uiModule;
-        private ILoadable[] modules;
+        private readonly ADModule adModule;
+        private readonly PlayerModule playerModule;
+        private readonly CameraModule cameraModule;
+        private readonly UIModule uiModule;
+        private readonly Module[] modules;
         #endregion
 
         #region Core
-        public GameManager(ScriptableObject _settings) : base(_settings)
+        public GameManager(GameManagerSettings gmSettings, ADModule adModule, PlayerModule playerModule, CameraModule cameraModule, UIModule uiModule) : base()
         {
-            gmSettings = _settings as GameManagerSettings;
+            this.gmSettings = gmSettings;
+            this.adModule = adModule;
+            this.playerModule = playerModule;
+            this.cameraModule = cameraModule;
+            this.uiModule = uiModule;
 
-            adModule = new ADModule(gmSettings.ModulesSettings[((int)Enums.ModuleType.ADModule)]);
-            playerModule = new PlayerModule(gmSettings.ModulesSettings[((int)Enums.ModuleType.PlayerModule)]);
-            cameraModule = new CameraModule(gmSettings.ModulesSettings[((int)Enums.ModuleType.CameraModule)]);
-            uiModule = new UIModule(gmSettings.ModulesSettings[((int)Enums.ModuleType.UIModule)]);
-
-            modules = new ILoadable[4];
-            modules[0] = adModule;
-            modules[1] = playerModule;
-            modules[2] = cameraModule;
-            modules[3] = uiModule;
+            modules = new Module[4];
+            modules[((int)Enums.ModuleType.ADModule)] = adModule;
+            modules[((int)Enums.ModuleType.PlayerModule)] = playerModule;
+            modules[((int)Enums.ModuleType.CameraModule)] = cameraModule;
+            modules[((int)Enums.ModuleType.UIModule)] = uiModule;
 
             setFPS();
             setCursor();
@@ -65,15 +63,20 @@ namespace DevShirme.Managers.GameManager
         #endregion
 
         #region Updates
-        public override void ExternalUpdate()
+        public override void Tick()
         {
             for (int i = 0; i < modules.Length; i++)
-                modules[i].ExternalUpdate();
+                modules[i].Tick();
         }
-        public override void ExternalFixedUpdate()
+        public override void FixedTick()
         {
             for (int i = 0; i < modules.Length; i++)
-                modules[i].ExternalFixedUpdate();
+                modules[i].FixedTick();
+        }
+        public override void LateTick()
+        {
+            for (int i = 0; i < modules.Length; i++)
+                modules[i].LateTick();
         }
         #endregion
     }

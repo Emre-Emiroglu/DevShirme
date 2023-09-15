@@ -1,4 +1,3 @@
-using DevShirme.Interfaces;
 using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,11 +5,11 @@ using UnityEngine;
 
 namespace DevShirme.Modules.PlayerModule
 {
-    public class CharacterController : Controller
+    public class DevCharacterController : Controller
     {
         #region Fields
         private readonly CharacterControllerSettings ccSettings;
-        private readonly IPlayerAgent playerAgent;
+        private readonly PlayerAgent playerAgent;
         #endregion
 
         #region Props
@@ -20,27 +19,30 @@ namespace DevShirme.Modules.PlayerModule
         #endregion
 
         #region Core
-        public CharacterController(ScriptableObject _settings) : base(_settings)
+        public DevCharacterController(CharacterControllerSettings ccSettings, PlayerAgent playerAgent) : base()
         {
-            ccSettings = _settings as CharacterControllerSettings;
+            this.ccSettings = ccSettings;
+            this.playerAgent = playerAgent;
 
-            playerAgent = Object.FindObjectOfType<PlayerAgent>();
-            playerAgent?.Initialize(ccSettings);
+            this.playerAgent?.Initialize(this.ccSettings);
         }
         #endregion
 
         #region Updates
-        public override void ExternalUpdate()
+        public override void Tick()
         {
             if (ccSettings.MovementData.MovementType == Enums.MovementType.Transform)
                 playerAgent?.Movement(MovementInput, KeyCodeState);
 
             playerAgent?.Rotation(RotationInput, KeyCodeState);
         }
-        public override void ExternalFixedUpdate()
+        public override void FixedTick()
         {
             if (ccSettings.MovementData.MovementType == Enums.MovementType.Rigidbody)
                 playerAgent?.Movement(MovementInput, KeyCodeState);
+        }
+        public override void LateTick()
+        {
         }
         #endregion
     }

@@ -17,9 +17,9 @@ namespace DevShirme.Modules.PlayerModule
         #endregion
 
         #region Core
-        public MobileInputController(ScriptableObject _settings) : base(_settings)
+        public MobileInputController(InputControllerSettings _icSettings) : base(_icSettings)
         {
-            this.data = _icSettings.MobileInputData;
+            data = _icSettings.MobileInputData;
         }
         protected override void inputUpdate()
         {
@@ -80,17 +80,20 @@ namespace DevShirme.Modules.PlayerModule
         #endregion
 
         #region Updates
-        public override void ExternalUpdate()
+        public override void Tick()
         {
-            base.ExternalUpdate();
+            base.Tick();
 
             inputUpdate();
         }
-        public override void ExternalFixedUpdate()
+        public override void FixedTick()
         {
-            base.ExternalFixedUpdate();
+            base.FixedTick();
+        }
+        public override void LateTick()
+        {
+            base.LateTick();
         }
         #endregion
-
     }
 }

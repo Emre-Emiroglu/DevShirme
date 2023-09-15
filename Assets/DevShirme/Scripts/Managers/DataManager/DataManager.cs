@@ -16,9 +16,9 @@ namespace DevShirme.Managers.DataManager
         #endregion
 
         #region Core
-        public DataManager(ScriptableObject _settings) : base(_settings)
+        public DataManager(DataManagerSettings dmSettings) : base()
         {
-            dmSettings = _settings as DataManagerSettings;
+            this.dmSettings = dmSettings;
 
             PlayerDataSet = new PlayerDataSet();
         }
@@ -45,10 +45,13 @@ namespace DevShirme.Managers.DataManager
         #endregion
 
         #region Updates
-        public override void ExternalUpdate()
+        public override void Tick()
         {
         }
-        public override void ExternalFixedUpdate()
+        public override void FixedTick()
+        {
+        }
+        public override void LateTick()
         {
         }
         #endregion

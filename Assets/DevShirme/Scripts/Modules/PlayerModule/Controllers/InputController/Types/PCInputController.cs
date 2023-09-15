@@ -9,17 +9,16 @@ namespace DevShirme.Modules.PlayerModule
     {
         #region Fields
         private readonly Structs.PCInputData data;
+        private readonly Camera mainCam;
         private bool isRunKeyPressed;
         private bool isJumpKeyPressed;
         #endregion
 
-        #region Getters
-        #endregion
-
         #region Core
-        public PCInputController(ScriptableObject _settings) : base(_settings)
+        public PCInputController(InputControllerSettings _icSettings) : base(_icSettings)
         {
-            this.data = _icSettings.PCInputData;
+            data = _icSettings.PCInputData;
+            mainCam = Camera.main;
         }
         protected override void inputUpdate()
         {
@@ -27,13 +26,14 @@ namespace DevShirme.Modules.PlayerModule
             {
                 case Enums.PCInputBehavior.Raw:
                     _movementInput = new Vector2(Input.GetAxis(data.HorizontalAxis), Input.GetAxis(data.VerticalAxis));
-                    _rotationInput = new Vector2(Input.GetAxis(data.MouseX), Input.GetAxis(data.MouseY));
                     break;
                 case Enums.PCInputBehavior.NonRaw:
                     _movementInput = new Vector2(Input.GetAxisRaw(data.HorizontalAxis), Input.GetAxisRaw(data.VerticalAxis));
-                    _rotationInput = new Vector2(Input.GetAxisRaw(data.MouseX), Input.GetAxisRaw(data.MouseY));
                     break;
             }
+
+            Vector3 mouseWorldPos = mainCam.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10f);
+            _rotationInput = new Vector2(mouseWorldPos.x, mouseWorldPos.z);
 
             isRunKeyPressed = Input.GetKey(data.RunKey);
             isJumpKeyPressed = Input.GetKeyUp(data.JumpKey);
@@ -46,15 +46,19 @@ namespace DevShirme.Modules.PlayerModule
         #endregion
 
         #region Updates
-        public override void ExternalUpdate()
+        public override void Tick()
         {
-            base.ExternalUpdate();
+            base.Tick();
 
             inputUpdate();
         }
-        public override void ExternalFixedUpdate()
+        public override void FixedTick()
         {
-            base.ExternalFixedUpdate();
+            base.FixedTick();
+        }
+        public override void LateTick()
+        {
+            base.LateTick();
         }
         #endregion
     }
