@@ -1,3 +1,4 @@
+using DevShirme.DesignPatterns.Behaviorals;
 using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ namespace DevShirme.Modules.PlayerModule
     public class PlayerAgent : MonoBehaviour
     {
         #region Fields
+        [Header("Events")]
+        [SerializeField] private GameEvent gameOverEvent;
         [Header("Components")]
         [SerializeField] private Weapon weapon;
         private Rigidbody rb;
@@ -25,7 +28,14 @@ namespace DevShirme.Modules.PlayerModule
 
             movementHandler = new MovementHandler(ccSettings.MovementData, transform, rb);
             rotationHandler = new RotationHandler(ccSettings.RotationData, transform, rb);
-            weaponHandler = new WeaponHandler(weapon, .5f, transform, rb);
+            weaponHandler = new WeaponHandler(weapon, transform, rb);
+        }
+        public void Reload()
+        {
+            transform.position = Vector3.zero;
+            transform.rotation = Quaternion.identity;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         }
         #endregion
 
@@ -42,6 +52,14 @@ namespace DevShirme.Modules.PlayerModule
         {
             if (leftClick)
                 weaponHandler.Execute(Vector2.zero, keyCodeState);
+        }
+        #endregion
+
+        #region Physic
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Enemy"))
+                gameOverEvent?.Notify(null);
         }
         #endregion
     }

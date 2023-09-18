@@ -1,5 +1,5 @@
+using DevShirme.DesignPatterns.Behaviorals;
 using DevShirme.Interfaces;
-using DevShirme.Managers.AudioManager;
 using DevShirme.Managers.PoolManager;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,10 +11,13 @@ namespace DevShirme.Modules.PlayerModule
     {
         #region Fields
         [Header("Components")]
+        [SerializeField] private WeaponData data;
+        [SerializeField] private GameEvent onWeaponShoot;
         [SerializeField] private Transform muzzle;
-        [SerializeField] private AudioClip shootSound;
-        [SerializeField] private float speed;
-        [SerializeField] private ForceMode forceMode;
+        #endregion
+
+        #region Getters
+        public WeaponData WeaponData => data;
         #endregion
 
         #region Core
@@ -24,9 +27,10 @@ namespace DevShirme.Modules.PlayerModule
         }
         public void Shoot()
         {
-            ((AudioManager)Core.Instance.GetManager(Utils.Enums.ManagerType.AudioManager)).PlaySound(shootSound);
             Bullet bullet = (Bullet)((PoolManager)Core.Instance.GetManager(Utils.Enums.ManagerType.PoolManager)).GetObj("BulletPool", muzzle.position, muzzle.rotation, Vector3.one, null, true);
-            bullet.Throw(speed, forceMode);
+            bullet.Throw(data.BulletSpeed);
+
+            onWeaponShoot?.Notify(data.ShootSound);
         }
         #endregion
     }

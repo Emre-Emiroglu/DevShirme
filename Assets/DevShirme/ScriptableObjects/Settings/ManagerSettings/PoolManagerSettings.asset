@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 1974922271291803560, guid: c2dc462153183f741918073cc9f2fccf, type: 3}
+  - {fileID: 6951927515830618067, guid: 955baae1405b2c943a5e8b8a8ee7772b, type: 3}
   poolNames:
   - BulletPool
+  - EnemyPool
   initSize: 100
   maxSize: 500

@@ -13,6 +13,7 @@ namespace DevShirme.Modules.PlayerModule
         private readonly MobileInputController mobileInputController;
         private readonly DevCharacterController characterController;
         private readonly Controller[] controllers;
+        private bool isActive;
         #endregion
 
         #region Core
@@ -26,12 +27,33 @@ namespace DevShirme.Modules.PlayerModule
             controllers = new Controller[2];
             controllers[((int)Enums.PlayerModuleControllerType.InputController)] = this.pcInputController;
             controllers[((int)Enums.PlayerModuleControllerType.CharacterController)] = this.characterController;
+
+            isActive = false;
+        }
+        #endregion
+
+        #region Observer
+        public override void OnNotify(object value, Enums.NotificationType notificationType)
+        {
+            isActive = notificationType == Enums.NotificationType.GameStart;
+
+            if (isActive)
+            {
+                pcInputController?.ClearInputs();
+                mobileInputController?.ClearInputs();
+            }
+
+            if (notificationType == Enums.NotificationType.GameReload)
+                characterController?.Reload();
         }
         #endregion
 
         #region Updates
         public override void Tick()
         {
+            if (!isActive)
+                return;
+
             characterController.MovementInput = pcInputController.MovementInput;
             characterController.RotationInput = pcInputController.RotationInput;
             characterController.LeftClick = pcInputController.LeftClick;
@@ -42,11 +64,17 @@ namespace DevShirme.Modules.PlayerModule
         }
         public override void FixedTick()
         {
+            if (!isActive)
+                return;
+
             for (int i = 0; i < controllers.Length; i++)
                 controllers[i].FixedTick();
         }
         public override void LateTick()
         {
+            if (!isActive)
+                return;
+
             for (int i = 0; i < controllers.Length; i++)
                 controllers[i].LateTick();
         }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DevShirme.Utils;
+using DevShirme.Interfaces;
 
 namespace DevShirme.Modules.CameraModule
 {
@@ -9,19 +10,34 @@ namespace DevShirme.Modules.CameraModule
     {
         #region Fields
         private readonly CameraSettings cameraSettings;
-        private readonly Cam[] cams;
-        private Cam activeCam;
+        private readonly ICam[] cams;
+        private ICam activeCam;
         #endregion
 
         #region Core
-        public CameraModule(CameraSettings cameraSettings, Cam[] cams) : base()
+        public CameraModule(CameraSettings cameraSettings, ICam[] cams) : base()
         {
             this.cameraSettings = cameraSettings;
             this.cams = cams;
 
             for (int i = 0; i < this.cams.Length; i++)
-            {
                 cams[i].Initialize();
+
+            toNewCam(Enums.CamType.IdleCam);
+        }
+        #endregion
+
+        #region Observer
+        public override void OnNotify(object value, Enums.NotificationType notificationType)
+        {
+            switch (notificationType)
+            {
+                case Enums.NotificationType.GameStart:
+                    toNewCam(Enums.CamType.FollowCam);
+                    break;
+                case Enums.NotificationType.GameReload:
+                    toNewCam(Enums.CamType.IdleCam);
+                    break;
             }
         }
         #endregion
@@ -31,24 +47,24 @@ namespace DevShirme.Modules.CameraModule
         {
             for (int i = 0; i < cams.Length; i++)
             {
-                bool isActive = i == ((int)newCam);
+                bool isActive = cams[i].CameraType == newCam;
                 if (isActive)
+                {
+                    activeCam = cams[i];
                     cams[i].Show();
+                }
                 else
                     cams[i].Hide();
-                
-                if (isActive)
-                    activeCam = cams[i];
             }
         }
         #endregion
 
         #region Shake
-        public void CamShake() => activeCam.CamShake(cameraSettings.AmplitudeGain, cameraSettings.FrequencyGain, cameraSettings.ShakeDuration);
+        public void Shake() => activeCam.Shake(cameraSettings.AmplitudeGain, cameraSettings.FrequencyGain, cameraSettings.ShakeDuration);
         #endregion
 
         #region Fov
-        public void FovChange(float addValue) => activeCam.FovChange(addValue, cameraSettings.FovChangeDuration);
+        public void ChangeFov(float addValue) => activeCam.ChangeFov(addValue, cameraSettings.FovChangeDuration);
         #endregion
 
         #region Updates

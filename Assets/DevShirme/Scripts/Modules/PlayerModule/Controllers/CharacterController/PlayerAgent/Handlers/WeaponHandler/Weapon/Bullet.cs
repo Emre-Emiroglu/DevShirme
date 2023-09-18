@@ -30,6 +30,14 @@ public class Bullet : PoolObject
     #endregion
 
     #region Executes
-    public void Throw(float speed, ForceMode forceMode) => rb.AddRelativeForce(Vector3.forward * speed, forceMode);
+    public void Throw(float speed) => rb.AddRelativeForce(Vector3.forward * speed, ForceMode.Impulse);
+    #endregion
+
+    #region Physic
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+            DeSpawn();
+    }
     #endregion
 }

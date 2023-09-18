@@ -30,7 +30,7 @@ namespace DevShirme.DesignPatterns.Behaviorals
         }
         public void Attach(IObserver observer) => subject.Attach(observer);
         public void DeAttach(IObserver observer) => subject.DeAttach(observer);
-        public void Notify(object value, Enums.NotificationType notificationType) => subject.Notify(value, notificationType);
+        public void Notify(object value) => subject.Notify(value);
         #endregion
     }
 }

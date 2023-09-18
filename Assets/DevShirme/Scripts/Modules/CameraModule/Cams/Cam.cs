@@ -3,38 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using DevShirme.Utils;
+using DevShirme.Interfaces;
 
 namespace DevShirme.Modules.CameraModule
 {
-    public class Cam : MonoBehaviour
+    public class Cam : MonoBehaviour, ICam
     {
         #region Fields
         [Header("Cam Components")]
-        [SerializeField] private Enums.CamType myType;
-        [SerializeField] private CinemachineVirtualCamera myCam;
-        private CinemachineBasicMultiChannelPerlin myPerlin;
+        [SerializeField] private Enums.CamType camType;
+        [SerializeField] private CinemachineVirtualCamera virtualCamera;
+        private CinemachineBasicMultiChannelPerlin perlin;
         private Coroutine shake;
         private Coroutine fov;
         private float orgFov;
         #endregion
 
+        #region Getters
+        public Enums.CamType CameraType => camType;
+        #endregion
+
         #region Core
         public void Initialize()
         {
-            myPerlin = myCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            perlin = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         }
         public void Show()
         {
-            myCam.Priority = 99;
+            virtualCamera.Priority = 99;
         }
         public void Hide()
         {
-            myCam.Priority = 0;
+            virtualCamera.Priority = 0;
         }
         #endregion
 
         #region Shake
-        public void CamShake(float amplitudeGain, float frequencyGain, float shakeDuration)
+        public void Shake(float amplitudeGain, float frequencyGain, float shakeDuration)
         {
             stopShakeCoroutine();
             shake = StartCoroutine(processShake(amplitudeGain, frequencyGain, shakeDuration));
@@ -52,15 +57,15 @@ namespace DevShirme.Modules.CameraModule
         }
         private void noise(float amplitudeGain, float frequencyGain)
         {
-            myPerlin.m_AmplitudeGain = amplitudeGain;
-            myPerlin.m_FrequencyGain = frequencyGain;
+            perlin.m_AmplitudeGain = amplitudeGain;
+            perlin.m_FrequencyGain = frequencyGain;
         }
         #endregion
 
         #region Fov
-        public void FovChange(float addValue, float duration)
+        public void ChangeFov(float addValue, float duration)
         {
-            myCam.m_Lens.FieldOfView = orgFov;
+            virtualCamera.m_Lens.FieldOfView = orgFov;
 
             stopFovCoroutine();
 
@@ -73,18 +78,18 @@ namespace DevShirme.Modules.CameraModule
         }
         private IEnumerator processFov(float addValue, float duration)
         {
-            float oldValue = myCam.m_Lens.FieldOfView;
+            float oldValue = virtualCamera.m_Lens.FieldOfView;
             float targetValue = oldValue + addValue;
             float t = 0f;
             while (t < duration)
             {
                 t += Time.deltaTime;
-                myCam.m_Lens.FieldOfView = Mathf.Lerp(oldValue, targetValue, t / duration);
+                virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(oldValue, targetValue, t / duration);
 
                 yield return null;
             }
 
-            myCam.m_Lens.FieldOfView = targetValue;
+            virtualCamera.m_Lens.FieldOfView = targetValue;
         }
         #endregion
     }

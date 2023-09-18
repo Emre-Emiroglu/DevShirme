@@ -11,7 +11,7 @@ namespace DevShirme.Modules.PlayerModule
         private readonly CharacterControllerSettings ccSettings;
         private readonly PlayerAgent playerAgent;
         #endregion
-
+        
         #region Props
         public Vector2 MovementInput { get; set; }
         public Vector2 RotationInput { get; set; }
@@ -27,6 +27,7 @@ namespace DevShirme.Modules.PlayerModule
 
             this.playerAgent?.Initialize(this.ccSettings);
         }
+        public void Reload() => playerAgent?.Reload();
         #endregion
 
         #region Updates

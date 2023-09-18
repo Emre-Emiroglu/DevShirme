@@ -9,6 +9,6 @@ namespace DevShirme.Interfaces
     {
         public void Attach(IObserver observer);
         public void DeAttach(IObserver observer);
-        public void Notify(object value, Enums.NotificationType notificationType);
+        public void Notify(object value);
     }
 }

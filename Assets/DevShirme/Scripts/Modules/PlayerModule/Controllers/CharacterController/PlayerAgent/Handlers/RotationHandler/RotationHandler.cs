@@ -32,8 +32,9 @@ namespace DevShirme.Modules.PlayerModule
         #region Rotations
         private void rotate()
         {
-            rotY = Mathf.Atan2(rotationInput.x, rotationInput.y) * Mathf.Rad2Deg;
-            Quaternion targetRot = Quaternion.Euler(0f, rotY, 0f);
+            Vector3 diff = new Vector3(rotationInput.x, 0f, rotationInput.y) - _obj.position;
+            Quaternion targetRot = Quaternion.LookRotation(diff, Vector3.up);
+
             _obj.rotation = Quaternion.Lerp(_obj.rotation, targetRot, Time.deltaTime * rotationData.RotationSpeed);
         }
         #endregion

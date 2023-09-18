@@ -10,17 +10,17 @@ namespace DevShirme.Modules.PlayerModule
     {
         #region Fields
         private readonly IWeapon weapon;
-        private float fireRate;
+        private readonly float fireRate;
         private float timer;
         #endregion
 
         #region Core
-        public WeaponHandler(IWeapon weapon, float fireRate, Transform obj, Rigidbody rb) : base(obj, rb)
+        public WeaponHandler(IWeapon weapon, Transform obj, Rigidbody rb) : base(obj, rb)
         {
             this.weapon = weapon;
-            this.fireRate = fireRate;
-
             this.weapon.Setup(true);
+
+            fireRate = this.weapon.WeaponData.FireRate;
         }
         #endregion
 

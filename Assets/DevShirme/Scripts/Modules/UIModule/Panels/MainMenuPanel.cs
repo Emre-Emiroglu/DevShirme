@@ -7,12 +7,15 @@ namespace DevShirme.Modules.UIModule
     public class MainMenuPanel : UIPanel
     {
         #region Fields
+        [SerializeField] private GameEventButton gameEventButton;
         #endregion
 
         #region Core
         public override void Initialize()
         {
             base.Initialize();
+
+            gameEventButton.Setup();
         }
         public override void Show()
         {

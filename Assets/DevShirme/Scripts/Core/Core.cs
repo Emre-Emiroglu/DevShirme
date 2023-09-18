@@ -11,6 +11,8 @@ using DevShirme.Modules.ADModule;
 using DevShirme.Modules.PlayerModule;
 using DevShirme.Modules.CameraModule;
 using DevShirme.Modules.UIModule;
+using DevShirme.Modules.EnemyModule;
+using DevShirme.Interfaces;
 
 namespace DevShirme
 {
@@ -67,30 +69,43 @@ namespace DevShirme
         #region Installs
         private void installs()
         {
+            #region ManagersSettings
             DataManagerSettings dmSettings = coreSettings.ManagersSettings[((int)Enums.ManagerType.DataManager)] as DataManagerSettings;
             PoolManagerSettings pmSettings = coreSettings.ManagersSettings[((int)Enums.ManagerType.PoolManager)] as PoolManagerSettings;
             GameManagerSettings gmSettings = coreSettings.ManagersSettings[((int)Enums.ManagerType.GameManager)] as GameManagerSettings;
             AudioManagerSettings amSettings = coreSettings.ManagersSettings[((int)Enums.ManagerType.AudioManager)] as AudioManagerSettings;
+            #endregion
 
+            #region ModulesSettings
             ADSettings adSettings = gmSettings.ModulesSettings[((int)Enums.ModuleType.ADModule)] as ADSettings;
             PlayerSettings playerSettings = gmSettings.ModulesSettings[((int)Enums.ModuleType.PlayerModule)] as PlayerSettings;
             CameraSettings cameraSettings = gmSettings.ModulesSettings[((int)Enums.ModuleType.CameraModule)] as CameraSettings;
             UISettings uiSettings = gmSettings.ModulesSettings[((int)Enums.ModuleType.UIModule)] as UISettings;
+            EnemySettings enemySettings = gmSettings.ModulesSettings[((int)Enums.ModuleType.EnemyModule)] as EnemySettings;
+            #endregion
 
+            #region ControllersSettings
             InputControllerSettings icSettings = playerSettings.ControllersSettings[((int)Enums.PlayerModuleControllerType.InputController)] as InputControllerSettings;
             CharacterControllerSettings ccSettings = playerSettings.ControllersSettings[((int)Enums.PlayerModuleControllerType.CharacterController)] as CharacterControllerSettings;
+            SpawnControllerSettings scSettings = enemySettings.ControllersSettings[((int)Enums.EnemyModuleControllerType.SpawnController)] as SpawnControllerSettings;
+            #endregion
 
+            #region MonoBehaviours
             PlayerAgent playerAgent = FindObjectOfType<PlayerAgent>();
-            Cam[] cams = FindObjectsOfType<Cam>();
-            UIPanel[] panels = FindObjectsOfType<UIPanel>();
+            ICam[] cams = FindObjectsOfType<Cam>();
+            IPanel[] panels = FindObjectsOfType<UIPanel>();
+            #endregion
 
+            #region InstallManagers
             dataManager = new DataManager(dmSettings);
             poolManager = new PoolManager(pmSettings, transform.GetChild(0));
             gameManager = new GameManager(gmSettings, new ADModule(adSettings),
                 new PlayerModule(playerSettings, new PCInputController(icSettings), new MobileInputController(icSettings), new DevCharacterController(ccSettings, playerAgent)),
                 new CameraModule(cameraSettings, cams),
-                new UIModule(uiSettings, panels));
-            audioManager = new AudioManager(amSettings, audioSource);
+                new UIModule(uiSettings, panels),
+                new EnemyModule(enemySettings, new SpawnController(scSettings, playerAgent.transform), playerAgent.transform));
+            audioManager = new AudioManager(amSettings, audioSource, gmSettings.GameEvents[((int)Enums.NotificationType.WeaponShoot)]);
+            #endregion
         }
         #endregion
 

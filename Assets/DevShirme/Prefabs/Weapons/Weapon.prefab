@@ -77,10 +77,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74464dc21f6cddb4a91361beb38e9350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onWeaponShoot: {fileID: 11400000, guid: 34025061309e3d947a93ff178b236bd4, type: 2}
   muzzle: {fileID: 1007163192391863310}
-  shootSound: {fileID: 8300000, guid: 321f02ebf95657d48813e41ff73fecca, type: 3}
-  speed: 50
-  forceMode: 1
+  data: {fileID: 11400000, guid: 0b5c1cda59fe9f545ab5342424dcf13d, type: 2}
 --- !u!1 &5623537759163914032
 GameObject:
   m_ObjectHideFlags: 0

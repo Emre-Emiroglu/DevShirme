@@ -21,10 +21,10 @@ namespace DevShirme.DesignPatterns.Behaviorals
         {
             _data.Observers.Remove(observer);
         }
-        public override void Notify(object value, Enums.NotificationType notificationType)
+        public override void Notify(object value)
         {
             foreach (IObserver item in _data.Observers)
-                item.OnNotify(value, notificationType);
+                item.OnNotify(value, _data.NotificationType);
         }
         #endregion
     }

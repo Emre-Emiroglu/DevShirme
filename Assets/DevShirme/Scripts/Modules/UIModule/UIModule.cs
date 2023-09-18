@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DevShirme.Utils;
+using DevShirme.Interfaces;
 
 namespace DevShirme.Modules.UIModule
 {
@@ -9,16 +10,37 @@ namespace DevShirme.Modules.UIModule
     {
         #region Fields
         private readonly UISettings uiSettings;
-        private readonly UIPanel[] panels;
+        private readonly IPanel[] panels;
         #endregion
 
         #region Core
-        public UIModule(UISettings uiSettings, UIPanel[] panels) : base()
+        public UIModule(UISettings uiSettings, IPanel[] panels) : base()
         {
             this.uiSettings = uiSettings;
             this.panels = panels;
 
+            for (int i = 0; i < panels.Length; i++)
+                panels[i].Initialize();
+
             transation(Enums.UIPanelType.MainMenuPanel);
+        }
+        #endregion
+
+        #region Observer
+        public override void OnNotify(object value, Enums.NotificationType notificationType)
+        {
+            switch (notificationType)
+            {
+                case Enums.NotificationType.GameStart:
+                    transation(Enums.UIPanelType.InGamePanel);
+                    break;
+                case Enums.NotificationType.GameOver:
+                    transation(Enums.UIPanelType.EndGamePanel);
+                    break;
+                case Enums.NotificationType.GameReload:
+                    transation(Enums.UIPanelType.MainMenuPanel);
+                    break;
+            }
         }
         #endregion
 
@@ -26,9 +48,13 @@ namespace DevShirme.Modules.UIModule
         private void transation(Enums.UIPanelType newPanel)
         {
             for (int i = 0; i < panels.Length; i++)
-                panels[i].Hide();
-            
-            panels[((int)newPanel)].Show();
+            {
+                bool isActive = panels[i].PanelType == newPanel;
+                if (isActive)
+                    panels[i].Show();
+                else
+                    panels[i].Hide();
+            }
         }
         #endregion
 

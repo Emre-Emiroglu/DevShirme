@@ -20,9 +20,9 @@ namespace DevShirme.DesignPatterns.Behaviorals
         {
             _data.Action -= observer.OnNotify;
         }
-        public override void Notify(object value, Enums.NotificationType notificationType)
+        public override void Notify(object value)
         {
-            _data.Action.Invoke(value, notificationType);
+            _data.Action.Invoke(value, _data.NotificationType);
         }
         #endregion
     }

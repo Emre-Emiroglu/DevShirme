@@ -32,6 +32,12 @@ namespace DevShirme.Modules.ADModule
         }
         #endregion
 
+        #region Observer
+        public override void OnNotify(object value, Enums.NotificationType notificationType)
+        {
+        }
+        #endregion
+
         #region Executes
         public void Show(Enums.ADType type)
         {

@@ -1,19 +1,29 @@
 using UnityEngine;
 using System.Collections;
+using DevShirme.Interfaces;
+using DevShirme.Utils;
 
 namespace DevShirme.Modules.UIModule
 {
-    public class UIPanel : MonoBehaviour
+    [RequireComponent(typeof(CanvasGroup))]
+    public class UIPanel : MonoBehaviour, IPanel
     {
         #region Fields
         [Header("Panel Fields")]
-        [SerializeField] private CanvasGroup canvasGroup;
-        [SerializeField] private Utils.Structs.PanelDatas data;
+        [SerializeField] private Enums.UIPanelType panelType;
+        [SerializeField] private Structs.PanelDatas data;
+        private CanvasGroup canvasGroup;
+        #endregion
+
+        #region Getters
+        public Enums.UIPanelType PanelType => panelType;
         #endregion
 
         #region Process
         public virtual void Initialize()
         {
+            canvasGroup = GetComponent<CanvasGroup>();
+
             Hide();
         }
         public virtual void Show()

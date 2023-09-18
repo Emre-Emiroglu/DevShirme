@@ -21,12 +21,17 @@ namespace DevShirme.Utils
             ADModule = 0,
             PlayerModule = 1,
             CameraModule = 2,
-            UIModule = 3
+            UIModule = 3,
+            EnemyModule = 4,
         }
         public enum PlayerModuleControllerType: int
         {
             InputController = 0,
             CharacterController = 1
+        }
+        public enum EnemyModuleControllerType : int
+        {
+            SpawnController = 0,
         }
         public enum InputType
         {
@@ -86,8 +91,10 @@ namespace DevShirme.Utils
         }
         public enum NotificationType: int
         {
-            A = 0,
-            B = 1,
+            GameStart = 0,
+            GameOver = 1,
+            GameReload = 2,
+            WeaponShoot = 3,
         }
         public enum SubjectType : int
         {
