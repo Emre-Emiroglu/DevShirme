@@ -21,7 +21,7 @@ namespace DevShirme.Models
         #endregion
 
         #region Core
-        public void Initialize()
+        public DataModel()
         {
             dataSettings = Resources.Load<DataSettings>("Settings/DataSettings");
 

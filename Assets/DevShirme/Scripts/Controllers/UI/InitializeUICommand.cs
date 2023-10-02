@@ -15,7 +15,6 @@ namespace DevShirme.Controllers
         #region Executes
         public override void Execute()
         {
-            UIModel.Initialize();
         }
         #endregion
     }

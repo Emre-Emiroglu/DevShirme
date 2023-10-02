@@ -9,7 +9,7 @@ namespace DevShirme.Models
     public class InputModel : IInputModel
     {
         #region Fields
-        private InputSettings inputSettings;
+        private readonly InputSettings inputSettings;
         #endregion
 
         #region Getters
@@ -17,7 +17,7 @@ namespace DevShirme.Models
         #endregion
 
         #region Core
-        public void Initialize()
+        public InputModel()
         {
             inputSettings = Resources.Load<InputSettings>("Settings/InputSettings");
         }

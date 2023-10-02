@@ -8,11 +8,9 @@ namespace DevShirme.Settings
     public class AudioSettings : ScriptableObject
     {
         #region Fields
-        [SerializeField] private AudioSource audioSource;
         #endregion
 
         #region Getters
-        public AudioSource AudioSource => audioSource;
         #endregion
     }
 }

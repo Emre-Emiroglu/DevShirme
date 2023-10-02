@@ -9,7 +9,7 @@ namespace DevShirme.Models
     public class PlayerModel : IPlayerModel
     {
         #region Fields
-        private PlayerSettings playerSettings;
+        private readonly PlayerSettings playerSettings;
         #endregion
 
         #region Getters
@@ -17,7 +17,7 @@ namespace DevShirme.Models
         #endregion
 
         #region Core
-        public void Initialize()
+        public PlayerModel()
         {
             playerSettings = Resources.Load<PlayerSettings>("Settings/PlayerSettings");
         }

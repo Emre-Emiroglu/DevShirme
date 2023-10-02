@@ -9,7 +9,6 @@ namespace DevShirme.Settings
     {
         #region Fields
         [Header("Pool Settings")]
-        [SerializeField] private Transform poolsParent;
         [SerializeField] private GameObject[] prefabs;
         [SerializeField] private string[] poolNames;
         [Range(0, 100)][SerializeField] private int initSize = 100;
@@ -17,7 +16,6 @@ namespace DevShirme.Settings
         #endregion
 
         #region Getters
-        public Transform PoolsParent => poolsParent;
         public GameObject[] Prefabs => prefabs;
         public string[] PoolNames => poolNames;
         public int InitSize => initSize;

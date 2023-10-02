@@ -7,11 +7,17 @@ using UnityEngine;
 
 namespace DevShirme.Controllers
 {
-    public class ChangeGameStateCommand : Command
+    public class InitializeGameCommand : Command
     {
         #region Injects
-        [Inject] public Enums.GameState GameState { get; set; }
+        [Inject] public IADModel ADModel { get; set; }
+        [Inject] public IPlayerModel PlayerModel { get; set; }
+        [Inject] public ICameraModel CameraModel { get; set; }
+        [Inject] public IWeaponModel WeaponModel { get; set; }
+        [Inject] public IEnemyModel EnemyModel { get; set; }
+        [Inject] public IInputModel InputModel { get; set; }
         [Inject] public IGameModel GameModel { get; set; }
+        [Inject] public Enums.GameState GameState { get; set; }
         #endregion
 
         #region Executes
@@ -20,15 +26,8 @@ namespace DevShirme.Controllers
             switch (GameState)
             {
                 case Enums.GameState.Init:
-                    GameModel.Initialize();
                     setFPS();
                     setCursor();
-                    break;
-                case Enums.GameState.Start:
-                    break;
-                case Enums.GameState.Over:
-                    break;
-                case Enums.GameState.Reload:
                     break;
             }
         }
@@ -45,5 +44,6 @@ namespace DevShirme.Controllers
             Cursor.lockState = GameModel.GameSettings.CursorLockMode;
         }
         #endregion
+
     }
 }

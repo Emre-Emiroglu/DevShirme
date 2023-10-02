@@ -15,7 +15,6 @@ namespace DevShirme.Controllers
         #region Executes
         public override void Execute()
         {
-            PoolModel.Initialize();
         }
         #endregion
     }

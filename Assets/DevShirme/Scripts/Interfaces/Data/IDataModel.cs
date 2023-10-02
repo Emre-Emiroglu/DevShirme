@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DevShirme.Interfaces
 {
-    public interface IDataModel: IInitializable
+    public interface IDataModel
     {
         public DataSettings DataSettings { get; }
         public Structs.PlayerData PlayerData { get; set; }

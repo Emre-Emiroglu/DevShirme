@@ -65,7 +65,9 @@ namespace DevShirme.Contexts
         }
         private void commandBinds()
         {
-            commandBinder.Bind(gameSignal.OnChangeGameState).To<ChangeGameStateCommand>();
+            commandBinder.Bind(gameSignal.OnChangeGameState)
+                .To<InitializeGameCommand>()
+                .To<TransationToNewPanelCommand>();
             commandBinder.Bind(gameSignal.OnShowAD).To<ShowADCommand>();
         }
         private void mediationBinds()

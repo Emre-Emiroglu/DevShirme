@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DevShirme.Interfaces
 {
-    public interface ICameraModel: IInitializable
+    public interface ICameraModel
     {
         public CameraSettings CameraSettings { get; }
     }

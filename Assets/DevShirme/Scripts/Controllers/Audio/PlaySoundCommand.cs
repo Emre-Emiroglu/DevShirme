@@ -23,7 +23,7 @@ namespace DevShirme.Controllers
         #region PlaySound
         private void playSound()
         {
-            AudioModel.AudioSettings.AudioSource.PlayOneShot(AudioClip);
+            AudioModel.AudioSource.PlayOneShot(AudioClip);
         }
         #endregion
     }

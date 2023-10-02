@@ -9,7 +9,7 @@ namespace DevShirme.Models
     public class CameraModel : ICameraModel
     {
         #region Fields
-        private CameraSettings cameraSettings;
+        private readonly CameraSettings cameraSettings;
         #endregion
 
         #region Getters
@@ -17,7 +17,7 @@ namespace DevShirme.Models
         #endregion
 
         #region Core
-        public void Initialize()
+        public CameraModel()
         {
             cameraSettings = Resources.Load<CameraSettings>("Settings/CameraSettings");
         }
