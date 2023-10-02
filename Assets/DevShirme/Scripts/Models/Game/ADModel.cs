@@ -8,13 +8,19 @@ namespace DevShirme.Models
 {
     public class ADModel : IADModel
     {
-        private readonly ADSettings adSettings;
+        #region Fields
+        private ADSettings adSettings;
+        #endregion
 
+        #region Getters
         public ADSettings ADSettings => adSettings;
+        #endregion
 
-        public ADModel()
+        #region Core
+        public void Initialize()
         {
             adSettings = Resources.Load<ADSettings>("Settings/ADSettings");
         }
+        #endregion
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DevShirme.Interfaces
 {
-    public interface IPlayerModel
+    public interface IPlayerModel: IInitializable
     {
         public PlayerSettings PlayerSettings { get; }
     }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DevShirme.Interfaces
 {
-    public interface IInputModel
+    public interface IInputModel: IInitializable
     {
         public InputSettings InputSettings { get; }
     }

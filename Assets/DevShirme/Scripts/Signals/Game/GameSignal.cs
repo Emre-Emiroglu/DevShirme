@@ -8,7 +8,7 @@ namespace DevShirme.Signals
 {
     public class GameSignal
     {
-        public Signal<Enums.GameState> OnGameStateChange = new Signal<Enums.GameState>();
+        public Signal<Enums.GameState> OnChangeGameState = new Signal<Enums.GameState>();
         public Signal OnGameUpdate = new Signal();
 
         public Signal<Enums.ADType> OnShowAD = new Signal<Enums.ADType>();

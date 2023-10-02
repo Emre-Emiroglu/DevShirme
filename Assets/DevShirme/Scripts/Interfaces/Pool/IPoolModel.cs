@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DevShirme.Interfaces
 {
-    public interface IPoolModel
+    public interface IPoolModel: IInitializable
     {
         public PoolSettings PoolSettings { get; }
         public ObjectPool[] ObjectPools { get; }

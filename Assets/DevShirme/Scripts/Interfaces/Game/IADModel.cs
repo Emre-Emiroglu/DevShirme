@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DevShirme.Interfaces
 {
-    public interface IADModel
+    public interface IADModel: IInitializable
     {
         public ADSettings ADSettings { get; }
     }

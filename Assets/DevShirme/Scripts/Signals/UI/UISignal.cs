@@ -8,6 +8,7 @@ namespace DevShirme.Signals
 {
     public class UISignal
     {
+        public Signal OnInitializeUI = new Signal();
         public Signal<Enums.UIPanelType> OnTransationToNewPanel = new Signal<Enums.UIPanelType>();
     }
 }

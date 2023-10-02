@@ -8,13 +8,19 @@ namespace DevShirme.Models
 {
     public class PlayerModel : IPlayerModel
     {
-        private readonly PlayerSettings playerSettings;
+        #region Fields
+        private PlayerSettings playerSettings;
+        #endregion
 
+        #region Getters
         public PlayerSettings PlayerSettings => playerSettings;
+        #endregion
 
-        public PlayerModel()
+        #region Core
+        public void Initialize()
         {
             playerSettings = Resources.Load<PlayerSettings>("Settings/PlayerSettings");
         }
+        #endregion
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DevShirme.Interfaces
 {
-    public interface IEnemyModel
+    public interface IEnemyModel: IInitializable
     {
         public EnemySettings EnemySettings { get; }
     }

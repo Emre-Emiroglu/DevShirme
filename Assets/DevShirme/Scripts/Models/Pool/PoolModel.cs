@@ -8,13 +8,18 @@ namespace DevShirme.Models
 {
     public class PoolModel : IPoolModel
     {
-        private readonly PoolSettings poolSettings;
+        #region Fields
+        private PoolSettings poolSettings;
         private ObjectPool[] objectPools;
+        #endregion
 
+        #region Getters
         public PoolSettings PoolSettings => poolSettings;
         public ObjectPool[] ObjectPools => objectPools;
+        #endregion
 
-        public PoolModel()
+        #region Core
+        public void Initialize()
         {
             poolSettings = Resources.Load<PoolSettings>("Settings/PoolSettings");
 
@@ -26,5 +31,6 @@ namespace DevShirme.Models
                 objectPools[i] = pool;
             }
         }
+        #endregion
     }
 }

@@ -8,13 +8,19 @@ namespace DevShirme.Models
 {
     public class WeaponModel : IWeaponModel
     {
-        private readonly WeaponSettings weaponSettings;
-        
-        public WeaponSettings WeaponSettings => weaponSettings;
+        #region Fields
+        private WeaponSettings weaponSettings;
+        #endregion
 
-        public WeaponModel()
+        #region Getters
+        public WeaponSettings WeaponSettings => weaponSettings;
+        #endregion
+
+        #region Core
+        public void Initialize()
         {
             weaponSettings = Resources.Load<WeaponSettings>("Settings/WeaponSettings");
         }
+        #endregion
     }
 }

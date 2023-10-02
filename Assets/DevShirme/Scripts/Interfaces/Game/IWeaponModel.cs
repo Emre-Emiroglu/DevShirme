@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DevShirme.Interfaces
 {
-    public interface IWeaponModel
+    public interface IWeaponModel: IInitializable
     {
         public WeaponSettings WeaponSettings { get; }
     }

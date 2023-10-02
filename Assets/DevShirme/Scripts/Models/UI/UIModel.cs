@@ -7,13 +7,19 @@ namespace DevShirme.Models
 {
     public class UIModel : IUIModel
     {
-        private readonly UISettings uiSettings;
+        #region Fields
+        private UISettings uiSettings;
+        #endregion
 
+        #region Getters
         public UISettings UISettings => uiSettings;
+        #endregion
 
-        public UIModel()
+        #region Core
+        public void Initialize()
         {
             uiSettings = Resources.Load<UISettings>("Settings/UISettings");
         }
+        #endregion
     }
 }

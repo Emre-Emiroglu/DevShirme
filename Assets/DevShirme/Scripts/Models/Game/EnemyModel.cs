@@ -8,13 +8,19 @@ namespace DevShirme.Models
 {
     public class EnemyModel : IEnemyModel
     {
-        private readonly EnemySettings enemySettings;
+        #region Fields
+        private EnemySettings enemySettings;
+        #endregion
 
+        #region Getters
         public EnemySettings EnemySettings => enemySettings;
+        #endregion
 
-        public EnemyModel()
+        #region Core
+        public void Initialize()
         {
             enemySettings = Resources.Load<EnemySettings>("Settings/EnemySettings");
         }
+        #endregion
     }
 }

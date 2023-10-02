@@ -7,13 +7,19 @@ namespace DevShirme.Models
 {
     public class AudioModel: IAudioModel
     {
-        private readonly Settings.AudioSettings audioSettings;
+        #region Fields
+        private Settings.AudioSettings audioSettings;
+        #endregion
 
+        #region Getters
         public Settings.AudioSettings AudioSettings => audioSettings;
+        #endregion
 
-        public AudioModel()
+        #region Core
+        public void Initialize()
         {
             audioSettings = Resources.Load<Settings.AudioSettings>("Settings/AudioSettings");
         }
+        #endregion
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace DevShirme.Controllers
 {
-    public class GameStateChangeCommand : Command
+    public class ChangeGameStateCommand : Command
     {
         #region Injects
         [Inject] public Enums.GameState GameState { get; set; }
@@ -20,6 +20,7 @@ namespace DevShirme.Controllers
             switch (GameState)
             {
                 case Enums.GameState.Init:
+                    GameModel.Initialize();
                     setFPS();
                     setCursor();
                     break;

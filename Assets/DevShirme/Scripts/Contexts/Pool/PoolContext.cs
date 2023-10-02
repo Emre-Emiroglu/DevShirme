@@ -44,16 +44,20 @@ namespace DevShirme.Contexts
         }
         public override void Launch()
         {
+            poolSignal.OnInitializePool?.Dispatch();
         }
         #endregion
 
         #region Bindings
         private void injectionBinds()
         {
+            injectionBinder.Bind<PoolSignal>().To(poolSignal).ToSingleton().CrossContext();
+
             injectionBinder.Bind<IPoolModel>().To<PoolModel>().ToSingleton().CrossContext();
         }
         private void commandBinds()
         {
+            commandBinder.Bind(poolSignal.OnInitializePool).To<InitializePoolCommand>();
             commandBinder.Bind(poolSignal.OnSpawn).To<SpawnCommand>();
             commandBinder.Bind(poolSignal.OnClearPool).To<ClearPoolCommand>();
         }

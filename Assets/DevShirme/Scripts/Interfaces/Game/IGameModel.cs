@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DevShirme.Interfaces
 {
-    public interface IGameModel
+    public interface IGameModel: IInitializable
     {
         public GameSettings GameSettings { get; }
     }

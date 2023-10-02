@@ -38,22 +38,22 @@ namespace DevShirme.Contexts
         {
             base.mapBindings();
 
+            gameSignal = new GameSignal();
+
             injectionBinds();
             commandBinds();
             mediationBinds();
         }
         public override void Launch()
         {
-            gameSignal.OnGameStateChange?.Dispatch(Utils.Enums.GameState.Init);
+            gameSignal.OnChangeGameState?.Dispatch(Utils.Enums.GameState.Init);
         }
         #endregion
 
         #region Bindings
         private void injectionBinds()
         {
-            gameSignal = injectionBinder.GetInstance<GameSignal>();
-
-            Debug.Log(gameSignal);
+            injectionBinder.Bind<GameSignal>().To(gameSignal).ToSingleton().CrossContext();
 
             injectionBinder.Bind<IADModel>().To<ADModel>().ToSingleton().CrossContext();
             injectionBinder.Bind<IPlayerModel>().To<PlayerModel>().ToSingleton().CrossContext();
@@ -65,16 +65,13 @@ namespace DevShirme.Contexts
         }
         private void commandBinds()
         {
-            commandBinder.Bind(gameSignal.OnGameStateChange).To<GameStateChangeCommand>();
-
+            commandBinder.Bind(gameSignal.OnChangeGameState).To<ChangeGameStateCommand>();
             commandBinder.Bind(gameSignal.OnShowAD).To<ShowADCommand>();
         }
         private void mediationBinds()
         {
             mediationBinder.Bind<PlayerAgentView>().To<PlayerAgentMediator>();
-
             mediationBinder.Bind<WeaponView>().To<WeaponMediator>();
-
             mediationBinder.Bind<CamView[]>().To<CamMediator[]>();
         }
         #endregion

@@ -30,18 +30,18 @@ namespace DevShirme.Mediators
         {
             View.Initialize(PlayerModel, InputModel);
 
-            GameSignal.OnGameStateChange.AddListener(onGameStateChange);
+            GameSignal.OnChangeGameState.AddListener(onChangeGameState);
             GameSignal.OnGameUpdate.AddListener(onGameUpdate);
         }
         public override void OnRemove()
         {
-            GameSignal.OnGameStateChange.RemoveListener(onGameStateChange);
+            GameSignal.OnChangeGameState.RemoveListener(onChangeGameState);
             GameSignal.OnGameUpdate.RemoveListener(onGameUpdate);
         }
         #endregion
 
         #region Receivers
-        private void onGameStateChange(Enums.GameState gameState) { }
+        private void onChangeGameState(Enums.GameState gameState) { }
         private void onGameUpdate() { }
         #endregion
 

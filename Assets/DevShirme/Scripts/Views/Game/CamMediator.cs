@@ -21,10 +21,11 @@ namespace DevShirme.Mediators
         #region Core
         public override void PreRegister()
         {
-            CamView.Initialize();
         }
         public override void OnRegister()
         {
+            CamView.Initialize();
+
             GameSignal.OnTransationToNewCam.AddListener(onTransationToNewCam);
             GameSignal.OnShakeCam.AddListener(onShakeCamCommand);
             GameSignal.OnChangeCamFov.AddListener(onChangeCamFov);

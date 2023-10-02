@@ -18,10 +18,11 @@ namespace DevShirme.Mediators
         #region Core
         public override void PreRegister()
         {
-            UIPanelView.Initialize();
         }
         public override void OnRegister()
         {
+            UIPanelView.Initialize();
+
             UISignal.OnTransationToNewPanel.AddListener(onTransationToNewPanel);
         }
         public override void OnRemove()

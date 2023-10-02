@@ -2,7 +2,6 @@ using DevShirme.Controllers;
 using DevShirme.Interfaces;
 using DevShirme.Models;
 using DevShirme.Signals;
-using strange.examples.signals;
 using strange.extensions.command.api;
 using strange.extensions.command.impl;
 using strange.extensions.context.api;
@@ -43,15 +42,22 @@ namespace DevShirme.Contexts
             commandBinds();
             mediationBinds();
         }
+        public override void Launch()
+        {
+            audioSignal.OnInitializeAudio?.Dispatch();
+        }
         #endregion
 
         #region Bindings
         private void injectionBinds()
         {
+            injectionBinder.Bind<AudioSignal>().To(audioSignal).ToSingleton().CrossContext();
+
             injectionBinder.Bind<IAudioModel>().To<AudioModel>().ToSingleton().CrossContext();
         }
         private void commandBinds()
         {
+            commandBinder.Bind(audioSignal.OnInitializeAudio).To<InitializeAudioCommand>();
             commandBinder.Bind(audioSignal.OnPlaySound).To<PlaySoundCommand>();
         }
         private void mediationBinds()

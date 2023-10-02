@@ -7,6 +7,7 @@ namespace DevShirme.Signals
 {
     public class AudioSignal
     {
+        public Signal OnInitializeAudio = new Signal();
         public Signal<AudioClip> OnPlaySound = new Signal<AudioClip>();
     }
 }

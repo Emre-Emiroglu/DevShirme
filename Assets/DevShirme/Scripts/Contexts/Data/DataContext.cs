@@ -1,3 +1,4 @@
+using DevShirme.Controllers;
 using DevShirme.Interfaces;
 using DevShirme.Models;
 using DevShirme.Signals;
@@ -41,11 +42,17 @@ namespace DevShirme.Contexts
             mediationBinds();
             commandBinds();
         }
+        public override void Launch()
+        {
+            dataSignal.OnInitializeData?.Dispatch();
+        }
         #endregion
 
         #region Bindings
         private void injectionBinds()
         {
+            injectionBinder.Bind<DataSignal>().To(dataSignal).ToSingleton().CrossContext();
+
             injectionBinder.Bind<IDataModel>().To<DataModel>().ToSingleton().CrossContext();
         }
         private void mediationBinds()
@@ -53,6 +60,7 @@ namespace DevShirme.Contexts
         }
         private void commandBinds()
         {
+            commandBinder.Bind(dataSignal.OnInitializeData).To<InitializeDataCommand>();
         }
         #endregion
     }

@@ -8,13 +8,19 @@ namespace DevShirme.Models
 {
     public class GameModel : IGameModel
     {
-        private readonly GameSettings gameSettings;
+        #region Fields
+        private GameSettings gameSettings;
+        #endregion
 
+        #region Getters
         public GameSettings GameSettings => gameSettings;
+        #endregion
 
-        public GameModel()
+        #region Core
+        public void Initialize()
         {
             gameSettings = Resources.Load<GameSettings>("Settings/GameSettings");
         }
+        #endregion
     }
 }

@@ -11,7 +11,7 @@ namespace DevShirme.Models
     public class DataModel : IDataModel
     {
         #region Fields
-        private readonly DataSettings dataSettings;
+        private DataSettings dataSettings;
         private string path = Application.persistentDataPath + "/" + "ply.dat";
         #endregion
 
@@ -21,7 +21,7 @@ namespace DevShirme.Models
         #endregion
 
         #region Core
-        public DataModel()
+        public void Initialize()
         {
             dataSettings = Resources.Load<DataSettings>("Settings/DataSettings");
 

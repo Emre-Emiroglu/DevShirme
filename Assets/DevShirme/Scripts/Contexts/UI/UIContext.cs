@@ -1,3 +1,4 @@
+using DevShirme.Controllers;
 using DevShirme.Mediators;
 using DevShirme.Models;
 using DevShirme.Signals;
@@ -42,15 +43,22 @@ namespace DevShirme.Contexts
             commandBinds();
             mediationBinds();
         }
+        public override void Launch()
+        {
+            uiSignal.OnInitializeUI?.Dispatch();
+        }
         #endregion
 
         #region Bindings
         private void injectionBinds()
         {
+            injectionBinder.Bind<UISignal>().To(uiSignal).ToSingleton().CrossContext();
+
             injectionBinder.Bind<IUIModel>().To<UIModel>().ToSingleton().CrossContext();
         }
         private void commandBinds()
         {
+            commandBinder.Bind(uiSignal.OnInitializeUI).To<InitializeUICommand>();
         }
         private void mediationBinds()
         {
