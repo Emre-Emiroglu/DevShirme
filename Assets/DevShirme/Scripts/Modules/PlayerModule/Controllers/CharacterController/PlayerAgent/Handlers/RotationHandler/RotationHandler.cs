@@ -33,9 +33,13 @@ namespace DevShirme.Modules.PlayerModule
         private void rotate()
         {
             Vector3 diff = new Vector3(rotationInput.x, 0f, rotationInput.y) - _obj.position;
-            Quaternion targetRot = Quaternion.LookRotation(diff, Vector3.up);
 
-            _obj.rotation = Quaternion.Lerp(_obj.rotation, targetRot, Time.deltaTime * rotationData.RotationSpeed);
+            if (diff.magnitude > .1f)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(diff, Vector3.up);
+
+                _obj.rotation = Quaternion.Lerp(_obj.rotation, targetRot, Time.deltaTime * rotationData.RotationSpeed);
+            }
         }
         #endregion
     }
