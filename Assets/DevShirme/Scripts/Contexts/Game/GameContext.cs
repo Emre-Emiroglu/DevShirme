@@ -66,7 +66,7 @@ namespace DevShirme.Contexts
         }
         private void commandBinds()
         {
-            commandBinder.Bind(gameSignal.OnChangeGameState).InSequence()
+            commandBinder.Bind(gameSignal.OnChangeGameState)
                 .To<InitializeGameCommand>()
                 .To<ChangeGameStateCommand>();
             commandBinder.Bind(gameSignal.OnShowAD).To<ShowADCommand>();

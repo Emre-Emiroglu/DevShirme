@@ -1,4 +1,5 @@
 using DevShirme.Interfaces;
+using DevShirme.Signals;
 using DevShirme.Views;
 using strange.extensions.mediation.impl;
 using System.Collections;
@@ -12,6 +13,10 @@ namespace DevShirme.Mediators
         #region Injects
         [Inject] public WeaponView WeaponView { get; set; }
         [Inject] public IWeaponModel WeaponModel { get; set; }
+        [Inject] public IPoolModel PoolModel { get; set; }
+        [Inject] public GameSignal GameSignal { get; set; }
+        [Inject] public PoolSignal PoolSignal { get; set; }
+        [Inject] public AudioSignal AudioSignal { get; set; }
         #endregion
 
         #region Core
@@ -20,14 +25,23 @@ namespace DevShirme.Mediators
         }
         public override void OnRegister()
         {
+            GameSignal.OnWeaponCanShoot.AddListener(onWeaponCanShoot);
         }
         public override void OnRemove()
         {
+            GameSignal.OnWeaponCanShoot.RemoveListener(onWeaponCanShoot);
         }
         #endregion
 
         #region Receivers
-        private void onShoot() => WeaponView.Shoot();
+        private void onWeaponCanShoot()
+        {
+            PoolModel.GetPoolObject("Bullet", WeaponView.Muzzle.position, WeaponView.Muzzle.rotation, Vector3.one, null, true);
+
+            AudioSignal.OnPlaySound?.Dispatch(WeaponModel.WeaponSettings.ShootSound);
+
+            WeaponView.Shoot();
+        } 
         #endregion
     }
 }

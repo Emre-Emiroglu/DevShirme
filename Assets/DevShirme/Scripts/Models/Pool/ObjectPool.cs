@@ -1,6 +1,7 @@
 ﻿using DevShirme.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace DevShirme.Models
@@ -68,8 +69,10 @@ namespace DevShirme.Models
         }
         private bool checkIsPoolFull()
         {
-            if (items.Count >= maxSize)
+            if (items.Count < initSize)
+            {
                 return false;
+            }
             else
             {
                 int newSize = items.Count * 2;

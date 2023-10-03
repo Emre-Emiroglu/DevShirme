@@ -1,7 +1,9 @@
 using DevShirme.Controllers;
 using DevShirme.Interfaces;
+using DevShirme.Mediators;
 using DevShirme.Models;
 using DevShirme.Signals;
+using DevShirme.Views;
 using strange.extensions.command.api;
 using strange.extensions.command.impl;
 using strange.extensions.context.api;
@@ -59,11 +61,11 @@ namespace DevShirme.Contexts
         private void commandBinds()
         {
             commandBinder.Bind(poolSignal.OnInitializePool).To<InitializePoolCommand>().Once();
-            commandBinder.Bind(poolSignal.OnSpawn).To<SpawnCommand>();
             commandBinder.Bind(poolSignal.OnClearPool).To<ClearPoolCommand>();
         }
         private void mediationBinds()
         {
+            mediationBinder.Bind<BulletView>().To<BulletMediator>();
         }
         #endregion
     }

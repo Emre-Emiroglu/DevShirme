@@ -39,6 +39,17 @@ namespace DevShirme.Models
                 objectPools[i] = pool;
             }
         }
+        public IPoolObject GetPoolObject(string poolName, Vector3 pos, Quaternion rot, Vector3 scale, Transform parent, bool useRotation = false, bool useScale = false, bool setParent = false)
+        {
+            for (int i = 0; i < objectPools.Length; i++)
+            {
+                if (objectPools[i].PoolName == poolName)
+                    return objectPools[i].GetObj(pos, rot, scale, parent, useRotation, useScale, setParent);
+            }
+
+            Debug.LogError(poolName + " Cant Found");
+            return null;
+        }
         #endregion
     }
 }

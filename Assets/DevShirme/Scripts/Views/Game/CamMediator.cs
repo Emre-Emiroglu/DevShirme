@@ -26,21 +26,22 @@ namespace DevShirme.Mediators
         {
             CamView.Initialize();
 
-            GameSignal.OnTransationToNewCam.AddListener(onTransationToNewCam);
+            GameSignal.OnChangeGameState.AddListener(onChangeGameState);
             GameSignal.OnShakeCam.AddListener(onShakeCamCommand);
             GameSignal.OnChangeCamFov.AddListener(onChangeCamFov);
         }
         public override void OnRemove()
         {
-            GameSignal.OnTransationToNewCam.RemoveListener(onTransationToNewCam);
+            GameSignal.OnChangeGameState.AddListener(onChangeGameState);
             GameSignal.OnShakeCam.RemoveListener(onShakeCamCommand);
             GameSignal.OnChangeCamFov.RemoveListener(onChangeCamFov);
         }
         #endregion
 
         #region Receivers
-        private void onTransationToNewCam(Enums.CamType camType)
+        private void onChangeGameState(Enums.GameState gameState)
         {
+            Enums.CamType camType = gameState == Enums.GameState.Start ? Enums.CamType.FollowCam : Enums.CamType.IdleCam;
             bool isShow = camType == CamView.CameraType;
             if (isShow)
                 CamView.Show();

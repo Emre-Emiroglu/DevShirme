@@ -1,4 +1,3 @@
-using DevShirme.Interfaces;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,6 +23,55 @@ namespace DevShirme.Utils
                 SoundOn = soundOn;
                 VibrateOn = vibrateOn;
             }
+        }
+
+        public struct SpawnData
+        {
+            #region Fields
+            private string poolName;
+            private Vector3 pos;
+            private Quaternion rot;
+            private Vector3 scale;
+            private Transform parent;
+            private bool useRotation;
+            private bool useScale;
+            private bool setParent;
+            #endregion
+
+            #region Constructor
+            public SpawnData(string poolName, Vector3 pos, Quaternion rot, Vector3 scale, Transform parent, bool useRotation, bool useScale, bool setParent)
+            {
+                this.poolName = poolName;
+                this.pos = pos;
+                this.rot = rot;
+                this.scale = scale;
+                this.parent = parent;
+                this.useRotation = useRotation;
+                this.useScale = useScale;
+                this.setParent = setParent;
+            }
+            #endregion
+
+            #region Getters
+            public string PoolName => poolName;
+            public Vector3 Pos => pos;
+            public Quaternion Rot => rot;
+            public Vector3 Scale => scale;
+            public Transform Parent => parent;
+            public bool UseRotation => useRotation;
+            public bool UseScale => useScale;
+            public bool SetParent => setParent;
+            #endregion
+        }
+
+        public struct InputData
+        {
+            public Vector2 MovementInput;
+            public Vector2 RotationInput;
+            public Enums.MovementState MovementState;
+            public bool LeftClick;
+            public bool IsRunKeyPressed;
+            public bool IsJumpKeyPressed;
         }
 
         [Serializable]
@@ -106,43 +154,5 @@ namespace DevShirme.Utils
             #endregion
         }
 
-        public struct SpawnData
-        {
-            #region Fields
-            private string poolName;
-            private Vector3 pos;
-            private Quaternion rot;
-            private Vector3 scale;
-            private Transform parent;
-            private bool useRotation;
-            private bool useScale;
-            private bool setParent;
-            #endregion
-
-            #region Constructor
-            public SpawnData(string poolName, Vector3 pos, Quaternion rot, Vector3 scale, Transform parent, bool useRotation, bool useScale, bool setParent)
-            {
-                this.poolName = poolName;
-                this.pos = pos;
-                this.rot = rot;
-                this.scale = scale;
-                this.parent = parent;
-                this.useRotation = useRotation;
-                this.useScale = useScale;
-                this.setParent = setParent;
-            }
-            #endregion
-
-            #region Getters
-            public string PoolName => poolName;
-            public Vector3 Pos => pos;
-            public Quaternion Rot => rot;
-            public Vector3 Scale => scale;
-            public Transform Parent => parent;
-            public bool UseRotation => useRotation;
-            public bool UseScale => useScale;
-            public bool SetParent => setParent;
-            #endregion
-        }
     }
 }

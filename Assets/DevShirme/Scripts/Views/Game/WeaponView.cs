@@ -12,13 +12,14 @@ namespace DevShirme.Views
         [SerializeField] private Transform muzzle;
         #endregion
 
+        #region Getters
+        public Transform Muzzle => muzzle;
+        #endregion
+
         #region Core
         public void Shoot()
         {
-            //Bullet bullet = (Bullet)((PoolManager)Core.Instance.GetManager(Utils.Enums.ManagerType.PoolManager)).GetObj("BulletPool", muzzle.position, muzzle.rotation, Vector3.one, null, true);
-            //bullet.Throw(data.BulletSpeed);
-
-            //onWeaponShoot?.Notify(data.ShootSound);
+            //TODO: FX etc.
         }
         #endregion
     }

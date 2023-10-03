@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootSound: {fileID: 8300000, guid: 321f02ebf95657d48813e41ff73fecca, type: 3}
   bulletSpeed: 10
-  fireRate: 0.1
+  fireRate: 1
