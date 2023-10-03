@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using DevShirme.Interfaces;
 using DevShirme.Utils;
 using strange.extensions.mediation.impl;
 

@@ -58,7 +58,7 @@ namespace DevShirme.Contexts
         }
         private void commandBinds()
         {
-            commandBinder.Bind(audioSignal.OnInitializeAudio).To<InitializeAudioCommand>();
+            commandBinder.Bind(audioSignal.OnInitializeAudio).To<InitializeAudioCommand>().Once();
             commandBinder.Bind(audioSignal.OnPlaySound).To<PlaySoundCommand>();
         }
         private void mediationBinds()

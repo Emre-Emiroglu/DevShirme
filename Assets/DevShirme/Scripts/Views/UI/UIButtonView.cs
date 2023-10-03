@@ -9,7 +9,7 @@ using UnityEngine.UI;
 namespace DevShirme.Views
 {
     [RequireComponent(typeof(Button))]
-    public abstract class UIButtonView : View
+    public class UIButtonView : View
     {
         #region Events
         public event Action<Enums.UIButtonType> OnButtonPressed;

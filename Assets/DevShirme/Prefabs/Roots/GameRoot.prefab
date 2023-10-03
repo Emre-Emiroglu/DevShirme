@@ -80,6 +80,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409a2eecd8a438243b8e6ea26bfb776b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camType: 0
+  virtualCamera: {fileID: 2021559914754221953}
 --- !u!114 &2021559914754221953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,6 +405,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409a2eecd8a438243b8e6ea26bfb776b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camType: 1
+  virtualCamera: {fileID: 2021559915473139703}
 --- !u!114 &2021559915473139703
 MonoBehaviour:
   m_ObjectHideFlags: 0

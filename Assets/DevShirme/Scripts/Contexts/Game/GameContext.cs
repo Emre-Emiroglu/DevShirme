@@ -3,6 +3,7 @@ using DevShirme.Interfaces;
 using DevShirme.Mediators;
 using DevShirme.Models;
 using DevShirme.Signals;
+using DevShirme.Utils;
 using DevShirme.Views;
 using strange.extensions.command.api;
 using strange.extensions.command.impl;
@@ -46,7 +47,7 @@ namespace DevShirme.Contexts
         }
         public override void Launch()
         {
-            gameSignal.OnChangeGameState?.Dispatch(Utils.Enums.GameState.Init);
+            gameSignal.OnChangeGameState?.Dispatch(Enums.GameState.Init);
         }
         #endregion
 
@@ -65,19 +66,17 @@ namespace DevShirme.Contexts
         }
         private void commandBinds()
         {
-            commandBinder.Bind(gameSignal.OnChangeGameState)
+            commandBinder.Bind(gameSignal.OnChangeGameState).InSequence()
                 .To<InitializeGameCommand>()
-                .To<TransationToNewPanelCommand>();
+                .To<ChangeGameStateCommand>();
             commandBinder.Bind(gameSignal.OnShowAD).To<ShowADCommand>();
         }
         private void mediationBinds()
         {
             mediationBinder.Bind<PlayerAgentView>().To<PlayerAgentMediator>();
             mediationBinder.Bind<WeaponView>().To<WeaponMediator>();
-            mediationBinder.Bind<CamView[]>().To<CamMediator[]>();
+            mediationBinder.Bind<CamView>().To<CamMediator>();
         }
         #endregion
-
-
     }
 }

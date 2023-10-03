@@ -1,3 +1,4 @@
+using DevShirme.Signals;
 using DevShirme.Utils;
 using DevShirme.Views;
 using strange.extensions.mediation.impl;
@@ -11,15 +12,17 @@ namespace DevShirme.Mediators
     {
         #region Injects
         [Inject] public UIButtonView UIButtonView { get; set; }
+        [Inject] public GameSignal GameSignal { get; set; }
+        [Inject] public UISignal UISignal { get; set; }
         #endregion
 
         #region Core
         public override void PreRegister()
         {
-            UIButtonView.Setup();
         }
         public override void OnRegister()
         {
+            UIButtonView.Setup();
             UIButtonView.OnButtonPressed += onButtonPressed;
         }
         public override void OnRemove()
@@ -31,7 +34,17 @@ namespace DevShirme.Mediators
         #region Receivers
         private void onButtonPressed(Enums.UIButtonType uiButtonType)
         {
-
+            switch (uiButtonType)
+            {
+                case Enums.UIButtonType.GameStart:
+                    GameSignal.OnChangeGameState?.Dispatch(Enums.GameState.Start);
+                    UISignal.OnTransationToNewPanel?.Dispatch(Enums.UIPanelType.InGamePanel);
+                    break;
+                case Enums.UIButtonType.GameReload:
+                    GameSignal.OnChangeGameState?.Dispatch(Enums.GameState.Reload);
+                    UISignal.OnTransationToNewPanel?.Dispatch(Enums.UIPanelType.MainMenuPanel);
+                    break;
+            }
         }
         #endregion
     }

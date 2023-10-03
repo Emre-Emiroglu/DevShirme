@@ -1,4 +1,4 @@
-using DevShirme.Signals;
+using DevShirme.Interfaces;
 using DevShirme.Utils;
 using strange.extensions.command.impl;
 using System.Collections;
@@ -7,31 +7,35 @@ using UnityEngine;
 
 namespace DevShirme.Controllers
 {
-    public class TransationToNewPanelCommand : Command
+    public class ChangeGameStateCommand : Command
     {
         #region Injects
-        [Inject] public UISignal UISignal { get; set; }
+        [Inject] public IGameModel GameModel { get; set; }
         [Inject] public Enums.GameState GameState { get; set; }
         #endregion
 
         #region Executes
         public override void Execute()
         {
+            GameModel.GameState = GameState;
+
             switch (GameState)
             {
                 case Enums.GameState.Init:
-                    UISignal.OnTransationToNewPanel?.Dispatch(Enums.UIPanelType.MainMenuPanel);
                     break;
                 case Enums.GameState.Start:
-                    UISignal.OnTransationToNewPanel?.Dispatch(Enums.UIPanelType.InGamePanel);
                     break;
                 case Enums.GameState.Over:
-                    UISignal.OnTransationToNewPanel?.Dispatch(Enums.UIPanelType.EndGamePanel);
                     break;
                 case Enums.GameState.Reload:
-                    UISignal.OnTransationToNewPanel?.Dispatch(Enums.UIPanelType.MainMenuPanel);
                     break;
             }
+
+            message();
+        }
+        private void message()
+        {
+            Debug.Log("Current Game State: " + GameState.ToString());
         }
         #endregion
     }

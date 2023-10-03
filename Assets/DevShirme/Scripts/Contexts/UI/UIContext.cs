@@ -46,6 +46,7 @@ namespace DevShirme.Contexts
         public override void Launch()
         {
             uiSignal.OnInitializeUI?.Dispatch();
+            uiSignal.OnTransationToNewPanel?.Dispatch(Utils.Enums.UIPanelType.MainMenuPanel);
         }
         #endregion
 
@@ -58,11 +59,12 @@ namespace DevShirme.Contexts
         }
         private void commandBinds()
         {
-            commandBinder.Bind(uiSignal.OnInitializeUI).To<InitializeUICommand>();
+            commandBinder.Bind(uiSignal.OnInitializeUI).To<InitializeUICommand>().Once();
         }
         private void mediationBinds()
         {
-            mediationBinder.Bind<UIPanelView[]>().To<UIPanelMediator[]>();
+            mediationBinder.Bind<UIPanelView>().To<UIPanelMediator>();
+            mediationBinder.Bind<UIButtonView>().To<UIButtonMediator>();
         }
         #endregion
     }

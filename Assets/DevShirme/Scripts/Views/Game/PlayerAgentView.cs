@@ -25,7 +25,6 @@ namespace DevShirme.Views
         private float timer;
         [Header("PCInput")]
         private Structs.PCInputData pcInputData;
-        private Camera mainCam;
         [Header("MobileInput")]
         private Structs.MobileInputData mobileInputData;
         private bool isPressing;
@@ -68,13 +67,7 @@ namespace DevShirme.Views
         #region Updates
         public void OnGameUpdate()
         {
-        }
-        #endregion
-
-        #region Movements
-        private void movement(Vector2 input, Enums.MovementState keyCodeState)
-        {
-            movementInput = input;
+            pcInput();
 
             isRun = keyCodeState == Enums.MovementState.Run;
             isJump = keyCodeState == Enums.MovementState.Jump;
@@ -84,12 +77,20 @@ namespace DevShirme.Views
                 transformMovement();
                 transformJump();
             }
-            else
+
+            rotate();
+        }
+        public void OnGameFixedUpdate()
+        {
+            if (movementData.MovementType == Enums.MovementType.Rigidbody)
             {
                 rigidbodyMovement();
                 rigidbodyJump();
             }
         }
+        #endregion
+
+        #region Movements
         private Vector3 getAcceleration()
         {
             float speedMultiplier = isRun ? movementData.RunSpeed : movementData.WalkSpeed;
@@ -130,11 +131,6 @@ namespace DevShirme.Views
         #endregion
 
         #region Rotations
-        private void rotation(Vector2 input)
-        {
-            rotationInput = input;
-            rotate();
-        }
         private void rotate()
         {
             Vector3 diff = new Vector3(rotationInput.x, 0f, rotationInput.y) - transform.position;
@@ -169,7 +165,7 @@ namespace DevShirme.Views
                     break;
             }
 
-            Vector3 mouseWorldPos = mainCam.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10f);
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10f);
             rotationInput = new Vector2(mouseWorldPos.x, mouseWorldPos.z);
 
             isRunKeyPressed = Input.GetKey(pcInputData.RunKey);

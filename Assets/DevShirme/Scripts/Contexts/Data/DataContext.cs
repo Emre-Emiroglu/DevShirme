@@ -60,7 +60,7 @@ namespace DevShirme.Contexts
         }
         private void commandBinds()
         {
-            commandBinder.Bind(dataSignal.OnInitializeData).To<InitializeDataCommand>();
+            commandBinder.Bind(dataSignal.OnInitializeData).To<InitializeDataCommand>().Once();
         }
         #endregion
     }

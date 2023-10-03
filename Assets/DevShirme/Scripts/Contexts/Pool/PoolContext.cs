@@ -38,6 +38,7 @@ namespace DevShirme.Contexts
             base.mapBindings();
 
             poolSignal = new PoolSignal();
+
             injectionBinds();
             commandBinds();
             mediationBinds();
@@ -57,7 +58,7 @@ namespace DevShirme.Contexts
         }
         private void commandBinds()
         {
-            commandBinder.Bind(poolSignal.OnInitializePool).To<InitializePoolCommand>();
+            commandBinder.Bind(poolSignal.OnInitializePool).To<InitializePoolCommand>().Once();
             commandBinder.Bind(poolSignal.OnSpawn).To<SpawnCommand>();
             commandBinder.Bind(poolSignal.OnClearPool).To<ClearPoolCommand>();
         }

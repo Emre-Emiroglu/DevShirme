@@ -14,7 +14,7 @@ namespace DevShirme.Mediators
         #region Injects
         [Inject] public IPlayerModel PlayerModel { get; set; }
         [Inject] public IInputModel InputModel { get; set; }
-        [Inject] public PlayerAgentView View { get; set; }
+        [Inject] public PlayerAgentView PlayerAgentView { get; set; }
         [Inject] public GameSignal GameSignal { get; set; }
         #endregion
 
@@ -28,21 +28,41 @@ namespace DevShirme.Mediators
         }
         public override void OnRegister()
         {
-            View.Initialize(PlayerModel, InputModel);
+            PlayerAgentView.Initialize(PlayerModel, InputModel);
 
             GameSignal.OnChangeGameState.AddListener(onChangeGameState);
-            GameSignal.OnGameUpdate.AddListener(onGameUpdate);
         }
         public override void OnRemove()
         {
             GameSignal.OnChangeGameState.RemoveListener(onChangeGameState);
-            GameSignal.OnGameUpdate.RemoveListener(onGameUpdate);
         }
         #endregion
 
         #region Receivers
-        private void onChangeGameState(Enums.GameState gameState) { }
-        private void onGameUpdate() { }
+        private void onChangeGameState(Enums.GameState gameState)
+        {
+            isGameStart = gameState == Enums.GameState.Start;
+
+            if (!isGameStart)
+                PlayerAgentView.Reload();
+        }
+        #endregion
+
+        #region Updates
+        private void Update()
+        {
+            if (!isGameStart)
+                return;
+
+            PlayerAgentView.OnGameUpdate();
+        }
+        private void FixedUpdate()
+        {
+            if (!isGameStart)
+                return;
+
+            PlayerAgentView.OnGameFixedUpdate();
+        }
         #endregion
 
     }
