@@ -11,7 +11,12 @@ namespace DevShirme.Mediators
     {
         #region Injects
         [Inject] public BulletView BulletView { get; set; }
+        [Inject] public IBulletModel BulletModel { get; set; }
         [Inject] public IWeaponModel WeaponModel { get; set; }
+        #endregion
+
+        #region Fields
+        private float totalSpeed;
         #endregion
 
         #region Core
@@ -20,6 +25,8 @@ namespace DevShirme.Mediators
         }
         public override void OnRegister()
         {
+            totalSpeed = BulletModel.BulletSettings.Speed * WeaponModel.WeaponSettings.WeaponSpeedFactor;
+
             throwBullet();
         }
         public override void OnRemove()
@@ -28,7 +35,7 @@ namespace DevShirme.Mediators
         #endregion
 
         #region Executes
-        private void throwBullet()=> BulletView?.Throw(WeaponModel.WeaponSettings.BulletSpeed);
+        private void throwBullet()=> BulletView.Throw(totalSpeed);
         #endregion
     }
 }

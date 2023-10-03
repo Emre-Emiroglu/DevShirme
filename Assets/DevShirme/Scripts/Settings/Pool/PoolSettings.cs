@@ -11,8 +11,8 @@ namespace DevShirme.Settings
         [Header("Pool Settings")]
         [SerializeField] private GameObject[] prefabs;
         [SerializeField] private string[] poolNames;
-        [Range(0, 100)][SerializeField] private int initSize = 100;
-        [Range(100, 1000)][SerializeField] private int maxSize = 500;
+        [Range(0, 1000)][SerializeField] private int initSize = 100;
+        [Range(0, 1000)][SerializeField] private int maxSize = 500;
         #endregion
 
         #region Getters

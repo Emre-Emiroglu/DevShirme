@@ -10,6 +10,7 @@ namespace DevShirme.Controllers
     {
         #region Injects
         [Inject] public IPoolModel PoolModel { get; set; }
+        [Inject] public IBulletModel BulletModel { get; set; }
         #endregion
 
         #region Executes

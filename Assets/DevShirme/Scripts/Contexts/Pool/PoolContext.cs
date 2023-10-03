@@ -57,6 +57,7 @@ namespace DevShirme.Contexts
             injectionBinder.Bind<PoolSignal>().To(poolSignal).ToSingleton().CrossContext();
 
             injectionBinder.Bind<IPoolModel>().To<PoolModel>().ToSingleton().CrossContext();
+            injectionBinder.Bind<IBulletModel>().To<BulletModel>().ToSingleton().CrossContext();
         }
         private void commandBinds()
         {

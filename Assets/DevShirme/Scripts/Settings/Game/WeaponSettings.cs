@@ -10,13 +10,13 @@ namespace DevShirme.Settings
         #region Fields
         [Header("Weapon Settings")]
         [SerializeField] private AudioClip shootSound;
-        [SerializeField] private float bulletSpeed;
+        [SerializeField] private float weaponSpeedFactor;
         [SerializeField] private float fireRate;
         #endregion
 
         #region Getters
         public AudioClip ShootSound => shootSound;
-        public float BulletSpeed => bulletSpeed;
+        public float WeaponSpeedFactor => weaponSpeedFactor;
         public float FireRate => fireRate;
         #endregion
     }

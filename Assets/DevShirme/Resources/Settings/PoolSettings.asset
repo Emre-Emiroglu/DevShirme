@@ -19,4 +19,4 @@ MonoBehaviour:
   - Bullet
   - Enemy
   initSize: 100
-  maxSize: 500
+  maxSize: 100
