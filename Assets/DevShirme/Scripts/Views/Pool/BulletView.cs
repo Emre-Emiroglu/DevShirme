@@ -10,6 +10,10 @@ namespace DevShirme.Views
         private Rigidbody rb;
         #endregion
 
+        #region Props
+        public float TotalSpeed { get; set; }
+        #endregion
+
         #region Core
         public override void Initialize()
         {
@@ -20,6 +24,8 @@ namespace DevShirme.Views
         public override void Spawn(Vector3 pos, Quaternion rot, Vector3 scale, Transform parent, bool useRotation = false, bool useScale = false, bool setParent = false)
         {
             base.Spawn(pos, rot, scale, parent, useRotation, useScale, setParent);
+
+            Throw();
         }
         public override void DeSpawn()
         {
@@ -31,7 +37,7 @@ namespace DevShirme.Views
         #endregion
 
         #region Throw
-        public void Throw(float speed) => rb.AddRelativeForce(Vector3.forward * speed, ForceMode.Impulse);
+        public void Throw() => rb.AddRelativeForce(Vector3.forward * TotalSpeed, ForceMode.Impulse);
         #endregion
 
         #region Physic

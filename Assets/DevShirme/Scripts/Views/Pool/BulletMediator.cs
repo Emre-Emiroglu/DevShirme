@@ -27,15 +27,11 @@ namespace DevShirme.Mediators
         {
             totalSpeed = BulletModel.BulletSettings.Speed * WeaponModel.WeaponSettings.WeaponSpeedFactor;
 
-            throwBullet();
+            BulletView.TotalSpeed = totalSpeed;
         }
         public override void OnRemove()
         {
         }
-        #endregion
-
-        #region Executes
-        private void throwBullet()=> BulletView.Throw(totalSpeed);
         #endregion
     }
 }
