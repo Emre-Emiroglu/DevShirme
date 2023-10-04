@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 220624a5521ecac429f0791571120c55, type: 3}
   m_Name: BulletSettings
   m_EditorClassIdentifier: 
-  speed: 10
-  autoDeSpawnDuration: 5
+  speed: 20

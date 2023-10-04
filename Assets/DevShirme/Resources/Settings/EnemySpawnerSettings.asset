@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ae4a3e62bdc2e4193d118acf0da763, type: 3}
   m_Name: EnemySpawnerSettings
   m_EditorClassIdentifier: 
-  duration: 2
-  radius: 20
+  duration: 1
+  radius: 30
   useGizmo: 1
   gizmoColor: {r: 1, g: 0, b: 0, a: 1}

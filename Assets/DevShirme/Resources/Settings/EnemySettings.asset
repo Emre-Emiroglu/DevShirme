@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EnemySettings
   m_EditorClassIdentifier: 
   followSpeed: 1
-  turnSpeed: 2
+  turnSpeed: 5
