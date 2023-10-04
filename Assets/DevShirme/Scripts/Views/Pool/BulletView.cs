@@ -1,3 +1,4 @@
+using DevShirme.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,13 +20,15 @@ namespace DevShirme.Views
         {
             base.Initialize();
 
+            TotalSpeed = 20;
+
             rb = GetComponent<Rigidbody>();
         }
         public override void Spawn(Vector3 pos, Quaternion rot, Vector3 scale, Transform parent, bool useRotation = false, bool useScale = false, bool setParent = false)
         {
             base.Spawn(pos, rot, scale, parent, useRotation, useScale, setParent);
 
-            Throw();
+            Throw(TotalSpeed);
         }
         public override void DeSpawn()
         {
@@ -37,7 +40,7 @@ namespace DevShirme.Views
         #endregion
 
         #region Throw
-        public void Throw() => rb.AddRelativeForce(Vector3.forward * TotalSpeed, ForceMode.Impulse);
+        public void Throw(float speed) => rb.AddRelativeForce(Vector3.forward * speed, ForceMode.Impulse);
         #endregion
 
         #region Physic
