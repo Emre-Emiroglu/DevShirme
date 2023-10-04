@@ -30,7 +30,7 @@ namespace DevShirme.Views
         }
         #endregion
 
-        #region Executes
+        #region Throw
         public void Throw(float speed) => rb.AddRelativeForce(Vector3.forward * speed, ForceMode.Impulse);
         #endregion
 

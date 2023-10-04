@@ -15,6 +15,7 @@ namespace DevShirme.Controllers
         [Inject] public IPlayerModel PlayerModel { get; set; }
         [Inject] public ICameraModel CameraModel { get; set; }
         [Inject] public IWeaponModel WeaponModel { get; set; }
+        [Inject] public IEnemySpawnerModel EnemySpawnerModel { get; set; }
         [Inject] public IInputModel InputModel { get; set; }
         [Inject] public IGameModel GameModel { get; set; }
         [Inject] public Enums.GameState GameState { get; set; }

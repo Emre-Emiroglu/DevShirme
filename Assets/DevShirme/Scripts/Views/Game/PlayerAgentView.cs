@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static DevShirme.Utils.Enums;
 
 namespace DevShirme.Views
 {
@@ -23,6 +24,8 @@ namespace DevShirme.Views
         private AgentHandler movementHandler;
         private AgentHandler rotationHandler;
         private AgentHandler weaponHandler;
+        [Header("Checks")]
+        private bool isDead;
         #endregion
 
         #region Core
@@ -39,6 +42,8 @@ namespace DevShirme.Views
         }
         public void Reload()
         {
+            isDead = false;
+
             pcInputHandler.Reload();
             movementHandler.Reload();
             rotationHandler.Reload();
@@ -72,8 +77,11 @@ namespace DevShirme.Views
         #region Physic
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.CompareTag("Enemy"))
+            if (collision.gameObject.CompareTag("Enemy") && !isDead)
+            {
+                isDead = true;
                 OnDead?.Invoke();
+            }
         }
         #endregion
     }

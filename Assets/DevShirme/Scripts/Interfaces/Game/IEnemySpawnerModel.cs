@@ -5,10 +5,8 @@ using UnityEngine;
 
 namespace DevShirme.Interfaces
 {
-    public interface IPlayerModel
+    public interface IEnemySpawnerModel
     {
-        public PlayerSettings PlayerSettings { get; }
-        public Transform PlayerTransform { get; }
+        public EnemySpawnerSettings EnemySpawnerSettings { get; }
     }
 }
-

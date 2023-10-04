@@ -30,9 +30,9 @@ namespace DevShirme.Controllers
                 case Enums.GameState.Start:
                     break;
                 case Enums.GameState.Over:
+                    PoolSignal.OnClearPool?.Dispatch(true, "");
                     break;
                 case Enums.GameState.Reload:
-                    PoolSignal.OnClearPool?.Dispatch(true, "");
                     break;
             }
 

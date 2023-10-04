@@ -79,6 +79,5 @@ namespace DevShirme.Mediators
             PlayerAgentView.OnGameFixedUpdate();
         }
         #endregion
-
     }
 }

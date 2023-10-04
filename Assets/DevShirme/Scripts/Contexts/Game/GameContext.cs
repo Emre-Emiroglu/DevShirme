@@ -63,6 +63,8 @@ namespace DevShirme.Contexts
             injectionBinder.Bind<IInputModel>().To<InputModel>().ToSingleton().CrossContext();
             injectionBinder.Bind<IGameModel>().To<GameModel>().ToSingleton().CrossContext();
             injectionBinder.Bind<IWeaponModel>().To<WeaponModel>().ToSingleton().CrossContext();
+            injectionBinder.Bind<IEnemySpawnerModel>().To<EnemySpawnerModel>().ToSingleton().CrossContext();
+        
         }
         private void commandBinds()
         {
@@ -78,6 +80,7 @@ namespace DevShirme.Contexts
             mediationBinder.Bind<PlayerAgentView>().To<PlayerAgentMediator>();
             mediationBinder.Bind<WeaponView>().To<WeaponMediator>();
             mediationBinder.Bind<CamView>().To<CamMediator>();
+            mediationBinder.Bind<EnemySpawnerView>().To<EnemySpawnerMediator>();
         }
         #endregion
     }
