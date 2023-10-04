@@ -1,6 +1,8 @@
 using DevShirme.Interfaces;
+using DevShirme.Signals;
 using DevShirme.Utils;
 using strange.extensions.command.impl;
+using strange.extensions.signal.impl;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +14,8 @@ namespace DevShirme.Controllers
         #region Injects
         [Inject] public IGameModel GameModel { get; set; }
         [Inject] public Enums.GameState GameState { get; set; }
+        [Inject] public PoolSignal PoolSignal { get; set; }
+        [Inject] public GameSignal GameSignal { get; set; }
         #endregion
 
         #region Executes
@@ -28,6 +32,7 @@ namespace DevShirme.Controllers
                 case Enums.GameState.Over:
                     break;
                 case Enums.GameState.Reload:
+                    PoolSignal.OnClearPool?.Dispatch(true, "");
                     break;
             }
 

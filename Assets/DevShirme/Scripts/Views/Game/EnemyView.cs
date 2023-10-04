@@ -6,10 +6,10 @@ using UnityEngine;
 
 namespace DevShirme.Views
 {
-    public class EnemyView : PoolObjectView, IEnemy
+    public class EnemyView : PoolObjectView
     {
         #region Fields
-        public Action<IEnemy> OnDead { get; set; }
+        public Action OnDead { get; set; }
         #endregion
 
         #region Core
@@ -43,7 +43,7 @@ namespace DevShirme.Views
         #region Dead
         public void Dead()
         {
-            OnDead?.Invoke(this);
+            OnDead?.Invoke();
 
             DeSpawn();
         }

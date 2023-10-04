@@ -10,11 +10,11 @@ namespace DevShirme.Controllers
     public class InitializeGameCommand : Command
     {
         #region Injects
+        [Inject] public IUIModel UIModel { get; set; }
         [Inject] public IADModel ADModel { get; set; }
         [Inject] public IPlayerModel PlayerModel { get; set; }
         [Inject] public ICameraModel CameraModel { get; set; }
         [Inject] public IWeaponModel WeaponModel { get; set; }
-        [Inject] public IEnemyModel EnemyModel { get; set; }
         [Inject] public IInputModel InputModel { get; set; }
         [Inject] public IGameModel GameModel { get; set; }
         [Inject] public Enums.GameState GameState { get; set; }

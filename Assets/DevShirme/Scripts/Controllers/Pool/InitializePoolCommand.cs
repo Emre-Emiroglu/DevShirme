@@ -11,6 +11,7 @@ namespace DevShirme.Controllers
         #region Injects
         [Inject] public IPoolModel PoolModel { get; set; }
         [Inject] public IBulletModel BulletModel { get; set; }
+        [Inject] public IEnemyModel EnemyModel { get; set; }
         #endregion
 
         #region Executes

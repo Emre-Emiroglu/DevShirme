@@ -13,7 +13,6 @@ namespace DevShirme.Mediators
         #region Injects
         [Inject] public UIButtonView UIButtonView { get; set; }
         [Inject] public GameSignal GameSignal { get; set; }
-        [Inject] public UISignal UISignal { get; set; }
         #endregion
 
         #region Core
@@ -38,11 +37,9 @@ namespace DevShirme.Mediators
             {
                 case Enums.UIButtonType.GameStart:
                     GameSignal.OnChangeGameState?.Dispatch(Enums.GameState.Start);
-                    UISignal.OnTransationToNewPanel?.Dispatch(Enums.UIPanelType.InGamePanel);
                     break;
                 case Enums.UIButtonType.GameReload:
                     GameSignal.OnChangeGameState?.Dispatch(Enums.GameState.Reload);
-                    UISignal.OnTransationToNewPanel?.Dispatch(Enums.UIPanelType.MainMenuPanel);
                     break;
             }
         }

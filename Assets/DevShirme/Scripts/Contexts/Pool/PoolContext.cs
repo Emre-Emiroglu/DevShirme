@@ -58,6 +58,7 @@ namespace DevShirme.Contexts
 
             injectionBinder.Bind<IPoolModel>().To<PoolModel>().ToSingleton().CrossContext();
             injectionBinder.Bind<IBulletModel>().To<BulletModel>().ToSingleton().CrossContext();
+            injectionBinder.Bind<IEnemyModel>().To<EnemyModel>().ToSingleton().CrossContext();
         }
         private void commandBinds()
         {
@@ -67,6 +68,7 @@ namespace DevShirme.Contexts
         private void mediationBinds()
         {
             mediationBinder.Bind<BulletView>().To<BulletMediator>();
+            mediationBinder.Bind<EnemyView>().To<EnemyMediator>();
         }
         #endregion
     }

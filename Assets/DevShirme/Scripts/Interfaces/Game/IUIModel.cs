@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DevShirme.Models
+namespace DevShirme.Interfaces
 {
     public interface IUIModel
     {

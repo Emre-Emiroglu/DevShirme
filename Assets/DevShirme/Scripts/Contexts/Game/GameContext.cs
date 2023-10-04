@@ -56,10 +56,10 @@ namespace DevShirme.Contexts
         {
             injectionBinder.Bind<GameSignal>().To(gameSignal).ToSingleton().CrossContext();
 
+            injectionBinder.Bind<IUIModel>().To<UIModel>().ToSingleton().CrossContext();
             injectionBinder.Bind<IADModel>().To<ADModel>().ToSingleton().CrossContext();
             injectionBinder.Bind<IPlayerModel>().To<PlayerModel>().ToSingleton().CrossContext();
             injectionBinder.Bind<ICameraModel>().To<CameraModel>().ToSingleton().CrossContext();
-            injectionBinder.Bind<IEnemyModel>().To<EnemyModel>().ToSingleton().CrossContext();
             injectionBinder.Bind<IInputModel>().To<InputModel>().ToSingleton().CrossContext();
             injectionBinder.Bind<IGameModel>().To<GameModel>().ToSingleton().CrossContext();
             injectionBinder.Bind<IWeaponModel>().To<WeaponModel>().ToSingleton().CrossContext();
@@ -73,6 +73,8 @@ namespace DevShirme.Contexts
         }
         private void mediationBinds()
         {
+            mediationBinder.Bind<UIPanelView>().To<UIPanelMediator>();
+            mediationBinder.Bind<UIButtonView>().To<UIButtonMediator>();
             mediationBinder.Bind<PlayerAgentView>().To<PlayerAgentMediator>();
             mediationBinder.Bind<WeaponView>().To<WeaponMediator>();
             mediationBinder.Bind<CamView>().To<CamMediator>();
