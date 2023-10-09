@@ -4,40 +4,6 @@ namespace DevShirme.Utils
 {
     public static class Enums
     {
-        public enum DestroyType
-        {
-            DestroyNewObj,
-            DestroyOldObj
-        }
-        public enum ManagerType : int
-        {
-            DataManager = 0,
-            PoolManager = 1,
-            GameManager = 2,
-            AudioManager = 3
-        }
-        public enum ModuleType : int
-        {
-            ADModule = 0,
-            PlayerModule = 1,
-            CameraModule = 2,
-            UIModule = 3,
-            EnemyModule = 4,
-        }
-        public enum PlayerModuleControllerType: int
-        {
-            InputController = 0,
-            CharacterController = 1
-        }
-        public enum EnemyModuleControllerType : int
-        {
-            SpawnController = 0,
-        }
-        public enum InputType
-        {
-            Mobile,
-            PC
-        }
         public enum MobileInputBehavior
         {
             Unclamped,
@@ -71,6 +37,11 @@ namespace DevShirme.Utils
             InGamePanel = 1,
             EndGamePanel = 2
         }
+        public enum UIButtonType : int
+        {
+            GameStart = 0,
+            GameReload = 1,
+        }
         public enum CamType : int
         {
             IdleCam = 0,
@@ -89,17 +60,12 @@ namespace DevShirme.Utils
             MinutesSeconds,
             Seconds
         }
-        public enum NotificationType: int
+        public enum GameState : int
         {
-            GameStart = 0,
-            GameOver = 1,
-            GameReload = 2,
-            WeaponShoot = 3,
-        }
-        public enum SubjectType : int
-        {
-            Action = 0,
-            NotAction = 1
+            Init = 0,
+            Start = 1,
+            Over = 2,
+            Reload = 3
         }
     }
 }
