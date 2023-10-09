@@ -1,13 +1,23 @@
-using strange.extensions.signal.impl;
+using DevShirme.Controllers;
+using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Signals
 {
-    public class AudioSignal
+    public class AudioSignal: Installer<AudioSignal>
     {
-        public Signal OnInitializeAudio = new Signal();
-        public Signal<AudioClip> OnPlaySound = new Signal<AudioClip>();
+        #region Bindings
+        public override void InstallBindings()
+        {
+            SignalBusInstaller.Install(Container);
+
+            Container.DeclareSignal<Structs.OnPlaySound>();
+
+            Container.BindSignal<Structs.OnPlaySound>().ToMethod<PlaySoundCommand>(x => x.PlaySound);
+        }
+        #endregion
     }
 }

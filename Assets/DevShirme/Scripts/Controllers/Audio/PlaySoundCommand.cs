@@ -1,30 +1,25 @@
-using DevShirme.Interfaces;
-using strange.extensions.command.impl;
+using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevShirme.Controllers
 {
-    public class PlaySoundCommand : Command
+    public class PlaySoundCommand
     {
-        #region Injects
-        [Inject] public IAudioModel AudioModel { get; set; }
-        [Inject] public AudioClip AudioClip { get; set; }
+        #region Fields
+        private readonly AudioSource audioSource;
         #endregion
 
-        #region Executes
-        public override void Execute()
+        #region Core
+        public PlaySoundCommand(AudioSource audioSource)
         {
-            playSound();
+            this.audioSource = audioSource;
         }
         #endregion
 
         #region PlaySound
-        private void playSound()
-        {
-            AudioModel.AudioSource.PlayOneShot(AudioClip);
-        }
+        public void PlaySound(Structs.OnPlaySound onPlaySound) => audioSource.PlayOneShot(onPlaySound.AudioClip);
         #endregion
     }
 }

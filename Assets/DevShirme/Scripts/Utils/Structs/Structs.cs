@@ -154,5 +154,10 @@ namespace DevShirme.Utils
             #endregion
         }
 
+
+        public struct OnPlaySound
+        {
+            public AudioClip AudioClip;
+        }
     }
 }

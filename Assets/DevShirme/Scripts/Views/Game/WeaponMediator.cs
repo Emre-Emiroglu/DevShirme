@@ -38,7 +38,7 @@ namespace DevShirme.Mediators
         {
             PoolModel.GetPoolObject("Bullet", WeaponView.Muzzle.position, WeaponView.Muzzle.rotation, Vector3.one, null, true);
 
-            AudioSignal.OnPlaySound?.Dispatch(WeaponModel.WeaponSettings.ShootSound);
+            //AudioSignal.OnPlaySound?.Dispatch(WeaponModel.WeaponSettings.ShootSound);
 
             WeaponView.Shoot();
         } 
