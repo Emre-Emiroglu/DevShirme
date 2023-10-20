@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using DevShirme.Utils;
+using System;
+using DevShirme.Models;
+using Zenject;
 
 namespace DevShirme.Views
 {
-    public class CamView : MonoBehaviour
+    public class CamView : MonoBehaviour, IDisposable
     {
+        #region Injects
+        private CameraModel cameraModel;
+        private SignalBus signalBus;
+        #endregion
+
         #region Fields
         [Header("Cam Components")]
         [SerializeField] private Enums.CamType camType;
@@ -18,43 +26,79 @@ namespace DevShirme.Views
         private float orgFov;
         #endregion
 
-        #region Getters
-        public Enums.CamType CameraType => camType;
-        #endregion
-
         #region Core
-        public void Initialize()
+        [Inject]
+        public void Construct(CameraModel cameraModel, SignalBus signalBus)
         {
             perlin = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
+            this.cameraModel = cameraModel;
+            this.signalBus = signalBus;
+
+            signalBus.Subscribe<Structs.OnChangeGameState>(x => OnChangeGameState(x.NewGameState));
+            signalBus.Subscribe<Structs.OnShakeCam>(x => OnShakeCam(x.TargetCam));
+            signalBus.Subscribe<Structs.OnChangeCamFov>(x => OnChangeCamFov(x.TargetCam, x.NewFov));
         }
-        public void Show()
+        public void Dispose()
+        {
+            signalBus.Unsubscribe<Structs.OnChangeGameState>(x => OnChangeGameState(x.NewGameState));
+            signalBus.Unsubscribe<Structs.OnShakeCam>(x => OnShakeCam(x.TargetCam));
+            signalBus.Unsubscribe<Structs.OnChangeCamFov>(x => OnChangeCamFov(x.TargetCam, x.NewFov));
+        }
+        private void Show()
         {
             virtualCamera.Priority = 99;
         }
-        public void Hide()
+        private void Hide()
         {
             virtualCamera.Priority = 0;
         }
         #endregion
 
-        #region Shake
-        public void Shake(float amplitudeGain, float frequencyGain, float shakeDuration)
+        #region Receivers
+        private void OnChangeGameState(Enums.GameState gameState)
         {
-            stopShakeCoroutine();
-            shake = StartCoroutine(processShake(amplitudeGain, frequencyGain, shakeDuration));
+            Enums.CamType camType = gameState == Enums.GameState.Start ? Enums.CamType.FollowCam : Enums.CamType.IdleCam;
+            bool isShow = camType == this.camType;
+            if (isShow)
+                Show();
+            else
+                Hide();
         }
-        private void stopShakeCoroutine()
+        private void OnShakeCam(Enums.CamType camType)
+        {
+            if (camType != this.camType)
+                return;
+
+            Shake(cameraModel.AmplitudeGain, cameraModel.FrequencyGain, cameraModel.ShakeDuration);
+        }
+        private void OnChangeCamFov(Enums.CamType camType, float addValue)
+        {
+            if (camType != this.camType)
+                return;
+
+            ChangeFov(addValue, cameraModel.ChangeFovDuration);
+        }
+        #endregion
+
+        #region Shake
+        private void Shake(float amplitudeGain, float frequencyGain, float shakeDuration)
+        {
+            StopShakeCoroutine();
+            shake = StartCoroutine(ProcessShake(amplitudeGain, frequencyGain, shakeDuration));
+        }
+        private void StopShakeCoroutine()
         {
             if (shake != null)
                 StopCoroutine(shake);
         }
-        private IEnumerator processShake(float amplitudeGain, float frequencyGain, float shakeDuration)
+        private IEnumerator ProcessShake(float amplitudeGain, float frequencyGain, float shakeDuration)
         {
-            noise(amplitudeGain, frequencyGain);
+            Noise(amplitudeGain, frequencyGain);
             yield return new WaitForSeconds(shakeDuration);
-            noise(0, 0);
+            Noise(0, 0);
         }
-        private void noise(float amplitudeGain, float frequencyGain)
+        private void Noise(float amplitudeGain, float frequencyGain)
         {
             perlin.m_AmplitudeGain = amplitudeGain;
             perlin.m_FrequencyGain = frequencyGain;
@@ -62,20 +106,20 @@ namespace DevShirme.Views
         #endregion
 
         #region Fov
-        public void ChangeFov(float addValue, float duration)
+        private void ChangeFov(float addValue, float duration)
         {
             virtualCamera.m_Lens.FieldOfView = orgFov;
 
-            stopFovCoroutine();
+            StopFovCoroutine();
 
-            fov = StartCoroutine(processFov(addValue, duration));
+            fov = StartCoroutine(ProcessFov(addValue, duration));
         }
-        private void stopFovCoroutine()
+        private void StopFovCoroutine()
         {
             if (fov != null)
                 StopCoroutine(fov);
         }
-        private IEnumerator processFov(float addValue, float duration)
+        private IEnumerator ProcessFov(float addValue, float duration)
         {
             float oldValue = virtualCamera.m_Lens.FieldOfView;
             float targetValue = oldValue + addValue;

@@ -1,12 +1,18 @@
 using UnityEngine;
 using System.Collections;
 using DevShirme.Utils;
+using Zenject;
+using System;
 
 namespace DevShirme.Views
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class UIPanelView : MonoBehaviour
+    public class UIPanelView : MonoBehaviour, IDisposable
     {
+        #region Injects
+        private SignalBus signalBus;
+        #endregion
+
         #region Fields
         [Header("Panel Fields")]
         [SerializeField] private Enums.UIPanelType panelType;
@@ -14,46 +20,74 @@ namespace DevShirme.Views
         private CanvasGroup canvasGroup;
         #endregion
 
-        #region Getters
-        public Enums.UIPanelType PanelType => panelType;
-        #endregion
-
-        #region Process
-        public virtual void Initialize()
+        #region Core
+        [Inject]
+        public void Construct(SignalBus signalBus)
         {
+            this.signalBus = signalBus;
+
             canvasGroup = GetComponent<CanvasGroup>();
 
             Hide();
+
+            signalBus.Subscribe<Structs.OnChangeGameState>(x => OnChangeGameState(x.NewGameState));
         }
-        public virtual void Show()
+        public void Dispose()
         {
-            if (data.SmoothPanels)
-            {
-                StartCoroutine(SetCanvasGroupAlpha(canvasGroup, 1f, data.ShowDuration));
-            }
-            else
-            {
-                StartCoroutine(SetCanvasGroupAlpha(canvasGroup, 1f, 0f));
-            }
-            canvasGroup.interactable = true;
-            canvasGroup.blocksRaycasts = true;
+            signalBus.Unsubscribe<Structs.OnChangeGameState>(x => OnChangeGameState(x.NewGameState));
         }
-        public virtual void Hide()
+        #endregion
+
+        #region Receivers
+        private void OnChangeGameState(Enums.GameState gameState)
         {
-            if (data.SmoothPanels)
+            Enums.UIPanelType panelType = Enums.UIPanelType.MainMenuPanel;
+
+            switch (gameState)
             {
-                StartCoroutine(SetCanvasGroupAlpha(canvasGroup, 0f, data.HideDuration));
+                case Enums.GameState.Init:
+                    panelType = Enums.UIPanelType.MainMenuPanel;
+                    break;
+                case Enums.GameState.Start:
+                    panelType = Enums.UIPanelType.InGamePanel;
+                    break;
+                case Enums.GameState.Over:
+                    panelType = Enums.UIPanelType.EndGamePanel;
+                    break;
+                case Enums.GameState.Reload:
+                    panelType = Enums.UIPanelType.MainMenuPanel;
+                    break;
             }
+
+            bool isShow = panelType == this.panelType;
+            if (isShow)
+                Show();
             else
-            {
-                StartCoroutine(SetCanvasGroupAlpha(canvasGroup, 0f, 0f));
-            }
-            canvasGroup.interactable = false;
-            canvasGroup.blocksRaycasts = false;
+                Hide();
         }
         #endregion
 
         #region Executes
+        protected virtual void Show()
+        {
+            if (data.SmoothPanels)
+                StartCoroutine(SetCanvasGroupAlpha(canvasGroup, 1f, data.ShowDuration));
+            else
+                StartCoroutine(SetCanvasGroupAlpha(canvasGroup, 1f, 0f));
+
+            canvasGroup.interactable = true;
+            canvasGroup.blocksRaycasts = true;
+        }
+        protected virtual void Hide()
+        {
+            if (data.SmoothPanels)
+                StartCoroutine(SetCanvasGroupAlpha(canvasGroup, 0f, data.HideDuration));
+            else
+                StartCoroutine(SetCanvasGroupAlpha(canvasGroup, 0f, 0f));
+
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
+        }
         private IEnumerator SetCanvasGroupAlpha(CanvasGroup canvasGroup, float targetValue, float duration)
         {
             float t = 0f;

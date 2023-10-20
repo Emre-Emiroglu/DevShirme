@@ -21,14 +21,14 @@ namespace DevShirme.Views
         #region Executes
         public override void OnGameUpdate()
         {
-            rotate();
+            Rotate();
         }
         public override void Reload()
         {
             _obj.rotation = Quaternion.identity;
             _rb.angularVelocity = Vector3.zero;
         }
-        private void rotate()
+        private void Rotate()
         {
             Vector3 diff = new Vector3(InputData.RotationInput.x, 0f, InputData.RotationInput.y) - _obj.position;
 

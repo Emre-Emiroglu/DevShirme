@@ -21,7 +21,7 @@ namespace DevShirme.Views
         #region Executes
         public override void OnGameUpdate()
         {
-            pcInput();
+            PcInput();
 
             base.OnGameUpdate();
         }
@@ -29,7 +29,7 @@ namespace DevShirme.Views
         {
             base.Reload();
         }
-        private void pcInput()
+        private void PcInput()
         {
             switch (pcInputData.PCInputBehavior)
             {

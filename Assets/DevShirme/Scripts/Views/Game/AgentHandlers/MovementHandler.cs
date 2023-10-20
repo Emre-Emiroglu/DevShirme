@@ -23,16 +23,16 @@ namespace DevShirme.Views
         {
             if (movementData.MovementType == Enums.MovementType.Transform)
             {
-                transformMovement();
-                transformJump();
+                TransformMovement();
+                TransformJump();
             }
         }
         public override void OnGameFixedUpdate()
         {
             if (movementData.MovementType == Enums.MovementType.Rigidbody)
             {
-                rigidbodyMovement();
-                rigidbodyJump();
+                RigidbodyMovement();
+                RigidbodyJump();
             }
         }
         public override void Reload()
@@ -40,23 +40,23 @@ namespace DevShirme.Views
             _obj.position = Vector3.zero;
             _rb.velocity = Vector3.zero;
         }
-        private Vector3 getAcceleration()
+        private Vector3 GetAcceleration()
         {
             float speedMultiplier = InputData.IsRunKeyPressed ? movementData.RunSpeed : movementData.WalkSpeed;
             Vector3 input = new Vector3(InputData.MovementInput.x, 0f, InputData.MovementInput.y);
             Vector3 acc = input * speedMultiplier;
             return acc;
         }
-        private void transformMovement()
+        private void TransformMovement()
         {
-            _obj.position += getAcceleration() * Time.deltaTime;
+            _obj.position += GetAcceleration() * Time.deltaTime;
         }
-        private void rigidbodyMovement()
+        private void RigidbodyMovement()
         {
-            _rb.velocity += getAcceleration() * Time.fixedDeltaTime;
+            _rb.velocity += GetAcceleration() * Time.fixedDeltaTime;
             _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, InputData.IsRunKeyPressed ? movementData.RunSpeed : movementData.WalkSpeed);
         }
-        private void transformJump()
+        private void TransformJump()
         {
             float jump = 0f;
             if (InputData.IsJumpKeyPressed)
@@ -69,7 +69,7 @@ namespace DevShirme.Views
             }
             _obj.Translate(new Vector3(0f, jump, 0f) * Time.deltaTime);
         }
-        private void rigidbodyJump()
+        private void RigidbodyJump()
         {
             if (InputData.IsJumpKeyPressed)
                 _rb.AddForce(Vector3.up * movementData.JumpPower * Time.fixedDeltaTime, movementData.JumpForceMode);

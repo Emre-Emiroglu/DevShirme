@@ -20,7 +20,7 @@ namespace DevShirme.Models
         public string PoolName => poolName;
         public IPoolObject GetObj(Vector3 pos, Quaternion rot, Vector3 scale, Transform parent, bool useRotation = false, bool useScale = false, bool setParent = false)
         {
-            checkIsPoolFull();
+            CheckIsPoolFull();
 
             for (int i = 0; i < items.Count; i++)
             {
@@ -46,17 +46,17 @@ namespace DevShirme.Models
 
             items = new List<IPoolObject>();
 
-            fillPool();
+            FillPool();
         }
         #endregion
 
         #region Executes
-        private void fillPool()
+        private void FillPool()
         {
             for (int i = 0; i < initSize; ++i)
-                spawn();
+                Spawn();
         }
-        private void spawn()
+        private void Spawn()
         {
             GameObject obj = Object.Instantiate(prefab, parent);
             IPoolObject tmp = obj.GetComponent<IPoolObject>();
@@ -67,7 +67,7 @@ namespace DevShirme.Models
 
             items.Add(tmp);
         }
-        private bool checkIsPoolFull()
+        private bool CheckIsPoolFull()
         {
             if (items.Count >= maxSize)
             {
@@ -79,7 +79,7 @@ namespace DevShirme.Models
                 newSize = newSize > maxSize ? newSize : maxSize;
 
                 for (int i = items.Count; i < newSize; i++)
-                    spawn();
+                    Spawn();
 
                 return true;
             }

@@ -3,16 +3,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Views
 {
     public class PoolObjectView : MonoBehaviour, IPoolObject
     {
-        #region Events
-        public event Action OnSpawn;
-        public event Action OnDeSpawn;
-        #endregion
-
         #region Fields
         private bool inUse;
         protected GameObject obj;
@@ -54,8 +50,6 @@ namespace DevShirme.Views
                 obj.transform.SetParent(parent.transform);
             }
             obj.SetActive(true);
-
-            OnSpawn?.Invoke();
         }
         public virtual void DeSpawn()
         {
@@ -65,8 +59,6 @@ namespace DevShirme.Views
             obj.transform.SetParent(restartParent.transform);
             inUse = false;
             obj.SetActive(false);
-
-            OnDeSpawn?.Invoke();
         }
         #endregion
     }

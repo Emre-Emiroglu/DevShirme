@@ -316,7 +316,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2999369929877073313}
-  - component: {fileID: 1343716314268870372}
+  - component: {fileID: 5207411550644925660}
   - component: {fileID: 140297655481883810}
   m_Layer: 0
   m_Name: FollowCam
@@ -341,7 +341,7 @@ Transform:
   m_Father: {fileID: 3520688300251486792}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &1343716314268870372
+--- !u!114 &5207411550644925660
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -26,14 +26,14 @@ namespace DevShirme.Controllers
         public void ClearPool()
         {
             if (isAll)
-                clearAllPools();
+                ClearAllPools();
             else
-                clear(poolName);
+                Clear(poolName);
         }
         #endregion
 
         #region Clears
-        private void clear(string poolName)
+        private void Clear(string poolName)
         {
             for (int i = 0; i < poolModel.ObjectPools.Length; i++)
             {
@@ -41,7 +41,7 @@ namespace DevShirme.Controllers
                     poolModel.ObjectPools[i].Reload();
             }
         }
-        private void clearAllPools()
+        private void ClearAllPools()
         {
             for (int i = 0; i < poolModel.ObjectPools.Length; i++)
                 poolModel.ObjectPools[i].Reload();

@@ -21,24 +21,24 @@ namespace DevShirme.Views
         #region Core
         public virtual void Show(Action callBack = null)
         {
-            refreshTween();
+            RefreshTween();
 
-            StartCoroutine(tween(showEase, showDuration, showScale));
+            StartCoroutine(Tween(showEase, showDuration, showScale));
         }
         public virtual void Hide(Action callBack = null)
         {
-            refreshTween();
+            RefreshTween();
 
-            StartCoroutine(tween(hideEase, hideDuration, hideScale));
+            StartCoroutine(Tween(hideEase, hideDuration, hideScale));
         }
-        private void refreshTween()
+        private void RefreshTween()
         {
             if (currentTween != null)
             {
                 StopCoroutine(currentTween);
             }
         }
-        private IEnumerator tween(AnimationCurve curve, float duration, Vector3 targetScale, Action callBack = null)
+        private IEnumerator Tween(AnimationCurve curve, float duration, Vector3 targetScale, Action callBack = null)
         {
             Vector3 oldScale = transform.localScale;
             float t = 0f;

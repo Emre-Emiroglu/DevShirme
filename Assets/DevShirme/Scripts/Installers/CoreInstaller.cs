@@ -1,4 +1,5 @@
 using DevShirme.Signals;
+using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace DevShirme.Installers
         }
         public override void Start()
         {
+            Container.Resolve<SignalBus>().Fire(new Structs.OnChangeGameState { NewGameState = Enums.GameState.Init });
         }
         #endregion
     }

@@ -13,21 +13,17 @@ namespace DevShirme.Views
         protected float value;
         #endregion
 
-        #region Core
-        public virtual void Initialize() { }
-        #endregion
-
         #region Executes
-        protected float changeValue(float targetValue)
+        protected float ChangeValue(float targetValue)
         {
             if (changer != null)
             {
                 StopCoroutine(changer);
             }
-            changer = StartCoroutine(change(targetValue));
+            changer = StartCoroutine(Change(targetValue));
             return value;
         }
-        private IEnumerator change(float targetValue)
+        private IEnumerator Change(float targetValue)
         {
             float oldValue = value;
             float t = 0f;

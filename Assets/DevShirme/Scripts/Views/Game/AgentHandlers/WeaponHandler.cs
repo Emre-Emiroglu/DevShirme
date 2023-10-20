@@ -29,13 +29,13 @@ namespace DevShirme.Views
             if (!InputData.LeftClick)
                 return;
 
-            shootingTimer();
+            ShootingTimer();
         }
         public override void Reload()
         {
             timer = 0f;
         }
-        private void shootingTimer()
+        private void ShootingTimer()
         {
             timer += Time.deltaTime;
             if (timer > fireRate)

@@ -26,7 +26,7 @@ namespace DevShirme.Views
         #region Executes
         public override void OnGameUpdate()
         {
-            mobileInput();
+            MobileInput();
 
             base.OnGameUpdate();
         }
@@ -41,7 +41,7 @@ namespace DevShirme.Views
             outputRaw = Vector2.zero;
             isPressing = false;
         }
-        private void mobileInput()
+        private void MobileInput()
         {
             if (Input.GetMouseButtonDown(0))
             {

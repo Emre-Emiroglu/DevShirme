@@ -25,22 +25,22 @@ namespace DevShirme.Controllers
             switch (adType)
             {
                 case Enums.ADType.Banner:
-                    bannerADRequest();
+                    BannerADRequest();
                     break;
                 case Enums.ADType.Interstital:
-                    interstitialADRequest();
-                    interstitalADShow();
+                    InterstitialADRequest();
+                    InterstitalADShow();
                     break;
                 case Enums.ADType.Rewarded:
-                    rewardedADRequest();
-                    rewardedADShow();
+                    RewardedADRequest();
+                    RewardedADShow();
                     break;
             }
         }
         #endregion
 
         #region Shows
-        private void interstitalADShow()
+        private void InterstitalADShow()
         {
             //if (interstitialAd != null && interstitialAd.CanShowAd())
             //{
@@ -52,7 +52,7 @@ namespace DevShirme.Controllers
             //    Debug.LogError("Interstitial ad is not ready yet.");
             //}
         }
-        private void rewardedADShow()
+        private void RewardedADShow()
         {
             //if (rewardedAd != null && rewardedAd.CanShowAd())
             //{
@@ -60,10 +60,8 @@ namespace DevShirme.Controllers
             //    registerEventHandlers(rewardedAd);
             //}
         }
-        private void rewardedADCallBack()
-        {
-        }
-        //private void registerEventHandlers(RewardedAd ad)
+
+        //private void RegisterEventHandlers(RewardedAd ad)
         //{
         //    // Raised when the ad is estimated to have earned money.
         //    ad.OnAdPaid += (AdValue adValue) =>
@@ -105,7 +103,7 @@ namespace DevShirme.Controllers
         #endregion
 
         #region Requests
-        private void bannerADRequest()
+        private void BannerADRequest()
         {
 #if UNITY_ANDROID
             string id = adSettings.GetID(Enums.ADType.Banner, true);
@@ -125,7 +123,7 @@ namespace DevShirme.Controllers
             //bannerView = new BannerView(id, data.BannerSize, data.BannerPosition);
             //bannerView.LoadAd(adRequest);
         }
-        private void interstitialADRequest()
+        private void InterstitialADRequest()
         {
 #if UNITY_ANDROID
             string id = adSettings.GetID(Enums.ADType.Interstital, true);
@@ -157,7 +155,7 @@ namespace DevShirme.Controllers
             //    interstitialAd = ad;
             //});
         }
-        private void rewardedADRequest()
+        private void RewardedADRequest()
         {
 #if UNITY_ANDROID
             string id = adSettings.GetID(Enums.ADType.Rewarded, true);

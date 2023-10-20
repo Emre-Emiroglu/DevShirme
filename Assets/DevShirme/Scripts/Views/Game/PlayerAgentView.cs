@@ -1,17 +1,21 @@
-using DevShirme.Interfaces;
+using DevShirme.Models;
+using DevShirme.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Views
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class PlayerAgentView : MonoBehaviour
+    public class PlayerAgentView : MonoBehaviour, IDisposable, ITickable, IFixedTickable
     {
-        #region Events
-        public Action OnDead;
-        public Action OnWeaponCanShoot;
+        #region Injects
+        private PlayerModel playerModel;
+        private InputModel inputModel;
+        private WeaponModel weaponModel;
+        private SignalBus signalBus;
         #endregion
 
         #region Fields
@@ -24,21 +28,33 @@ namespace DevShirme.Views
         private AgentHandler weaponHandler;
         [Header("Checks")]
         private bool isDead;
+        private bool isGameStart = false;
         #endregion
 
         #region Core
-        public void Initialize(IPlayerModel playerModel, IInputModel inputModel, IWeaponModel weaponModel)
+        public void Construct(PlayerModel playerModel, InputModel inputModel, WeaponModel weaponModel, SignalBus signalBus)
         {
+            this.playerModel = playerModel;
+            this.inputModel = inputModel;
+            this.weaponModel = weaponModel;
+            this.signalBus = signalBus;
+
             rb = GetComponent<Rigidbody>();
 
-            pcInputHandler = new PCInputHandler(inputModel.PCInputData, transform, rb);
-            movementHandler = new MovementHandler(playerModel.MovementData, transform, rb);
-            rotationHandler = new RotationHandler(playerModel.RotationData, transform, rb);
-            weaponHandler = new WeaponHandler(weaponModel.FireRate, transform, rb);
+            pcInputHandler = new PCInputHandler(this.inputModel.PCInputData, transform, rb);
+            movementHandler = new MovementHandler(this.playerModel.MovementData, transform, rb);
+            rotationHandler = new RotationHandler(this.playerModel.RotationData, transform, rb);
+            weaponHandler = new WeaponHandler(this.weaponModel.FireRate, transform, rb);
 
-            ((WeaponHandler)weaponHandler).OnWeaponCanShoot = onWeaponCanShoot;
+            ((WeaponHandler)weaponHandler).OnWeaponCanShoot = OnWeaponCanShoot;
+
+            this.signalBus.Subscribe<Structs.OnChangeGameState>(x => OnChangeGameState(x.NewGameState));
         }
-        public void Reload()
+        public void Dispose()
+        {
+            signalBus.Unsubscribe<Structs.OnChangeGameState>(x => OnChangeGameState(x.NewGameState));
+        }
+        private void Reload()
         {
             isDead = false;
 
@@ -50,12 +66,25 @@ namespace DevShirme.Views
         #endregion
 
         #region Receivers
-        private void onWeaponCanShoot() => OnWeaponCanShoot?.Invoke();
+        private void OnWeaponCanShoot()
+        {
+            signalBus.Fire(new Structs.OnWeaponCanShoot { });
+        }
+        private void OnChangeGameState(Enums.GameState gameState)
+        {
+            isGameStart = gameState == Enums.GameState.Start;
+
+            if (!isGameStart)
+                Reload();
+        }
         #endregion
 
-        #region Updates
-        public void OnGameUpdate()
+        #region Ticks
+        public void Tick()
         {
+            if (!isGameStart)
+                return;
+
             pcInputHandler.OnGameUpdate();
 
             movementHandler.InputData = pcInputHandler.InputData;
@@ -66,8 +95,11 @@ namespace DevShirme.Views
             rotationHandler.OnGameUpdate();
             weaponHandler.OnGameUpdate();
         }
-        public void OnGameFixedUpdate()
+        public void FixedTick()
         {
+            if (!isGameStart)
+                return;
+
             movementHandler.OnGameFixedUpdate();
         }
         #endregion
@@ -78,7 +110,7 @@ namespace DevShirme.Views
             if (collision.gameObject.CompareTag("Enemy") && !isDead)
             {
                 isDead = true;
-                OnDead?.Invoke();
+                signalBus.Fire(new Structs.OnChangeGameState { NewGameState = Enums.GameState.Over });
             }
         }
         #endregion

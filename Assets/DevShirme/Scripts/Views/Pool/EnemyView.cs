@@ -1,17 +1,34 @@
+using DevShirme.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking.Types;
+using Zenject;
+using Zenject.SpaceFighter;
 
 namespace DevShirme.Views
 {
-    public class EnemyView : PoolObjectView
+    public class EnemyView : PoolObjectView, ITickable
     {
+        #region Injects
+        private EnemyModel enemyModel;
+        private PlayerModel playerModel;
+        #endregion
+
         #region Fields
-        public Action OnDead { get; set; }
+        private Transform playerTransform;
         #endregion
 
         #region Core
+        [Inject]
+        public void Construct(EnemyModel enemyModel, PlayerModel playerModel)
+        {
+            this.enemyModel = enemyModel;
+            this.playerModel = playerModel;
+
+            playerTransform = this.playerModel.PlayerTransform;
+        }
         public override void Initialize()
         {
             base.Initialize();
@@ -27,7 +44,7 @@ namespace DevShirme.Views
         #endregion
 
         #region Follow
-        public void Follow(Transform target, float followSpeed, float turnSpeed)
+        private void Follow(Transform target, float followSpeed, float turnSpeed)
         {
             transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime * followSpeed);
 
@@ -39,12 +56,11 @@ namespace DevShirme.Views
         }
         #endregion
 
-        #region Dead
-        public void Dead()
+        #region Ticks
+        public void Tick()
         {
-            OnDead?.Invoke();
-
-            DeSpawn();
+            if (InUse)
+                Follow(playerTransform, enemyModel.FollowSpeed, enemyModel.TurnSpeed);
         }
         #endregion
 
@@ -52,7 +68,7 @@ namespace DevShirme.Views
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Bullet"))
-                Dead();
+                DeSpawn();
         }
         #endregion
     }

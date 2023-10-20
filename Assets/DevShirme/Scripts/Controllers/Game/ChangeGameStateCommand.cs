@@ -28,35 +28,32 @@ namespace DevShirme.Controllers
             switch (gameState)
             {
                 case Enums.GameState.Init:
-                    setFPS();
-                    setCursor();
+                    SetFPS();
+                    SetCursor();
                     break;
                 case Enums.GameState.Start:
                     break;
                 case Enums.GameState.Over:
-                    Structs.OnClearPool onClearPool = new Structs.OnClearPool();
-                    onClearPool.IsAll = true;
-                    onClearPool.PoolName = "";
-                    signalBus.Fire(onClearPool);
+                    signalBus.Fire(new Structs.OnClearPool { IsAll = true, PoolName = "" });
                     break;
                 case Enums.GameState.Reload:
                     break;
             }
 
-            message(gameState);
+            Message(gameState);
         }
-        private void message(Enums.GameState gameState)
+        private void Message(Enums.GameState gameState)
         {
             Debug.Log("Current Game State: " + gameState.ToString());
         }
         #endregion
 
         #region Setters
-        private void setFPS()
+        private void SetFPS()
         {
             Application.targetFrameRate = gameModel.TargetFPS;
         }
-        private void setCursor()
+        private void SetCursor()
         {
             Cursor.visible = gameModel.IsCursorActive;
             Cursor.lockState = gameModel.CursorLockMode;

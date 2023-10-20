@@ -1,26 +1,34 @@
-using DevShirme.Interfaces;
+using DevShirme.Models;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Views
 {
     public class BulletView : PoolObjectView
     {
-        #region Fields
-        private Rigidbody rb;
+        #region Injects
+        private BulletModel bulletModel;
+        private WeaponModel weaponModel;
         #endregion
 
-        #region Props
-        public float TotalSpeed { get; set; }
+        #region Fields
+        private Rigidbody rb;
+        private float totalSpeed;
         #endregion
 
         #region Core
+        [Inject]
+        public void Construct(BulletModel bulletModel, WeaponModel weaponModel)
+        {
+            totalSpeed = bulletModel.Speed * weaponModel.WeaponSpeedFactor;
+        }
         public override void Initialize()
         {
             base.Initialize();
 
-            TotalSpeed = 20;
+            totalSpeed = 20;
 
             rb = GetComponent<Rigidbody>();
         }
@@ -28,7 +36,7 @@ namespace DevShirme.Views
         {
             base.Spawn(pos, rot, scale, parent, useRotation, useScale, setParent);
 
-            Throw(TotalSpeed);
+            Throw(totalSpeed);
         }
         public override void DeSpawn()
         {
