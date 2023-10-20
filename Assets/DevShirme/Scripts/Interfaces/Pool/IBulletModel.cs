@@ -1,12 +1,12 @@
-using DevShirme.Settings;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Interfaces
 {
-    public interface IBulletModel
+    public interface IBulletModel: IInitializable
     {
-        public BulletSettings BulletSettings { get; }
+        public float Speed { get; }
     }
 }

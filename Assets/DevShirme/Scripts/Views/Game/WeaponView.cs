@@ -1,11 +1,10 @@
-using strange.extensions.mediation.impl;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevShirme.Views
 {
-    public class WeaponView : View
+    public class WeaponView : MonoBehaviour
     {
         #region Fields
         [Header("Components")]

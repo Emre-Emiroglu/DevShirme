@@ -16,7 +16,7 @@ namespace DevShirme.Signals
 
             Container.DeclareSignal<Structs.OnPlaySound>();
 
-            Container.BindSignal<Structs.OnPlaySound>().ToMethod<PlaySoundCommand>(x => x.PlaySound);
+            Container.BindSignal<Structs.OnPlaySound>().ToMethod<PlaySoundCommand>(x => x.PlaySound).FromNew();
         }
         #endregion
     }

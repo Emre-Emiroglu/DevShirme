@@ -1,23 +1,28 @@
-using DevShirme.Interfaces;
+using DevShirme.Models;
 using DevShirme.Utils;
-using strange.extensions.command.impl;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevShirme.Controllers
 {
-    public class ShowADCommand : Command
+    public class ShowADCommand
     {
-        #region Injects
-        [Inject] public Enums.ADType ADType { get; set; }
-        [Inject] public IADModel ADModel { get; set; }
+        #region Fields
+        private readonly ADModel adModel;
+        #endregion
+
+        #region Core
+        public ShowADCommand(ADModel adModel)
+        {
+            this.adModel = adModel;
+        }
         #endregion
 
         #region Executes
-        public override void Execute()
+        public void ShowAD(Enums.ADType adType)
         {
-            switch (ADType)
+            switch (adType)
             {
                 case Enums.ADType.Banner:
                     bannerADRequest();

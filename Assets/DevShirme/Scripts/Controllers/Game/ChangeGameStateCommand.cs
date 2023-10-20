@@ -1,46 +1,65 @@
-using DevShirme.Interfaces;
-using DevShirme.Signals;
+using DevShirme.Models;
 using DevShirme.Utils;
-using strange.extensions.command.impl;
-using strange.extensions.signal.impl;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Controllers
 {
-    public class ChangeGameStateCommand : Command
+    public class ChangeGameStateCommand
     {
-        #region Injects
-        [Inject] public IGameModel GameModel { get; set; }
-        [Inject] public Enums.GameState GameState { get; set; }
-        [Inject] public PoolSignal PoolSignal { get; set; }
-        [Inject] public GameSignal GameSignal { get; set; }
+        #region Fields
+        private readonly GameModel gameModel;
+        private readonly SignalBus signalBus;
+        #endregion
+
+        #region Core
+        public ChangeGameStateCommand(GameModel gameModel, SignalBus signalBus)
+        {
+            this.gameModel = gameModel;
+            this.signalBus = signalBus;
+        }
         #endregion
 
         #region Executes
-        public override void Execute()
+        public void ChangeGameState(Enums.GameState gameState)
         {
-            GameModel.GameState = GameState;
-
-            switch (GameState)
+            switch (gameState)
             {
                 case Enums.GameState.Init:
+                    setFPS();
+                    setCursor();
                     break;
                 case Enums.GameState.Start:
                     break;
                 case Enums.GameState.Over:
-                    PoolSignal.OnClearPool?.Dispatch(true, "");
+                    Structs.OnClearPool onClearPool = new Structs.OnClearPool();
+                    onClearPool.IsAll = true;
+                    onClearPool.PoolName = "";
+                    signalBus.Fire(onClearPool);
                     break;
                 case Enums.GameState.Reload:
                     break;
             }
 
-            message();
+            message(gameState);
         }
-        private void message()
+        private void message(Enums.GameState gameState)
         {
-            Debug.Log("Current Game State: " + GameState.ToString());
+            Debug.Log("Current Game State: " + gameState.ToString());
+        }
+        #endregion
+
+        #region Setters
+        private void setFPS()
+        {
+            Application.targetFrameRate = gameModel.TargetFPS;
+        }
+        private void setCursor()
+        {
+            Cursor.visible = gameModel.IsCursorActive;
+            Cursor.lockState = gameModel.CursorLockMode;
         }
         #endregion
     }

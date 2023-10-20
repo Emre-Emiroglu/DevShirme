@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using DevShirme.Utils;
-using strange.extensions.mediation.impl;
 
 namespace DevShirme.Views
 {
-    public class CamView : View
+    public class CamView : MonoBehaviour
     {
         #region Fields
         [Header("Cam Components")]

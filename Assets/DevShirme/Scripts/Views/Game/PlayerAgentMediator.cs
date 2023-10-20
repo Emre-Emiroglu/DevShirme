@@ -1,82 +1,83 @@
-using DevShirme.Interfaces;
-using DevShirme.Signals;
+using DevShirme.Models;
 using DevShirme.Utils;
 using DevShirme.Views;
-using strange.extensions.mediation.impl;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Mediators
 {
-    public class PlayerAgentMediator : Mediator
+    public class PlayerAgentMediator : MonoBehaviour, IDisposable, ITickable, IFixedTickable
     {
-        #region Injects
-        [Inject] public IPlayerModel PlayerModel { get; set; }
-        [Inject] public IInputModel InputModel { get; set; }
-        [Inject] public IWeaponModel WeaponModel { get; set; }
-        [Inject] public PlayerAgentView PlayerAgentView { get; set; }
-        [Inject] public GameSignal GameSignal { get; set; }
-        #endregion
-
         #region Fields
+        private PlayerAgentView view;
+        private PlayerModel playerModel;
+        private InputModel inputModel;
+        private WeaponModel weaponModel;
+        private SignalBus signalBus;
         private bool isGameStart = false;
         #endregion
 
         #region Core
-        public override void PreRegister()
+        [Zenject.Inject]
+        public void Construct(PlayerAgentView view, PlayerModel playerModel, InputModel inputModel, WeaponModel weaponModel, SignalBus signalBus)
         {
+            this.view = view;
+            this.playerModel = playerModel;
+            this.inputModel = inputModel;
+            this.weaponModel = weaponModel;
+            this.signalBus = signalBus;
+
+            this.view.Initialize(this.playerModel, this.inputModel, this.weaponModel);
+
+            this.view.OnDead += onPlayerDead;
+            this.view.OnWeaponCanShoot += onWeaponCanShoot;
+
+            signalBus.Subscribe<Structs.OnChangeGameState>(x => onChangeGameState(x.NewGameState));
         }
-        public override void OnRegister()
+        public void Dispose()
         {
-            PlayerAgentView.Initialize(PlayerModel, InputModel, WeaponModel);
+            view.OnDead -= onPlayerDead;
+            view.OnWeaponCanShoot -= onWeaponCanShoot;
 
-            PlayerAgentView.OnDead += onPlayerDead;
-            PlayerAgentView.OnWeaponCanShoot += onWeaponCanShoot;
-
-            GameSignal.OnChangeGameState.AddListener(onChangeGameState);
-        }
-        public override void OnRemove()
-        {
-            PlayerAgentView.OnDead -= onPlayerDead;
-            PlayerAgentView.OnWeaponCanShoot -= onWeaponCanShoot;
-
-            GameSignal.OnChangeGameState.RemoveListener(onChangeGameState);
+            signalBus.Unsubscribe<Structs.OnChangeGameState>(x => onChangeGameState(x.NewGameState));
         }
         #endregion
 
         #region Receivers
         private void onPlayerDead()
         {
-            GameSignal.OnChangeGameState?.Dispatch(Enums.GameState.Over);
+            signalBus.Fire(new Structs.OnChangeGameState { NewGameState = Enums.GameState.Over });
         }
         private void onWeaponCanShoot()
         {
-            GameSignal.OnWeaponCanShoot?.Dispatch();
+            signalBus.Fire(new Structs.OnWeaponCanShoot { });
         }
         private void onChangeGameState(Enums.GameState gameState)
         {
             isGameStart = gameState == Enums.GameState.Start;
 
             if (!isGameStart)
-                PlayerAgentView.Reload();
+                view.Reload();
         }
         #endregion
 
         #region Updates
-        private void Update()
+        public void Tick()
         {
             if (!isGameStart)
                 return;
 
-            PlayerAgentView.OnGameUpdate();
+            view.OnGameUpdate();
         }
-        private void FixedUpdate()
+        public void FixedTick()
         {
             if (!isGameStart)
                 return;
 
-            PlayerAgentView.OnGameFixedUpdate();
+            view.OnGameFixedUpdate();
         }
         #endregion
     }

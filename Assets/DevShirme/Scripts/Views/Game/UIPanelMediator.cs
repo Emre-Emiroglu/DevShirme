@@ -1,33 +1,34 @@
-using DevShirme.Signals;
 using DevShirme.Utils;
 using DevShirme.Views;
-using strange.extensions.mediation.impl;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Mediators
 {
-    public class UIPanelMediator : Mediator
+    public class UIPanelMediator : MonoBehaviour, IDisposable
     {
-        #region Injects
-        [Inject] public UIPanelView UIPanelView { get; set; }
-        [Inject] public GameSignal GameSignal { get; set; }
+        #region Fields
+        private UIPanelView uiPanelView;
+        private SignalBus signalBus;
         #endregion
 
         #region Core
-        public override void PreRegister()
+        [Zenject.Inject]
+        public void Construct(UIPanelView uiPanelView, SignalBus signalBus)
         {
-        }
-        public override void OnRegister()
-        {
-            UIPanelView.Initialize();
+            this.uiPanelView = uiPanelView;
+            this.signalBus = signalBus;
 
-            GameSignal.OnChangeGameState.AddListener(onChangeGameState);
+            this.uiPanelView.Initialize();
+
+            signalBus.Subscribe<Structs.OnChangeGameState>(x => onChangeGameState(x.NewGameState));
         }
-        public override void OnRemove()
+        public void Dispose()
         {
-            GameSignal.OnChangeGameState.RemoveListener(onChangeGameState);
+            signalBus.Unsubscribe<Structs.OnChangeGameState>(x => onChangeGameState(x.NewGameState));
         }
         #endregion
 
@@ -52,11 +53,11 @@ namespace DevShirme.Mediators
                     break;
             }
 
-            bool isShow = UIPanelView.PanelType == panelType;
+            bool isShow = uiPanelView.PanelType == panelType;
             if (isShow)
-                UIPanelView.Show();
+                uiPanelView.Show();
             else
-                UIPanelView.Hide();
+                uiPanelView.Hide();
         }
         #endregion
     }

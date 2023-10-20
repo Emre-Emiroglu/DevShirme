@@ -1,25 +1,28 @@
+using DevShirme.Models;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Settings
 {
     [CreateAssetMenu(fileName = "PoolSettings", menuName = "DevShirme/Settings/PoolSettings", order = 0)]
-    public class PoolSettings : ScriptableObject
+    public class PoolSettings : ScriptableObjectInstaller<PoolSettings>
     {
         #region Fields
         [Header("Pool Settings")]
-        [SerializeField] private GameObject[] prefabs;
-        [SerializeField] private string[] poolNames;
-        [Range(0, 1000)][SerializeField] private int initSize = 100;
-        [Range(0, 1000)][SerializeField] private int maxSize = 500;
+        [SerializeField] private PoolModel poolModel;
+        [SerializeField] private BulletModel bulletModel;
+        [SerializeField] private EnemyModel enemyModel;
         #endregion
 
-        #region Getters
-        public GameObject[] Prefabs => prefabs;
-        public string[] PoolNames => poolNames;
-        public int InitSize => initSize;
-        public int MaxSize => maxSize;
+        #region Bindings
+        public override void InstallBindings()
+        {
+            Container.BindInstances(poolModel);
+            Container.BindInstances(bulletModel);
+            Container.BindInstances(enemyModel);
+        }
         #endregion
     }
 }

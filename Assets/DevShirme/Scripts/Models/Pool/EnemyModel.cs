@@ -1,26 +1,27 @@
 using DevShirme.Interfaces;
-using DevShirme.Settings;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevShirme.Models
 {
+    [Serializable]
     public class EnemyModel : IEnemyModel
     {
         #region Fields
-        private readonly EnemySettings enemySettings;
+        [Header("Enemy Model Settings")]
+        [SerializeField] private float followSpeed;
+        [SerializeField] private float turnSpeed;
         #endregion
 
         #region Getters
-        public EnemySettings EnemySettings => enemySettings;
+        public float FollowSpeed => followSpeed;
+        public float TurnSpeed => turnSpeed;
         #endregion
 
         #region Core
-        public EnemyModel()
-        {
-            enemySettings = Resources.Load<EnemySettings>("Settings/EnemySettings");
-        }
+        public void Initialize() { }
         #endregion
     }
 }

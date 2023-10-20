@@ -1,26 +1,25 @@
 using DevShirme.Interfaces;
-using DevShirme.Settings;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevShirme.Models
 {
+    [Serializable]
     public class BulletModel : IBulletModel
     {
         #region Fields
-        private BulletSettings bulletSettings;
+        [Header("Bullet Model Settings")]
+        [SerializeField] private float speed;
         #endregion
 
         #region Getters
-        public BulletSettings BulletSettings => bulletSettings;
+        public float Speed => speed;
         #endregion
 
         #region Core
-        public BulletModel()
-        {
-            bulletSettings = Resources.Load<BulletSettings>("Settings/BulletSettings");
-        }
+        public void Initialize() { }
         #endregion
     }
 }

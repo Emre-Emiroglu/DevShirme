@@ -1,30 +1,32 @@
+using DevShirme.Models;
 using DevShirme.Views;
 using strange.extensions.mediation.impl;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevShirme.Mediators
 {
-    public class PoolObjectMediator : Mediator
+    public class PoolObjectMediator : MonoBehaviour, IDisposable
     {
-        #region Injects
-        [Inject] public PoolObjectView PoolObjectView { get; set; }
+        #region Fields
+        private PoolObjectView poolObjectView;
         #endregion
 
         #region Core
-        public override void PreRegister()
+        [Zenject.Inject]
+        public void Construct(PoolObjectView poolObjectView)
         {
+            this.poolObjectView = poolObjectView;
+
+            poolObjectView.OnSpawn += onSpawn;
+            poolObjectView.OnDeSpawn += onDeSpawn;
         }
-        public override void OnRegister()
+        public void Dispose()
         {
-            PoolObjectView.OnSpawn += onSpawn;
-            PoolObjectView.OnDeSpawn += onDeSpawn;
-        }
-        public override void OnRemove()
-        {
-            PoolObjectView.OnSpawn -= onSpawn;
-            PoolObjectView.OnDeSpawn -= onDeSpawn;
+            poolObjectView.OnSpawn -= onSpawn;
+            poolObjectView.OnDeSpawn -= onDeSpawn;
         }
         #endregion
 

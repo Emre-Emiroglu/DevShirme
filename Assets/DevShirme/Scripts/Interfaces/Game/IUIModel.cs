@@ -1,12 +1,11 @@
-using DevShirme.Settings;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Interfaces
 {
-    public interface IUIModel
+    public interface IUIModel: IInitializable
     {
-        public UISettings UISettings { get; }
     }
 }

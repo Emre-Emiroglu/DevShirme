@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DevShirme.Views
 {
-    public class EnemySpawnerView : View
+    public class EnemySpawnerView : MonoBehaviour
     {
         #region Fields
         [Header("Components")]

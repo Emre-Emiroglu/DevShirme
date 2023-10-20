@@ -1,42 +1,50 @@
 using DevShirme.Interfaces;
-using strange.extensions.command.impl;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevShirme.Controllers
 {
-    public class ClearPoolCommand : Command
+    public class ClearPoolCommand
     {
-        #region Injects
-        [Inject] public IPoolModel PoolModel { get; set; }
-        [Inject] public bool IsAll { get; set; }
-        [Inject] public string PoolName { get; set; }
+        #region Fields
+        private readonly IPoolModel poolModel;
+        private readonly bool isAll;
+        private readonly string poolName;
         #endregion
 
-        #region Executes
-        public override void Execute()
+        #region Core
+        public ClearPoolCommand(IPoolModel poolModel, bool isAll, string poolName)
         {
-            if (IsAll)
+            this.poolModel = poolModel;
+            this.isAll = isAll;
+            this.poolName = poolName;
+        }
+        #endregion
+
+        #region ClearPool
+        public void ClearPool()
+        {
+            if (isAll)
                 clearAllPools();
             else
-                clear(PoolName);
+                clear(poolName);
         }
         #endregion
 
         #region Clears
         private void clear(string poolName)
         {
-            for (int i = 0; i < PoolModel.ObjectPools.Length; i++)
+            for (int i = 0; i < poolModel.ObjectPools.Length; i++)
             {
-                if (PoolModel.ObjectPools[i].PoolName == poolName)
-                    PoolModel.ObjectPools[i].Reload();
+                if (poolModel.ObjectPools[i].PoolName == poolName)
+                    poolModel.ObjectPools[i].Reload();
             }
         }
-        public void clearAllPools()
+        private void clearAllPools()
         {
-            for (int i = 0; i < PoolModel.ObjectPools.Length; i++)
-                PoolModel.ObjectPools[i].Reload();
+            for (int i = 0; i < poolModel.ObjectPools.Length; i++)
+                poolModel.ObjectPools[i].Reload();
         }
         #endregion
     }

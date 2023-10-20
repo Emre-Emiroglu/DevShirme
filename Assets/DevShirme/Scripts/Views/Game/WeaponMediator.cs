@@ -1,46 +1,48 @@
-using DevShirme.Interfaces;
-using DevShirme.Signals;
+using DevShirme.Models;
+using DevShirme.Utils;
 using DevShirme.Views;
-using strange.extensions.mediation.impl;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Mediators
 {
-    public class WeaponMediator : Mediator
+    public class WeaponMediator : MonoBehaviour, IDisposable
     {
         #region Injects
-        [Inject] public WeaponView WeaponView { get; set; }
-        [Inject] public IWeaponModel WeaponModel { get; set; }
-        [Inject] public IPoolModel PoolModel { get; set; }
-        [Inject] public GameSignal GameSignal { get; set; }
-        [Inject] public PoolSignal PoolSignal { get; set; }
-        [Inject] public AudioSignal AudioSignal { get; set; }
+        private WeaponView view;
+        private WeaponModel weaponModel;
+        private PoolModel poolModel;
+        private SignalBus signalBus;
         #endregion
 
         #region Core
-        public override void PreRegister()
+        [Zenject.Inject]
+        public void Construct(WeaponView view, WeaponModel weaponModel, PoolModel poolModel, SignalBus signalBus)
         {
+            this.view = view;
+            this.weaponModel = weaponModel;
+            this.poolModel = poolModel;
+            this.signalBus = signalBus;
+
+            signalBus.Subscribe<Structs.OnWeaponCanShoot>(onWeaponCanShoot);
         }
-        public override void OnRegister()
+        public void Dispose()
         {
-            GameSignal.OnWeaponCanShoot.AddListener(onWeaponCanShoot);
-        }
-        public override void OnRemove()
-        {
-            GameSignal.OnWeaponCanShoot.RemoveListener(onWeaponCanShoot);
+            signalBus.Unsubscribe<Structs.OnWeaponCanShoot>(onWeaponCanShoot);
         }
         #endregion
 
         #region Receivers
         private void onWeaponCanShoot()
         {
-            PoolModel.GetPoolObject("Bullet", WeaponView.Muzzle.position, WeaponView.Muzzle.rotation, Vector3.one, null, true);
+            poolModel.GetPoolObject("Bullet", view.Muzzle.position, view.Muzzle.rotation, Vector3.one, null, true);
 
-            //AudioSignal.OnPlaySound?.Dispatch(WeaponModel.WeaponSettings.ShootSound);
+            signalBus.Fire(new Structs.OnPlaySound { AudioClip = weaponModel.ShootSound });
 
-            WeaponView.Shoot();
+            view.Shoot();
         } 
         #endregion
     }

@@ -1,20 +1,31 @@
+using DevShirme.Controllers;
 using DevShirme.Utils;
-using strange.extensions.signal.impl;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Signals
 {
-    public class GameSignal
+    public class GameSignal: Installer<GameSignal>
     {
-        public Signal<Enums.GameState> OnChangeGameState = new Signal<Enums.GameState>();
+        #region Bindings
+        public override void InstallBindings()
+        {
+            SignalBusInstaller.Install(Container);
 
-        public Signal<Enums.ADType> OnShowAD = new Signal<Enums.ADType>();
+            Container.DeclareSignal<Structs.OnChangeGameState>();
+            Container.DeclareSignal<Structs.OnShowAD>();
+            Container.DeclareSignal<Structs.OnShakeCam>();
+            Container.DeclareSignal<Structs.OnChangeCamFov>();
+            Container.DeclareSignal<Structs.OnWeaponCanShoot>();
 
-        public Signal<Enums.CamType> OnShakeCam = new Signal<Enums.CamType>();
-        public Signal<Enums.CamType, float> OnChangeCamFov = new Signal<Enums.CamType, float>();
-
-        public Signal OnWeaponCanShoot = new Signal();
+            Container.BindSignal<Structs.OnChangeGameState>().ToMethod<ChangeGameStateCommand>((x, s) => x.ChangeGameState(s.NewGameState)).FromNew();
+            Container.BindSignal<Structs.OnShowAD>().ToMethod<ShowADCommand>((x, s) => x.ShowAD(s.AD)).FromNew();
+            Container.BindSignal<Structs.OnShakeCam>();
+            Container.BindSignal<Structs.OnChangeCamFov>();
+            Container.BindSignal<Structs.OnWeaponCanShoot>();
+        }
+        #endregion
     }
 }

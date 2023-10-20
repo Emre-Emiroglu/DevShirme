@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-namespace DevShirme.Contexts
+namespace DevShirme.Installers
 {
     public class AudioInstaller : MonoInstaller<AudioInstaller>
     {

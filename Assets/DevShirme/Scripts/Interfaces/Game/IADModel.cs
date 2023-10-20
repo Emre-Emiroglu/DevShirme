@@ -1,13 +1,16 @@
-using DevShirme.Settings;
+using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Interfaces
 {
-    public interface IADModel
+    public interface IADModel: IInitializable
     {
-        public ADSettings ADSettings { get; }
+        public string GetID(Enums.ADType adType, bool test);
+        //public AdSize BannerSize { get; };
+        //public AdPosition BannerPosition { get; };
     }
 }
 

@@ -7,6 +7,7 @@ namespace DevShirme.Utils
 {
     public static class Structs
     {
+        #region NonSerializableDatas
         public struct PlayerData
         {
             public int Level;
@@ -24,7 +25,6 @@ namespace DevShirme.Utils
                 VibrateOn = vibrateOn;
             }
         }
-
         public struct SpawnData
         {
             #region Fields
@@ -63,7 +63,6 @@ namespace DevShirme.Utils
             public bool SetParent => setParent;
             #endregion
         }
-
         public struct InputData
         {
             public Vector2 MovementInput;
@@ -73,7 +72,9 @@ namespace DevShirme.Utils
             public bool IsRunKeyPressed;
             public bool IsJumpKeyPressed;
         }
+        #endregion
 
+        #region SeralizableDatas
         [Serializable]
         public struct PanelDatas
         {
@@ -87,7 +88,6 @@ namespace DevShirme.Utils
             public float HideDuration => hideDuration;
             #endregion
         }
-
         [Serializable]
         public struct MobileInputData
         {
@@ -107,7 +107,6 @@ namespace DevShirme.Utils
             public bool Swipe => swipe;
             #endregion
         }
-
         [Serializable]
         public struct PCInputData
         {
@@ -125,7 +124,6 @@ namespace DevShirme.Utils
             public KeyCode JumpKey => jumpKey;
             #endregion
         }
-
         [Serializable]
         public struct MovementData
         {
@@ -143,7 +141,6 @@ namespace DevShirme.Utils
             public ForceMode JumpForceMode => jumpForceMode;
             #endregion
         }
-
         [Serializable]
         public struct RotationData
         {
@@ -153,11 +150,36 @@ namespace DevShirme.Utils
             public float RotationSpeed => rotationSpeed;
             #endregion
         }
+        #endregion
 
-
+        #region GameEvents
+        public struct OnClearPool
+        {
+            public bool IsAll;
+            public string PoolName;
+        }
         public struct OnPlaySound
         {
             public AudioClip AudioClip;
         }
+        public struct OnChangeGameState
+        {
+            public Enums.GameState NewGameState { get; set; }
+        }
+        public struct OnShowAD
+        {
+            public Enums.ADType AD;
+        }
+        public struct OnShakeCam
+        {
+            public Enums.CamType TargetCam;
+        }
+        public struct OnChangeCamFov
+        {
+            public Enums.CamType TargetCam;
+            public float NewFov;
+        }
+        public struct OnWeaponCanShoot { }
+        #endregion
     }
 }

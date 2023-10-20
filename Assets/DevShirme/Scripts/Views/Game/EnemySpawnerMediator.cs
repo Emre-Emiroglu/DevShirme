@@ -1,50 +1,47 @@
-using DevShirme.Interfaces;
-using DevShirme.Settings;
-using DevShirme.Signals;
+using DevShirme.Models;
 using DevShirme.Utils;
 using DevShirme.Views;
-using strange.extensions.mediation.impl;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Mediators
 {
-    public class EnemySpawnerMediator : Mediator
+    public class EnemySpawnerMediator : MonoBehaviour, IDisposable, ITickable
     {
-        #region Injects
-        [Inject] public EnemySpawnerView EnemySpawnerView { get; set; }
-        [Inject] public IEnemySpawnerModel EnemySpawnerModel { get; set; }
-        [Inject] public IPoolModel PoolModel { get; set; }
-        [Inject] public GameSignal GameSignal { get; set; }
-        #endregion
-
         #region Fields
+        private EnemySpawnerView view;
+        private EnemySpawnerModel enemySpawnerModel;
+        private PoolModel poolModel;
+        private SignalBus signalBus;
         private bool isGameStart = false;
         private float timer;
         private float duration;
         #endregion
 
         #region Core
-        public override void PreRegister()
+        [Zenject.Inject]
+        public void Construct(EnemySpawnerView view, EnemySpawnerModel enemySpawnerModel, PoolModel poolModel, SignalBus signalBus)
         {
+            this.view = view;
+            this.enemySpawnerModel = enemySpawnerModel;
+            this.poolModel = poolModel;
+            this.signalBus = signalBus;
+
+            duration = this.enemySpawnerModel.Duration;
+
+            view.Initialize(
+                this.enemySpawnerModel.Radius,
+                this.enemySpawnerModel.UseGizmo,
+                this.enemySpawnerModel.GizmoColor);
+
+            signalBus.Subscribe<Structs.OnChangeGameState>(x => onChangeGameState(x.NewGameState));
         }
-        public override void OnRegister()
+        public void Dispose()
         {
-            EnemySpawnerSettings settings = EnemySpawnerModel.EnemySpawnerSettings;
-
-            duration = settings.Duration;
-
-            EnemySpawnerView.Initialize(
-                settings.Radius,
-                settings.UseGizmo,
-                settings.GizmoColor);
-
-            GameSignal.OnChangeGameState.AddListener(onChangeGameState);
-        }
-        public override void OnRemove()
-        {
-            GameSignal.OnChangeGameState.RemoveListener(onChangeGameState);
+            signalBus.Unsubscribe<Structs.OnChangeGameState>(x => onChangeGameState(x.NewGameState));
         }
         #endregion
 
@@ -69,19 +66,19 @@ namespace DevShirme.Mediators
         }
         private void spawnEnemy()
         {
-            Vector3 randomPos = Random.insideUnitSphere * EnemySpawnerModel.EnemySpawnerSettings.Radius;
+            Vector3 randomPos = UnityEngine.Random.insideUnitSphere * enemySpawnerModel.Radius;
             randomPos.y = 0f;
-            PoolModel.GetPoolObject("Enemy", EnemySpawnerView.transform.position + randomPos, Quaternion.identity, Vector3.one, null, true);
+            poolModel.GetPoolObject("Enemy", view.transform.position + randomPos, Quaternion.identity, Vector3.one, null, true);
         }
         #endregion
 
-        #region Updates
-        private void Update()
+        #region Ticks
+        public void Tick()
         {
             if (!isGameStart)
                 return;
 
-            EnemySpawnerView.OnGameUpdate();
+            view.OnGameUpdate();
 
             spawnByTimer();
         }

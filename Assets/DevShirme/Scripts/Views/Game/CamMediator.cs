@@ -1,40 +1,41 @@
-using DevShirme.Interfaces;
-using DevShirme.Settings;
-using DevShirme.Signals;
+using DevShirme.Models;
 using DevShirme.Utils;
 using DevShirme.Views;
-using strange.extensions.mediation.impl;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Mediators
 {
-    public class CamMediator : Mediator
+    public class CamMediator : MonoBehaviour, IDisposable
     {
-        #region Injects
-        [Inject] public CamView CamView { get; set; }
-        [Inject] public ICameraModel CameraModel { get; set; }
-        [Inject] public GameSignal GameSignal { get; set; }
+        #region Fields
+        private CamView view;
+        private CameraModel cameraModel;
+        private SignalBus signalBus;
         #endregion
 
         #region Core
-        public override void PreRegister()
+        [Zenject.Inject]
+        public void Construct(CamView view, CameraModel cameraModel, SignalBus signalBus)
         {
-        }
-        public override void OnRegister()
-        {
-            CamView.Initialize();
+            this.view = view;
+            this.cameraModel = cameraModel;
+            this.signalBus = signalBus;
 
-            GameSignal.OnChangeGameState.AddListener(onChangeGameState);
-            GameSignal.OnShakeCam.AddListener(onShakeCamCommand);
-            GameSignal.OnChangeCamFov.AddListener(onChangeCamFov);
+            this.view.Initialize();
+
+            signalBus.Subscribe<Structs.OnChangeGameState>(x => onChangeGameState(x.NewGameState));
+            signalBus.Subscribe<Structs.OnShakeCam>(x => onShakeCam(x.TargetCam));
+            signalBus.Subscribe<Structs.OnChangeCamFov>(x => onChangeCamFov(x.TargetCam, x.NewFov));
         }
-        public override void OnRemove()
+        public void Dispose()
         {
-            GameSignal.OnChangeGameState.AddListener(onChangeGameState);
-            GameSignal.OnShakeCam.RemoveListener(onShakeCamCommand);
-            GameSignal.OnChangeCamFov.RemoveListener(onChangeCamFov);
+            signalBus.Unsubscribe<Structs.OnChangeGameState>(x => onChangeGameState(x.NewGameState));
+            signalBus.Unsubscribe<Structs.OnShakeCam>(x => onShakeCam(x.TargetCam));
+            signalBus.Unsubscribe<Structs.OnChangeCamFov>(x => onChangeCamFov(x.TargetCam, x.NewFov));
         }
         #endregion
 
@@ -42,27 +43,25 @@ namespace DevShirme.Mediators
         private void onChangeGameState(Enums.GameState gameState)
         {
             Enums.CamType camType = gameState == Enums.GameState.Start ? Enums.CamType.FollowCam : Enums.CamType.IdleCam;
-            bool isShow = camType == CamView.CameraType;
+            bool isShow = camType == view.CameraType;
             if (isShow)
-                CamView.Show();
+                view.Show();
             else
-                CamView.Hide();
+                view.Hide();
         }
-        private void onShakeCamCommand(Enums.CamType camType)
+        private void onShakeCam(Enums.CamType camType)
         {
-            if (camType != CamView.CameraType)
+            if (camType != view.CameraType)
                 return;
 
-            CameraSettings cameraSettings = CameraModel.CameraSettings;
-
-            CamView.Shake(cameraSettings.AmplitudeGain, cameraSettings.FrequencyGain, cameraSettings.ShakeDuration);
+            view.Shake(cameraModel.AmplitudeGain, cameraModel.FrequencyGain, cameraModel.ShakeDuration);
         }
         private void onChangeCamFov(Enums.CamType camType, float addValue)
         {
-            if (camType != CamView.CameraType)
+            if (camType != view.CameraType)
                 return;
 
-            CamView.ChangeFov(addValue, CameraModel.CameraSettings.ChangeFovDuration);
+            view.ChangeFov(addValue, cameraModel.ChangeFovDuration);
         }
         #endregion
     }

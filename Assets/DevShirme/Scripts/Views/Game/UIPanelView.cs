@@ -1,12 +1,11 @@
 using UnityEngine;
 using System.Collections;
 using DevShirme.Utils;
-using strange.extensions.mediation.impl;
 
 namespace DevShirme.Views
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class UIPanelView : View
+    public class UIPanelView : MonoBehaviour
     {
         #region Fields
         [Header("Panel Fields")]

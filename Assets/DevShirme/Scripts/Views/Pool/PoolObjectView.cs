@@ -1,14 +1,12 @@
 using DevShirme.Interfaces;
-using strange.extensions.mediation.impl;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace DevShirme.Views
 {
-    public class PoolObjectView : View, IPoolObject
+    public class PoolObjectView : MonoBehaviour, IPoolObject
     {
         #region Events
         public event Action OnSpawn;

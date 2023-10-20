@@ -12,6 +12,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d676eb08bd51a42b8eaae9ced18717, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  targetFPS: 165
-  isCursorActive: 1
-  cursorLockMode: 0
+  gameModel:
+    targetFPS: 165
+    isCursorActive: 1
+    cursorLockMode: 0
+  inputModel:
+    pcInputData:
+      pcInputBehavior: 0
+      verticalAxis: Vertical
+      horizontalAxis: Horizontal
+      runKey: 304
+      jumpKey: 32
+    mobileInputData:
+      mobileInputBehavior: 1
+      lerp: 1
+      lerpSpeed: 0.1
+      sensitivity: 80
+      clampDistance: 0.8
+      swipe: 0
+  weaponModel:
+    shootSound: {fileID: 8300000, guid: 321f02ebf95657d48813e41ff73fecca, type: 3}
+    weaponSpeedFactor: 2
+    fireRate: 0.125
+  enemySpawnerModel:
+    duration: 1
+    radius: 20
+    useGizmo: 1
+    gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  cameraModel:
+    amplitudeGain: 1
+    frequencyGain: 1
+    shakeDuration: 1
+    changeFovDuration: 1
+  adModel:
+    adIds: []
+    testAdIds:
+    - 
+    - 
+    - 

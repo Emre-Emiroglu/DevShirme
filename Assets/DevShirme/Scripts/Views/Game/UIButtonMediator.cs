@@ -1,47 +1,52 @@
-using DevShirme.Signals;
 using DevShirme.Utils;
 using DevShirme.Views;
-using strange.extensions.mediation.impl;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Mediators
 {
-    public class UIButtonMediator : Mediator
+    public class UIButtonMediator : MonoBehaviour, IDisposable
     {
-        #region Injects
-        [Inject] public UIButtonView UIButtonView { get; set; }
-        [Inject] public GameSignal GameSignal { get; set; }
+        #region Fields
+        private UIButtonView view;
+        private SignalBus signalBus;
         #endregion
 
         #region Core
-        public override void PreRegister()
+        [Zenject.Inject]
+        public void Construct(UIButtonView view, SignalBus signalBus)
         {
+            this.view = view;
+            this.signalBus = signalBus;
+
+            this.view.Setup();
+            this.view.OnButtonPressed += onButtonPressed;
         }
-        public override void OnRegister()
+        public void Dispose()
         {
-            UIButtonView.Setup();
-            UIButtonView.OnButtonPressed += onButtonPressed;
-        }
-        public override void OnRemove()
-        {
-            UIButtonView.OnButtonPressed -= onButtonPressed;
+            view.OnButtonPressed -= onButtonPressed;
         }
         #endregion
 
         #region Receivers
         private void onButtonPressed(Enums.UIButtonType uiButtonType)
         {
+            Structs.OnChangeGameState onChangeGameState = new Structs.OnChangeGameState();
+
             switch (uiButtonType)
             {
                 case Enums.UIButtonType.GameStart:
-                    GameSignal.OnChangeGameState?.Dispatch(Enums.GameState.Start);
+                    onChangeGameState.NewGameState = Enums.GameState.Start;
                     break;
                 case Enums.UIButtonType.GameReload:
-                    GameSignal.OnChangeGameState?.Dispatch(Enums.GameState.Reload);
+                    onChangeGameState.NewGameState = Enums.GameState.Reload;
                     break;
             }
+
+            signalBus.Fire(onChangeGameState);
         }
         #endregion
     }

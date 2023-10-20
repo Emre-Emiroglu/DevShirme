@@ -1,41 +1,36 @@
 using DevShirme.Interfaces;
-using DevShirme.Settings;
-using strange.extensions.context.api;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevShirme.Models
 {
+    [Serializable]
     public class PoolModel : IPoolModel
     {
-        #region Injects
-        [Inject(ContextKeys.CONTEXT_VIEW)] public GameObject ContextView { get; set; }
-        #endregion
-
         #region Fields
-        private readonly PoolSettings poolSettings;
+        [Header("Pool Model Settings")]
+        [SerializeField] private GameObject[] prefabs;
+        [SerializeField] private string[] poolNames;
+        [Range(0, 1000)][SerializeField] private int initSize = 100;
+        [Range(0, 1000)][SerializeField] private int maxSize = 500;
         private ObjectPool[] objectPools;
+        private Transform parent;
         #endregion
 
         #region Getters
-        public PoolSettings PoolSettings => poolSettings;
         public ObjectPool[] ObjectPools => objectPools;
         #endregion
 
         #region Core
-        public PoolModel()
+        public void Initialize()
         {
-            poolSettings = Resources.Load<PoolSettings>("Settings/PoolSettings");
-
-            objectPools = new ObjectPool[poolSettings.Prefabs.Length];
-        }
-        [PostConstruct]
-        public void PostConstruct()
-        {
-            for (int i = 0; i < poolSettings.Prefabs.Length; i++)
+            parent = GameObject.Find("PoolInstaller").GetComponent<Transform>();
+            objectPools = new ObjectPool[prefabs.Length];
+            for (int i = 0; i < prefabs.Length; i++)
             {
-                ObjectPool pool = new ObjectPool(poolSettings.Prefabs[i], poolSettings.PoolNames[i], poolSettings.InitSize, poolSettings.MaxSize, ContextView.transform);
+                ObjectPool pool = new ObjectPool(prefabs[i], poolNames[i], initSize, maxSize, parent);
                 objectPools[i] = pool;
             }
         }

@@ -41,6 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5710726847221820365}
   - component: {fileID: 6587873628995550880}
+  - component: {fileID: 3493207978919990873}
+  - component: {fileID: 7531791764241351171}
   m_Layer: 7
   m_Name: Weapon
   m_TagString: Weapon
@@ -77,9 +79,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74464dc21f6cddb4a91361beb38e9350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onWeaponShoot: {fileID: 11400000, guid: 34025061309e3d947a93ff178b236bd4, type: 2}
   muzzle: {fileID: 1007163192391863310}
-  data: {fileID: 11400000, guid: 0b5c1cda59fe9f545ab5342424dcf13d, type: 2}
+--- !u!114 &3493207978919990873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5300082370103318499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9976b4ef5d922241b442b055c771b27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7531791764241351171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5300082370103318499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 6587873628995550880}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &5623537759163914032
 GameObject:
   m_ObjectHideFlags: 0

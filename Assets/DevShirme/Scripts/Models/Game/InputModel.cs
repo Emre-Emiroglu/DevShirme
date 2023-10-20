@@ -1,26 +1,28 @@
 using DevShirme.Interfaces;
-using DevShirme.Settings;
+using DevShirme.Utils;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevShirme.Models
 {
+    [Serializable]
     public class InputModel : IInputModel
     {
         #region Fields
-        private readonly InputSettings inputSettings;
+        [Header("Input Model Settings")]
+        [SerializeField] private Structs.PCInputData pcInputData;
+        [SerializeField] private Structs.MobileInputData mobileInputData;
         #endregion
 
         #region Getters
-        public InputSettings InputSettings => inputSettings;
+        public Structs.PCInputData PCInputData => pcInputData;
+        public Structs.MobileInputData MobileInputData => mobileInputData;
         #endregion
 
         #region Core
-        public InputModel()
-        {
-            inputSettings = Resources.Load<InputSettings>("Settings/InputSettings");
-        }
+        public void Initialize() { }
         #endregion
     }
 }

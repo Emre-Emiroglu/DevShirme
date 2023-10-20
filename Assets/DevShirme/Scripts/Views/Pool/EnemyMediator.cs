@@ -1,43 +1,50 @@
-using DevShirme.Interfaces;
+using DevShirme.Models;
 using DevShirme.Views;
-using strange.extensions.mediation.impl;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Mediators
 {
-    public class EnemyMediator : Mediator
+    public class EnemyMediator : MonoBehaviour, ITickable, IDisposable
     {
-        #region Injects
-        [Inject] public EnemyView EnemyView { get; set; }
-        [Inject] public IEnemyModel EnemyModel { get; set; }
-        [Inject] public IPlayerModel PlayerModel { get; set; }
-        #endregion
-
         #region Fields
+        private EnemyView enemyView;
+        private EnemyModel enemyModel;
+        private PlayerModel playerModel;
         private Transform playerTransform;
         #endregion
 
         #region Core
-        public override void PreRegister()
+        [Zenject.Inject]
+        public void Construct(EnemyView enemyView, EnemyModel enemyModel, PlayerModel playerModel)
         {
+            this.enemyView = enemyView;
+            this.enemyModel = enemyModel;
+            this.playerModel = playerModel;
+
+            playerTransform = this.playerModel.PlayerTransform;
+
+            this.enemyView.OnDead += onDead;
         }
-        public override void OnRegister()
+        public void Dispose()
         {
-            playerTransform = PlayerModel.PlayerTransform;
-        }
-        public override void OnRemove()
-        {
+            this.enemyView.OnDead -= onDead;
         }
         #endregion
 
+        #region Receivers
+        private void onDead() { Dispose(); }
+        #endregion
+
         #region Updates
-        private void Update()
+        public void Tick()
         {
-            if (EnemyView.InUse)
+            if (enemyView.InUse)
             {
-                EnemyView.Follow(playerTransform, EnemyModel.EnemySettings.FollowSpeed, EnemyModel.EnemySettings.TurnSpeed);
+                enemyView.Follow(playerTransform, enemyModel.FollowSpeed, enemyModel.TurnSpeed);
             }
         }
         #endregion

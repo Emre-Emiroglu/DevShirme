@@ -1,13 +1,14 @@
-using DevShirme.Settings;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Interfaces
 {
-    public interface IEnemyModel
+    public interface IEnemyModel: IInitializable
     {
-        public EnemySettings EnemySettings { get; }
+        public float FollowSpeed { get; }
+        public float TurnSpeed { get; }
     }
 }
 

@@ -1,5 +1,4 @@
 using DevShirme.Utils;
-using strange.extensions.mediation.impl;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using UnityEngine.UI;
 namespace DevShirme.Views
 {
     [RequireComponent(typeof(Button))]
-    public class UIButtonView : View
+    public class UIButtonView : MonoBehaviour
     {
         #region Events
         public event Action<Enums.UIButtonType> OnButtonPressed;

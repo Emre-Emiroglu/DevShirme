@@ -163,6 +163,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7324937862736909153}
   - component: {fileID: 799451440}
+  - component: {fileID: 6539620715420670389}
+  - component: {fileID: 5013663213708903645}
   - component: {fileID: 7782844173272061040}
   m_Layer: 5
   m_Name: InGamePanel
@@ -211,6 +213,36 @@ MonoBehaviour:
     smoothPanels: 0
     showDuration: 0
     hideDuration: 0
+--- !u!114 &6539620715420670389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515496422364300019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5a6212e8ee1922408a18b9ee95edc63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5013663213708903645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515496422364300019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 799451440}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!225 &7782844173272061040
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -386,6 +418,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5617728340081203824}
   - component: {fileID: 2081310221}
+  - component: {fileID: 5562987247001135503}
+  - component: {fileID: 4474189658996985401}
   - component: {fileID: 174479795976324756}
   m_Layer: 5
   m_Name: EndGamePanel
@@ -434,6 +468,36 @@ MonoBehaviour:
     smoothPanels: 0
     showDuration: 0
     hideDuration: 0
+--- !u!114 &5562987247001135503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3745965016052253501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5a6212e8ee1922408a18b9ee95edc63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4474189658996985401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3745965016052253501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 2081310221}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!225 &174479795976324756
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -532,6 +596,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4405609171650844550}
   - component: {fileID: 375496977}
+  - component: {fileID: 7951378551062234149}
+  - component: {fileID: 2145545775733888259}
   - component: {fileID: 4405609171650844549}
   m_Layer: 5
   m_Name: MainMenuPanel
@@ -580,6 +646,36 @@ MonoBehaviour:
     smoothPanels: 0
     showDuration: 0
     hideDuration: 0
+--- !u!114 &7951378551062234149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4405609171650844551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5a6212e8ee1922408a18b9ee95edc63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2145545775733888259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4405609171650844551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 375496977}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!225 &4405609171650844549
 CanvasGroup:
   m_ObjectHideFlags: 0
