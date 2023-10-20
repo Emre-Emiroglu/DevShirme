@@ -16,7 +16,7 @@ namespace DevShirme.Settings
         #region Bindings
         public override void InstallBindings()
         {
-            Container.BindInstances(dataModel);
+            Container.BindInterfacesAndSelfTo<DataModel>().FromInstance(dataModel).AsSingle();
         }
         #endregion
     }

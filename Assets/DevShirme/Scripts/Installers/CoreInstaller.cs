@@ -1,5 +1,6 @@
 using DevShirme.Signals;
 using DevShirme.Utils;
+using DevShirme.Views;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,12 @@ namespace DevShirme.Installers
         #region Bindings
         public override void InstallBindings()
         {
+            Container.BindInterfacesAndSelfTo<EnemySpawnerView>().FromComponentInHierarchy().AsSingle();
+            Container.BindInterfacesAndSelfTo<CamView>().FromComponentInHierarchy().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerAgentView>().FromComponentInHierarchy().AsSingle();
+            Container.BindInterfacesAndSelfTo<WeaponView>().FromComponentInHierarchy().AsSingle();
+            Container.BindInterfacesAndSelfTo<UIPanelView>().FromComponentInHierarchy().AsSingle();
+
             CoreSignals.Install(Container);
         }
         public override void Start()

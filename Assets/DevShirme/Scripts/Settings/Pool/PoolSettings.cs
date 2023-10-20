@@ -19,9 +19,9 @@ namespace DevShirme.Settings
         #region Bindings
         public override void InstallBindings()
         {
-            Container.BindInstances(poolModel);
-            Container.BindInstances(bulletModel);
-            Container.BindInstances(enemyModel);
+            Container.BindInterfacesAndSelfTo<PoolModel>().FromInstance(poolModel).AsSingle();
+            Container.BindInterfacesAndSelfTo<BulletModel>().FromInstance(bulletModel).AsSingle();
+            Container.BindInterfacesAndSelfTo<EnemyModel>().FromInstance(enemyModel).AsSingle();
         }
         #endregion
     }

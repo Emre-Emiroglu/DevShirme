@@ -16,7 +16,7 @@ namespace DevShirme.Settings
         #region Bindings
         public override void InstallBindings()
         {
-            Container.BindInstances(audioModel);
+            Container.BindInterfacesAndSelfTo<AudioModel>().FromInstance(audioModel).AsSingle();
         }
         #endregion
     }

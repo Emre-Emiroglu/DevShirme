@@ -24,14 +24,14 @@ namespace DevShirme.Settings
         #region Bindings
         public override void InstallBindings()
         {
-            Container.BindInstance(gameModel);
-            Container.BindInstance(inputModel);
-            Container.BindInstance(playerModel);
-            Container.BindInstance(weaponModel);
-            Container.BindInstance(enemySpawnerModel);
-            Container.BindInstance(uiModel);
-            Container.BindInstance(cameraModel);
-            Container.BindInstance(adModel);
+            Container.BindInterfacesAndSelfTo<GameModel>().FromInstance(gameModel).AsSingle();
+            Container.BindInterfacesAndSelfTo<InputModel>().FromInstance(inputModel).AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerModel>().FromInstance(playerModel).AsSingle();
+            Container.BindInterfacesAndSelfTo<WeaponModel>().FromInstance(weaponModel).AsSingle();
+            Container.BindInterfacesAndSelfTo<EnemySpawnerModel>().FromInstance(enemySpawnerModel).AsSingle();
+            Container.BindInterfacesAndSelfTo<UIModel>().FromInstance(uiModel).AsSingle();
+            Container.BindInterfacesAndSelfTo<CameraModel>().FromInstance(cameraModel).AsSingle();
+            Container.BindInterfacesAndSelfTo<ADModel>().FromInstance(adModel).AsSingle();
         }
         #endregion
     }

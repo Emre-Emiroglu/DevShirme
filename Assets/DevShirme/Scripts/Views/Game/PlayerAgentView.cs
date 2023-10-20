@@ -32,6 +32,7 @@ namespace DevShirme.Views
         #endregion
 
         #region Core
+        [Inject]
         public void Construct(PlayerModel playerModel, InputModel inputModel, WeaponModel weaponModel, SignalBus signalBus)
         {
             this.playerModel = playerModel;
