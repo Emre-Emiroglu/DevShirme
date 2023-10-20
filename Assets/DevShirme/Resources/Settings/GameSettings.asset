@@ -30,6 +30,15 @@ MonoBehaviour:
       sensitivity: 80
       clampDistance: 0.8
       swipe: 0
+  playerModel:
+    movementData:
+      movementType: 0
+      walkSpeed: 10
+      runSpeed: 20
+      jumpPower: 50
+      jumpForceMode: 1
+    rotationData:
+      rotationSpeed: 20
   weaponModel:
     shootSound: {fileID: 8300000, guid: 321f02ebf95657d48813e41ff73fecca, type: 3}
     weaponSpeedFactor: 2

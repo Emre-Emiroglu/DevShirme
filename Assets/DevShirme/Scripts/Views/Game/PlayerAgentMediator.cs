@@ -21,7 +21,7 @@ namespace DevShirme.Mediators
         #endregion
 
         #region Core
-        [Zenject.Inject]
+        [Inject]
         public void Construct(PlayerAgentView view, PlayerModel playerModel, InputModel inputModel, WeaponModel weaponModel, SignalBus signalBus)
         {
             this.view = view;

@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using strange.extensions.mediation.impl;
 
 namespace DevShirme.Views
 {
-    public class UIPopUpView : View
+    public class UIPopUpView : MonoBehaviour
     {
         #region Fields
         [Header("PopUp Settings")]

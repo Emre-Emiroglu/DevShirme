@@ -26,7 +26,7 @@ namespace DevShirme.Models
         #region Core
         public void Initialize()
         {
-            parent = GameObject.Find("PoolInstaller").GetComponent<Transform>();
+            parent = GameObject.Find("PoolsParent").GetComponent<Transform>();
             objectPools = new ObjectPool[prefabs.Length];
             for (int i = 0; i < prefabs.Length; i++)
             {

@@ -1,10 +1,9 @@
-using DevShirme.Models;
 using DevShirme.Views;
-using strange.extensions.mediation.impl;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Mediators
 {
@@ -15,7 +14,7 @@ namespace DevShirme.Mediators
         #endregion
 
         #region Core
-        [Zenject.Inject]
+        [Inject]
         public void Construct(PoolObjectView poolObjectView)
         {
             this.poolObjectView = poolObjectView;

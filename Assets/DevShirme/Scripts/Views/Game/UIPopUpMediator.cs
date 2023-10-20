@@ -1,31 +1,23 @@
 using DevShirme.Views;
-using strange.extensions.mediation.impl;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DevShirme.Mediators
 {
-    public class UIPopUpMediator : Mediator
+    public class UIPopUpMediator : MonoBehaviour
     {
-        #region Injects
-        [Inject] public UIPopUpView UIPopUpView { get; set; }
+        #region Fields
+        private UIPopUpView view;
         #endregion
 
         #region Core
-        public override void PreRegister()
+        [Inject]
+        public void Construct(UIPopUpView view)
         {
+            this.view = view;
         }
-        public override void OnRegister()
-        {
-        }
-        public override void OnRemove()
-        {
-        }
-        #endregion
-
-        #region Receivers
-
         #endregion
     }
 }

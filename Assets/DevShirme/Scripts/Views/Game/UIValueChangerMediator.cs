@@ -1,32 +1,22 @@
 using DevShirme.Views;
-using strange.extensions.mediation.impl;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevShirme.Mediators
 {
-    public class UIValueChangerMediator : Mediator
+    public class UIValueChangerMediator : MonoBehaviour
     {
-        #region Injects
-        [Inject] public UIValueChangerView UIValueChangerView { get; set; }
+        #region Fields
+        private UIValueChangerView view;
         #endregion
 
         #region Core
-        public override void PreRegister()
-        {
-            UIValueChangerView.Initialize();
-        }
-        public override void OnRegister()
-        {
-        }
-        public override void OnRemove()
-        {
-        }
-        #endregion
 
-        #region Receivers
-
+        public void Construct(UIValueChangerView view)
+        {
+            this.view = view;
+        }
         #endregion
     }
 }

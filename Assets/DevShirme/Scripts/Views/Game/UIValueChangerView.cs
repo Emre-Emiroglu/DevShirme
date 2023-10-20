@@ -1,11 +1,10 @@
-using strange.extensions.mediation.impl;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevShirme.Views
 {
-    public class UIValueChangerView : View
+    public class UIValueChangerView : MonoBehaviour
     {
         #region Fields
         [Header("UI Value Changer Components")]

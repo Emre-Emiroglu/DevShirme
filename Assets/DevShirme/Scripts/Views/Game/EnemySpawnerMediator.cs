@@ -22,7 +22,7 @@ namespace DevShirme.Mediators
         #endregion
 
         #region Core
-        [Zenject.Inject]
+        [Inject]
         public void Construct(EnemySpawnerView view, EnemySpawnerModel enemySpawnerModel, PoolModel poolModel, SignalBus signalBus)
         {
             this.view = view;
