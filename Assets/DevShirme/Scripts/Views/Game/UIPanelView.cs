@@ -34,7 +34,9 @@ namespace DevShirme.Views
         }
         public void Dispose()
         {
-            signalBus.Unsubscribe<Structs.OnChangeGameState>(x => OnChangeGameState(x.NewGameState));
+            Debug.Log("Disposed: " + panelType.ToString());
+
+            signalBus.TryUnsubscribe<Structs.OnChangeGameState>(x => OnChangeGameState(x.NewGameState));
         }
         #endregion
 

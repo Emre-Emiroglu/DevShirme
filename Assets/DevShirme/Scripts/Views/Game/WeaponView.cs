@@ -33,7 +33,7 @@ namespace DevShirme.Views
         }
         public void Dispose()
         {
-            signalBus.Unsubscribe<Structs.OnWeaponCanShoot>(OnWeaponCanShoot);
+            signalBus.TryUnsubscribe<Structs.OnWeaponCanShoot>(OnWeaponCanShoot);
         }
         #endregion
 

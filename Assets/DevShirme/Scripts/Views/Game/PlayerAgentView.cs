@@ -53,7 +53,7 @@ namespace DevShirme.Views
         }
         public void Dispose()
         {
-            signalBus.Unsubscribe<Structs.OnChangeGameState>(x => OnChangeGameState(x.NewGameState));
+            signalBus.TryUnsubscribe<Structs.OnChangeGameState>(x => OnChangeGameState(x.NewGameState));
         }
         private void Reload()
         {

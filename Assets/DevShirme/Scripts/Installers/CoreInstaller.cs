@@ -1,6 +1,7 @@
 using DevShirme.Signals;
 using DevShirme.Utils;
 using DevShirme.Views;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,10 +15,11 @@ namespace DevShirme.Installers
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<EnemySpawnerView>().FromComponentInHierarchy().AsSingle();
-            Container.BindInterfacesAndSelfTo<CamView>().FromComponentInHierarchy().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerAgentView>().FromComponentInHierarchy().AsSingle();
             Container.BindInterfacesAndSelfTo<WeaponView>().FromComponentInHierarchy().AsSingle();
-            Container.BindInterfacesAndSelfTo<UIPanelView>().FromComponentInHierarchy().AsSingle();
+
+            Container.BindInterfacesAndSelfTo<CamView>().FromComponentsInHierarchy().AsTransient().NonLazy();
+            Container.BindInterfacesAndSelfTo<UIPanelView>().FromComponentsInHierarchy().AsTransient().NonLazy();
 
             CoreSignals.Install(Container);
         }
