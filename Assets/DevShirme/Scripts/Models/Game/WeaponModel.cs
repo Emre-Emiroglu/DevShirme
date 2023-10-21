@@ -21,9 +21,5 @@ namespace DevShirme.Models
         public float WeaponSpeedFactor => weaponSpeedFactor;
         public float FireRate => fireRate;
         #endregion
-
-        #region Core
-        public void Initialize() { }
-        #endregion
     }
 }

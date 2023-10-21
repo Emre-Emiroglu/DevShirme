@@ -5,7 +5,7 @@ using Zenject;
 
 namespace DevShirme.Interfaces
 {
-    public interface IUIModel: IInitializable
+    public interface IUIModel
     {
     }
 }

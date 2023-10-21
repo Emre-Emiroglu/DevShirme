@@ -14,9 +14,5 @@ namespace DevShirme.Models
 
         #region Getters
         #endregion
-
-        #region Core
-        public void Initialize() { }
-        #endregion
     }
 }

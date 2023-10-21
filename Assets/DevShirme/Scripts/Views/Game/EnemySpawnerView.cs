@@ -12,6 +12,7 @@ namespace DevShirme.Views
     {
         #region Injects
         private EnemySpawnerModel enemySpawnerModel;
+        private EnemyModel enemyModel;
         private PoolModel poolModel;
         private SignalBus signalBus;
         #endregion
@@ -19,27 +20,19 @@ namespace DevShirme.Views
         #region Fields
         [Header("Components")]
         [SerializeField] private Transform playerTransform;
-        private float radius;
-        private bool useGizmo;
-        private Color gizmoColor;
         private bool isGameStart = false;
         private float timer;
-        private float duration;
+        private readonly List<EnemyView> enemyViews = new List<EnemyView>();
         #endregion
 
         #region Core
         [Inject]
-        public void Construct(EnemySpawnerModel enemySpawnerModel, PoolModel poolModel, SignalBus signalBus)
+        public void Construct(EnemySpawnerModel enemySpawnerModel, EnemyModel enemyModel, PoolModel poolModel, SignalBus signalBus)
         {
             this.enemySpawnerModel = enemySpawnerModel;
+            this.enemyModel = enemyModel;
             this.poolModel = poolModel;
             this.signalBus = signalBus;
-
-            duration = this.enemySpawnerModel.Duration;
-
-            radius = this.enemySpawnerModel.Radius;
-            useGizmo = this.enemySpawnerModel.UseGizmo;
-            gizmoColor = this.enemySpawnerModel.GizmoColor;
 
             this.signalBus.Subscribe<Structs.OnChangeGameState>(x => OnChangeGameState(x.NewGameState));
         }
@@ -54,6 +47,8 @@ namespace DevShirme.Views
         {
             isGameStart = gameState == Enums.GameState.Start;
 
+            enemyViews.Clear();
+
             timer = 0f;
         }
         #endregion
@@ -62,7 +57,7 @@ namespace DevShirme.Views
         private void SpawnByTimer()
         {
             timer += Time.deltaTime;
-            if (timer > duration)
+            if (timer > enemySpawnerModel.Duration)
             {
                 timer = 0f;
                 SpawnEnemy();
@@ -72,7 +67,8 @@ namespace DevShirme.Views
         {
             Vector3 randomPos = UnityEngine.Random.insideUnitSphere * enemySpawnerModel.Radius;
             randomPos.y = 0f;
-            poolModel.GetPoolObject("Enemy", transform.position + randomPos, Quaternion.identity, Vector3.one, null, true);
+            EnemyView enemyView = poolModel.GetPoolObject("Enemy", transform.position + randomPos, Quaternion.identity, Vector3.one, null, true) as EnemyView;
+            enemyView.Setup(playerTransform, enemyModel.FollowSpeed, enemyModel.TurnSpeed);
         }
         #endregion
 
@@ -81,6 +77,9 @@ namespace DevShirme.Views
         {
             if (!isGameStart)
                 return;
+
+            for (int i = 0; i < enemyViews.Count; i++)
+                enemyViews[i].Tick();
 
             transform.position = playerTransform.position;
 
@@ -91,10 +90,10 @@ namespace DevShirme.Views
         #region Gizmo
         private void OnDrawGizmosSelected()
         {
-            if (useGizmo)
+            if (enemySpawnerModel != null && enemySpawnerModel.UseGizmo)
             {
-                Gizmos.color = gizmoColor;
-                Gizmos.DrawWireSphere(transform.position, radius);
+                Gizmos.color = enemySpawnerModel.GizmoColor;
+                Gizmos.DrawWireSphere(transform.position, enemySpawnerModel.Radius);
             }
         }
         #endregion

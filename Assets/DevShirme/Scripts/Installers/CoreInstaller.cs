@@ -1,3 +1,4 @@
+using DevShirme.Models;
 using DevShirme.Signals;
 using DevShirme.Utils;
 using DevShirme.Views;
@@ -17,8 +18,9 @@ namespace DevShirme.Installers
             Container.BindInterfacesAndSelfTo<PlayerAgentView>().FromComponentInHierarchy().AsSingle();
             Container.BindInterfacesAndSelfTo<WeaponView>().FromComponentInHierarchy().AsSingle();
 
-            Container.BindInterfacesAndSelfTo<CamView>().FromComponentsInHierarchy().AsTransient().NonLazy();
-            Container.BindInterfacesAndSelfTo<UIPanelView>().FromComponentsInHierarchy().AsTransient().NonLazy();
+            Container.BindInterfacesAndSelfTo<CamView>().FromComponentsInHierarchy().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<UIPanelView>().FromComponentsInHierarchy().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<UIButtonView>().FromComponentsInHierarchy().AsSingle().NonLazy();
 
             CoreSignals.Install(Container);
         }

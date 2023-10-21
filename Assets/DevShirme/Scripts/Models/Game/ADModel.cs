@@ -28,9 +28,5 @@ namespace DevShirme.Models
         //public AdSize BannerSize => bannerSize;
         //public AdPosition BannerPosition => bannerPosition;
         #endregion
-
-        #region Core
-        public void Initialize() { }
-        #endregion
     }
 }

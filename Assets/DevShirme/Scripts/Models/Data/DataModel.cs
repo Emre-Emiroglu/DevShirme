@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 namespace DevShirme.Models
@@ -46,6 +47,26 @@ namespace DevShirme.Models
                 Debug.Log("Data Not Found. Created New One");
             }
         }
+        #endregion
+
+        #region Executes
+#if UNITY_EDITOR
+        [MenuItem("DevShirme/Data/ClearPlayerData")]
+        public static void ClearPlayerData()
+        {
+            string path = Application.persistentDataPath + "/" + "ply.dat";
+
+            if (File.Exists(path))
+                File.Delete(path);
+        }
+        [MenuItem("DevShirme/Data/OpenDataFolder")]
+        public static void OpenDataFolder()
+        {
+            string path = Application.persistentDataPath;
+
+            EditorUtility.OpenFilePanel("", path, "");
+        }
+#endif
         #endregion
     }
 }

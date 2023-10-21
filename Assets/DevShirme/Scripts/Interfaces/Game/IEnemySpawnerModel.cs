@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 namespace DevShirme.Interfaces
 {
-    public interface IEnemySpawnerModel: IInitializable
+    public interface IEnemySpawnerModel
     {
         public float Duration { get; }
         public float Radius { get; }

@@ -12,6 +12,7 @@ namespace DevShirme.Views
     {
         #region Injects
         private WeaponModel weaponModel;
+        private BulletModel bulletModel;
         private PoolModel poolModel;
         private SignalBus signalBus;
         #endregion
@@ -23,9 +24,10 @@ namespace DevShirme.Views
 
         #region Core
         [Inject]
-        public void Construct(WeaponModel weaponModel, PoolModel poolModel, SignalBus signalBus)
+        public void Construct(WeaponModel weaponModel, BulletModel bulletModel, PoolModel poolModel, SignalBus signalBus)
         {
             this.weaponModel = weaponModel;
+            this.bulletModel = bulletModel;
             this.poolModel = poolModel;
             this.signalBus = signalBus;
 
@@ -40,7 +42,8 @@ namespace DevShirme.Views
         #region Receivers
         private void OnWeaponCanShoot()
         {
-            poolModel.GetPoolObject("Bullet", muzzle.position, muzzle.rotation, Vector3.one, null, true);
+            BulletView bulletView = poolModel.GetPoolObject("Bullet", muzzle.position, muzzle.rotation, Vector3.one, null, true) as BulletView;
+            bulletView.Setup(bulletModel.Speed, weaponModel.WeaponSpeedFactor);
 
             signalBus.Fire(new Structs.OnPlaySound { AudioClip = weaponModel.ShootSound });
 

@@ -1,33 +1,23 @@
-using DevShirme.Models;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking.Types;
-using Zenject;
-using Zenject.SpaceFighter;
 
 namespace DevShirme.Views
 {
-    public class EnemyView : PoolObjectView, ITickable
+    public class EnemyView : PoolObjectView
     {
-        #region Injects
-        private EnemyModel enemyModel;
-        private PlayerModel playerModel;
-        #endregion
-
         #region Fields
         private Transform playerTransform;
+        private float followSpeed;
+        private float turnSpeed;
         #endregion
 
         #region Core
-        [Inject]
-        public void Construct(EnemyModel enemyModel, PlayerModel playerModel)
+        public void Setup(Transform playerTransform, float followSpeed, float turnSpeed)
         {
-            this.enemyModel = enemyModel;
-            this.playerModel = playerModel;
-
-            playerTransform = this.playerModel.PlayerTransform;
+            this.playerTransform = playerTransform;
+            this.followSpeed = followSpeed;
+            this.turnSpeed = turnSpeed;
         }
         public override void Initialize()
         {
@@ -60,7 +50,7 @@ namespace DevShirme.Views
         public void Tick()
         {
             if (InUse)
-                Follow(playerTransform, enemyModel.FollowSpeed, enemyModel.TurnSpeed);
+                Follow(playerTransform, followSpeed, turnSpeed);
         }
         #endregion
 

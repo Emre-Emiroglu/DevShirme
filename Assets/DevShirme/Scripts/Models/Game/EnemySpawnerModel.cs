@@ -23,9 +23,5 @@ namespace DevShirme.Models
         public bool UseGizmo => useGizmo;
         public Color GizmoColor => gizmoColor;
         #endregion
-
-        #region Core
-        public void Initialize() { }
-        #endregion
     }
 }

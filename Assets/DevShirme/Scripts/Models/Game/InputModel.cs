@@ -20,9 +20,5 @@ namespace DevShirme.Models
         public Structs.PCInputData PCInputData => pcInputData;
         public Structs.MobileInputData MobileInputData => mobileInputData;
         #endregion
-
-        #region Core
-        public void Initialize() { }
-        #endregion
     }
 }

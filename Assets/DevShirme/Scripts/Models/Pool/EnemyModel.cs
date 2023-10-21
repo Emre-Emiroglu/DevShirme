@@ -19,9 +19,5 @@ namespace DevShirme.Models
         public float FollowSpeed => followSpeed;
         public float TurnSpeed => turnSpeed;
         #endregion
-
-        #region Core
-        public void Initialize() { }
-        #endregion
     }
 }

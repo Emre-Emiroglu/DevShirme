@@ -44,6 +44,7 @@ MonoBehaviour:
     weaponSpeedFactor: 2
     fireRate: 0.125
   enemySpawnerModel:
+    poolName: Enemy
     duration: 1
     radius: 20
     useGizmo: 1

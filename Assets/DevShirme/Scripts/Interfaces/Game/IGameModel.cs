@@ -2,11 +2,10 @@ using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 namespace DevShirme.Interfaces
 {
-    public interface IGameModel: IInitializable
+    public interface IGameModel
     {
         public Enums.GameState GameState { get; set; }
         public int TargetFPS { get; }

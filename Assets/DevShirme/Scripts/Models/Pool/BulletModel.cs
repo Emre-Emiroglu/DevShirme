@@ -17,9 +17,5 @@ namespace DevShirme.Models
         #region Getters
         public float Speed => speed;
         #endregion
-
-        #region Core
-        public void Initialize() { }
-        #endregion
     }
 }

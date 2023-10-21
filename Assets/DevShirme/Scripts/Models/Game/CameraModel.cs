@@ -23,9 +23,5 @@ namespace DevShirme.Models
         public float ShakeDuration => shakeDuration;
         public float ChangeFovDuration => changeFovDuration;
         #endregion
-
-        #region Core
-        public void Initialize() { }
-        #endregion
     }
 }

@@ -23,9 +23,5 @@ namespace DevShirme.Models
         public bool IsCursorActive => isCursorActive;
         public CursorLockMode CursorLockMode => cursorLockMode;
         #endregion
-
-        #region Core
-        public void Initialize() { }
-        #endregion
     }
 }

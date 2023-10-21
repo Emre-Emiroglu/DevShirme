@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 namespace DevShirme.Interfaces
 {
-    public interface ICameraModel: IInitializable
+    public interface ICameraModel
     {
         public float AmplitudeGain { get; }
         public float FrequencyGain { get; }

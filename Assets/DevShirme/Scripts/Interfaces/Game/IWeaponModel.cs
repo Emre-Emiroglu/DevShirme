@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 namespace DevShirme.Interfaces
 {
-    public interface IWeaponModel: IInitializable
+    public interface IWeaponModel
     {
         public AudioClip ShootSound { get; }
         public float WeaponSpeedFactor { get; }
