@@ -41,8 +41,6 @@ namespace DevShirme.Views
         }
         public void Dispose()
         {
-            Debug.Log("Disposed: " + camType.ToString());
-
             signalBus.TryUnsubscribe<Structs.OnChangeGameState>(x => OnChangeGameState(x.NewGameState));
             signalBus.TryUnsubscribe<Structs.OnShakeCam>(x => OnShakeCam(x.TargetCam));
             signalBus.TryUnsubscribe<Structs.OnChangeCamFov>(x => OnChangeCamFov(x.TargetCam, x.NewFov));

@@ -1,3 +1,4 @@
+using DevShirme.Models;
 using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,18 +9,18 @@ namespace DevShirme.Controllers
     public class PlaySoundCommand
     {
         #region Fields
-        private readonly AudioSource audioSource;
+        private readonly AudioModel audioModel;
         #endregion
 
         #region Core
-        public PlaySoundCommand(AudioSource audioSource)
+        public PlaySoundCommand(AudioModel audioModel)
         {
-            this.audioSource = audioSource;
+            this.audioModel = audioModel;
         }
         #endregion
 
         #region PlaySound
-        public void PlaySound(Structs.OnPlaySound onPlaySound) => audioSource.PlayOneShot(onPlaySound.AudioClip);
+        public void PlaySound(Structs.OnPlaySound onPlaySound) => audioModel.AudioSource.PlayOneShot(onPlaySound.AudioClip);
         #endregion
     }
 }

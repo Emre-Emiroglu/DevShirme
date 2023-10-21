@@ -1,4 +1,4 @@
-using DevShirme.Interfaces;
+using DevShirme.Models;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,13 +8,13 @@ namespace DevShirme.Controllers
     public class ClearPoolCommand
     {
         #region Fields
-        private readonly IPoolModel poolModel;
+        private readonly PoolModel poolModel;
         private readonly bool isAll;
         private readonly string poolName;
         #endregion
 
         #region Core
-        public ClearPoolCommand(IPoolModel poolModel, bool isAll, string poolName)
+        public ClearPoolCommand(PoolModel poolModel, bool isAll, string poolName)
         {
             this.poolModel = poolModel;
             this.isAll = isAll;

@@ -10,7 +10,7 @@ namespace DevShirme.Settings
     public class AudioSettings : ScriptableObjectInstaller<AudioSettings>
     {
         #region Fields
-        private AudioModel audioModel;
+        [SerializeField] private AudioModel audioModel;
         #endregion
 
         #region Bindings

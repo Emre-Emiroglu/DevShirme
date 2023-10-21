@@ -9,20 +9,14 @@ namespace DevShirme.Models
     [Serializable]
     public class AudioModel: IAudioModel
     {
-        #region Fields
-        private Transform audioSourceTransform;
-        private AudioSource audioSource;
-        #endregion
-
         #region Getters
-        public AudioSource AudioSource => audioSource;
+        public AudioSource AudioSource { get; private set;}
         #endregion
 
         #region Core
         public void Initialize()
         {
-            audioSourceTransform = GameObject.Find("AudioSource").GetComponent<Transform>();
-            audioSource = audioSourceTransform?.GetComponent<AudioSource>();
+            AudioSource = UnityEngine.Object.FindAnyObjectByType<AudioSource>();
         }
         #endregion
     }
