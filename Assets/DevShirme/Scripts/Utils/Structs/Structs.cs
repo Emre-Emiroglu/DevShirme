@@ -164,7 +164,7 @@ namespace DevShirme.Utils
         }
         public struct OnChangeGameState
         {
-            public Enums.GameState NewGameState { get; set; }
+            public Enums.GameState NewGameState;
         }
         public struct OnShowAD
         {

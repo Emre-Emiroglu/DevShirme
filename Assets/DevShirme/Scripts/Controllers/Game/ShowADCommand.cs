@@ -20,9 +20,9 @@ namespace DevShirme.Controllers
         #endregion
 
         #region Executes
-        public void ShowAD(Enums.ADType adType)
+        public void ShowAD(Structs.OnShowAD onShowAD)
         {
-            switch (adType)
+            switch (onShowAD.AD)
             {
                 case Enums.ADType.Banner:
                     BannerADRequest();

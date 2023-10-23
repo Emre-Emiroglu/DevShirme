@@ -24,5 +24,5 @@ MonoBehaviour:
   bulletModel:
     speed: 10
   enemyModel:
-    followSpeed: 10
+    followSpeed: 1
     turnSpeed: 25

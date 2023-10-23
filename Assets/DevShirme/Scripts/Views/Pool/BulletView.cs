@@ -8,14 +8,9 @@ namespace DevShirme.Views
     {
         #region Fields
         private Rigidbody rb;
-        private float totalSpeed;
         #endregion
 
         #region Core
-        public void Setup(float bulletSpeed, float weaponSpeedFactor)
-        {
-            totalSpeed = bulletSpeed * weaponSpeedFactor;
-        }
         public override void Initialize()
         {
             base.Initialize();
@@ -25,8 +20,6 @@ namespace DevShirme.Views
         public override void Spawn(Vector3 pos, Quaternion rot, Vector3 scale, Transform parent, bool useRotation = false, bool useScale = false, bool setParent = false)
         {
             base.Spawn(pos, rot, scale, parent, useRotation, useScale, setParent);
-
-            Throw(totalSpeed);
         }
         public override void DeSpawn()
         {

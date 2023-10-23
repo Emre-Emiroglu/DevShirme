@@ -1,4 +1,5 @@
 using DevShirme.Models;
+using DevShirme.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,26 +10,22 @@ namespace DevShirme.Controllers
     {
         #region Fields
         private readonly PoolModel poolModel;
-        private readonly bool isAll;
-        private readonly string poolName;
         #endregion
 
         #region Core
-        public ClearPoolCommand(PoolModel poolModel, bool isAll, string poolName)
+        public ClearPoolCommand(PoolModel poolModel)
         {
             this.poolModel = poolModel;
-            this.isAll = isAll;
-            this.poolName = poolName;
         }
         #endregion
 
         #region ClearPool
-        public void ClearPool()
+        public void ClearPool(Structs.OnClearPool onClearPool)
         {
-            if (isAll)
+            if (onClearPool.IsAll)
                 ClearAllPools();
             else
-                Clear(poolName);
+                Clear(onClearPool.PoolName);
         }
         #endregion
 

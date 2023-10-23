@@ -69,6 +69,8 @@ namespace DevShirme.Views
             randomPos.y = 0f;
             EnemyView enemyView = poolModel.GetPoolObject("Enemy", transform.position + randomPos, Quaternion.identity, Vector3.one, null, true) as EnemyView;
             enemyView.Setup(playerTransform, enemyModel.FollowSpeed, enemyModel.TurnSpeed);
+            if (!enemyViews.Contains(enemyView))
+                enemyViews.Add(enemyView);
         }
         #endregion
 

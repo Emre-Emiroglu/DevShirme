@@ -43,7 +43,7 @@ namespace DevShirme.Views
         private void OnWeaponCanShoot()
         {
             BulletView bulletView = poolModel.GetPoolObject("Bullet", muzzle.position, muzzle.rotation, Vector3.one, null, true) as BulletView;
-            bulletView.Setup(bulletModel.Speed, weaponModel.WeaponSpeedFactor);
+            bulletView.Throw(bulletModel.Speed * weaponModel.WeaponSpeedFactor);
 
             signalBus.Fire(new Structs.OnPlaySound { AudioClip = weaponModel.ShootSound });
 

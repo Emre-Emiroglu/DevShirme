@@ -23,9 +23,9 @@ namespace DevShirme.Controllers
         #endregion
 
         #region Executes
-        public void ChangeGameState(Enums.GameState gameState)
+        public void ChangeGameState(Structs.OnChangeGameState onChangeGameState)
         {
-            switch (gameState)
+            switch (onChangeGameState.NewGameState)
             {
                 case Enums.GameState.Init:
                     SetFPS();
@@ -40,7 +40,7 @@ namespace DevShirme.Controllers
                     break;
             }
 
-            Message(gameState);
+            Message(onChangeGameState.NewGameState);
         }
         private void Message(Enums.GameState gameState)
         {

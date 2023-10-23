@@ -28,8 +28,8 @@ namespace DevShirme.Signals
 
             Container.BindSignal<Structs.OnPlaySound>().ToMethod<PlaySoundCommand>(x => x.PlaySound).FromNew();
 
-            Container.BindSignal<Structs.OnChangeGameState>().ToMethod<ChangeGameStateCommand>((x, s) => x.ChangeGameState(s.NewGameState)).FromNew();
-            Container.BindSignal<Structs.OnShowAD>().ToMethod<ShowADCommand>((x, s) => x.ShowAD(s.AD)).FromNew();
+            Container.BindSignal<Structs.OnChangeGameState>().ToMethod<ChangeGameStateCommand>(x => x.ChangeGameState).FromNew();
+            Container.BindSignal<Structs.OnShowAD>().ToMethod<ShowADCommand>(x => x.ShowAD).FromNew();
         }
         #endregion
     }
