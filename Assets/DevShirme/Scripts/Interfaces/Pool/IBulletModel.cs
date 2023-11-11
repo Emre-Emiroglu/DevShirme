@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DevShirme.Interfaces
+namespace DevShirme.Interfaces.Pool
 {
     public interface IBulletModel
     {

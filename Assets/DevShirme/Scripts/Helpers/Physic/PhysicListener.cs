@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
-using DevShirme.Utils;
+using DevShirme.Utils.Enums;
 
-namespace DevShirme.Helpers
+namespace DevShirme.Helpers.Physic
 {
     public class PhysicListener : MonoBehaviour
     {

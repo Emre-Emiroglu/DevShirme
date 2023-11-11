@@ -1,9 +1,6 @@
-using DevShirme.Utils;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using DevShirme.Utils.Structs;
 
-namespace DevShirme.Interfaces
+namespace DevShirme.Interfaces.Game
 {
     public interface IInputModel
     {

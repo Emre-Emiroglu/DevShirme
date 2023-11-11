@@ -22,21 +22,68 @@ MonoBehaviour:
       verticalAxis: Vertical
       horizontalAxis: Horizontal
       runKey: 304
-      jumpKey: 32
-    mobileInputData:
-      mobileInputBehavior: 1
-      lerp: 1
-      lerpSpeed: 0.1
-      sensitivity: 80
-      clampDistance: 0.8
-      swipe: 0
   playerModel:
     movementData:
       movementType: 0
-      walkSpeed: 10
-      runSpeed: 20
-      jumpPower: 50
-      jumpForceMode: 1
+      accelerationCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      decelerationCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: -0.6415566
+          outSlope: -0.6415566
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.58405465
+          value: 0.6252959
+          inSlope: -1
+          outSlope: -1
+          tangentMode: 136
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: -1.5033126
+          outSlope: -1.5033126
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      walkSpeed: 5
+      runSpeed: 10
     rotationData:
       rotationSpeed: 20
   weaponModel:
@@ -44,7 +91,6 @@ MonoBehaviour:
     weaponSpeedFactor: 2
     fireRate: 0.125
   enemySpawnerModel:
-    poolName: Enemy
     duration: 1
     radius: 20
     useGizmo: 1
@@ -54,9 +100,3 @@ MonoBehaviour:
     frequencyGain: 1
     shakeDuration: 1
     changeFovDuration: 1
-  adModel:
-    adIds: []
-    testAdIds:
-    - 
-    - 
-    - 

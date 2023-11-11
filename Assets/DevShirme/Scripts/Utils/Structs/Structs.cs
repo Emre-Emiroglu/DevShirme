@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DevShirme.Utils
+namespace DevShirme.Utils.Structs
 {
     public static class Structs
     {
@@ -67,10 +67,9 @@ namespace DevShirme.Utils
         {
             public Vector2 MovementInput;
             public Vector2 RotationInput;
-            public Enums.MovementState MovementState;
+            public Enums.Enums.MovementState MovementState;
             public bool LeftClick;
             public bool IsRunKeyPressed;
-            public bool IsJumpKeyPressed;
         }
         #endregion
 
@@ -89,9 +88,24 @@ namespace DevShirme.Utils
             #endregion
         }
         [Serializable]
+        public struct PCInputData
+        {
+            [SerializeField] private Enums.Enums.PCInputBehavior pcInputBehavior;
+            [SerializeField] private string verticalAxis;
+            [SerializeField] private string horizontalAxis;
+            [SerializeField] private KeyCode runKey;
+
+            #region Getters
+            public Enums.Enums.PCInputBehavior PCInputBehavior => pcInputBehavior;
+            public string VerticalAxis => verticalAxis;
+            public string HorizontalAxis => horizontalAxis;
+            public KeyCode RunKey => runKey;
+            #endregion
+        }
+        [Serializable]
         public struct MobileInputData
         {
-            [SerializeField] private Enums.MobileInputBehavior mobileInputBehavior;
+            [SerializeField] private Enums.Enums.MobileInputBehavior mobileInputBehavior;
             [SerializeField] private bool lerp;
             [SerializeField] private float lerpSpeed;
             [SerializeField] private float sensitivity;
@@ -99,7 +113,7 @@ namespace DevShirme.Utils
             [SerializeField] private bool swipe;
 
             #region Getters
-            public Enums.MobileInputBehavior MobileInputBehavior => mobileInputBehavior;
+            public Enums.Enums.MobileInputBehavior MobileInputBehavior => mobileInputBehavior;
             public bool Lerp => lerp;
             public float LerpSpeed => lerpSpeed;
             public float Sensitivity => sensitivity;
@@ -108,37 +122,16 @@ namespace DevShirme.Utils
             #endregion
         }
         [Serializable]
-        public struct PCInputData
-        {
-            [SerializeField] private Enums.PCInputBehavior pcInputBehavior;
-            [SerializeField] private string verticalAxis;
-            [SerializeField] private string horizontalAxis;
-            [SerializeField] private KeyCode runKey;
-            [SerializeField] private KeyCode jumpKey;
-
-            #region Getters
-            public Enums.PCInputBehavior PCInputBehavior => pcInputBehavior;
-            public string VerticalAxis => verticalAxis;
-            public string HorizontalAxis => horizontalAxis;
-            public KeyCode RunKey => runKey;
-            public KeyCode JumpKey => jumpKey;
-            #endregion
-        }
-        [Serializable]
         public struct MovementData
         {
-            [SerializeField] private Enums.MovementType movementType;
+            [SerializeField] private Enums.Enums.MovementType movementType;
             [SerializeField] private float walkSpeed;
             [SerializeField] private float runSpeed;
-            [SerializeField] private float jumpPower;
-            [SerializeField] private ForceMode jumpForceMode;
 
             #region Getters
-            public Enums.MovementType MovementType => movementType;
+            public Enums.Enums.MovementType MovementType => movementType;
             public float WalkSpeed => walkSpeed;
             public float RunSpeed => runSpeed;
-            public float JumpPower => jumpPower;
-            public ForceMode JumpForceMode => jumpForceMode;
             #endregion
         }
         [Serializable]
@@ -160,23 +153,20 @@ namespace DevShirme.Utils
         }
         public struct OnPlaySound
         {
+            public Enums.Enums.AudioSourceTypes AudioSourceType;
             public AudioClip AudioClip;
         }
         public struct OnChangeGameState
         {
-            public Enums.GameState NewGameState;
-        }
-        public struct OnShowAD
-        {
-            public Enums.ADType AD;
+            public Enums.Enums.GameState NewGameState;
         }
         public struct OnShakeCam
         {
-            public Enums.CamType TargetCam;
+            public Enums.Enums.CamType TargetCam;
         }
         public struct OnChangeCamFov
         {
-            public Enums.CamType TargetCam;
+            public Enums.Enums.CamType TargetCam;
             public float NewFov;
         }
         public struct OnWeaponCanShoot { }

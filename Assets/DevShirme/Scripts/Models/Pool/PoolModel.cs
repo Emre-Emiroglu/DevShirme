@@ -1,13 +1,12 @@
-using DevShirme.Interfaces;
+using DevShirme.Interfaces.Pool;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-namespace DevShirme.Models
+namespace DevShirme.Models.Pool
 {
     [Serializable]
-    public class PoolModel : IPoolModel
+    public class PoolModel : IPoolModel, IInitializable
     {
         #region Fields
         [Header("Pool Model Settings")]
@@ -16,7 +15,6 @@ namespace DevShirme.Models
         [Range(0, 1000)][SerializeField] private int initSize = 100;
         [Range(0, 1000)][SerializeField] private int maxSize = 500;
         private ObjectPool[] objectPools;
-        private Transform parent;
         #endregion
 
         #region Getters
@@ -26,7 +24,7 @@ namespace DevShirme.Models
         #region Core
         public void Initialize()
         {
-            parent = GameObject.Find("PoolsParent").GetComponent<Transform>();
+            Transform parent = GameObject.Find("PoolsParent").GetComponent<Transform>();
             objectPools = new ObjectPool[prefabs.Length];
             for (int i = 0; i < prefabs.Length; i++)
             {

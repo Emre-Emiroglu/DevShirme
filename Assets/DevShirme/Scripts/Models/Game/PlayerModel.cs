@@ -1,11 +1,11 @@
-using DevShirme.Interfaces;
-using DevShirme.Utils;
+using DevShirme.Interfaces.Game;
+using DevShirme.Utils.Structs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DevShirme.Models
+namespace DevShirme.Models.Game
 {
     [Serializable]
     public class PlayerModel : IPlayerModel

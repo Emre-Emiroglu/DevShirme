@@ -1,12 +1,8 @@
-using DevShirme.Utils;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Zenject;
+using DevShirme.Utils.Structs;
 
-namespace DevShirme.Interfaces
+namespace DevShirme.Interfaces.Data
 {
-    public interface IDataModel: IInitializable
+    public interface IDataModel
     {
         public Structs.PlayerData PlayerData { get; set; }
         public void Save();

@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
-namespace DevShirme.Interfaces
+namespace DevShirme.Interfaces.Audio
 {
-    public interface IAudioModel: IInitializable
+    public interface IAudioModel
     {
-        public AudioSource AudioSource { get; }
+        public AudioSource PlayerAudioSource { get; }
+        public AudioSource InGameAudioSource { get; }
+        public AudioSource MusicAudioSource { get; }
+        public AudioSource UIAudioSource { get; }
     }
 }

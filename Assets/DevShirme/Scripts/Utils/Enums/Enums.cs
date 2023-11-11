@@ -1,6 +1,5 @@
-using System;
 
-namespace DevShirme.Utils
+namespace DevShirme.Utils.Enums
 {
     public static class Enums
     {
@@ -23,13 +22,6 @@ namespace DevShirme.Utils
         {
             Walk = 0,
             Run = 1,
-            Jump = 2
-        }
-        public enum ADType : int
-        {
-            Banner = 0,
-            Interstital = 1,
-            Rewarded = 2
         }
         public enum UIPanelType : int
         {
@@ -66,6 +58,13 @@ namespace DevShirme.Utils
             Start = 1,
             Over = 2,
             Reload = 3
+        }
+        public enum AudioSourceTypes: int
+        {
+            PlayerAudioSource = 0,
+            InGameAudioSource = 1,
+            MusicAudioSource = 2,
+            UIAudioSource = 3,
         }
     }
 }

@@ -1,10 +1,10 @@
-using DevShirme.Interfaces;
+using DevShirme.Interfaces.Pool;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DevShirme.Models
+namespace DevShirme.Models.Pool
 {
     [Serializable]
     public class EnemyModel : IEnemyModel

@@ -1,9 +1,9 @@
-﻿using DevShirme.Interfaces;
+﻿using DevShirme.Interfaces.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DevShirme.Models
+namespace DevShirme.Models.Pool
 {
     public class ObjectPool
     {

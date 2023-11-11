@@ -1,11 +1,10 @@
-using DevShirme.Models;
-using DevShirme.Utils;
-using System.Collections;
-using System.Collections.Generic;
+using DevShirme.Models.Game;
+using DevShirme.Utils.Enums;
+using DevShirme.Utils.Structs;
 using UnityEngine;
 using Zenject;
 
-namespace DevShirme.Controllers
+namespace DevShirme.Controllers.Game
 {
     public class ChangeGameStateCommand
     {

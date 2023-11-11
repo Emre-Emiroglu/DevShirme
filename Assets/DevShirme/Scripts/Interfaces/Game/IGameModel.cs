@@ -1,9 +1,7 @@
-using DevShirme.Utils;
-using System.Collections;
-using System.Collections.Generic;
+using DevShirme.Utils.Enums;
 using UnityEngine;
 
-namespace DevShirme.Interfaces
+namespace DevShirme.Interfaces.Game
 {
     public interface IGameModel
     {

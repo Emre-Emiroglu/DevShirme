@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using DevShirme.Utils;
 using TMPro;
 using System;
+using DevShirme.Utils.Enums;
 
 namespace DevShirme.Helpers
 {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DevShirme.Helpers
+namespace DevShirme.Helpers.Physic
 {
     public class RaycastWorldHandler : MonoBehaviour
     {

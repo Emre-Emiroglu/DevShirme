@@ -1,10 +1,7 @@
-using DevShirme.Models;
-using DevShirme.Utils;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using DevShirme.Models.Pool;
+using DevShirme.Utils.Structs;
 
-namespace DevShirme.Controllers
+namespace DevShirme.Controllers.Pool
 {
     public class ClearPoolCommand
     {

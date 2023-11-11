@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DevShirme.Interfaces
+namespace DevShirme.Interfaces.Pool
 {
     public interface IPoolObject
     {

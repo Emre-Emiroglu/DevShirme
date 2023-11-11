@@ -1,10 +1,9 @@
-using DevShirme.Models;
-using DevShirme.Utils;
-using System.Collections;
-using System.Collections.Generic;
+using DevShirme.Models.Audio;
+using DevShirme.Utils.Enums;
+using DevShirme.Utils.Structs;
 using UnityEngine;
 
-namespace DevShirme.Controllers
+namespace DevShirme.Controllers.Audio
 {
     public class PlaySoundCommand
     {
@@ -20,7 +19,28 @@ namespace DevShirme.Controllers
         #endregion
 
         #region PlaySound
-        public void PlaySound(Structs.OnPlaySound onPlaySound) => audioModel.AudioSource.PlayOneShot(onPlaySound.AudioClip);
+        public void PlaySound(Structs.OnPlaySound onPlaySound)
+        {
+            AudioSource source = null;
+
+            switch (onPlaySound.AudioSourceType)
+            {
+                case Enums.AudioSourceTypes.PlayerAudioSource:
+                    source = audioModel.PlayerAudioSource;
+                    break;
+                case Enums.AudioSourceTypes.InGameAudioSource:
+                    source = audioModel.InGameAudioSource;
+                    break;
+                case Enums.AudioSourceTypes.MusicAudioSource:
+                    source = audioModel.MusicAudioSource;
+                    break;
+                case Enums.AudioSourceTypes.UIAudioSource:
+                    source = audioModel.UIAudioSource;
+                    break;
+            }
+
+            source.PlayOneShot(onPlaySound.AudioClip);
+        }
         #endregion
     }
 }

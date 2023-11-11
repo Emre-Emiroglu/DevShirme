@@ -1,10 +1,12 @@
-using DevShirme.Models;
 using DevShirme.Signals;
-using DevShirme.Utils;
-using DevShirme.Views;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using DevShirme.Utils.Enums;
+using DevShirme.Utils.Structs;
+using DevShirme.Views.Cam;
+using DevShirme.Views.EnemySpawner;
+using DevShirme.Views.PlayerAgent;
+using DevShirme.Views.PlayerAgent.AgentHandlers;
+using DevShirme.Views.UI;
+using DevShirme.Views.Weapon;
 using Zenject;
 
 namespace DevShirme.Installers
@@ -14,8 +16,15 @@ namespace DevShirme.Installers
         #region Bindings
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<EnemySpawnerView>().FromComponentInHierarchy().AsSingle();
+            #region PlayerAgent
+            Container.BindInterfacesAndSelfTo<PCInputHandler>().AsSingle();
+            Container.BindInterfacesAndSelfTo<MovementHandler>().AsSingle();
+            Container.BindInterfacesAndSelfTo<RotationHandler>().AsSingle();
+            Container.BindInterfacesAndSelfTo<WeaponHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerAgentView>().FromComponentInHierarchy().AsSingle();
+            #endregion
+
+            Container.BindInterfacesAndSelfTo<EnemySpawnerView>().FromComponentInHierarchy().AsSingle();
             Container.BindInterfacesAndSelfTo<WeaponView>().FromComponentInHierarchy().AsSingle();
 
             Container.BindInterfacesAndSelfTo<CamView>().FromComponentsInHierarchy().AsSingle().NonLazy();

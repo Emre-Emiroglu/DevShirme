@@ -1,10 +1,10 @@
-using DevShirme.Utils;
+using DevShirme.Utils.Structs;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-namespace DevShirme.Interfaces
+namespace DevShirme.Interfaces.Game
 {
     public interface IPlayerModel: IInitializable
     {

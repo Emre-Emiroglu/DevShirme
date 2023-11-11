@@ -1,16 +1,15 @@
-using DevShirme.Interfaces;
-using DevShirme.Utils;
+using DevShirme.Interfaces.Data;
+using DevShirme.Utils.Structs;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using Zenject;
 
-namespace DevShirme.Models
+namespace DevShirme.Models.Data
 {
     [Serializable]
-    public class DataModel : IDataModel
+    public class DataModel : IDataModel, IInitializable
     {
         #region Fields
         [Header("Data Model Settings")]

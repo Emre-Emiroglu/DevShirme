@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-namespace DevShirme.Utils
+namespace DevShirme.Utils.Extensions
 {
     public static class Extensions
     {
